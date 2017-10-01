@@ -12,7 +12,7 @@ public class MakeEverythingOK {
 
         WavAudioSource audio = new WavAudioSource();
         try {
-            audio.PlaySong("C:\\tmp\\Muumimusiikkia 20.wav");
+            audio.PlaySong("/home/amir/Downloads/Muumimusiikkia 20.wav");
 
             // main loop
             Date lastLoopTime = new Date();
@@ -24,6 +24,13 @@ public class MakeEverythingOK {
                     // rand wait is here for simulation until actual code is written
                     int randWait = ThreadLocalRandom.current().nextInt(2, 10 + 1);
                     Thread.sleep(randWait);
+                    RGBColor colors[] = new RGBColor[2];
+                    colors[0] = new RGBColor();
+                    colors[0].r = (byte)255;
+                    colors[1] = new RGBColor();
+                    colors[1].g = (byte)255;
+                    network.addSegment("test", colors, 2, 9);
+                    network.addSegment("test", colors, 2, 17);
                     network.send();
                     Date now = new Date();
                     long msSinceLastSend = now.getTime() - lastLoopTime.getTime();

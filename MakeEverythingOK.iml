@@ -11,5 +11,6 @@
     <orderEntry type="module" module-name="Network" />
     <orderEntry type="module" module-name="LEDObject" />
     <orderEntry type="module" module-name="Audio" />
+    <orderEntry type="module" module-name="Colors" />
   </component>
 </module>

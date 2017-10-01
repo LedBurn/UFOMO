@@ -1,12 +1,8 @@
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.SocketException;
-import java.net.UnknownHostException;
+import java.io.IOException;
+import java.net.*;
 import java.nio.ByteBuffer;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 class SingleControllerData {
 
@@ -67,6 +63,15 @@ class SingleControllerData {
                 msgContent[msgIndex++] = color.g;
                 msgContent[msgIndex++] = color.b;
             }
+
+            DatagramPacket sendPacket = new DatagramPacket(msgContent, msgContent.length, ipAddress, 2000);
+            try {
+                clientSocket.send(sendPacket);
+            }
+            catch (IOException e) {
+                // TODO: log?
+            }
+
         }
         this.storedSegments.clear();
     }
@@ -81,7 +86,7 @@ class SingleControllerData {
         try {
             // TODO: get the ip as configuration
             // TODO: add broadcast to the controller (new message in LedBurn protocol) so it will publish the ip by name
-            this.ipAddress = InetAddress.getByName("127.0.0.1");
+            this.ipAddress = InetAddress.getByName("10.0.0.210");
             return true;
         }
         catch (UnknownHostException e) {
@@ -160,7 +165,7 @@ public class Network {
         controller.addSegment(data, stripId, pixelId);
     }
 
-    private long lastFrameId = 0;
+    private long lastFrameId = ThreadLocalRandom.current().nextInt(0, 1000000);
 
     private Map<String, SingleControllerData> controllers = new TreeMap<>();
 }
