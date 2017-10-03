@@ -1,5 +1,4 @@
 import java.util.Date;
-import java.util.concurrent.ThreadLocalRandom;
 //import java.awt.*;
 
 public class MakeEverythingOK {
@@ -16,13 +15,28 @@ public class MakeEverythingOK {
             Date lastLoopTime = new Date();
             Totem t = new Totem();
 
+            ContinuousWhiteEffect cwe = new ContinuousWhiteEffect();
+            ContinuousRainbowEffect cre = new ContinuousRainbowEffect(cwe);
+            ContinuousConstLocationOffsetEffect rainbowWithOffset = new ContinuousConstLocationOffsetEffect(cre);
+            rainbowWithOffset.configure(0.5);
+            ContinuousCyclicMoveEffect cme1 = new ContinuousCyclicMoveEffect(cre);
+            cme1.configure(1, true);
+            ContinuousCyclicMoveEffect cme2 = new ContinuousCyclicMoveEffect(rainbowWithOffset);
+            cme2.configure(1, true);
+            ContinuousToDiscrete ctd1 = new ContinuousToDiscrete(110, cme1);
+            ContinuousToDiscrete ctd2 = new ContinuousToDiscrete(110, cme2);
+
+            DiscreteConstColorEffect blackDiscrete = new DiscreteConstColorEffect(110);
+            DiscreteAlternateEffect dsoe = new DiscreteAlternateEffect(110, ctd1, ctd2);
+            dsoe.configure(1, 2);
+            EffectToObjectMapper mapperLeft = new EffectToObjectMapper(dsoe, t.GetAllPixels(), t.leftIndexes);
+            EffectToObjectMapper mapperRight = new EffectToObjectMapper(dsoe, t.GetAllPixels(), t.rightIndexes);
             while(true) {
                 Double currentPos = audio.GetPositionSeconds();
                 if(currentPos != null) {
-                    // paint all the led objects according to the current position
-                    // rand wait is here for simulation until actual code is written
-                    int randWait = ThreadLocalRandom.current().nextInt(2, 10 + 1);
-                    Thread.sleep(randWait);
+                    double timePercent = (currentPos % 3.0) / 3.0;
+                    mapperLeft.apply(timePercent);
+                    mapperRight.apply(timePercent);
                     network.addSegment("test", t.GetRGBColors(0, 220), 2, 0);
                     network.send();
                     Date now = new Date();

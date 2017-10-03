@@ -9,7 +9,7 @@ abstract public class LEDObject {
 
     static int[] CreateIndexRange(int firstIndex, int lastIndex) {
         int allIndexes[] = new int[lastIndex - firstIndex + 1];
-        for(int i=firstIndex; i<= lastIndex; i++) {
+        for(int i=firstIndex; i <= lastIndex; i++) {
             allIndexes[i-firstIndex] = i;
         }
         return allIndexes;
@@ -36,5 +36,13 @@ abstract public class LEDObject {
             rgbArr[i] = pixels[begin + i].toRGBColor();
         }
         return rgbArr;
+    }
+
+    public int[] reverseArray(int[] arr) {
+        int revArr[] = new int[arr.length];
+        for(int i = 0; i < arr.length; i++) {
+            revArr[i] = arr[arr.length - i - 1];
+        }
+        return revArr;
     }
 }
