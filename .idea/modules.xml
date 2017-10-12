@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/LEDObject/LEDObject.iml" filepath="$PROJECT_DIR$/LEDObject/LEDObject.iml" />
       <module fileurl="file://$PROJECT_DIR$/MakeEverythingOK.iml" filepath="$PROJECT_DIR$/MakeEverythingOK.iml" />
       <module fileurl="file://$PROJECT_DIR$/Network/Network.iml" filepath="$PROJECT_DIR$/Network/Network.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Simulator/Simulator.iml" filepath="$PROJECT_DIR$/Simulator/Simulator.iml" />
     </modules>
   </component>
 </project>

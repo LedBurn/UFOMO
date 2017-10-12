@@ -23,6 +23,7 @@ public class WavAudioSource extends AudioSource {
         this.clip.start();
         while (!this.clip.isRunning()) {
             try {
+                System.out.println("waiting for song");
                 Thread.sleep(10);
             }
             catch (Exception ex) {
