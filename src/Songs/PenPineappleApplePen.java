@@ -10,7 +10,8 @@ public class PenPineappleApplePen extends Song {
     @Override
     protected void configure() {
         ContinuousWhiteEffect cwe = new ContinuousWhiteEffect();
-        ContinuousRainbowEffect cre = new ContinuousRainbowEffect(cwe);
+        ContinuousFadeOutEffect cfie = new ContinuousFadeOutEffect(cwe);
+        ContinuousRainbowEffect cre = new ContinuousRainbowEffect(cfie);
         ContinuousConstLocationOffsetEffect rainbowWithOffset = new ContinuousConstLocationOffsetEffect(cre);
         rainbowWithOffset.configure(0.5);
         ContinuousCyclicMoveEffect cme1 = new ContinuousCyclicMoveEffect(cre);
@@ -25,8 +26,8 @@ public class PenPineappleApplePen extends Song {
         dsoe.configure(1, 2);
 
         DiscreteConfettiEffect dce = new DiscreteConfettiEffect(110, ctd1);
-        mapperLeft = new EffectToObjectMapper(dce, totems[0].GetAllPixels(), totems[0].leftIndexes);
-        mapperRight = new EffectToObjectMapper(dce, totems[0].GetAllPixels(), totems[0].rightIndexes);
+        mapperLeft = new EffectToObjectMapper(ctd1, totems[0].GetAllPixels(), totems[0].leftIndexes);
+        mapperRight = new EffectToObjectMapper(ctd1, totems[0].GetAllPixels(), totems[0].rightIndexes);
     }
 
     @Override
