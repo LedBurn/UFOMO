@@ -44,6 +44,7 @@ public abstract class Song {
                     if (simulator != null) {
                         simulator.draw(simTotems);
                     }
+                    network.send();
                 } else {
                     timer.cancel();
                 }
