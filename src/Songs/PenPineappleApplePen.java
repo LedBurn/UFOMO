@@ -24,9 +24,9 @@ public class PenPineappleApplePen extends Song {
         DiscreteAlternateEffect dsoe = new DiscreteAlternateEffect(110, ctd1, ctd2);
         dsoe.configure(1, 2);
 
-        DiscreteSpikeEffect dse = new DiscreteSpikeEffect(110, dsoe);
-        mapperLeft = new EffectToObjectMapper(dse, totems[0].GetAllPixels(), totems[0].leftIndexes);
-        mapperRight = new EffectToObjectMapper(dse, totems[0].GetAllPixels(), totems[0].rightIndexes);
+        DiscreteConfettiEffect dce = new DiscreteConfettiEffect(110, ctd1);
+        mapperLeft = new EffectToObjectMapper(dce, totems[0].GetAllPixels(), totems[0].leftIndexes);
+        mapperRight = new EffectToObjectMapper(dce, totems[0].GetAllPixels(), totems[0].rightIndexes);
     }
 
     @Override
@@ -36,8 +36,14 @@ public class PenPineappleApplePen extends Song {
 
     @Override
     protected void apply(double currentPos) {
-        double timePercent = (currentPos % 3.0) / 3.0;
+        double timePercent = (currentPos % 10.0) / 10.0;
+        if(timePercent < this.lastTimePercent) {
+            configure();
+        }
+        this.lastTimePercent = timePercent;
         mapperLeft.apply(timePercent);
         mapperRight.apply(timePercent);
     }
+
+    private double lastTimePercent = 0.0;
 }
