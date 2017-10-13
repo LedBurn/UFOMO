@@ -1,23 +1,19 @@
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
-//import java.awt.*;
 
 public class MakeEverythingOK {
 
-    public static void main(String[] args) {
+    public static void run(String soundsPath, final boolean runSimulator) {
         final Network network = new Network();
         network.configure();
-
-        final Simulator s = new Simulator();
+        final Simulator s = runSimulator ? new Simulator() : null;
         final WavAudioSource audio = new WavAudioSource();
 
         try {
-            audio.PlaySong("/Users/user/git/VoXIP/iPhoneVoXIPFramework/VoXIPFramework/VoiceFrameWork/Resources/alert_incoming_waiting.wav");
+            audio.PlaySong(soundsPath + "everythingIsOKNow.wav");
             System.out.print("song is playing");
 
-            // main loop
-            Date lastLoopTime = new Date();
             final Totem t = new Totem();
 
             ContinuousWhiteEffect cwe = new ContinuousWhiteEffect();
@@ -37,7 +33,6 @@ public class MakeEverythingOK {
             final EffectToObjectMapper mapperLeft = new EffectToObjectMapper(dsoe, t.GetAllPixels(), t.leftIndexes);
             final EffectToObjectMapper mapperRight = new EffectToObjectMapper(dsoe, t.GetAllPixels(), t.rightIndexes);
 
-
             System.out.println("start timer");
 
             final Timer timer = new Timer();
@@ -51,7 +46,9 @@ public class MakeEverythingOK {
                         mapperLeft.apply(timePercent);
                         mapperRight.apply(timePercent);
                         network.addSegment("test", t.GetRGBColors(0, 220), 2, 0);
-                        s.draw(t);
+                        if (runSimulator) {
+                            s.draw(t);
+                        }
                     } else {
                         timer.cancel();
                     }

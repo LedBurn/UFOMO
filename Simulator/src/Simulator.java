@@ -15,6 +15,7 @@ public class Simulator {
         frame.setSize(WIDTH, HEIGHT);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         graphics = frame.getGraphics();
         System.out.print("screen started");
     }
