@@ -23,8 +23,10 @@ public class PenPineappleApplePen extends Song {
         DiscreteConstColorEffect blackDiscrete = new DiscreteConstColorEffect(110);
         DiscreteAlternateEffect dsoe = new DiscreteAlternateEffect(110, ctd1, ctd2);
         dsoe.configure(1, 2);
-        mapperLeft = new EffectToObjectMapper(dsoe, totems[0].GetAllPixels(), totems[0].leftIndexes);
-        mapperRight = new EffectToObjectMapper(dsoe, totems[0].GetAllPixels(), totems[0].rightIndexes);
+
+        DiscreteSpikeEffect dse = new DiscreteSpikeEffect(110, dsoe);
+        mapperLeft = new EffectToObjectMapper(dse, totems[0].GetAllPixels(), totems[0].leftIndexes);
+        mapperRight = new EffectToObjectMapper(dse, totems[0].GetAllPixels(), totems[0].rightIndexes);
     }
 
     @Override
