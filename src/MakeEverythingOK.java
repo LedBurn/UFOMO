@@ -5,16 +5,24 @@ import java.util.TimerTask;
 public class MakeEverythingOK {
 
     public static void run(String soundsPath, final boolean runSimulator) {
+
+        // config network
         final Network network = new Network();
         network.configure();
+
+        // config LED elements
+        final Totem t = new Totem();
+
+        // config simulator
         final Simulator s = runSimulator ? new Simulator() : null;
+        final SimulatedTotem simTotem = runSimulator ? new SimulatedTotem(t) : null;
+
+        // config audio
         final WavAudioSource audio = new WavAudioSource();
 
         try {
             audio.PlaySong(soundsPath + "everythingIsOKNow.wav");
             System.out.print("song is playing");
-
-            final Totem t = new Totem();
 
             ContinuousWhiteEffect cwe = new ContinuousWhiteEffect();
             ContinuousRainbowEffect cre = new ContinuousRainbowEffect(cwe);
@@ -47,7 +55,7 @@ public class MakeEverythingOK {
                         mapperRight.apply(timePercent);
                         network.addSegment("test", t.GetRGBColors(0, 220), 2, 0);
                         if (runSimulator) {
-                            s.draw(t);
+                            s.draw(simTotem);
                         }
                     } else {
                         timer.cancel();

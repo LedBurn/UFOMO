@@ -7,7 +7,7 @@ abstract public class LEDObject {
     abstract public HSBColor[] GetAllPixels();
     public int GetPixelsNumber() { return this.GetAllPixels().length; }
 
-    static int[] CreateIndexRange(int firstIndex, int lastIndex) {
+    public static int[] CreateIndexRange(int firstIndex, int lastIndex) {
         int allIndexes[] = new int[lastIndex - firstIndex + 1];
         for(int i=firstIndex; i <= lastIndex; i++) {
             allIndexes[i-firstIndex] = i;
@@ -15,7 +15,7 @@ abstract public class LEDObject {
         return allIndexes;
     }
 
-    static HSBColor[] CreateHSBArray(int numOfPixels) {
+    public static HSBColor[] CreateHSBArray(int numOfPixels) {
         HSBColor pixels[] = new HSBColor[numOfPixels];
         Random rand = new Random();
         for(int i=0; i<numOfPixels; i++) {
