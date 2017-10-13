@@ -37,9 +37,10 @@ public class MakeEverythingOK {
 
             DiscreteConstColorEffect blackDiscrete = new DiscreteConstColorEffect(110);
             DiscreteAlternateEffect dsoe = new DiscreteAlternateEffect(110, ctd1, ctd2);
+            DiscreteSpikeEffect dse = new DiscreteSpikeEffect(110, dsoe);
             dsoe.configure(1, 2);
-            final EffectToObjectMapper mapperLeft = new EffectToObjectMapper(dsoe, t.GetAllPixels(), t.leftIndexes);
-            final EffectToObjectMapper mapperRight = new EffectToObjectMapper(dsoe, t.GetAllPixels(), t.rightIndexes);
+            final EffectToObjectMapper mapperLeft = new EffectToObjectMapper(dse, t.GetAllPixels(), t.leftIndexes);
+            final EffectToObjectMapper mapperRight = new EffectToObjectMapper(dse, t.GetAllPixels(), t.rightIndexes);
 
             System.out.println("start timer");
 
@@ -57,6 +58,7 @@ public class MakeEverythingOK {
                         if (runSimulator) {
                             s.draw(simTotem);
                         }
+                        network.send();
                     } else {
                         timer.cancel();
                     }
