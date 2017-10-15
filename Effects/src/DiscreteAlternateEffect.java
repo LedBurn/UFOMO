@@ -7,15 +7,15 @@ public class DiscreteAlternateEffect extends DiscreteEffect {
         configure(1, 3);
     }
 
-    public void configure(int alternatePerBeat, int numberOfPixels) {
+    public void configure(int alternatePerBeat, int pixelsPerSegment) {
         this.alternatePerBeat = alternatePerBeat;
-        this.changeFreequency = 1.0 / this.alternatePerBeat;
-        this.numberOfPixels = numberOfPixels;
+        this.changeFrequency = 1.0 / this.alternatePerBeat;
+        this.pixelsPerSegment = pixelsPerSegment;
     }
 
     public HSBColor getColor(double timePercent, int index) {
-        boolean alternateStage = (timePercent % this.changeFreequency) < (0.5 / alternatePerBeat);
-        if( ((index / numberOfPixels) % 2 == 0 ) == alternateStage) {
+        boolean alternateStage = (timePercent % this.changeFrequency) < (0.5 / alternatePerBeat);
+        if( ((index / pixelsPerSegment) % 2 == 0 ) == alternateStage) {
             return this.e1.getColor(timePercent, index);
         }
         else {
@@ -25,6 +25,6 @@ public class DiscreteAlternateEffect extends DiscreteEffect {
 
     private DiscreteEffect e1, e2;
     private int alternatePerBeat;
-    private double changeFreequency;
-    private int numberOfPixels;
+    private double changeFrequency;
+    private int pixelsPerSegment;
 }

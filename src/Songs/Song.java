@@ -40,6 +40,8 @@ public abstract class Song {
                 Double currentPos = audio.GetPositionSeconds();
                 if (currentPos != null) {
                     apply(currentPos);
+                    network.addSegment("test", totems[0].GetRGBColors(0, 220), 0, 0);
+                    network.addSegment("test", totems[0].GetRGBColors(0, 220), 1, 0);
                     network.addSegment("test", totems[0].GetRGBColors(0, 220), 2, 0);
                     if (simulator != null) {
                         simulator.draw(simTotems);
@@ -49,7 +51,7 @@ public abstract class Song {
                     timer.cancel();
                 }
             }
-        }, 0, 20);
+        }, 0, 100);
     }
 
     protected abstract String getAudioFileName();

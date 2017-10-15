@@ -5,7 +5,7 @@ public class MainLocal {
         if (soundsPath == null) {
             throw new RuntimeException("Local sounds path isn't configured. Please update the Config class");
         }
-        boolean runSimulator = false;
+        boolean runSimulator = true;
 
         MakeEverythingOK.run(soundsPath, runSimulator);
     }
