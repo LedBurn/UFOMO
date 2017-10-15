@@ -34,8 +34,12 @@ public class PenPineappleApplePen extends Song {
         ContinuousSegmentEffect seg = new ContinuousSegmentEffect(cme1);
         ContinuousCyclicMoveEffect segMove = new ContinuousCyclicMoveEffect(seg);
         ContinuousToDiscrete segToDiscrete = new ContinuousToDiscrete(110, segMove);
-        mapperLeft = new EffectToObjectMapper(segToDiscrete, totems[0].GetAllPixels(), totems[0].leftIndexes);
-        mapperRight = new EffectToObjectMapper(segToDiscrete, totems[0].GetAllPixels(), totems[0].rightIndexes);
+
+        ContinuousEmptyEffect fill = new ContinuousEmptyEffect(cme1);
+        fill.configure(0.8, 0.2);
+        ContinuousToDiscrete fillToDiscrete = new ContinuousToDiscrete(110, fill);
+        mapperLeft = new EffectToObjectMapper(fillToDiscrete, totems[0].GetAllPixels(), totems[0].leftIndexes);
+        mapperRight = new EffectToObjectMapper(fillToDiscrete, totems[0].GetAllPixels(), totems[0].rightIndexes);
     }
 
     @Override
