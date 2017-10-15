@@ -1,16 +1,20 @@
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public abstract class Song {
     protected final Totem[] totems;
+    protected final ArrayList<AnimationTiming> timings = new ArrayList<>();
+
     private final Network network;
     private final WavAudioSource audio;
     private final Simulator simulator;
     private final String soundsPath;
     private final ISimulatedLEDObject simTotems;
+
     private Timer timer;
 
     public Song(Network network, WavAudioSource audio, Simulator simulator, String soundsPath) {
@@ -54,8 +58,14 @@ public abstract class Song {
         }, 0, 20);
     }
 
+    private void apply(double currentPos) {
+        for (AnimationTiming timing : timings) {
+            timing.apply(currentPos);
+        }
+    }
+
     protected abstract String getAudioFileName();
     protected abstract void configure();
-    protected abstract void apply(double currentPos);
+
 
 }

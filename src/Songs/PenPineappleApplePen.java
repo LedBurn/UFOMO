@@ -1,45 +1,34 @@
 public class PenPineappleApplePen extends Song {
 
-    private EffectToObjectMapper mapperLeft;
-    private EffectToObjectMapper mapperRight;
-
     public PenPineappleApplePen(Network network, WavAudioSource audio, Simulator simulator, String soundsPath) {
         super(network, audio, simulator, soundsPath);
+
+
     }
+    // beat 0.88
+    // 0.3 * 8
+    // 7.34 * 8
+    // 14.38
+    // 21.27
+
 
     @Override
     protected void configure() {
-        ContinuousWhiteEffect cwe = new ContinuousWhiteEffect();
-        ContinuousRainbowEffect cre = new ContinuousRainbowEffect(cwe);
-        ContinuousConstLocationOffsetEffect rainbowWithOffset = new ContinuousConstLocationOffsetEffect(cre);
-        rainbowWithOffset.configure(0.5);
-        ContinuousCyclicMoveEffect cme1 = new ContinuousCyclicMoveEffect(cre);
-        cme1.configure(1, true);
-        ContinuousCyclicMoveEffect cme2 = new ContinuousCyclicMoveEffect(rainbowWithOffset);
-        cme2.configure(1, true);
-        ContinuousToDiscrete ctd1 = new ContinuousToDiscrete(110, cme1);
-        ContinuousToDiscrete ctd2 = new ContinuousToDiscrete(110, cme2);
 
-        DiscreteConstColorEffect blackDiscrete = new DiscreteConstColorEffect(110);
-        DiscreteAlternateEffect dsoe = new DiscreteAlternateEffect(110, ctd1, ctd2);
-        dsoe.configure(1, 2);
+        Totem totem = totems[0];
+        int numOfPixels = totem.leftIndexes.length + totem.rightIndexes.length;
 
-        DiscreteConfettiEffect dce = new DiscreteConfettiEffect(110, ctd1);
+        Animation blackAnimation = new Animation();
+        DiscreteConstColorEffect blackEffect = new DiscreteConstColorEffect(numOfPixels);
+        blackEffect.configure(HSBColor.BLACK);
+        blackAnimation.addMapper(new EffectToObjectMapper(blackEffect, totem.GetAllPixels(), totem.leftIndexes));
+        blackAnimation.addMapper(new EffectToObjectMapper(blackEffect, totem.GetAllPixels(), totem.rightIndexes));
+        timings.add(new AnimationTiming(blackAnimation, 0, 0.3));
 
-        DiscreteTwoConstColorsAlternateEffect dtccae = new DiscreteTwoConstColorsAlternateEffect(110);
-
-        ContinuousGlowEffect glow = new ContinuousGlowEffect(cre);
-        ContinuousToDiscrete glowToDiscrete = new ContinuousToDiscrete(110, glow);
-
-        ContinuousSegmentEffect seg = new ContinuousSegmentEffect(cme1);
-        ContinuousCyclicMoveEffect segMove = new ContinuousCyclicMoveEffect(seg);
-        ContinuousToDiscrete segToDiscrete = new ContinuousToDiscrete(110, segMove);
-
-        ContinuousEmptyEffect fill = new ContinuousEmptyEffect(cme1);
-        fill.configure(0.8, 0.2);
-        ContinuousToDiscrete fillToDiscrete = new ContinuousToDiscrete(110, fill);
-        mapperLeft = new EffectToObjectMapper(fillToDiscrete, totems[0].GetAllPixels(), totems[0].leftIndexes);
-        mapperRight = new EffectToObjectMapper(fillToDiscrete, totems[0].GetAllPixels(), totems[0].rightIndexes);
+        Animation firstAnimation = new Animation();
+        firstAnimation.addAnimation(firstAnimation(true), 0.0 ,0.5);
+        firstAnimation.addAnimation(firstAnimation(false), 0.5 ,1.0);
+        timings.add(new AnimationTiming(firstAnimation, 0.3, 14.38));
     }
 
     @Override
@@ -47,16 +36,24 @@ public class PenPineappleApplePen extends Song {
         return "pen.wav";
     }
 
-    @Override
-    protected void apply(double currentPos) {
-        double timePercent = (currentPos % 2.0) / 2.0;
-        if(timePercent < this.lastTimePercent) {
-            configure();
-        }
-        this.lastTimePercent = timePercent;
-        mapperLeft.apply(timePercent);
-        mapperRight.apply(timePercent);
-    }
 
-    private double lastTimePercent = 0.0;
+    private Animation firstAnimation(boolean forward) {
+        Totem totem = totems[0];
+        Animation animation = new Animation();
+        ContinuousWhiteEffect cwe = new ContinuousWhiteEffect();
+        ContinuousRainbowEffect cre = new ContinuousRainbowEffect(cwe);
+        ContinuousConstLocationOffsetEffect rainbowWithOffset = new ContinuousConstLocationOffsetEffect(cre);
+        rainbowWithOffset.configure(0.5);
+        ContinuousCyclicMoveEffect cme1 = new ContinuousCyclicMoveEffect(cre);
+        cme1.configure(1, forward);
+        ContinuousCyclicMoveEffect cme2 = new ContinuousCyclicMoveEffect(rainbowWithOffset);
+        cme2.configure(1, forward);
+        ContinuousToDiscrete ctd1 = new ContinuousToDiscrete(110, cme1);
+        ContinuousToDiscrete ctd2 = new ContinuousToDiscrete(110, cme2);
+        DiscreteAlternateEffect dsoe = new DiscreteAlternateEffect(110, ctd1, ctd2);
+        dsoe.configure(4, 5);
+        animation.addMapper(new EffectToObjectMapper(dsoe, totem.GetAllPixels(), totem.leftIndexes));
+        animation.addMapper(new EffectToObjectMapper(dsoe, totem.GetAllPixels(), totem.leftIndexes));
+        return animation;
+    }
 }

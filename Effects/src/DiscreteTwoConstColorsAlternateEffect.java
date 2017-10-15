@@ -16,8 +16,8 @@ public class DiscreteTwoConstColorsAlternateEffect extends DiscreteEffect {
         HSBColor prevColor = this.c1.getColor(0.0, 0);
 
         double nextHue = prevColor.hue + hueChange;
-        this.c1.configure(HSBColor.createFromParams(nextHue, 1.0, 1.0));
-        this.c2.configure(HSBColor.createFromParams(nextHue + 0.5, 1.0, 1.0));
+        this.c1.configure(new HSBColor(nextHue, 1.0, 1.0));
+        this.c2.configure(new HSBColor(nextHue + 0.5, 1.0, 1.0));
     }
 
     @Override

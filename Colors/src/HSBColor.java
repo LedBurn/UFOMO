@@ -6,12 +6,14 @@ public class HSBColor {
     public double saturation;
     public double brightness;
 
-    public static HSBColor createFromParams(double hue, double saturation, double brightness) {
-        HSBColor c = new HSBColor();
-        c.hue = hue;
-        c.saturation = saturation;
-        c.brightness = brightness;
-        return c;
+    public HSBColor() {
+        this(0, 0, 0);
+    }
+
+    public HSBColor(double hue, double saturation, double brightness) {
+        this.hue = hue;
+        this.saturation = saturation;
+        this.brightness = brightness;
     }
 
     public RGBColor toRGBColor() {
@@ -33,4 +35,6 @@ public class HSBColor {
         saturation = other.saturation;
         brightness = other.brightness;
     }
+
+    public static final HSBColor BLACK = new HSBColor(0,0,0);
 }

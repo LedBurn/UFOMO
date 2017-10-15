@@ -15,5 +15,6 @@
     <orderEntry type="module" module-name="Colors" />
     <orderEntry type="module" module-name="Effects" />
     <orderEntry type="module" module-name="Simulator" />
+    <orderEntry type="module" module-name="Animations" />
   </component>
 </module>
