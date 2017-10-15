@@ -51,7 +51,7 @@ public abstract class Song {
                     timer.cancel();
                 }
             }
-        }, 0, 100);
+        }, 0, 20);
     }
 
     protected abstract String getAudioFileName();
