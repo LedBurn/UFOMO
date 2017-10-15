@@ -10,8 +10,7 @@ public class PenPineappleApplePen extends Song {
     @Override
     protected void configure() {
         ContinuousWhiteEffect cwe = new ContinuousWhiteEffect();
-        ContinuousFadeOutEffect cfie = new ContinuousFadeOutEffect(cwe);
-        ContinuousRainbowEffect cre = new ContinuousRainbowEffect(cfie);
+        ContinuousRainbowEffect cre = new ContinuousRainbowEffect(cwe);
         ContinuousConstLocationOffsetEffect rainbowWithOffset = new ContinuousConstLocationOffsetEffect(cre);
         rainbowWithOffset.configure(0.5);
         ContinuousCyclicMoveEffect cme1 = new ContinuousCyclicMoveEffect(cre);
@@ -28,8 +27,11 @@ public class PenPineappleApplePen extends Song {
         DiscreteConfettiEffect dce = new DiscreteConfettiEffect(110, ctd1);
 
         DiscreteTwoConstColorsAlternateEffect dtccae = new DiscreteTwoConstColorsAlternateEffect(110);
-        mapperLeft = new EffectToObjectMapper(dtccae, totems[0].GetAllPixels(), totems[0].leftIndexes);
-        mapperRight = new EffectToObjectMapper(dtccae, totems[0].GetAllPixels(), totems[0].rightIndexes);
+
+        ContinuousGlowEffect glow = new ContinuousGlowEffect(cre);
+        ContinuousToDiscrete glowToDiscrete = new ContinuousToDiscrete(110, glow);
+        mapperLeft = new EffectToObjectMapper(glowToDiscrete, totems[0].GetAllPixels(), totems[0].leftIndexes);
+        mapperRight = new EffectToObjectMapper(glowToDiscrete, totems[0].GetAllPixels(), totems[0].rightIndexes);
     }
 
     @Override

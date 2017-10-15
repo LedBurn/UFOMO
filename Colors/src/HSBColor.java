@@ -24,7 +24,7 @@ public class HSBColor {
     }
 
     public int toRGBInt() {
-       return Color.HSBtoRGB((float)hue, (float)saturation, (float)brightness);
+       return Color.HSBtoRGB((float)hue, (float)saturation, (float)(brightness * brightness));
     }
 
     // TODO: does java supports it in some way?
