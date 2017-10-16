@@ -8,6 +8,7 @@ import java.util.TimerTask;
 public abstract class Song {
     protected final Totem[] totems;
     protected final ArrayList<AnimationTiming> timings = new ArrayList<>();
+    protected final ArrayList<AnimationTimingAmir> timingsAmir = new ArrayList<>();
 
     private final Network network;
     private final WavAudioSource audio;
@@ -23,7 +24,7 @@ public abstract class Song {
         this.simulator = simulator;
         this.soundsPath = soundsPath;
 
-        totems = new Totem[1];
+        totems = new Totem[8];
         for (int i=0; i<totems.length; i++) {
             totems[i] = new Totem();
         }
@@ -45,8 +46,8 @@ public abstract class Song {
                 if (currentPos != null) {
                     apply(currentPos);
                     network.addSegment("test", totems[0].GetRGBColors(0, 220), 0, 0);
-                    network.addSegment("test", totems[0].GetRGBColors(0, 220), 1, 0);
-                    network.addSegment("test", totems[0].GetRGBColors(0, 220), 2, 0);
+                    network.addSegment("test", totems[1].GetRGBColors(0, 220), 4, 0);
+                    network.addSegment("test", totems[2].GetRGBColors(0, 220), 2, 0);
                     if (simulator != null) {
                         simulator.draw(simTotems);
                     }
@@ -59,7 +60,10 @@ public abstract class Song {
     }
 
     private void apply(double currentPos) {
-        for (AnimationTiming timing : timings) {
+        for(Totem t: this.totems) {
+            t.clear();
+        }
+        for (AnimationTimingAmir timing : timingsAmir) {
             timing.apply(currentPos);
         }
     }

@@ -15,6 +15,52 @@ public class PenPineappleApplePen extends Song {
     @Override
     protected void configure() {
 
+        int pixelsPerSide = this.totems[0].GetPixelsNumber() / 2;
+
+        ContinuousConstColorEffect blue = new ContinuousConstColorEffect(HSBColor.BLUE);
+        ContinuousConstColorEffect red = new ContinuousConstColorEffect(HSBColor.RED);
+        ContinuousConstColorEffect yellow = new ContinuousConstColorEffect(HSBColor.YELLOW);
+
+        ContinuousFadeInEffect fadeBlue = new ContinuousFadeInEffect(blue);
+        ContinuousFadeInEffect fadeRed = new ContinuousFadeInEffect(red);
+        ContinuousFadeInEffect fadeYellow = new ContinuousFadeInEffect(yellow);
+
+        ContinuousSpikeEffect spikeBlue = new ContinuousSpikeEffect(blue);
+        spikeBlue.configure(0.0, 2.0, 1.0);
+        ContinuousSpikeEffect spikeRed = new ContinuousSpikeEffect(red);
+        spikeRed.configure(1.0, -1.0, 1.0);
+        ContinuousSpikeEffect spikeYellow = new ContinuousSpikeEffect(yellow);
+        spikeYellow.configure(1.0, -1.0, 1.0);
+
+
+        // pen apple
+        timingsAmir.add(new AnimationTimingAmir(new HalfTotemsAnimation(this.totems, fadeBlue.getAsDiscrete(pixelsPerSide), true), 0.3, 2.066));
+        timingsAmir.add(new AnimationTimingAmir(new HalfTotemsAnimation(this.totems, fadeRed.getAsDiscrete(pixelsPerSide), false), 2.066, 3.822));
+
+        timingsAmir.add(new AnimationTimingAmir(new AllTotemsAnimation(this.totems, spikeBlue.getAsDiscrete(pixelsPerSide), true, false), 4.675, 5.146));
+        timingsAmir.add(new AnimationTimingAmir(new AllTotemsAnimation(this.totems, spikeRed.getAsDiscrete(pixelsPerSide), false, true), 4.675, 5.146));
+
+        DiscreteAlternateEffect alternateRedBlue = new DiscreteAlternateEffect(pixelsPerSide, red.getAsDiscrete(pixelsPerSide), blue.getAsDiscrete(pixelsPerSide));
+        alternateRedBlue.configure(5, 2);
+        timingsAmir.add(new AnimationTimingAmir(new AllTotemsAnimation(this.totems, alternateRedBlue, true, true), 5.558, 6.920));
+
+        // pen pineapple
+        timingsAmir.add(new AnimationTimingAmir(new HalfTotemsAnimation(this.totems, fadeBlue.getAsDiscrete(pixelsPerSide), true), 7.373, 9.117));
+        timingsAmir.add(new AnimationTimingAmir(new HalfTotemsAnimation(this.totems, fadeYellow.getAsDiscrete(pixelsPerSide), false), 9.117, 10.886));
+
+        timingsAmir.add(new AnimationTimingAmir(new AllTotemsAnimation(this.totems, spikeBlue.getAsDiscrete(pixelsPerSide), true, false), 11.769, 12.214));
+        timingsAmir.add(new AnimationTimingAmir(new AllTotemsAnimation(this.totems, spikeYellow.getAsDiscrete(pixelsPerSide), false, true), 11.769, 12.214));
+
+        DiscreteAlternateEffect alternateBlueYellow = new DiscreteAlternateEffect(pixelsPerSide, blue.getAsDiscrete(pixelsPerSide), yellow.getAsDiscrete(pixelsPerSide));
+        alternateBlueYellow.configure(5, 2);
+        timingsAmir.add(new AnimationTimingAmir(new AllTotemsAnimation(this.totems, alternateBlueYellow, true, true), 12.600, 13.971));
+
+        // apple pen
+        timingsAmir.add(new AnimationTimingAmir(new AllTotemsAnimation(this.totems, alternateRedBlue, true, true), 14.412, 16.143));
+
+        // pineapple pen
+        timingsAmir.add(new AnimationTimingAmir(new AllTotemsAnimation(this.totems, alternateBlueYellow, true, true), 16.143, 17.941));
+
         Totem totem = totems[0];
         int numOfPixels = totem.leftIndexes.length + totem.rightIndexes.length;
 
@@ -23,12 +69,12 @@ public class PenPineappleApplePen extends Song {
         blackEffect.configure(HSBColor.BLACK);
         blackAnimation.addMapper(new EffectToObjectMapper(blackEffect, totem.GetAllPixels(), totem.leftIndexes));
         blackAnimation.addMapper(new EffectToObjectMapper(blackEffect, totem.GetAllPixels(), totem.rightIndexes));
-        timings.add(new AnimationTiming(blackAnimation, 0, 0.3));
+        timings.add(new AnimationTiming(blackAnimation, 0, 5.0));
 
         Animation firstAnimation = new Animation();
         firstAnimation.addAnimation(firstAnimation(true), 0.0 ,0.5);
         firstAnimation.addAnimation(firstAnimation(false), 0.5 ,1.0);
-        timings.add(new AnimationTiming(firstAnimation, 0.3, 14.38));
+        timings.add(new AnimationTiming(firstAnimation, 5.0, 14.38));
     }
 
     @Override

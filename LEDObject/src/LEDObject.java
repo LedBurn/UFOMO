@@ -7,6 +7,16 @@ abstract public class LEDObject {
     abstract public HSBColor[] GetAllPixels();
     public int GetPixelsNumber() { return this.GetAllPixels().length; }
 
+    public void clear() {
+        HSBColor[] allPixels = GetAllPixels();
+        for(int i=0; i<allPixels.length; i++) {
+            HSBColor currPixel = allPixels[i];
+            currPixel.brightness = 0.0;
+            currPixel.saturation = 0.0;
+            currPixel.hue = 0.0;
+        }
+    }
+
     public static int[] CreateIndexRange(int firstIndex, int lastIndex) {
         int allIndexes[] = new int[lastIndex - firstIndex + 1];
         for(int i=firstIndex; i <= lastIndex; i++) {
