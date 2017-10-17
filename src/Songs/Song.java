@@ -9,6 +9,7 @@ public abstract class Song {
     protected final Totem[] totems;
     protected final ArrayList<AnimationTiming> timings = new ArrayList<>();
     protected final ArrayList<AnimationTimingAmir> timingsAmir = new ArrayList<>();
+    protected final ArrayList<AddonTiming> timingsAddons = new ArrayList<>();
 
     private final Network network;
     private final WavAudioSource audio;
@@ -64,6 +65,9 @@ public abstract class Song {
             t.clear();
         }
         for (AnimationTimingAmir timing : timingsAmir) {
+            timing.apply(currentPos);
+        }
+        for(AddonTiming timing : timingsAddons) {
             timing.apply(currentPos);
         }
     }

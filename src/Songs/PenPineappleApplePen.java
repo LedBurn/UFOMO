@@ -1,3 +1,5 @@
+import java.util.concurrent.Callable;
+
 public class PenPineappleApplePen extends Song {
 
     public PenPineappleApplePen(Network network, WavAudioSource audio, Simulator simulator, String soundsPath) {
@@ -22,7 +24,6 @@ public class PenPineappleApplePen extends Song {
         ContinuousConstColorEffect yellow = new ContinuousConstColorEffect(HSBColor.YELLOW);
 
         ContinuousFadeInEffect fadeBlue = new ContinuousFadeInEffect(blue);
-        ContinuousFadeInEffect fadeRed = new ContinuousFadeInEffect(red);
         ContinuousFadeInEffect fadeYellow = new ContinuousFadeInEffect(yellow);
 
         ContinuousSpikeEffect spikeBlue = new ContinuousSpikeEffect(blue);
@@ -34,8 +35,10 @@ public class PenPineappleApplePen extends Song {
 
 
         // pen apple
-        timingsAmir.add(new AnimationTimingAmir(new HalfTotemsAnimation(this.totems, fadeBlue.getAsDiscrete(pixelsPerSide), true), 0.3, 2.066));
-        timingsAmir.add(new AnimationTimingAmir(new HalfTotemsAnimation(this.totems, fadeRed.getAsDiscrete(pixelsPerSide), false), 2.066, 3.822));
+        timingsAmir.add(new AnimationTimingAmir(new HalfTotemsAnimation(this.totems, blue.getAsDiscrete(pixelsPerSide), true), 0.3, 2.066));
+        timingsAddons.add(new AddonTiming(new AddonsContainerAllTotems(totems, new AddonEffect[]{new AddonFadeInEffect()}), 0.3, 2.066));
+        timingsAmir.add(new AnimationTimingAmir(new HalfTotemsAnimation(this.totems, red.getAsDiscrete(pixelsPerSide), false), 2.066, 3.822));
+        timingsAddons.add(new AddonTiming(new AddonsContainerAllTotems(totems, new AddonEffect[]{new AddonFadeInEffect()}), 2.066, 3.822));
 
         timingsAmir.add(new AnimationTimingAmir(new AllTotemsAnimation(this.totems, spikeBlue.getAsDiscrete(pixelsPerSide), true, false), 4.675, 5.146));
         timingsAmir.add(new AnimationTimingAmir(new AllTotemsAnimation(this.totems, spikeRed.getAsDiscrete(pixelsPerSide), false, true), 4.675, 5.146));
@@ -56,10 +59,23 @@ public class PenPineappleApplePen extends Song {
         timingsAmir.add(new AnimationTimingAmir(new AllTotemsAnimation(this.totems, alternateBlueYellow, true, true), 12.600, 13.971));
 
         // apple pen
-        timingsAmir.add(new AnimationTimingAmir(new AllTotemsAnimation(this.totems, alternateRedBlue, true, true), 14.412, 16.143));
+        double penAnimationEnd = 15.689 + 0.3;
+        timingsAmir.add(new AnimationTimingAmir(new AllTotemsAnimation(this.totems, alternateRedBlue, true, true), 14.412, penAnimationEnd));
+        timingsAddons.add(new AddonTiming(new AddonsContainerAllTotems(totems, new AddonEffect[]{new AddonClearS2SEffect()}), 15.689, penAnimationEnd));
 
         // pineapple pen
-        timingsAmir.add(new AnimationTimingAmir(new AllTotemsAnimation(this.totems, alternateBlueYellow, true, true), 16.143, 17.941));
+        double pineappleAnimationEnd = 17.500 + 0.3;
+        timingsAmir.add(new AnimationTimingAmir(new AllTotemsAnimation(this.totems, alternateBlueYellow, true, true), 16.143, pineappleAnimationEnd));
+        timingsAddons.add(new AddonTiming(new AddonsContainerAllTotems(totems, new AddonEffect[]{new AddonClearS2SEffect()}), 17.500, pineappleAnimationEnd));
+
+        // Ahhhh
+        AddonEffect randColor = new AddonRandomColorFromList(new HSBColor[]{HSBColor.RED, HSBColor.BLUE, HSBColor.YELLOW});
+        AddonRandomOnPixels randOn = new AddonRandomOnPixels(0.5);
+        AddonsContainerAllTotems ahhhEffects = new AddonsContainerAllTotems(totems, new AddonEffect[]{randColor, randOn});
+        timingsAddons.add(new AddonTiming(ahhhEffects, 18.820, 21.475));
+
+        AddonCyclicMove move = new AddonCyclicMove();
+        timingsAddons.add(new AddonTiming(new AddonsContainerAllTotems(totems, new AddonEffect[]{move}), 19.715, 21.475));
 
         Totem totem = totems[0];
         int numOfPixels = totem.leftIndexes.length + totem.rightIndexes.length;
