@@ -35,6 +35,7 @@ public class PenPineappleApplePen extends Song {
 
 
         // pen apple
+
         timingsAmir.add(new AnimationTimingAmir(new HalfTotemsAnimation(this.totems, blue.getAsDiscrete(pixelsPerSide), true), 0.3, 2.066));
         timingsAddons.add(new AddonTiming(new AddonsContainerAllTotems(totems, new AddonEffect[]{new AddonFadeInEffect()}), 0.3, 2.066));
         timingsAmir.add(new AnimationTimingAmir(new HalfTotemsAnimation(this.totems, red.getAsDiscrete(pixelsPerSide), false), 2.066, 3.822));
@@ -76,21 +77,18 @@ public class PenPineappleApplePen extends Song {
 
         AddonCyclicMove move = new AddonCyclicMove();
         timingsAddons.add(new AddonTiming(new AddonsContainerAllTotems(totems, new AddonEffect[]{move}), 19.715, 21.475));
+        timingsAddons.add(new AddonTiming(new AddonsContainerAllTotems(totems, new AddonEffect[]{new AddonGlowStain(HSBColor.BLUE.hue, 0.25)}), 19.715, 19.944));
+        timingsAddons.add(new AddonTiming(new AddonsContainerAllTotems(totems, new AddonEffect[]{new AddonGlowStain(HSBColor.YELLOW.hue, 0.25)}), 19.944, 20.623));
+        timingsAddons.add(new AddonTiming(new AddonsContainerAllTotems(totems, new AddonEffect[]{new AddonGlowStain(HSBColor.RED.hue, 0.25)}), 20.623, 21.089));
+        timingsAddons.add(new AddonTiming(new AddonsContainerAllTotems(totems, new AddonEffect[]{new AddonGlowStain(HSBColor.BLUE.hue, 0.25)}), 21.089, 21.475));
 
-        Totem totem = totems[0];
-        int numOfPixels = totem.leftIndexes.length + totem.rightIndexes.length;
+        timingsAddons.add(new AddonTiming(new AddonsContainerAllTotems(totems, new AddonEffect[]{new AddonGlowStain(HSBColor.RED.hue, 1.0)}), 21.455, 21.914));
+        timingsAddons.add(new AddonTiming(new AddonsContainerAllTotems(totems, new AddonEffect[]{new AddonGlowStain(HSBColor.YELLOW.hue, 1.0)}), 22.355, 22.796));
+        timingsAddons.add(new AddonTiming(new AddonsContainerAllTotems(totems, new AddonEffect[]{new AddonGlowStain(HSBColor.BLUE.hue, 1.0)}), 23.237, 23.679));
+        timingsAddons.add(new AddonTiming(new AddonsContainerAllTotems(totems, new AddonEffect[]{new AddonGlowStain(HSBColor.RED.hue, 1.0)}), 24.143, 24.561));
+        timingsAddons.add(new AddonTiming(new AddonsContainerAllTotems(totems, new AddonEffect[]{new AddonGlowStain(HSBColor.YELLOW.hue, 1.0)}), 25.002, 25.443));
+        timingsAddons.add(new AddonTiming(new AddonsContainerAllTotems(totems, new AddonEffect[]{new AddonGlowStain(HSBColor.BLUE.hue, 1.0)}), 25.884, 26.331));
 
-        Animation blackAnimation = new Animation();
-        DiscreteConstColorEffect blackEffect = new DiscreteConstColorEffect(numOfPixels);
-        blackEffect.configure(HSBColor.BLACK);
-        blackAnimation.addMapper(new EffectToObjectMapper(blackEffect, totem.GetAllPixels(), totem.leftIndexes));
-        blackAnimation.addMapper(new EffectToObjectMapper(blackEffect, totem.GetAllPixels(), totem.rightIndexes));
-        timings.add(new AnimationTiming(blackAnimation, 0, 5.0));
-
-        Animation firstAnimation = new Animation();
-        firstAnimation.addAnimation(firstAnimation(true), 0.0 ,0.5);
-        firstAnimation.addAnimation(firstAnimation(false), 0.5 ,1.0);
-        timings.add(new AnimationTiming(firstAnimation, 5.0, 14.38));
     }
 
     @Override
