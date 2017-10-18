@@ -20,6 +20,7 @@ public class PenPineappleApplePen extends Song {
         AddonSpike spikeUp = new AddonSpike(0.0, 2.0, 1.0);
         AddonSpike spikeDown = new AddonSpike(1.0, -1.0, 1.0);
 
+
         // pen apple
         timingsAddons.add(new AddonTiming(new AddonsContainerHalfTotems(totems, new AddonEffect[]{pen, new AddonFadeInEffect()}, true), 0.3, 2.066));
         timingsAddons.add(new AddonTiming(new AddonsContainerHalfTotems(totems, new AddonEffect[]{apple, new AddonFadeInEffect()}, false), 2.066, 3.822));
