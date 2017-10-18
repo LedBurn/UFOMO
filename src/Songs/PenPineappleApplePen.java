@@ -17,38 +17,31 @@ public class PenPineappleApplePen extends Song {
     @Override
     protected void configure() {
 
-        int pixelsPerSide = this.totems[0].GetPixelsNumber() / 2;
-
-        ContinuousConstColorEffect blue = new ContinuousConstColorEffect(HSBColor.BLUE);
-        ContinuousConstColorEffect red = new ContinuousConstColorEffect(HSBColor.RED);
-        ContinuousConstColorEffect yellow = new ContinuousConstColorEffect(HSBColor.YELLOW);
-
-        ContinuousSpikeEffect spikeBlue = new ContinuousSpikeEffect(blue);
-        spikeBlue.configure(0.0, 2.0, 1.0);
-        ContinuousSpikeEffect spikeRed = new ContinuousSpikeEffect(red);
-        spikeRed.configure(1.0, -1.0, 1.0);
-        ContinuousSpikeEffect spikeYellow = new ContinuousSpikeEffect(yellow);
-        spikeYellow.configure(1.0, -1.0, 1.0);
+        AddonSetConstColor pen = new AddonSetConstColor(HSBColor.BLUE);
+        AddonSetConstColor apple = new AddonSetConstColor(HSBColor.RED);
+        AddonSetConstColor pineapple = new AddonSetConstColor(HSBColor.YELLOW);
 
         AddonAlternateColorsFromArray alternateBlueRed = new AddonAlternateColorsFromArray(new HSBColor[]{HSBColor.BLUE, HSBColor.RED}, 3, 10);
         AddonAlternateColorsFromArray alternateBlueYellow = new AddonAlternateColorsFromArray(new HSBColor[]{HSBColor.BLUE, HSBColor.YELLOW}, 3, 10);
 
+        AddonSpike spikeUp = new AddonSpike(0.0, 2.0, 1.0);
+        AddonSpike spikeDown = new AddonSpike(1.0, -1.0, 1.0);
 
         // pen apple
-        timingsAddons.add(new AddonTiming(new AddonsContainerHalfTotems(totems, new AddonEffect[]{new AddonSetConstColor(HSBColor.BLUE), new AddonFadeInEffect()}, true), 0.3, 2.066));
-        timingsAddons.add(new AddonTiming(new AddonsContainerHalfTotems(totems, new AddonEffect[]{new AddonSetConstColor(HSBColor.RED), new AddonFadeInEffect()}, false), 2.066, 3.822));
+        timingsAddons.add(new AddonTiming(new AddonsContainerHalfTotems(totems, new AddonEffect[]{pen, new AddonFadeInEffect()}, true), 0.3, 2.066));
+        timingsAddons.add(new AddonTiming(new AddonsContainerHalfTotems(totems, new AddonEffect[]{apple, new AddonFadeInEffect()}, false), 2.066, 3.822));
 
-        timingsAmir.add(new AnimationTimingAmir(new AllTotemsAnimation(this.totems, spikeBlue.getAsDiscrete(pixelsPerSide), true, false), 4.675, 5.146));
-        timingsAmir.add(new AnimationTimingAmir(new AllTotemsAnimation(this.totems, spikeRed.getAsDiscrete(pixelsPerSide), false, true), 4.675, 5.146));
+        timingsAddons.add(new AddonTiming(new AddonsContainerAllTotemOneSide(totems, new AddonEffect[]{pen, spikeDown}, true), 4.675, 5.146));
+        timingsAddons.add(new AddonTiming(new AddonsContainerAllTotemOneSide(totems, new AddonEffect[]{apple, spikeUp}, false), 4.675, 5.146));
 
         timingsAddons.add(new AddonTiming(new AddonsContainerAllTotems(totems, new AddonEffect[]{alternateBlueRed}), 5.558, 6.920));
 
         // pen pineapple
-        timingsAddons.add(new AddonTiming(new AddonsContainerHalfTotems(totems, new AddonEffect[]{new AddonSetConstColor(HSBColor.BLUE), new AddonFadeInEffect()}, true), 7.373, 9.117));
-        timingsAddons.add(new AddonTiming(new AddonsContainerHalfTotems(totems, new AddonEffect[]{new AddonSetConstColor(HSBColor.YELLOW), new AddonFadeInEffect()}, false), 9.117, 10.886));
+        timingsAddons.add(new AddonTiming(new AddonsContainerHalfTotems(totems, new AddonEffect[]{pen, new AddonFadeInEffect()}, true), 7.373, 9.117));
+        timingsAddons.add(new AddonTiming(new AddonsContainerHalfTotems(totems, new AddonEffect[]{pineapple, new AddonFadeInEffect()}, false), 9.117, 10.886));
 
-        timingsAmir.add(new AnimationTimingAmir(new AllTotemsAnimation(this.totems, spikeBlue.getAsDiscrete(pixelsPerSide), true, false), 11.769, 12.214));
-        timingsAmir.add(new AnimationTimingAmir(new AllTotemsAnimation(this.totems, spikeYellow.getAsDiscrete(pixelsPerSide), false, true), 11.769, 12.214));
+        timingsAddons.add(new AddonTiming(new AddonsContainerAllTotemOneSide(totems, new AddonEffect[]{pen, spikeDown}, true), 11.769, 12.214));
+        timingsAddons.add(new AddonTiming(new AddonsContainerAllTotemOneSide(totems, new AddonEffect[]{pineapple, spikeUp}, false), 11.769, 12.214));
 
         timingsAddons.add(new AddonTiming(new AddonsContainerAllTotems(totems, new AddonEffect[]{alternateBlueYellow}), 12.600, 13.971));
 
@@ -81,6 +74,7 @@ public class PenPineappleApplePen extends Song {
         timingsAddons.add(new AddonTiming(new AddonsContainerAllTotems(totems, new AddonEffect[]{new AddonGlowStain(HSBColor.RED.hue, 1.0)}), 24.143, 24.561));
         timingsAddons.add(new AddonTiming(new AddonsContainerAllTotems(totems, new AddonEffect[]{new AddonGlowStain(HSBColor.YELLOW.hue, 1.0)}), 25.002, 25.443));
         timingsAddons.add(new AddonTiming(new AddonsContainerAllTotems(totems, new AddonEffect[]{new AddonGlowStain(HSBColor.BLUE.hue, 1.0)}), 25.884, 26.331));
+
     }
 
     @Override
