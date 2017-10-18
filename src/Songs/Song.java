@@ -7,8 +7,6 @@ import java.util.TimerTask;
 
 public abstract class Song {
     protected final Totem[] totems;
-    protected final ArrayList<AnimationTiming> timings = new ArrayList<>();
-    protected final ArrayList<AnimationTimingAmir> timingsAmir = new ArrayList<>();
     protected final ArrayList<AddonTiming> timingsAddons = new ArrayList<>();
 
     private final Network network;
@@ -63,9 +61,6 @@ public abstract class Song {
     private void apply(double currentPos) {
         for(Totem t: this.totems) {
             t.clear();
-        }
-        for (AnimationTimingAmir timing : timingsAmir) {
-            timing.apply(currentPos);
         }
         for(AddonTiming timing : timingsAddons) {
             timing.apply(currentPos);

@@ -5,14 +5,7 @@ public class PenPineappleApplePen extends Song {
     public PenPineappleApplePen(Network network, WavAudioSource audio, Simulator simulator, String soundsPath) {
         super(network, audio, simulator, soundsPath);
 
-
     }
-    // beat 0.88
-    // 0.3 * 8
-    // 7.34 * 8
-    // 14.38
-    // 21.27
-
 
     @Override
     protected void configure() {
@@ -26,6 +19,7 @@ public class PenPineappleApplePen extends Song {
 
         AddonSpike spikeUp = new AddonSpike(0.0, 2.0, 1.0);
         AddonSpike spikeDown = new AddonSpike(1.0, -1.0, 1.0);
+
 
         // pen apple
         timingsAddons.add(new AddonTiming(new AddonsContainerHalfTotems(totems, new AddonEffect[]{pen, new AddonFadeInEffect()}, true), 0.3, 2.066));
@@ -123,24 +117,4 @@ public class PenPineappleApplePen extends Song {
         return "pen.wav";
     }
 
-
-    private Animation firstAnimation(boolean forward) {
-        Totem totem = totems[0];
-        Animation animation = new Animation();
-        ContinuousWhiteEffect cwe = new ContinuousWhiteEffect();
-        ContinuousRainbowEffect cre = new ContinuousRainbowEffect(cwe);
-        ContinuousConstLocationOffsetEffect rainbowWithOffset = new ContinuousConstLocationOffsetEffect(cre);
-        rainbowWithOffset.configure(0.5);
-        ContinuousCyclicMoveEffect cme1 = new ContinuousCyclicMoveEffect(cre);
-        cme1.configure(1, forward);
-        ContinuousCyclicMoveEffect cme2 = new ContinuousCyclicMoveEffect(rainbowWithOffset);
-        cme2.configure(1, forward);
-        ContinuousToDiscrete ctd1 = new ContinuousToDiscrete(110, cme1);
-        ContinuousToDiscrete ctd2 = new ContinuousToDiscrete(110, cme2);
-        DiscreteAlternateEffect dsoe = new DiscreteAlternateEffect(110, ctd1, ctd2);
-        dsoe.configure(4, 5);
-        animation.addMapper(new EffectToObjectMapper(dsoe, totem.GetAllPixels(), totem.leftIndexes));
-        animation.addMapper(new EffectToObjectMapper(dsoe, totem.GetAllPixels(), totem.leftIndexes));
-        return animation;
-    }
 }
