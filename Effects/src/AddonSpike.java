@@ -34,7 +34,7 @@ public class AddonSpike extends AddonEffect {
                 currColor.brightness = 0.0;
             }
             else {
-                currColor.brightness = 1.0 -  ((currHeadStart - relLocation) / this.tailLength);
+                currColor.brightness *= 1.0 -  ((currHeadStart - relLocation) / this.tailLength);
             }
         }
 
