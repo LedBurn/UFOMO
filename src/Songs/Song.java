@@ -7,7 +7,7 @@ import java.util.TimerTask;
 
 public abstract class Song {
     protected final Totem[] totems;
-    protected final ArrayList<AddonTiming> timingsAddons = new ArrayList<>();
+    protected final ArrayList<AddonTiming> timings = new ArrayList<>();
 
     private final Network network;
     private final WavAudioSource audio;
@@ -62,9 +62,13 @@ public abstract class Song {
         for(Totem t: this.totems) {
             t.clear();
         }
-        for(AddonTiming timing : timingsAddons) {
+        for(AddonTiming timing : timings) {
             timing.apply(currentPos);
         }
+    }
+
+    protected void addTiming(double from, double to, AddonsContainer container) {
+        this.timings.add(new AddonTiming(container, from, to));
     }
 
     protected abstract String getAudioFileName();
