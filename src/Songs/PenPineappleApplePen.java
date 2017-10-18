@@ -33,9 +33,7 @@ public class PenPineappleApplePen extends Song {
         ContinuousSpikeEffect spikeYellow = new ContinuousSpikeEffect(yellow);
         spikeYellow.configure(1.0, -1.0, 1.0);
 
-
         // pen apple
-
         timingsAmir.add(new AnimationTimingAmir(new HalfTotemsAnimation(this.totems, blue.getAsDiscrete(pixelsPerSide), true), 0.3, 2.066));
         timingsAddons.add(new AddonTiming(new AddonsContainerAllTotems(totems, new AddonEffect[]{new AddonFadeInEffect()}), 0.3, 2.066));
         timingsAmir.add(new AnimationTimingAmir(new HalfTotemsAnimation(this.totems, red.getAsDiscrete(pixelsPerSide), false), 2.066, 3.822));
