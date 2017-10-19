@@ -45,8 +45,9 @@ public abstract class Song {
                 if (currentPos != null) {
                     apply(currentPos);
                     network.addSegment("test", totems[0].GetRGBColors(0, 220), 0, 0);
-                    network.addSegment("test", totems[1].GetRGBColors(0, 220), 4, 0);
+                    network.addSegment("test", totems[1].GetRGBColors(0, 220), 1, 0);
                     network.addSegment("test", totems[2].GetRGBColors(0, 220), 2, 0);
+                    network.addSegment("test", totems[3].GetRGBColors(0, 220), 3, 0);
                     if (simulator != null) {
                         simulator.draw(simTotems);
                     }
@@ -55,7 +56,7 @@ public abstract class Song {
                     timer.cancel();
                 }
             }
-        }, 0, 20);
+        }, 0, 25);
     }
 
     private void apply(double currentPos) {

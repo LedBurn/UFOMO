@@ -11,16 +11,18 @@ public class AddonConfetti extends AddonEffect {
         this.pixelsPercentToShine = pixelsPercentToShine;
         this.midLifeTime = midLifeTime;
     }
+1
+    @Override
+    public void setNumberOfPixels(int numberOfPixels) {
+        this.birthTime = new double[numberOfPixels];
+        for(int i=0; i < numberOfPixels; i++) {
+            this.birthTime[i] = -1000000; // very small number - so the exponent will be very small as well
+        }
+    }
 
     @Override
     public void apply(HSBColor[] array, double timePercent) {
 
-        if(this.birthTime == null) {
-            this.birthTime = new double[array.length];
-            for(int i=0; i < array.length; i++) {
-                this.birthTime[i] = -1000000; // very small number - so the exponent will be very small as well
-            }
-        }
         this.shine(timePercent, array.length);
 
         for(int i=0; i<array.length; i++) {

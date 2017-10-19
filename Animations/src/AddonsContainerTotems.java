@@ -26,32 +26,12 @@ public class AddonsContainerTotems extends AddonsContainer {
         for(Callable<AddonEffect> e: effects) {
             try {
                 s.effects[i] = e.call();
+                s.effects[i].setNumberOfPixels(indexes.length);
             }
             catch (java.lang.Exception exception) {
 
             }
             i++;
-        }
-
-        this.segments.add(s);
-    }
-
-    protected void addSegment(Totem t, int indexes[], AddonEffect effects[]) {
-
-        Segment s = new Segment();
-
-        s.t = t;
-        s.indexes = indexes;
-        s.arrayForEffect = new HSBColor[indexes.length];
-
-        s.effects = new AddonEffect[effects.length];
-        for(int i=0; i<effects.length; i++) {
-            try {
-                s.effects[i] = effects[i];
-            }
-            catch (java.lang.Exception e) {
-
-            }
         }
 
         this.segments.add(s);
