@@ -37,6 +37,8 @@ public class PenPineappleApplePen extends Song {
 
         addTiming(12.600, 13.971, new AddonsContainerAllTotems(totems, new AddonEffect[]{alternateBlueYellow}));
 
+        //addBeatAnimations(0.3, 14.417, 16, 0.0, 0.5, new AddonsContainerAllTotems(totems, new AddonEffect[]{new AddonSaturationGlitter(0.5, 0.5)}));
+
         // apple pen
         double penAnimationEnd = 15.689 + 0.3;
         addTiming(14.412, penAnimationEnd, new AddonsContainerAllTotems(totems, new AddonEffect[]{alternateBlueRed}));
@@ -101,30 +103,20 @@ public class PenPineappleApplePen extends Song {
         // Dance time 28.550 - 29.408   ahh 29.408 - 30.295
         addTiming(28.550,30.295, new AddonsContainerAllTotems(totems, new AddonEffect[]{new AddonSetConstColor(HSBColor.GREEN),new AddonConfetti(5.0,0.05)}));
 
-        // apple apple 30.295 - 33.824
-        addTiming(30.295,33.824, new AddonsContainerAllTotems(totems, new AddonEffect[]{alternateBlueRed,move}));
+        addMultiSectionsTiming(30.295, 44.418, new AddonsContainer[]{
+                new AddonsContainerAllTotems(totems, new AddonEffect[]{alternateBlueRed,move}),
+                new AddonsContainerAllTotems(totems, new AddonEffect[]{alternateBlueYellow,move}),
+                new AddonsContainerAllTotems(totems, new AddonEffect[]{alternateBlueRed,move,new AddonClearS2SEffect()}),
+                new AddonsContainerAllTotems(totems, new AddonEffect[]{alternateBlueRed,move,spikeDown})
+        });
 
-        // pen apple 33.824 - 35.364
-        addTiming(33.824,35.364, new AddonsContainerAllTotems(totems, new AddonEffect[]{alternateBlueYellow,move}));
-
-        // 35.364 - 40.666
-        addTiming(35.364,40.666, new AddonsContainerAllTotems(totems, new AddonEffect[]{alternateBlueRed,move,new AddonClearS2SEffect()}));
-
-        // 40.666 - 44.418
-        addTiming(40.666,44.418, new AddonsContainerAllTotems(totems, new AddonEffect[]{alternateBlueRed,move,spikeDown}));
-
-        // crazy time 44.418 - 47.461 phase 1
         AddonEffect standardConfetti = new AddonConfetti(5.0,0.05);
-        addTiming(44.418,47.461, new AddonsContainerAllTotems(totems, new AddonEffect[]{new AddonSetConstColor(HSBColor.GREEN),standardConfetti,new AddonClearS2SEffect()}));
-
-        // crazy time 47.461 - 51.000 phase 2
-        addTiming(47.461,51.000, new AddonsContainerAllTotems(totems, new AddonEffect[]{pen,standardConfetti,spikeDown}));
-
-        // crazy time 51.000 - 54.615 phase 3
-        addTiming(51.000,54.615, new AddonsContainerAllTotems(totems, new AddonEffect[]{apple,standardConfetti,spikeUp}));
-
-        // crazy time 54.615 - 56.767 phase 4
-        addTiming(54.615,56.767, new AddonsContainerAllTotems(totems, new AddonEffect[]{pineapple,standardConfetti}));
+        addMultiSectionsTiming(44.418, 58.572, new AddonsContainer[]{
+                new AddonsContainerAllTotems(totems, new AddonEffect[]{new AddonSetConstColor(HSBColor.GREEN),standardConfetti,new AddonClearS2SEffect()}),
+                new AddonsContainerAllTotems(totems, new AddonEffect[]{pen,standardConfetti,spikeDown}),
+                new AddonsContainerAllTotems(totems, new AddonEffect[]{apple,standardConfetti,spikeUp}),
+                new AddonsContainerAllTotems(totems, new AddonEffect[]{pineapple,standardConfetti})
+        });
 
         // Fading bla 56.767 - 57.902
         addTiming(56.767, 57.902, new AddonsContainerAllTotems(totems, new AddonEffect[]{new AddonFadeOut()}));

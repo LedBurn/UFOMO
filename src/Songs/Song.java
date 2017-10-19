@@ -67,6 +67,25 @@ public abstract class Song {
         }
     }
 
+    protected void addBeatAnimations(double from, double to, int numberOfBeats, double inBeatFrom, double inBeatTo, AddonsContainer container) {
+        double eachBeatTime = (to-from) /  numberOfBeats;
+        for(int i=0; i<numberOfBeats; i++) {
+            double currFromTime = from + i*eachBeatTime + inBeatFrom * eachBeatTime;
+            double currToTime = from + i*eachBeatTime + inBeatTo * eachBeatTime;
+            this.timings.add(new AddonTiming(container, currFromTime, currToTime));
+        }
+    }
+
+    protected void addMultiSectionsTiming(double from, double to, AddonsContainer containers[]) {
+        double eachBeatTime = (to-from) /  containers.length;
+        for(int i=0; i < containers.length; i++) {
+            AddonsContainer currContainer = containers[i];
+            double currFromTime = from + i * eachBeatTime;
+            double currToTime = currFromTime + eachBeatTime;
+            this.timings.add(new AddonTiming(containers[i], currFromTime, currToTime));
+        }
+    }
+
     protected void addTiming(double from, double to, AddonsContainer container) {
         this.timings.add(new AddonTiming(container, from, to));
     }
