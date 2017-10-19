@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Callable;
 
 class Segment {
@@ -11,6 +12,29 @@ class Segment {
 }
 
 public class AddonsContainerTotems extends AddonsContainer {
+
+    protected void addSegment(Totem t, int indexes[], List<Callable<AddonEffect>> effects) {
+
+        Segment s = new Segment();
+
+        s.t = t;
+        s.indexes = indexes;
+        s.arrayForEffect = new HSBColor[indexes.length];
+
+        s.effects = new AddonEffect[effects.size()];
+        int i=0;
+        for(Callable<AddonEffect> e: effects) {
+            try {
+                s.effects[i] = e.call();
+            }
+            catch (java.lang.Exception exception) {
+
+            }
+            i++;
+        }
+
+        this.segments.add(s);
+    }
 
     protected void addSegment(Totem t, int indexes[], AddonEffect effects[]) {
 

@@ -1,8 +1,10 @@
 import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.Callable;
 
 public class AddonsContainerPartialTotem extends AddonsContainerTotems {
 
-    public void addTotemSegment(Totem totems[], AddonEffect effects[], double locStart, double locEnd, Boolean sideLeft) {
+    public void addTotemSegment(Totem totems[], List<Callable<AddonEffect>> effects, double locStart, double locEnd, Boolean sideLeft) {
 
         for(Totem t : totems) {
             if(sideLeft == null || sideLeft == true) {
@@ -14,7 +16,7 @@ public class AddonsContainerPartialTotem extends AddonsContainerTotems {
         }
     }
 
-    private void addIndexes(Totem totem, AddonEffect effects[], double locStart, double locEnd, int indexes[]) {
+    private void addIndexes(Totem totem, List<Callable<AddonEffect>> effects, double locStart, double locEnd, int indexes[]) {
 
         int indexStart = (int)(locStart * indexes.length);
         int indexEnd = (int)(locEnd * indexes.length);

@@ -1,6 +1,9 @@
+import java.util.List;
+import java.util.concurrent.Callable;
+
 public class AddonsContainerHalfTotems extends AddonsContainerTotems {
 
-    public AddonsContainerHalfTotems(Totem totems[], AddonEffect effects[], boolean isEven) {
+    public AddonsContainerHalfTotems(Totem totems[], List<Callable<AddonEffect>> effects, boolean isEven) {
 
         int i=0;
         if(!isEven) {
