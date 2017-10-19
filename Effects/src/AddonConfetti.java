@@ -11,7 +11,7 @@ public class AddonConfetti extends AddonEffect {
         this.pixelsPercentToShine = pixelsPercentToShine;
         this.midLifeTime = midLifeTime;
     }
-1
+
     @Override
     public void setNumberOfPixels(int numberOfPixels) {
         this.birthTime = new double[numberOfPixels];

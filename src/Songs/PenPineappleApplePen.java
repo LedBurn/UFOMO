@@ -82,25 +82,10 @@ public class PenPineappleApplePen extends Song {
         addTiming(25.884, 26.331, new AddonsContainerAllTotems(totems, Arrays.asList(() -> new AddonGlowStain(HSBColor.BLUE.hue, 1.0))));
 
         // pen pineapple apple pen
-        AddonsContainerPartialTotem partialPen = new AddonsContainerPartialTotem();
-        partialPen.addTotemSegment(new Totem[]{totems[0], totems[3], totems[6]}, Arrays.asList(() -> new AddonStain(HSBColor.BLUE.hue, 1.0)), 0.1, 0.3, null);
-        partialPen.addTotemSegment(new Totem[]{totems[1], totems[4], totems[7]}, Arrays.asList(() -> new AddonStain(HSBColor.BLUE.hue, 1.0)), 0.6, 0.9, null);
-        addTiming(26.331, 28.550, partialPen);
-
-        AddonsContainerPartialTotem partialPineapple = new AddonsContainerPartialTotem();
-        partialPineapple.addTotemSegment(new Totem[]{totems[0], totems[3], totems[6]}, Arrays.asList(() -> new AddonStain(HSBColor.YELLOW.hue, 1.0)), 0.5, 0.6, null);
-        partialPineapple.addTotemSegment(new Totem[]{totems[1], totems[4], totems[7]}, Arrays.asList(() -> new AddonStain(HSBColor.YELLOW.hue, 1.0)), 0.0, 0.4, null);
-        addTiming(26.965, 28.550, partialPineapple);
-
-        AddonsContainerPartialTotem partialApple = new AddonsContainerPartialTotem();
-        partialApple.addTotemSegment(new Totem[]{totems[0], totems[3], totems[6]}, Arrays.asList(() -> new AddonStain(HSBColor.RED.hue, 1.0)), 0.2, 0.4, null);
-        partialApple.addTotemSegment(new Totem[]{totems[1], totems[4], totems[7]}, Arrays.asList(() -> new AddonStain(HSBColor.RED.hue, 1.0)), 0.7, 0.8, null);
-        addTiming(27.683, 28.550, partialApple);
-
-        AddonsContainerPartialTotem partialGreen = new AddonsContainerPartialTotem();
-        partialGreen.addTotemSegment(new Totem[]{totems[2], totems[5]}, Arrays.asList(() -> new AddonStain(HSBColor.GREEN.hue, 1.0)), 0.6, 0.9, null);
-        partialGreen.addTotemSegment(new Totem[]{totems[1], totems[4]}, Arrays.asList(() -> new AddonStain(HSBColor.GREEN.hue, 1.0)), 0.0, 0.2, null);
-        addTiming(28.147, 28.550, partialGreen);
+        addTiming(26.331, 28.550, new AddonsContainerRadomSegments(totems, Arrays.asList(() -> new AddonStain(HSBColor.BLUE.hue, 1.0)), 0.2, 16));
+        addTiming(26.965, 28.550, new AddonsContainerRadomSegments(totems, Arrays.asList(() -> new AddonStain(HSBColor.YELLOW.hue, 1.0)), 0.2, 16));
+        addTiming(27.683, 28.550, new AddonsContainerRadomSegments(totems, Arrays.asList(() -> new AddonStain(HSBColor.RED.hue, 1.0)), 0.2, 16));
+        addTiming(28.147, 28.550, new AddonsContainerRadomSegments(totems, Arrays.asList(() -> new AddonStain(HSBColor.BLUE.hue, 1.0)), 0.2, 16));
 
 //        addTiming(25.884, 26.331, new AddonsContainerAllTotems(totems, new AddonEffect[]{move}));
 //        addTiming(19.715, 19.944, new AddonsContainerAllTotems(totems, new AddonEffect[]{new AddonGlowStain(HSBColor.BLUE.hue, 0.25)}));
