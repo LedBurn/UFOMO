@@ -59,20 +59,20 @@ public class PenPineappleApplePen extends Song {
         addTiming(17.500, pineappleAnimationEnd, new AddonsContainerAllTotems(totems, Arrays.asList(clearS2S)));
 
         // Ahhhh
-        AddonEffect randColor = new AddonRandomColorFromList(new HSBColor[]{HSBColor.RED, HSBColor.BLUE, HSBColor.YELLOW});
-        AddonRandomOnPixels randOn = new AddonRandomOnPixels(0.5);
-        AddonsContainerAllTotems ahhhEffects = new AddonsContainerAllTotems(totems, Arrays.asList(() -> randColor, () -> randOn));
-        addTiming(18.820, 21.475, ahhhEffects);
+        Callable<AddonEffect> alternate3Segments = () -> new AddonAlternateColorsFromArray(new HSBColor[]{HSBColor.RED, HSBColor.BLUE, HSBColor.YELLOW}, 10, 0);
+        Callable<AddonEffect> randOn = () -> new AddonRandomOnPixels(0.5);
+        AddonsContainerAllTotems ahhhEffects = new AddonsContainerAllTotems(totems, Arrays.asList(alternate3Segments, randOn));
+        addTiming(18.820, 21.455, ahhhEffects);
 
         // pen pineapple apple pen
+        addTiming(19.715, 21.455, new AddonsContainerAllTotems(totems, Arrays.asList(move)));
 
 
-        addTiming(19.715, 21.475, new AddonsContainerAllTotems(totems, Arrays.asList(move)));
-//        addTiming(19.715, 19.944, new AddonsContainerAllTotems(totems, new AddonEffect[]{new AddonGlowStain(HSBColor.BLUE.hue, 0.25)}));
-//        addTiming(19.944, 20.623, new AddonsContainerAllTotems(totems, new AddonEffect[]{new AddonGlowStain(HSBColor.YELLOW.hue, 0.25)}));
-//        addTiming(20.623, 21.089, new AddonsContainerAllTotems(totems, new AddonEffect[]{new AddonGlowStain(HSBColor.RED.hue, 0.25)}));
-//        addTiming(21.089, 21.475, new AddonsContainerAllTotems(totems, new AddonEffect[]{new AddonGlowStain(HSBColor.BLUE.hue, 0.25)}));
-
+/*        addTiming(19.715, 19.944, new AddonsContainerAllTotems(totems, Arrays.asList(pen, spikeUp)));
+        addTiming(19.944, 20.623, new AddonsContainerAllTotems(totems, Arrays.asList(pineapple, spikeUp)));
+        addTiming(20.623, 21.089, new AddonsContainerAllTotems(totems, Arrays.asList(apple, spikeUp)));
+        addTiming(21.089, 21.475, new AddonsContainerAllTotems(totems, Arrays.asList(pen, spikeUp)));
+*/
         // Beats
         addTiming(21.455, 21.914, new AddonsContainerAllTotems(totems, Arrays.asList(() -> new AddonGlowStain(HSBColor.RED.hue, 1.0))));
         addTiming(22.355, 22.796, new AddonsContainerAllTotems(totems, Arrays.asList(() -> new AddonGlowStain(HSBColor.YELLOW.hue, 1.0))));
