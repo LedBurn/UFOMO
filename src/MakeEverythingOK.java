@@ -15,8 +15,10 @@ public class MakeEverythingOK {
         final WavAudioSource audio = new WavAudioSource();
 
         try {
-            Song pen = new PenPineappleApplePen(network, audio, s, soundsPath);
-            pen.play();
+            Song sun = new HereComesTheSun(network, audio, s, soundsPath);
+            sun.play();
+            //Song pen = new PenPineappleApplePen(network, audio, s, soundsPath);
+            //pen.play();
         } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
         } catch (IOException e) {
