@@ -13,6 +13,11 @@ public class WavAudioSource extends AudioSource {
 
     }
 
+    public void StopSong() {
+        this.clip.stop();
+        this.clip.close();
+    }
+
     public void PlaySong(String filePath) throws
             UnsupportedAudioFileException, LineUnavailableException,
             IOException {

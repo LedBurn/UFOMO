@@ -14,14 +14,18 @@ public abstract class Song {
     private final Simulator simulator;
     private final String soundsPath;
     private final ISimulatedLEDObject simTotems;
+    private final KeyPedServer keyPedServer;
+    private final boolean allowInterupt;
 
     private Timer timer;
 
-    public Song(Network network, WavAudioSource audio, Simulator simulator, String soundsPath) {
+    public Song(boolean allowInterupt, Network network, WavAudioSource audio, Simulator simulator, String soundsPath, KeyPedServer keyPedServer) {
         this.network = network;
         this.audio = audio;
         this.simulator = simulator;
         this.soundsPath = soundsPath;
+        this.keyPedServer = keyPedServer;
+        this.allowInterupt = allowInterupt;
 
         totems = new Totem[8];
         for (int i=0; i<totems.length; i++) {
@@ -33,14 +37,28 @@ public abstract class Song {
         configure();
     }
 
-    public void play() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+    public Integer play() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 
         audio.PlaySong(soundsPath + getAudioFileName());
+
+        if(this.allowInterupt) {
+            this.keyPedServer.clearCurrentInupt();
+        }
 
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
+
+                if(allowInterupt) {
+                    Integer userChoice = keyPedServer.checkForInput();
+                    if(userChoice != null) {
+                        System.out.println("stop playing current song due to user interrupt. userChoice: " + userChoice);
+                        audio.StopSong();
+                        timer.cancel();
+                    }
+                }
+
                 Double currentPos = audio.GetPositionSeconds();
                 if (currentPos != null) {
                     apply(currentPos);
@@ -77,6 +95,8 @@ public abstract class Song {
                 }
             }
         }, 0, 25);
+
+        return null;
     }
 
     private void apply(double currentPos) {

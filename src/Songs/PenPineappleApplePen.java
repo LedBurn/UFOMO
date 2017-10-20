@@ -5,8 +5,8 @@ import java.util.concurrent.Callable;
 
 public class PenPineappleApplePen extends Song {
 
-    public PenPineappleApplePen(Network network, WavAudioSource audio, Simulator simulator, String soundsPath) {
-        super(network, audio, simulator, soundsPath);
+    public PenPineappleApplePen(Network network, WavAudioSource audio, Simulator simulator, String soundsPath, KeyPedServer keyPedServer) {
+        super(true, network, audio, simulator, soundsPath, keyPedServer);
 
     }
 

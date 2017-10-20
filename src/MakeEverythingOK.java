@@ -11,14 +11,17 @@ public class MakeEverythingOK {
 
         final Network network = new Network();
         network.configure();
+        final KeyPedServer keyPedServer = new KeyPedServer();
+        Thread keyPadServertThread = new Thread(keyPedServer, "key pad server thread");
+        keyPadServertThread.start();
         final Simulator s = runSimulator ? new Simulator() : null;
         final WavAudioSource audio = new WavAudioSource();
 
         try {
-            Song sun = new HereComesTheSun(network, audio, s, soundsPath);
-            sun.play();
-            //Song pen = new PenPineappleApplePen(network, audio, s, soundsPath);
-            //pen.play();
+            //Song sun = new HereComesTheSun(network, audio, s, soundsPath, keyPedServer);
+            //sun.play();
+            Song pen = new PenPineappleApplePen(network, audio, s, soundsPath, keyPedServer);
+            pen.play();
         } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -26,6 +29,5 @@ public class MakeEverythingOK {
         } catch (LineUnavailableException e) {
             e.printStackTrace();
         }
-
     }
 }

@@ -3,8 +3,8 @@ import java.util.concurrent.Callable;
 
 public class HereComesTheSun extends Song {
 
-    public HereComesTheSun(Network network, WavAudioSource audio, Simulator simulator, String soundsPath) {
-        super(network, audio, simulator, soundsPath);
+    public HereComesTheSun(Network network, WavAudioSource audio, Simulator simulator, String soundsPath, KeyPedServer keyPedServer) {
+        super(false, network, audio, simulator, soundsPath, keyPedServer);
 
     }
 
