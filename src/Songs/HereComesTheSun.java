@@ -11,32 +11,49 @@ public class HereComesTheSun extends Song {
     @Override
     protected void configure() {
 
-        Callable<AddonEffect> blue = () -> new AddonSetConstColor(HSBColor.BLUE);
+        Callable<AddonEffect> sunYellow = () -> new AddonSetConstColor(HSBColor.YELLOW);
+        Callable<AddonEffect> sunOrange = () -> new AddonSetConstColor(HSBColor.ORANGE);
+        Callable<AddonEffect> sunRed = () -> new AddonSetConstColor(HSBColor.RED);
+
+        Callable<AddonEffect> fadeIn = () -> new AddonFadeInEffect();
+        Callable<AddonEffect> spikeUp = () -> new AddonSpike(0.0, 2.0, 1.0);
+        Callable<AddonEffect> spikeDown = () -> new AddonSpike(1.0, -1.0, 1.0);
+        Callable<AddonEffect> confetti = () -> new AddonConfetti(5.0,0.2);
+        Callable<AddonEffect> move = () -> new AddonCyclicMove();
+
+        /*Callable<AddonEffect> blue = () -> new AddonSetConstColor(HSBColor.BLUE);
         Callable<AddonEffect> apple = () -> new AddonSetConstColor(HSBColor.RED);
-        Callable<AddonEffect> sun = () -> new AddonGlowStain(HSBColor.YELLOW.hue,1.0);
 
         Callable<AddonEffect> alternateBlueRed = () -> new AddonAlternateColorsFromArray(new HSBColor[]{HSBColor.BLUE, HSBColor.RED}, 3, 10);
         Callable<AddonEffect> alternateBlueYellow = () -> new AddonAlternateColorsFromArray(new HSBColor[]{HSBColor.BLUE, HSBColor.YELLOW}, 3, 10);
 
-        Callable<AddonEffect> spikeUp = () -> new AddonSpike(0.0, 2.0, 1.0);
-        Callable<AddonEffect> spikeDown = () -> new AddonSpike(1.0, -1.0, 1.0);
 
-        Callable<AddonEffect> fadeIn = () -> new AddonFadeInEffect();
         Callable<AddonEffect> clearS2S = () -> new AddonClearS2SEffect();
-        Callable<AddonEffect> move = () -> new AddonCyclicMove();
-        Callable<AddonEffect> standardConfetti = () -> new AddonConfetti(5.0,0.05);
+
+        */
+
 
         // Here comes the sun
-        addTiming(0.0, 4.818, new AddonsContainerAllTotems(totems, Arrays.asList(sun,fadeIn)));
+        addTiming(0.0, 4.818, new AddonsContainerAllTotems(totems, Arrays.asList(sunRed,fadeIn)));
         // Here comes the sun
-        addTiming(4.818, 7.126, new AddonsContainerAllTotems(totems, Arrays.asList(sun)));
+        addTiming(4.818, 7.126, new AddonsContainerAllTotems(totems, Arrays.asList(() -> new AddonChangeHue(HSBColor.RED.hue, HSBColor.ORANGE.hue))));
+
+        addTiming(8.580, 10.174, new AddonsContainerAllTotems(totems, Arrays.asList(sunOrange, confetti)));
+        addTiming(8.580, 10.174, new AddonsContainerAllTotemOneSide(totems, Arrays.asList(spikeUp), true));
+        addTiming(8.580, 10.174, new AddonsContainerAllTotemOneSide(totems, Arrays.asList(spikeDown), false));
+        addTiming(0.0, 10.174, new AddonsContainerAllTotems(totems, Arrays.asList(() -> new AddonBrightnessStain())));
+
+        addTiming(7.126, 8.580, new AddonsContainerTotemsCircle(totems, Arrays.asList(sunOrange, () -> new AddonBrightnessStain(), () -> new AddonMoveSin())));
+
+
+
         // and i say, its all right
-        AddonsContainerPartialTotem singleTot = new AddonsContainerPartialTotem();
+        /*AddonsContainerPartialTotem singleTot = new AddonsContainerPartialTotem();
         singleTot.addTotemSegment(new Totem[]{totems[0]}, Arrays.asList(blue,standardConfetti), 0.0, 1.0, null);
         addTiming(7.126, 10.304, singleTot);
         // to lu le lu lu le
         addTiming(10.304, 14.000, new AddonsContainerAllTotems(totems, Arrays.asList(blue,standardConfetti)));
-
+*/
         //addTiming(5.558, 6.920, new AddonsContainerAllTotems(totems, Arrays.asList(alternateBlueRed)));
 
         //addTiming(12.600, 13.971, new AddonsContainerAllTotems(totems, Arrays.asList(alternateBlueYellow)));

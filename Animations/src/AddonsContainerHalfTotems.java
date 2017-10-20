@@ -11,8 +11,8 @@ public class AddonsContainerHalfTotems extends AddonsContainerTotems {
         }
         for(; i<totems.length; i+=2) {
             Totem t = totems[i];
-            this.addSegment(t, t.leftIndexes, effects);
-            this.addSegment(t, t.rightIndexes, effects);
+            this.addSegment(t, t.leftIndexes, effects, null);
+            this.addSegment(t, t.rightIndexes, effects, null);
         }
     }
 

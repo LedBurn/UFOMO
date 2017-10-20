@@ -20,7 +20,7 @@ public class AddonsContainerRadomSegments extends AddonsContainerTotems {
             int segmentLengthPixels = (int)(segmentLength * allIndexes.length);
             int selectionStartPixel = ThreadLocalRandom.current().nextInt(allIndexes.length - segmentLengthPixels);
             int slicedIndexes[] = Arrays.copyOfRange(allIndexes, selectionStartPixel, selectionStartPixel + segmentLengthPixels);
-            this.addSegment(randTotem, slicedIndexes, effects);
+            this.addSegment(randTotem, slicedIndexes, effects, null);
         }
     }
 

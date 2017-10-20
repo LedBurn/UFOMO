@@ -7,10 +7,10 @@ public class AddonsContainerAllTotemOneSide extends AddonsContainerTotems {
 
         for(Totem t : totems) {
             if(isLeft) {
-                this.addSegment(t, t.leftIndexes, effects);
+                this.addSegment(t, t.leftIndexes, effects, null);
             }
             else {
-                this.addSegment(t, t.rightIndexes, effects);
+                this.addSegment(t, t.rightIndexes, effects, null);
             }
         }
     }

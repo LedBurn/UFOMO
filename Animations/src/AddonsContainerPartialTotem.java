@@ -34,7 +34,7 @@ public class AddonsContainerPartialTotem extends AddonsContainerTotems {
                 relevantArray[dstArrayIndex] = indexes[i];
             }
         }
-        this.addSegment(totem, relevantArray, effects);
+        this.addSegment(totem, relevantArray, effects, null);
     }
 
 }

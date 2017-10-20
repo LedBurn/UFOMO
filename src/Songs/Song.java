@@ -46,57 +46,61 @@ public abstract class Song {
         }
 
         timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
 
-                if(allowInterupt) {
-                    Integer userChoice = keyPedServer.checkForInput();
-                    if(userChoice != null) {
-                        System.out.println("stop playing current song due to user interrupt. userChoice: " + userChoice);
-                        audio.StopSong();
-                        timer.cancel();
-                    }
-                }
-
-                Double currentPos = audio.GetPositionSeconds();
-                if (currentPos != null) {
-                    apply(currentPos);
-                    network.addSegment("test", totems[0].GetRGBColors(0, 220), 0, 0);
-                    network.addSegment("test", totems[1].GetRGBColors(0, 220), 1, 0);
-                    network.addSegment("test", totems[2].GetRGBColors(0, 220), 2, 0);
-                    network.addSegment("test", totems[3].GetRGBColors(0, 220), 3, 0);
-                    network.addSegment("test", totems[4].GetRGBColors(0, 220), 4, 0);
-                    network.addSegment("test", totems[5].GetRGBColors(0, 220), 5, 0);
-                    network.addSegment("test", totems[6].GetRGBColors(0, 220), 6, 0);
-                    network.addSegment("test", totems[7].GetRGBColors(0, 220), 7, 0);
-                    network.addSegment("test", totems[0].GetRGBColors(0, 220), 8, 0);
-                    network.addSegment("test", totems[1].GetRGBColors(0, 220), 9, 0);
-                    network.addSegment("test", totems[2].GetRGBColors(0, 220), 10, 0);
-                    network.addSegment("test", totems[3].GetRGBColors(0, 220), 11, 0);
-                    network.addSegment("test", totems[4].GetRGBColors(0, 220), 12, 0);
-                    network.addSegment("test", totems[5].GetRGBColors(0, 220), 13, 0);
-                    network.addSegment("test", totems[6].GetRGBColors(0, 220), 14, 0);
-                    network.addSegment("test", totems[7].GetRGBColors(0, 220), 15, 0);
-                    network.addSegment("test", totems[0].GetRGBColors(0, 220), 16, 0);
-                    network.addSegment("test", totems[1].GetRGBColors(0, 220), 17, 0);
-                    network.addSegment("test", totems[2].GetRGBColors(0, 220), 18, 0);
-                    network.addSegment("test", totems[3].GetRGBColors(0, 220), 19, 0);
-                    network.addSegment("test", totems[4].GetRGBColors(0, 220), 20, 0);
-                    network.addSegment("test", totems[5].GetRGBColors(0, 220), 21, 0);
-                    network.addSegment("test", totems[6].GetRGBColors(0, 220), 22, 0);
-                    network.addSegment("test", totems[7].GetRGBColors(0, 220), 23, 0);
-                    if (simulator != null) {
-                        simulator.draw(simTotems);
-                    }
-                    network.send();
-                } else {
+        while(true) {
+            if(allowInterupt) {
+                Integer userChoice = keyPedServer.checkForInput();
+                if(userChoice != null) {
+                    System.out.println("stop playing current song due to user interrupt. userChoice: " + userChoice);
+                    audio.StopSong();
                     timer.cancel();
+                    return userChoice;
                 }
             }
-        }, 0, 25);
 
-        return null;
+            Double currentPos = audio.GetPositionSeconds();
+            if (currentPos != null) {
+                apply(currentPos);
+                network.addSegment("test", totems[0].GetRGBColors(0, 220), 0, 0);
+                network.addSegment("test", totems[1].GetRGBColors(0, 220), 1, 0);
+                network.addSegment("test", totems[2].GetRGBColors(0, 220), 2, 0);
+                network.addSegment("test", totems[3].GetRGBColors(0, 220), 3, 0);
+                network.addSegment("test", totems[4].GetRGBColors(0, 220), 4, 0);
+                network.addSegment("test", totems[5].GetRGBColors(0, 220), 5, 0);
+                network.addSegment("test", totems[6].GetRGBColors(0, 220), 6, 0);
+                network.addSegment("test", totems[7].GetRGBColors(0, 220), 7, 0);
+                network.addSegment("test", totems[0].GetRGBColors(0, 220), 8, 0);
+                network.addSegment("test", totems[1].GetRGBColors(0, 220), 9, 0);
+                network.addSegment("test", totems[2].GetRGBColors(0, 220), 10, 0);
+                network.addSegment("test", totems[3].GetRGBColors(0, 220), 11, 0);
+                network.addSegment("test", totems[4].GetRGBColors(0, 220), 12, 0);
+                network.addSegment("test", totems[5].GetRGBColors(0, 220), 13, 0);
+                network.addSegment("test", totems[6].GetRGBColors(0, 220), 14, 0);
+                network.addSegment("test", totems[7].GetRGBColors(0, 220), 15, 0);
+                network.addSegment("test", totems[0].GetRGBColors(0, 220), 16, 0);
+                network.addSegment("test", totems[1].GetRGBColors(0, 220), 17, 0);
+                network.addSegment("test", totems[2].GetRGBColors(0, 220), 18, 0);
+                network.addSegment("test", totems[3].GetRGBColors(0, 220), 19, 0);
+                network.addSegment("test", totems[4].GetRGBColors(0, 220), 20, 0);
+                network.addSegment("test", totems[5].GetRGBColors(0, 220), 21, 0);
+                network.addSegment("test", totems[6].GetRGBColors(0, 220), 22, 0);
+                network.addSegment("test", totems[7].GetRGBColors(0, 220), 23, 0);
+                if (simulator != null) {
+                    simulator.draw(simTotems);
+                }
+                network.send();
+            } else {
+                return null;
+            }
+
+            try {
+                Thread.sleep(25);
+            }
+            catch (java.lang.InterruptedException interrupt) {
+                return null;
+            }
+
+        }
     }
 
     private void apply(double currentPos) {
