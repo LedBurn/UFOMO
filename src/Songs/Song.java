@@ -48,6 +48,10 @@ public abstract class Song {
                     network.addSegment("test", totems[1].GetRGBColors(0, 220), 1, 0);
                     network.addSegment("test", totems[2].GetRGBColors(0, 220), 2, 0);
                     network.addSegment("test", totems[3].GetRGBColors(0, 220), 3, 0);
+                    network.addSegment("test", totems[4].GetRGBColors(0, 220), 4, 0);
+                    network.addSegment("test", totems[5].GetRGBColors(0, 220), 5, 0);
+                    network.addSegment("test", totems[6].GetRGBColors(0, 220), 6, 0);
+                    network.addSegment("test", totems[7].GetRGBColors(0, 220), 7, 0);
                     if (simulator != null) {
                         simulator.draw(simTotems);
                     }

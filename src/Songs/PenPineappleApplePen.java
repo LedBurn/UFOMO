@@ -26,6 +26,7 @@ public class PenPineappleApplePen extends Song {
         Callable<AddonEffect> fadeIn = () -> new AddonFadeInEffect();
         Callable<AddonEffect> clearS2S = () -> new AddonClearS2SEffect();
         Callable<AddonEffect> move = () -> new AddonCyclicMove();
+        Callable<AddonEffect> standardConfetti = () -> new AddonConfetti(5.0,0.05);
 
         // new AddonEffect[]{pen, new AddonFadeInEffect()}
         // pen apple
@@ -94,7 +95,8 @@ public class PenPineappleApplePen extends Song {
 //        addTiming(21.089, 21.475, new AddonsContainerAllTotems(totems, new AddonEffect[]{new AddonGlowStain(HSBColor.BLUE.hue, 0.25)}));
 
         // Dance time 28.550 - 29.408   ahh 29.408 - 30.295
-        addTiming(28.550,30.295, new AddonsContainerAllTotems(totems, Arrays.asList(() -> new AddonSetConstColor(HSBColor.GREEN),() -> new AddonConfetti(5.0,0.05))));
+        addTiming(28.550,30.295, new AddonsContainerAllTotems(totems, Arrays.asList(() -> new AddonRainbow(), standardConfetti)));
+        addTiming(28.550,29.408, new AddonsContainerAllTotems(totems, Arrays.asList(() -> new AddonChangeBrightness(0.5))));
 
         addMultiSectionsTiming(30.295, 44.418, new AddonsContainer[]{
                 new AddonsContainerAllTotems(totems, Arrays.asList(alternateBlueRed, move)),
@@ -103,7 +105,6 @@ public class PenPineappleApplePen extends Song {
                 new AddonsContainerAllTotems(totems, Arrays.asList(alternateBlueRed, move, spikeDown))
         });
 
-        Callable<AddonEffect> standardConfetti = () -> new AddonConfetti(5.0,0.05);
         addMultiSectionsTiming(44.418, 58.572, new AddonsContainer[]{
                 new AddonsContainerAllTotems(totems, Arrays.asList(pen, standardConfetti, clearS2S)),
                 new AddonsContainerAllTotems(totems, Arrays.asList(apple, standardConfetti, spikeDown)),
