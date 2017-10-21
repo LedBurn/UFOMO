@@ -7,16 +7,18 @@ public class AddonConfetti extends AddonEffect {
     - pixelsPercentToShine = 5.0
     - midLifeTime = 0.05
      */
-    public AddonConfetti(double pixelsPercentToShine, double midLifeTime) {
+    public AddonConfetti(double pixelsPercentToShine, double midLifeTime, boolean startsAsOn) {
         this.pixelsPercentToShine = pixelsPercentToShine;
         this.midLifeTime = midLifeTime;
+        this.startsAsOn = startsAsOn;
     }
 
     @Override
     public void setNumberOfPixels(int numberOfPixels) {
         this.birthTime = new double[numberOfPixels];
+        double birthValue = this.startsAsOn ? 0.0 : -1000000;
         for(int i=0; i < numberOfPixels; i++) {
-            this.birthTime[i] = -1000000; // very small number - so the exponent will be very small as well
+            this.birthTime[i] = birthValue; // very small number - so the exponent will be very small as well
         }
     }
 
@@ -62,5 +64,6 @@ public class AddonConfetti extends AddonEffect {
 
     double pixelsPercentToShine;
     double midLifeTime;
+    boolean startsAsOn;
 
 }

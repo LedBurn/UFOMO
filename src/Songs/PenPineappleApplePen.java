@@ -26,7 +26,7 @@ public class PenPineappleApplePen extends Song {
         Callable<AddonEffect> fadeIn = () -> new AddonFadeInEffect();
         Callable<AddonEffect> clearS2S = () -> new AddonClearS2SEffect();
         Callable<AddonEffect> move = () -> new AddonCyclicMove();
-        Callable<AddonEffect> standardConfetti = () -> new AddonConfetti(5.0,0.05);
+        Callable<AddonEffect> standardConfetti = () -> new AddonConfetti(5.0,0.05, false);
 
         // new AddonEffect[]{pen, new AddonFadeInEffect()}
         // pen apple

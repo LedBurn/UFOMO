@@ -8,14 +8,17 @@ public class AddonSaturationGlitter extends AddonEffect {
     }
 
     @Override
+    public void setNumberOfPixels(int numberOfPixels) {
+        this.birthTime = new double[numberOfPixels];
+        double birthValue = -1000000; // very small number - so the exponent will be very small as well
+        for(int i=0; i < numberOfPixels; i++) {
+            this.birthTime[i] = birthValue;
+        }
+    }
+
+    @Override
     public void apply(HSBColor[] array, double timePercent) {
 
-        if(this.birthTime == null) {
-            this.birthTime = new double[array.length];
-            for(int i=0; i < array.length; i++) {
-                this.birthTime[i] = -1000000; // very small number - so the exponent will be very small as well
-            }
-        }
         this.shine(timePercent, array.length);
 
         for(int i=0; i<array.length; i++) {
@@ -23,7 +26,7 @@ public class AddonSaturationGlitter extends AddonEffect {
             double timeFromBirth = timePercent - this.birthTime[i];
             double midTimeFactor = -0.693 / this.midLifeTime;
             double brightFactor = Math.exp(midTimeFactor * timeFromBirth);
-            c.saturation *= (1.0 - brightFactor);
+            c.saturation = (1.0 - brightFactor);
         }
     }
 
@@ -39,13 +42,21 @@ public class AddonSaturationGlitter extends AddonEffect {
             }
         }
 
-        int minBound = Math.max((int)(numberOfPixels * timePercent) - 5, 0);
-        int maxBound = Math.min((int)(numberOfPixels * timePercent) + 5, numberOfPixels - 1);
+        // at the end, we want to let some times for the glitter to disappear
+        if(timePercent > (1.0 - 3 * this.midLifeTime)) {
+            return;
+        }
+        double locPercent = timePercent / (1.0 - 3 * this.midLifeTime);
+
+        int minBound = (int)(numberOfPixels * locPercent) - 5;
+        int maxBound = (int)(numberOfPixels * locPercent) + 5;
 
         int expectedShinePixels = (int)(timePercent * this.pixelsPercentToShine * numberOfPixels);
         for(int i=this.totalShinedPixels; i < expectedShinePixels; i++) {
             int index = ThreadLocalRandom.current().nextInt(minBound, maxBound);
-            this.birthTime[index] = timePercent;
+            if(index >= 0 && index < numberOfPixels) {
+                this.birthTime[index] = timePercent;
+            }
         }
         this.totalShinedPixels = expectedShinePixels;
 
