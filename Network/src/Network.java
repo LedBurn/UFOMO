@@ -86,7 +86,7 @@ class SingleControllerData {
         try {
             // TODO: get the ip as configuration
             // TODO: add broadcast to the controller (new message in LedBurn protocol) so it will publish the ip by name
-            this.ipAddress = InetAddress.getByName("beaglebone.local");
+            this.ipAddress = InetAddress.getByName("10.0.0.20");
             return true;
         }
         catch (UnknownHostException e) {
