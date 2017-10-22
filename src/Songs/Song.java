@@ -94,7 +94,7 @@ public abstract class Song {
             }
 
             try {
-                Thread.sleep(25);
+                Thread.sleep(30);
             }
             catch (java.lang.InterruptedException interrupt) {
                 return null;

@@ -48,11 +48,21 @@ public class HSBColor {
         return averagePercent % 1.0;
     }
 
+    public static HSBColor mixColors(HSBColor c1, double amount1, HSBColor c2, double amount2) {
+        double hue = HSBColor.combineHues(c1.hue, amount1, c2.hue, amount2);
+        double brightness = (c1.brightness * amount1 + c2.brightness * amount2) / (amount1 + amount2);
+        double saturation = (c1.saturation * amount1 + c2.saturation * amount2) / (amount1 + amount2);
+        return new HSBColor(hue, saturation, brightness);
+    }
+
     public static final HSBColor BLACK = new HSBColor(0,0,0);
     public static final HSBColor RED = new HSBColor(0.0/3.0,1.0,1.0);
     public static final HSBColor GREEN = new HSBColor(1.0/3.0,1.0,1.0);
     public static final HSBColor BLUE = new HSBColor(2.0/3.0,1.0,1.0);
+    public static final HSBColor SKYBLUE = new HSBColor(0.6,0.8,0.8);
     public static final HSBColor YELLOW = new HSBColor(1.0/6.0,1.0,1.0);
     public static final HSBColor ORANGE = new HSBColor(1.0/12.0,1.0,1.0);
+    public static final HSBColor BROWN = new HSBColor(23.0/255.0,0.9,0.5);
+
 
 }
