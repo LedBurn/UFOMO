@@ -11,7 +11,7 @@ public class Silence2Sec extends Song{
 
     @Override
     protected String getAudioFileName() {
-        return "silence_15sec.wav";
+        return "silence_2sec.wav";
     }
 
 }
