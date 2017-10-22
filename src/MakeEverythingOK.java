@@ -61,6 +61,8 @@ public class MakeEverythingOK {
 
                 // we know that userInput is available
                 makeDigitSound(network, audio, s, soundsPath, keyPedServer, userInput);
+                Song silence2Sec = new Silence2Sec(network, audio, s, soundsPath, keyPedServer);
+                silence2Sec.play();
 
                 Song songToPlay = getSongByDigit(network, audio, s, soundsPath, keyPedServer, userInput);
 
@@ -98,6 +100,7 @@ public class MakeEverythingOK {
             case 1:
                 return new PenPineappleApplePen(network, audio, simulator, soundsPath, keyPedServer);
             case 2:
+                return new Money(network, audio, simulator, soundsPath, keyPedServer);
             case 3:
                 return new Rachel(network, audio, simulator, soundsPath, keyPedServer);
             case 4:
