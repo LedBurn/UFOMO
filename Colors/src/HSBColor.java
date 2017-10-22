@@ -63,6 +63,7 @@ public class HSBColor {
     public static final HSBColor YELLOW = new HSBColor(1.0/6.0,1.0,1.0);
     public static final HSBColor ORANGE = new HSBColor(1.0/12.0,1.0,1.0);
     public static final HSBColor BROWN = new HSBColor(23.0/255.0,0.9,0.5);
+    public static final HSBColor GRAY = new HSBColor(0.0,0.0,0.2);
 
 
 }

@@ -15,7 +15,6 @@ public class AddonBlur extends AddonEffect {
             this.satChange[i] = ThreadLocalRandom.current().nextDouble(-0.1, 0.1);
             this.brightnessChange[i] = ThreadLocalRandom.current().nextDouble(-0.05, 0.05);
             this.hueChange[i] = ThreadLocalRandom.current().nextDouble(-0.02, 0.02);
-            System.out.println(this.hueChange[i]);
         }
     }
 

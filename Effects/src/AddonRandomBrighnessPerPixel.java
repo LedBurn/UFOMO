@@ -14,7 +14,6 @@ public class AddonRandomBrighnessPerPixel extends AddonEffect {
         brightness = new double[numberOfPixels];
         for(int i=0; i < numberOfPixels; i++) {
             this.brightness[i] = ThreadLocalRandom.current().nextDouble();
-            System.out.println(this.brightness[i]);
         }
     }
 
