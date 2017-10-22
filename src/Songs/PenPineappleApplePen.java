@@ -83,10 +83,10 @@ public class PenPineappleApplePen extends Song {
         addTiming(25.884, 26.331, new AddonsContainerAllTotems(totems, Arrays.asList(() -> new AddonGlowStain(HSBColor.BLUE.hue, 1.0))));
 
         // pen pineapple apple pen
-        addTiming(26.331, 28.550, new AddonsContainerRadomSegments(totems, Arrays.asList(() -> new AddonStain(HSBColor.BLUE.hue, 1.0)), 0.2, 16));
-        addTiming(26.965, 28.550, new AddonsContainerRadomSegments(totems, Arrays.asList(() -> new AddonStain(HSBColor.YELLOW.hue, 1.0)), 0.2, 16));
-        addTiming(27.683, 28.550, new AddonsContainerRadomSegments(totems, Arrays.asList(() -> new AddonStain(HSBColor.RED.hue, 1.0)), 0.2, 16));
-        addTiming(28.147, 28.550, new AddonsContainerRadomSegments(totems, Arrays.asList(() -> new AddonStain(HSBColor.BLUE.hue, 1.0)), 0.2, 16));
+        addTiming(26.331, 28.550, new AddonsContainerRadomSegments(totems, Arrays.asList(() -> new AddonStain(HSBColor.BLUE.hue, 1.0, 1.0)), 0.2, 16));
+        addTiming(26.965, 28.550, new AddonsContainerRadomSegments(totems, Arrays.asList(() -> new AddonStain(HSBColor.YELLOW.hue, 1.0, 1.0)), 0.2, 16));
+        addTiming(27.683, 28.550, new AddonsContainerRadomSegments(totems, Arrays.asList(() -> new AddonStain(HSBColor.RED.hue, 1.0, 1.0)), 0.2, 16));
+        addTiming(28.147, 28.550, new AddonsContainerRadomSegments(totems, Arrays.asList(() -> new AddonStain(HSBColor.BLUE.hue, 1.0, 1.0)), 0.2, 16));
 
 //        addTiming(25.884, 26.331, new AddonsContainerAllTotems(totems, new AddonEffect[]{move}));
 //        addTiming(19.715, 19.944, new AddonsContainerAllTotems(totems, new AddonEffect[]{new AddonGlowStain(HSBColor.BLUE.hue, 0.25)}));

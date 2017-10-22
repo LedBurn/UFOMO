@@ -19,7 +19,7 @@ public class AddonGlowStain extends AddonEffect {
             double origBrightness = array[i].brightness;
             array[i].brightness = Math.min(origBrightness + stainBrightness, 1.0);
             if(this.stainHue != null) {
-                array[i].hue = this.combineHues(this.stainHue, stainBrightness, array[i].hue, origBrightness);
+                array[i].hue = HSBColor.combineHues(this.stainHue, stainBrightness * 2, array[i].hue, origBrightness);
             }
             array[i].saturation = this.combineSat(1.0, stainBrightness, array[i].saturation, origBrightness);
         }
@@ -27,14 +27,6 @@ public class AddonGlowStain extends AddonEffect {
 
     private double combineSat(double sat1, double amount1, double sat2, double amount2) {
         return (sat1 * amount1 + sat2 * amount2) / (amount1 + amount2);
-    }
-
-    private double combineHues(double hue1, double amount1, double hue2, double amount2) {
-        double x = amount1 * Math.cos(hue1 * 2 * Math.PI) + amount2 * Math.cos(hue2 * 2 * Math.PI);
-        double y = amount1 * Math.sin(hue1 * 2 * Math.PI) + amount2 * Math.sin(hue2 * 2 * Math.PI);
-        double combinesAngle = Math.atan2(y, x);
-        double averagePercent = combinesAngle / ( 2.0 * Math.PI);
-        return averagePercent % 1.0;
     }
 
     private double getBrightness(double timePercent, double relLocation) {
