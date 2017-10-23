@@ -22,6 +22,9 @@ public class MakeEverythingOK {
 
             while(true) {
 
+                Song h = new HereComesTheSun(network, audio, s, soundsPath, keyPedServer);
+                h.play();
+
                 Integer userInput = null;
 
                 int invitationCallNumber = 0;

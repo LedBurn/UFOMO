@@ -20,6 +20,9 @@ public class PenPineappleApplePen extends Song {
         Callable<AddonEffect> alternateBlueRed = () -> new AddonAlternateColorsFromArray(new HSBColor[]{HSBColor.BLUE, HSBColor.RED}, 3, 10);
         Callable<AddonEffect> alternateBlueYellow = () -> new AddonAlternateColorsFromArray(new HSBColor[]{HSBColor.BLUE, HSBColor.YELLOW}, 3, 10);
 
+        Callable<AddonEffect> alternateBlueRedNoMove = () -> new AddonAlternateColorsFromArray(new HSBColor[]{HSBColor.BLUE, HSBColor.RED}, 3, 0);
+        Callable<AddonEffect> alternateBlueYellowNoMove = () -> new AddonAlternateColorsFromArray(new HSBColor[]{HSBColor.BLUE, HSBColor.YELLOW}, 3, 0);
+
         Callable<AddonEffect> spikeUp = () -> new AddonSpike(0.0, 2.0, 1.0);
         Callable<AddonEffect> spikeDown = () -> new AddonSpike(1.0, -1.0, 1.0);
 
@@ -99,10 +102,10 @@ public class PenPineappleApplePen extends Song {
         addTiming(28.550,29.408, new AddonsContainerAllTotems(totems, Arrays.asList(() -> new AddonChangeBrightness(0.5))));
 
         addMultiSectionsTiming(30.295, 44.418, new AddonsContainer[]{
-                new AddonsContainerAllTotems(totems, Arrays.asList(alternateBlueRed, move)),
-                new AddonsContainerAllTotems(totems, Arrays.asList(alternateBlueYellow, move)),
-                new AddonsContainerAllTotems(totems, Arrays.asList(alternateBlueRed, move, clearS2S)),
-                new AddonsContainerAllTotems(totems, Arrays.asList(alternateBlueRed, move, spikeDown))
+                new AddonsContainerAllTotems(totems, Arrays.asList(alternateBlueRedNoMove, move)),
+                new AddonsContainerAllTotems(totems, Arrays.asList(alternateBlueYellowNoMove, move)),
+                new AddonsContainerAllTotems(totems, Arrays.asList(alternateBlueRedNoMove, move, clearS2S)),
+                new AddonsContainerAllTotems(totems, Arrays.asList(alternateBlueRedNoMove, move, spikeDown))
         });
 
         addMultiSectionsTiming(44.418, 58.572, new AddonsContainer[]{

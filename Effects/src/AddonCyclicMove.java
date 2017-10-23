@@ -1,12 +1,17 @@
 public class AddonCyclicMove extends AddonEffect {
 
     @Override
+    public void setNumberOfPixels(int numberOfPixels) {
+        this.arrayForCopy = new HSBColor[numberOfPixels];
+        for(int i=0; i < numberOfPixels; i++) {
+            this.arrayForCopy[i] = new HSBColor();
+        }
+    }
+
+    @Override
     public void apply(HSBColor[] array, double timePercent) {
 
-        // create a copy. i'm sure there is a cleaner way to do it :)
-        HSBColor arrayForCopy[] = new HSBColor[array.length];
         for(int i=0; i<arrayForCopy.length; i++) {
-            arrayForCopy[i] = new HSBColor();
             arrayForCopy[i].copyFromOther(array[i]);
         }
 
@@ -16,5 +21,7 @@ public class AddonCyclicMove extends AddonEffect {
             array[i].copyFromOther(arrayForCopy[srcIndex]);
         }
     }
+
+    private HSBColor arrayForCopy[];
 
 }

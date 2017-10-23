@@ -9,11 +9,8 @@ abstract public class LEDObject {
 
     public void clear() {
         HSBColor[] allPixels = GetAllPixels();
-        for(int i=0; i<allPixels.length; i++) {
-            HSBColor currPixel = allPixels[i];
-            currPixel.brightness = 0.0;
-            currPixel.saturation = 0.0;
-            currPixel.hue = 0.0;
+        for(HSBColor c : allPixels) {
+            c.copyFromOther(HSBColor.BLACK);
         }
     }
 

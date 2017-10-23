@@ -22,6 +22,8 @@ public class WavAudioSource extends AudioSource {
             UnsupportedAudioFileException, LineUnavailableException,
             IOException {
 
+        System.out.println("Palying '" + filePath + "'");
+
         //printInfo();
         if(this.clip != null) {
             this.clip.close();
