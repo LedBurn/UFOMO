@@ -52,4 +52,20 @@ abstract public class LEDObject {
         }
         return revArr;
     }
+
+    public int[] combineArrays(int[][] arrayOfArrays) {
+        int numOfElements = 0;
+        for(int[] singleArr: arrayOfArrays) {
+            numOfElements += singleArr.length;
+        }
+        int[] combinedArr = new int[numOfElements];
+        int i=0;
+        for(int[] singleArr: arrayOfArrays) {
+            for(int val: singleArr) {
+                combinedArr[i] = val;
+                i++;
+            }
+        }
+        return combinedArr;
+    }
 }
