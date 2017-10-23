@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.concurrent.Callable;
 
 public class Invitation extends Song{
 
@@ -9,7 +10,12 @@ public class Invitation extends Song{
 
     @Override
     protected void configure() {
+        Callable<AddonEffect> warmWhite = () -> new AddonSetConstColor(new HSBColor(0.0, 0.0, 0.3));
+        Callable<AddonEffect> fadeIn = () -> new AddonFadeInEffect();
+        Callable<AddonEffect> blur = () -> new AddonBlur();
 
+        addTiming(0.0, 100.0, new AddonsContainerAllTotems(totems, Arrays.asList(warmWhite, blur)));
+        addTiming(0.0, 2, new AddonsContainerAllTotems(totems, Arrays.asList(fadeIn)));
     }
 
     @Override
