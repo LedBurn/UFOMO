@@ -22,7 +22,7 @@ public class MakeEverythingOK {
 
             while(true) {
 
-                Song h = new HereComesTheSun(network, audio, s, soundsPath, keyPedServer);
+                Song h = new Money(network, audio, s, soundsPath, keyPedServer);
                 h.play();
 
                 Integer userInput = null;

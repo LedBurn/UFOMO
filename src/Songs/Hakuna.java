@@ -21,8 +21,8 @@ public class Hakuna extends Song{
         Callable<AddonEffect> dark = () -> new AddonChangeBrightness(0.24);
         Callable<AddonEffect> light = () -> new AddonChangeBrightness(1.0);
         Callable<AddonEffect> inOut = () -> new AddonOutAndIn(0.2);
-        Callable<AddonEffect> spikeUp = () -> new AddonSpike(0.0, 2.0, 1.0);
-        Callable<AddonEffect> spikeDown = () -> new AddonSpike(1.0, -1.0, 1.0);
+        Callable<AddonEffect> spikeUp = () -> new AddonSpike(0.0, 2.0, 1.0, false);
+        Callable<AddonEffect> spikeDown = () -> new AddonSpike(1.0, -1.0, 1.0, false);
         Callable<AddonEffect> confetti = () -> new AddonConfetti(5.0,0.2, false);
         Callable<AddonEffect> move = () -> new AddonCyclicMove();
         Callable<AddonEffect> brightStain = () -> new AddonBrightnessStain();

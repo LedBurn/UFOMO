@@ -18,8 +18,8 @@ public class HereComesTheSun extends Song {
 
         Callable<AddonEffect> fadeIn = () -> new AddonFadeInEffect();
         Callable<AddonEffect> fadeOut = () -> new AddonFadeOut();
-        Callable<AddonEffect> spikeUp = () -> new AddonSpike(0.0, 2.0, 1.0);
-        Callable<AddonEffect> spikeDown = () -> new AddonSpike(1.0, -1.0, 1.0);
+        Callable<AddonEffect> spikeUp = () -> new AddonSpike(0.0, 2.0, 1.0, false);
+        Callable<AddonEffect> spikeDown = () -> new AddonSpike(1.0, -1.0, 1.0, false);
         Callable<AddonEffect> confetti = () -> new AddonConfetti(5.0,0.2, false);
         Callable<AddonEffect> move = () -> new AddonCyclicMove();
         Callable<AddonEffect> brightStain = () -> new AddonBrightnessStain();

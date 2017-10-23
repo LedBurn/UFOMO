@@ -23,8 +23,8 @@ public class PenPineappleApplePen extends Song {
         Callable<AddonEffect> alternateBlueRedNoMove = () -> new AddonAlternateColorsFromArray(new HSBColor[]{HSBColor.BLUE, HSBColor.RED}, 3, 0);
         Callable<AddonEffect> alternateBlueYellowNoMove = () -> new AddonAlternateColorsFromArray(new HSBColor[]{HSBColor.BLUE, HSBColor.YELLOW}, 3, 0);
 
-        Callable<AddonEffect> spikeUp = () -> new AddonSpike(0.0, 2.0, 1.0);
-        Callable<AddonEffect> spikeDown = () -> new AddonSpike(1.0, -1.0, 1.0);
+        Callable<AddonEffect> spikeUp = () -> new AddonSpike(0.0, 2.0, 1.0, false);
+        Callable<AddonEffect> spikeDown = () -> new AddonSpike(1.0, -1.0, 1.0, false);
 
         Callable<AddonEffect> fadeIn = () -> new AddonFadeInEffect();
         Callable<AddonEffect> clearS2S = () -> new AddonClearS2SEffect();
