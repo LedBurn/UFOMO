@@ -22,8 +22,8 @@ public class MakeEverythingOK {
 
             while(true) {
 
-                /*Song h = new Hotline(network, audio, s, soundsPath, keyPedServer);
-                h.play();*/
+                Song h = new Rachel(network, audio, s, soundsPath, keyPedServer);
+                h.play();
 
                 Integer userInput = null;
 
@@ -39,6 +39,7 @@ public class MakeEverythingOK {
                 }
 
                 makeDigitSound(network, audio, s, soundsPath, keyPedServer, userInput);
+                System.gc();
                 int numberOfHotlinePlays = 0;
                 userInput = null;
                 while (userInput == null && numberOfHotlinePlays < 3) {
@@ -64,6 +65,7 @@ public class MakeEverythingOK {
 
                 // we know that userInput is available
                 makeDigitSound(network, audio, s, soundsPath, keyPedServer, userInput);
+                System.gc();
                 Song silence2Sec = new Silence2Sec(network, audio, s, soundsPath, keyPedServer);
                 silence2Sec.play();
 
@@ -78,6 +80,8 @@ public class MakeEverythingOK {
                     }
                 }
 
+                songToPlay = null;
+                System.gc();
                 Song silence15sec = new Silence15Sec(network, audio, s, soundsPath, keyPedServer);
                 silence15sec.play();
             }

@@ -17,7 +17,7 @@ public class HereComesTheSun extends Song {
         Callable<AddonEffect> skyBlue = () -> new AddonSetConstColor(new HSBColor(2.0/3.0, 0.7, 0.2));
 
         Callable<AddonEffect> fadeIn = () -> new AddonFadeInEffect();
-        Callable<AddonEffect> fadeOut = () -> new AddonFadeOut();
+        Callable<AddonEffect> fadeOut = () -> new AddonFadeOut(0.0);
         Callable<AddonEffect> spikeUp = () -> new AddonSpike(0.0, 2.0, 1.0, false);
         Callable<AddonEffect> spikeDown = () -> new AddonSpike(1.0, -1.0, 1.0, false);
         Callable<AddonEffect> confetti = () -> new AddonConfetti(5.0,0.2, false);
@@ -108,7 +108,7 @@ public class HereComesTheSun extends Song {
         AddonsContainerPartialTotem sun3 = new AddonsContainerPartialTotem();
         sun3.addTotemSegment(new Totem[]{totems[2], totems[5]}, Arrays.asList(() -> new AddonStain(hue, 1.0, saturation)), locStart, locEnd, null);
         addTiming(startTime + 2.0, startTime + 5.724, sun3);
-        addTiming(startTime + 2.665, startTime + 5.724, new AddonsContainerAllTotems(totems, Arrays.asList(() -> new AddonFadeOut())));
+        addTiming(startTime + 2.665, startTime + 5.724, new AddonsContainerAllTotems(totems, Arrays.asList(() -> new AddonFadeOut(0.0))));
     }
 
     @Override

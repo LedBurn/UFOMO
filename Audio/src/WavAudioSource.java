@@ -1,3 +1,5 @@
+import com.sun.media.sound.JDK13Services;
+
 import javax.sound.sampled.*;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -6,7 +8,7 @@ import java.nio.ByteOrder;
 
 public class WavAudioSource extends AudioSource {
 
-    AudioInputStream ais = null;
+    AudioInputStream audioStream;
     Clip clip = null;
 
     public WavAudioSource() {
@@ -14,6 +16,12 @@ public class WavAudioSource extends AudioSource {
     }
 
     public void StopSong() {
+        try {
+            this.audioStream.close();
+        }
+        catch (Exception e) {
+            System.out.println("StopSong error: " + e.toString());
+        }
         this.clip.stop();
         this.clip.close();
     }
@@ -23,6 +31,7 @@ public class WavAudioSource extends AudioSource {
             IOException {
 
         System.out.println("Palying '" + filePath + "'");
+        //this.printInfo();
 
         //printInfo();
         if(this.clip != null) {
@@ -30,8 +39,8 @@ public class WavAudioSource extends AudioSource {
             this.clip = null;
         }
 
-        AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File(filePath)); // Obtains an audio input stream of the song
-        AudioFormat baseFormat = audioStream.getFormat();    //Obtains the audio format of the song in the audio input stream.
+        audioStream = AudioSystem.getAudioInputStream(new File(filePath)); // Obtains an audio input stream of the song
+        //AudioFormat baseFormat = audioStream.getFormat();    //Obtains the audio format of the song in the audio input stream.
         /*AudioFormat decodedFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, //The type of encoding for the audio stream
                 48000, //Sample rate of the audio stream
                 16, //Number of bits in each sample of a sound that has this format.
@@ -43,17 +52,8 @@ public class WavAudioSource extends AudioSource {
         //System.out.println("original = "+baseFormat);
         //System.out.println("decoded = "+decodedFormat);
 
-        this.ais = AudioSystem.getAudioInputStream(baseFormat, audioStream); //Obtains an audio input stream of the indicated encoding by converting the provided audio input stream.
         this.clip = AudioSystem.getClip();
-        this.clip.addLineListener(new LineListener() {
-                                      @Override
-                                      public void update(LineEvent event) {
-                                          if (LineEvent.Type.STOP.equals(event.getType())) {
-                                              clip.close();
-                                          }
-                                      }
-                                  });
-        this.clip.open(this.ais);
+        this.clip.open(audioStream);
         //FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
         //System.out.println("Max vol:"+gainControl.getMaximum());
         //System.out.println("Min vol:"+gainControl.getMinimum());
@@ -72,9 +72,6 @@ public class WavAudioSource extends AudioSource {
     }
 
     public Double GetPositionSeconds() {
-        if(ais == null) {
-            return null;
-        }
         if(!this.clip.isRunning()) {
             return null;
         }

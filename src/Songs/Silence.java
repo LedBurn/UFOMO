@@ -15,7 +15,7 @@ public class Silence extends Song{
         addBeatAnimations(0.0, 60.0, 10, 0.0, 0.5, new AddonsContainerAllTotems(totems, Arrays.asList(warmToBlue)));
         addBeatAnimations(0.0, 60.0, 10, 0.5, 1.0, new AddonsContainerAllTotems(totems, Arrays.asList(blueToWarm)));
 
-        addTiming(58.0, 60.0, new AddonsContainerAllTotems(totems, Arrays.asList(() -> new AddonFadeOut())));
+        addTiming(58.0, 60.0, new AddonsContainerAllTotems(totems, Arrays.asList(() -> new AddonFadeOut(0.0))));
     }
 
     @Override

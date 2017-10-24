@@ -45,17 +45,20 @@ public class Money extends Song{
         Totem totems036[] = new Totem[] {totems[0], totems[3], totems[6]};
         Totem totems147[] = new Totem[] {totems[1], totems[4], totems[7]};
         Totem totems25[] = new Totem[] {totems[2], totems[5]};
+        Totem totemsLeft[] = new Totem[] {totems[0], totems[1], totems[2], totems[3]};
+        Totem totemsRight[] = new Totem[] {totems[7], totems[6], totems[5], totems[4]};
 
         Callable<AddonEffect> moneyGreen = () -> new AddonSetConstColor(HSBColor.GREEN);
         Callable<AddonEffect> moneyGreenLight = () -> new AddonSetConstColor(new HSBColor(HSBColor.GREEN.hue, 0.8, 1.0));
         Callable<AddonEffect> confetti = () -> new AddonConfetti(5.0, 0.2, true);
         Callable<AddonEffect> spikeClear = () -> new AddonSpike(1.0, -0.2, 0.2, true);
+        Callable<AddonEffect> spikeUp = () -> new AddonSpike(0.0, 2.0, 1.0, false);
         Callable<AddonEffect> black = () -> new AddonSetConstColor(HSBColor.BLACK);
         Callable<AddonEffect> blur = () -> new AddonBlur();
         Callable<AddonEffect> rainbow = () -> new AddonRainbow();
         Callable<AddonEffect> glitterUp = () -> new AddonSaturationGlitter(2.0, 0.05);
         Callable<AddonEffect> fadeIn = () -> new AddonFadeInEffect();
-        Callable<AddonEffect> fadeOut = () -> new AddonFadeOut();
+        Callable<AddonEffect> fadeOut = () -> new AddonFadeOut(0.0);
         Callable<AddonEffect> clear = () -> new AddonClearS2SEffect();
 
         Callable<AddonEffect> alterRedGreen = () -> new AddonAlternateColorsFromArray(new HSBColor[]{HSBColor.RED, HSBColor.GREEN}, 3, 10);
@@ -134,6 +137,97 @@ public class Money extends Song{
         addTiming(34.126, 35.870, new AddonsContainerAllTotems(totems, Arrays.asList(glitterUp)));
         addTiming(35.870, 36.196, new AddonsContainerAllTotems(totems, Arrays.asList(fadeOut)));
 
+        // start of new part
+        Callable<AddonEffect> purple = () -> new AddonSetConstColor(HSBColor.PURPLE);
+        Callable<AddonEffect> pink = () -> new AddonSetConstColor(HSBColor.PINK);
+        Callable<AddonEffect> pinkAndPurple = () -> new AddonAlternateSmooth(HSBColor.PINK.hue, HSBColor.PURPLE.hue, 3);
+
+        // we need to take it back in
+        addTiming(36.196, 40.828, new AddonsContainerAllTotems(totems, Arrays.asList(purple)));
+        addTiming(36.196, 38.089, new AddonsContainerAllTotems(totems, Arrays.asList(fadeIn)));
+        // time
+        //addTiming(39.600, 40.828, new AddonsContainerAllTotems(totems, Arrays.asList(fadeOutToHalf)));
+        // beat
+        addTiming(40.314 - 0.2, 40.314 + 0.2, new AddonsContainerAllTotems(totems, Arrays.asList(glitterUp)));
+
+        // when music made us all
+        addTiming(40.828, 43.389, new AddonsContainerAllTotems(totems, Arrays.asList(purple)));
+        // unite
+        //addTiming(42.003, 43.058, new AddonsContainerAllTotems(totems, Arrays.asList(fadeOutToHalf)));
+        // beat
+        addTiming(43.058 - 0.2, 43.058 + 0.2, new AddonsContainerAllTotems(totems, Arrays.asList(glitterUp)));
+
+        // and it wasn't low
+        addTiming(43.389, 46.327, new AddonsContainerAllTotems(totems, Arrays.asList(purple)));
+        // blows
+        addTiming(44.422, 44.422 + 0.2, new AddonsContainerAllTotems(totemsLeft, Arrays.asList(clear)));
+        addTiming(44.422 + 0.2, 46.327, new AddonsContainerAllTotems(totemsLeft, Arrays.asList(black)));
+        // and video
+        // hoes
+        addTiming(45.796, 45.796 + 0.2, new AddonsContainerAllTotems(totemsRight, Arrays.asList(clear)));
+        addTiming(45.796 + 0.2, 46.327, new AddonsContainerAllTotems(totemsRight, Arrays.asList(black)));
+
+        // am i the only one
+        addTiming(46.327, 49.203 - 0.4, new AddonsContainerAllTotems(totems, Arrays.asList(purple)));
+        addTiming(46.327, 48.170 - 0.2, new AddonsContainerAllTotems(totems, Arrays.asList(fadeIn)));
+        addTiming(48.170, 49.203 - 0.4, new AddonsContainerAllTotems(totems, Arrays.asList(confetti, fadeOut)));
+
+
+        // why is everybody so obsessed
+        addTiming(49.203, 51.955, new AddonsContainerAllTotems(totems, Arrays.asList(pink)));
+        // beat
+        addTiming(51.287 - 0.2, 51.287 + 0.2, new AddonsContainerAllTotems(totems, Arrays.asList(glitterUp)));
+
+        // money can't buy us happiness
+        addTiming(51.955, 54.329, new AddonsContainerAllTotems(totems, Arrays.asList(pink)));
+        // beat
+        addTiming(54.015 - 0.2, 54.015 + 0.2, new AddonsContainerAllTotems(totems, Arrays.asList(glitterUp)));
+
+        // can we all slow
+        addTiming(54.329, 57.051, new AddonsContainerAllTotems(totems, Arrays.asList(pink)));
+        // down
+        addTiming(55.391, 55.391 + 0.2, new AddonsContainerAllTotems(totemsLeft, Arrays.asList(clear)));
+        addTiming(55.391 + 0.2, 57.051, new AddonsContainerAllTotems(totemsLeft, Arrays.asList(black)));
+        // and enjoy right
+        // now
+        addTiming(56.761, 56.761 + 0.2, new AddonsContainerAllTotems(totemsRight, Arrays.asList(clear)));
+        addTiming(56.761 + 0.2, 57.051, new AddonsContainerAllTotems(totemsRight, Arrays.asList(black)));
+
+        // guarantee we'll be feeling alright
+        addTiming(57.051, 60.204 - 0.4, new AddonsContainerAllTotems(totems, Arrays.asList(pink)));
+        addTiming( 57.051, 58.555 - 0.2, new AddonsContainerAllTotems(totems, Arrays.asList(fadeIn)));
+        addTiming(58.555, 60.204 - 0.4, new AddonsContainerAllTotems(totems, Arrays.asList(confetti, fadeOut)));
+
+        Callable<AddonEffect> glowBlue = () -> new AddonGlowStain(HSBColor.BLUE.hue, 1.0);
+        Callable<AddonEffect> blue = () -> new AddonSetConstColor(HSBColor.BLUE);
+        addTiming(60.204, 61.5, new AddonsContainerTotemsCircle(totemsRight, Arrays.asList(glowBlue)));
+        addTiming(60.204, 62.253, new AddonsContainerAllTotems(totemsLeft, Arrays.asList(blue, fadeIn)));
+
+        addTiming(62.880, 64.080, new AddonsContainerTotemsCircle(totemsLeft, Arrays.asList(glowBlue)));
+        addTiming(62.880, 64.987, new AddonsContainerAllTotems(totemsRight, Arrays.asList(blue, fadeIn)));
+
+        // can you feel it
+        // yeah
+        addTiming(66.357, 67.007, new AddonsContainerAllTotems(totems, Arrays.asList(rainbow, spikeUp)));
+        // we're playing with love tonight
+        addTiming(67.007, 68.969, new AddonsContainerAllTotems(totems, Arrays.asList(rainbow)));
+        addTiming(67.007, 68.000, new AddonsContainerTotemsCircle(totems, Arrays.asList(fadeIn)));
+        addTiming(68.000, 68.969, new AddonsContainerTotemsCircle(totems, Arrays.asList(fadeOut)));
+
+        // its not about the
+        addTiming(68.969, 71.613, new AddonsContainerAllTotems(totems, Arrays.asList(moneyGreen, confetti)));
+
+        // money 1
+        addTiming(69.776, 70.229, new AddonsContainerAllTotems(totems036, Arrays.asList(spikeClear)));
+        addTiming(70.229, 71.613, new AddonsContainerAllTotems(totems036, Arrays.asList(black)));
+
+        // money 2
+        addTiming(70.229, 70.821, new AddonsContainerAllTotems(totems147, Arrays.asList(spikeClear)));
+        addTiming(70.821, 71.613, new AddonsContainerAllTotems(totems147, Arrays.asList(black)));
+
+        // money 3
+        addTiming(70.821, 71.613, new AddonsContainerAllTotems(totems25, Arrays.asList(spikeClear)));
+
     }
 
     private void addNote(double noteTime, int totemIndex, boolean isLongNote) {
@@ -141,7 +235,7 @@ public class Money extends Song{
         Totem singleTot[] = new Totem[] {totems[totemIndex]};
 
         Callable<AddonEffect> noteColor = () -> new AddonSetConstColor(noteToColor[totemIndex]);
-        Callable<AddonEffect> fadeOut = () -> new AddonFadeOut();
+        Callable<AddonEffect> fadeOut = () -> new AddonFadeOut(0.0);
 
         double noteEndTime = noteTime + 0.315;
         if(isLongNote) {
