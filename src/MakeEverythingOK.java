@@ -22,8 +22,8 @@ public class MakeEverythingOK {
 
             while(true) {
 
-                Song h = new Rachel(network, audio, s, soundsPath, keyPedServer);
-                h.play();
+//                Song h = new Rachel(network, audio, s, soundsPath, keyPedServer);
+//                h.play();
 
                 Integer userInput = null;
 
