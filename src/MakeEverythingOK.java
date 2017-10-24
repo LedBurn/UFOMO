@@ -20,7 +20,28 @@ public class MakeEverythingOK {
 
         try {
 
+            int songNumber = 1;
+
             while(true) {
+
+                if(!keyPedServer.isActive()) {
+                    System.gc();
+                    System.out.println("key pad not active choosing a song automatically");
+                    Song autoSong = getSongByDigit(network, audio, s, soundsPath, keyPedServer, songNumber);
+                    autoSong.play();
+                    Song silence = new Silence(network, audio, s, soundsPath, keyPedServer);
+                    silence.play();
+                    if(songNumber == 5) {
+                        songNumber = 7;
+                    }
+                    else if(songNumber == 7) {
+                        songNumber = 1;
+                    }
+                    else {
+                        songNumber++;
+                    }
+                    continue;
+                }
 
 //                Song h = new Rachel(network, audio, s, soundsPath, keyPedServer);
 //                h.play();
