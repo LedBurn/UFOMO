@@ -22,6 +22,10 @@ public class KeyPedServer implements Runnable {
         return valToReturn;
     }
 
+    public boolean isActive() {
+        return this.connectionSocket != null;
+    }
+
     @Override
     public void run() {
 
