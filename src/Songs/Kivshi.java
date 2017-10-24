@@ -11,7 +11,7 @@ public class Kivshi extends Song{
     @Override
     protected void configure() {
         Callable<AddonEffect> green = () -> new AddonSetConstColor(HSBColor.GREEN);
-        Callable<AddonEffect> fadeOut = () -> new AddonFadeOut();
+        Callable<AddonEffect> fadeOut = () -> new AddonFadeOut(0.0);
 
         addTiming(0.695, 3.491, new EntireSheep(sheep, Arrays.asList(green)));
 

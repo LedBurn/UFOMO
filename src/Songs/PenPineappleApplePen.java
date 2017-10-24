@@ -116,7 +116,7 @@ public class PenPineappleApplePen extends Song {
         });
 
         // Fading bla 56.767 - 57.902
-        addTiming(56.767, 57.902, new AddonsContainerAllTotems(totems, Arrays.asList(() -> new AddonFadeOut())));
+        addTiming(56.767, 57.902, new AddonsContainerAllTotems(totems, Arrays.asList(() -> new AddonFadeOut(0.0))));
     }
 
     @Override

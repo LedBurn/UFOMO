@@ -17,7 +17,7 @@ public class Hakuna extends Song{
         Callable<AddonEffect> skyblue = () -> new AddonSetConstColor(new HSBColor(2.0/3.0, 0.7, 0.2));
         Callable<AddonEffect> rainbow = () -> new AddonRainbow();
         Callable<AddonEffect> fadeIn = () -> new AddonFadeInEffect();
-        Callable<AddonEffect> fadeOut = () -> new AddonFadeOut();
+        Callable<AddonEffect> fadeOut = () -> new AddonFadeOut(0.0);
         Callable<AddonEffect> dark = () -> new AddonChangeBrightness(0.24);
         Callable<AddonEffect> light = () -> new AddonChangeBrightness(1.0);
         Callable<AddonEffect> inOut = () -> new AddonOutAndIn(0.2);
