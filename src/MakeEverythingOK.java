@@ -49,7 +49,7 @@ public class MakeEverythingOK {
                 Integer userInput = null;
 
                 int invitationCallNumber = 0;
-                while (userInput == null) {
+                while (userInput == null && keyPedServer.isActive()) {
                     // invitation text and then a minute of silence
                     Song invitation = new Invitation(network, audio, s, soundsPath, keyPedServer, invitationCallNumber++);
                     userInput = invitation.play();
@@ -63,7 +63,7 @@ public class MakeEverythingOK {
                 System.gc();
                 int numberOfHotlinePlays = 0;
                 userInput = null;
-                while (userInput == null && numberOfHotlinePlays < 3) {
+                while (userInput == null && numberOfHotlinePlays < 3 && keyPedServer.isActive()) {
                     Song hotline = new Hotline(network, audio, s, soundsPath, keyPedServer);
                     userInput = hotline.play();
 
