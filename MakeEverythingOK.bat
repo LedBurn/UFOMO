@@ -1,0 +1,1 @@
+java -Xmx200m -jar C:\Users\Bigi\Documents\GitHub\MakeEverythingOK\out\artifacts\MakeEverythingOK_jar\MakeEverythingOK.jar
