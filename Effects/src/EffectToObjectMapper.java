@@ -1,5 +1,9 @@
 public class EffectToObjectMapper {
 
+    private DiscreteEffect effect;
+    private HSBColor destArray[];
+    private int indexes[];
+
     public EffectToObjectMapper(DiscreteEffect effect, HSBColor destArray[], int indexes[]) {
         this.effect = effect;
         this.destArray = destArray;
@@ -12,7 +16,5 @@ public class EffectToObjectMapper {
         }
     }
 
-    private DiscreteEffect effect;
-    private HSBColor destArray[];
-    private int indexes[];
+
 }

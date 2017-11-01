@@ -7,6 +7,13 @@ abstract public class LEDObject {
     abstract public HSBColor[] GetAllPixels();
     public int GetPixelsNumber() { return this.GetAllPixels().length; }
 
+    public void clear() {
+        HSBColor[] allPixels = GetAllPixels();
+        for(HSBColor c : allPixels) {
+            c.copyFromOther(HSBColor.BLACK);
+        }
+    }
+
     public static int[] CreateIndexRange(int firstIndex, int lastIndex) {
         int allIndexes[] = new int[lastIndex - firstIndex + 1];
         for(int i=firstIndex; i <= lastIndex; i++) {
@@ -44,5 +51,21 @@ abstract public class LEDObject {
             revArr[i] = arr[arr.length - i - 1];
         }
         return revArr;
+    }
+
+    public int[] combineArrays(int[][] arrayOfArrays) {
+        int numOfElements = 0;
+        for(int[] singleArr: arrayOfArrays) {
+            numOfElements += singleArr.length;
+        }
+        int[] combinedArr = new int[numOfElements];
+        int i=0;
+        for(int[] singleArr: arrayOfArrays) {
+            for(int val: singleArr) {
+                combinedArr[i] = val;
+                i++;
+            }
+        }
+        return combinedArr;
     }
 }

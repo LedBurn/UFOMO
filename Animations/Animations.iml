@@ -4,17 +4,11 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/Songs" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="Network" />
-    <orderEntry type="module" module-name="LEDObject" />
-    <orderEntry type="module" module-name="Audio" />
-    <orderEntry type="module" module-name="Colors" />
     <orderEntry type="module" module-name="Effects" />
-    <orderEntry type="module" module-name="Simulator" />
-    <orderEntry type="module" module-name="Animations" />
+    <orderEntry type="module" module-name="LEDObject" />
+    <orderEntry type="module" module-name="Colors" />
   </component>
 </module>
