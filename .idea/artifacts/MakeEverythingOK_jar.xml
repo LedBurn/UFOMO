@@ -2,7 +2,7 @@
   <artifact type="jar" build-on-make="true" name="MakeEverythingOK:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/MakeEverythingOK_jar</output-path>
     <root id="archive" name="MakeEverythingOK.jar">
-      <element id="module-output" name="MakeEverythingOK" />
+      <element id="module-output" name="UFOMO" />
       <element id="module-output" name="Network" />
       <element id="module-output" name="Colors" />
       <element id="module-output" name="LEDObject" />

@@ -7,7 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
 class SingleControllerData {
 
     /*
-    data - array of RGBColor. The number of pixels in the segment is givin by to the array length.
+    data - array of RGBColor. The number of pixels in the segment is given by to the array length.
     the RGBColor data type already has the pixel color in the correct format which is 3 integers in the range [0-255]
      */
     public void addSegment(RGBColor[] data, int stripId, int pixelId) {
