@@ -15,6 +15,4 @@ public class EffectToObjectMapper {
             this.destArray[this.indexes[i]] = this.effect.getColor(timePercent, i);
         }
     }
-
-
 }

@@ -1,71 +1,49 @@
-import java.util.Random;
 
-/**
- * An abstract class of a physical LED object
- * */
-abstract public class LEDObject {
-    abstract public HSBColor[] GetAllPixels();
-    public int GetPixelsNumber() { return this.GetAllPixels().length; }
+// Abstract class that holds the pixels of a led object
+public class LEDObject {
+
+    private HSBColor[] pixels;
+
+    public LEDObject(int numOfPixels) {
+        this.pixels = new HSBColor[numOfPixels];
+        this.clear();
+    }
 
     public void clear() {
-        HSBColor[] allPixels = GetAllPixels();
-        for(HSBColor c : allPixels) {
-            c.copyFromOther(HSBColor.BLACK);
+        for(int i=0; i<pixels.length; i++) {
+            pixels[i] = HSBColor.BLACK;
         }
     }
 
-    public static int[] CreateIndexRange(int firstIndex, int lastIndex) {
-        int allIndexes[] = new int[lastIndex - firstIndex + 1];
-        for(int i=firstIndex; i <= lastIndex; i++) {
-            allIndexes[i-firstIndex] = i;
-        }
-        return allIndexes;
+    public int numOfPixels() {
+        return this.pixels.length;
     }
 
-    public static HSBColor[] CreateHSBArray(int numOfPixels) {
-        HSBColor pixels[] = new HSBColor[numOfPixels];
-        Random rand = new Random();
-        for(int i=0; i<numOfPixels; i++) {
-            pixels[i] = new HSBColor();
-            pixels[i].brightness = 1.0f;
-            pixels[i].saturation = 1.0f;
-            pixels[i].hue = rand.nextFloat();
+    // get color of a specific pixel
+    public HSBColor getColor(int pixelNum) {
+        if (pixelNum < 0 || pixelNum >= pixels.length) {
+            System.out.println("ERROR: pixel is out of range. pixel " + pixelNum + "isn't in 0-" + pixels.length + " range");
+            return HSBColor.BLACK;
         }
-        return pixels;
+        return this.pixels[pixelNum];
     }
 
-    public RGBColor[] GetRGBColors(int begin, int end) {
-        // TODO: handle bad input
-        int numberOfPixels = end-begin;
-        HSBColor pixels[] = GetAllPixels();
-        RGBColor rgbArr[] = new RGBColor[numberOfPixels];
-        for(int i=0; i<numberOfPixels; i++) {
-            rgbArr[i] = pixels[begin + i].toRGBColor();
-        }
-        return rgbArr;
+    // get color of a specific pixel as RGB integer (best for sending on network)
+    public RGBColor getColorRGB(int pixelNum) {
+        return getColor(pixelNum).toRGBColor();
     }
 
-    public int[] reverseArray(int[] arr) {
-        int revArr[] = new int[arr.length];
-        for(int i = 0; i < arr.length; i++) {
-            revArr[i] = arr[arr.length - i - 1];
-        }
-        return revArr;
+    // get color of a specific pixel as RGB integer (best for simulator)
+    public int getColorRGBInt(int pixelNum) {
+        return getColor(pixelNum).toRGBInt();
     }
 
-    public int[] combineArrays(int[][] arrayOfArrays) {
-        int numOfElements = 0;
-        for(int[] singleArr: arrayOfArrays) {
-            numOfElements += singleArr.length;
+    // set color of a specific pixel
+    public void setColor(int pixelNum, HSBColor color) {
+        if (pixelNum < 0 || pixelNum >= pixels.length) {
+            System.out.println("ERROR: pixel is out of range. pixel " + pixelNum + "isn't in 0-" + pixels.length + " range");
+            return;
         }
-        int[] combinedArr = new int[numOfElements];
-        int i=0;
-        for(int[] singleArr: arrayOfArrays) {
-            for(int val: singleArr) {
-                combinedArr[i] = val;
-                i++;
-            }
-        }
-        return combinedArr;
+        this.pixels[pixelNum] = color;
     }
 }

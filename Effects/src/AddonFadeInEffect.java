@@ -7,5 +7,4 @@ public class AddonFadeInEffect extends AddonEffect {
             c.brightness = c.brightness * timePercent;
         }
     }
-
 }
