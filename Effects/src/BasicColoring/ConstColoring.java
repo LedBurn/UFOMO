@@ -1,10 +1,14 @@
 
 // simple all white coloring
-public class WhiteColoring extends Coloring {
+public class ConstColoring extends Coloring {
     private HSBColor color;
 
-    public WhiteColoring() {
+    public ConstColoring() {
         this.color = new HSBColor(0,0, 1.0);
+    }
+
+    public ConstColoring(HSBColor color) {
+        this.color = color;
     }
 
     @Override

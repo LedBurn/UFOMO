@@ -12,6 +12,18 @@ public class RainbowAnimations {
             animations.add(new Animation(ufomoObject.bigCircle, Coloring.RAINBOW_COLORING, addons));
             animations.add(new Animation(ufomoObject.mediumCircle, Coloring.RAINBOW_COLORING, addons));
             animations.add(new Animation(ufomoObject.smallCircle, Coloring.RAINBOW_COLORING, addons));
+
+            for (int i = 0; i < ufomoObject.lines.length; i++) {
+                animations.add(new Animation(ufomoObject.lines[i], Coloring.RAINBOW_COLORING, addons));
+            }
+
+
+            Coloring octagonColoring = new ConstColoring(new HSBColor(0,1.0,1.0));
+            Addon[] octagonAddons = {new ChangeHueAddon()};
+
+            for (int i = 0; i < ufomoObject.octagon.length; i++) {
+                animations.add(new Animation(ufomoObject.octagon[i], octagonColoring, octagonAddons));
+            }
         }
     };
 
@@ -23,6 +35,10 @@ public class RainbowAnimations {
             animations.add(new Animation(ufomoObject.bigCircle, Coloring.RAINBOW_COLORING, addons1));
             animations.add(new Animation(ufomoObject.mediumCircle, Coloring.RAINBOW_COLORING, addons2));
             animations.add(new Animation(ufomoObject.smallCircle, Coloring.RAINBOW_COLORING, addons1));
+
+            for (int i = 0; i < ufomoObject.lines.length; i++) {
+                animations.add(new Animation(ufomoObject.lines[i], Coloring.RAINBOW_COLORING, addons1));
+            }
         }
     };
 
@@ -42,6 +58,10 @@ public class RainbowAnimations {
             animations.add(new Animation(ufomoObject.bigCircle, Coloring.RAINBOW_COLORING, addons1));
             animations.add(new Animation(ufomoObject.mediumCircle, Coloring.RAINBOW_COLORING, addons2));
             animations.add(new Animation(ufomoObject.smallCircle, Coloring.RAINBOW_COLORING, addons3));
+
+            for (int i = 0; i < ufomoObject.lines.length; i++) {
+                animations.add(new Animation(ufomoObject.lines[i], Coloring.RAINBOW_COLORING, addons1));
+            }
         }
     };
 }
