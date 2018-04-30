@@ -20,5 +20,4 @@ public class AddonTiming {
         double timePercent = (currentPos - fromTime) / (toTime - fromTime);
         addonsContainer.apply(timePercent);
     }
-
 }

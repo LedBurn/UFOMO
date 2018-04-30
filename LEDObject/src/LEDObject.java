@@ -46,4 +46,28 @@ public class LEDObject {
         }
         this.pixels[pixelNum] = color;
     }
+
+    // copy pixels array from another led object
+    public void copy(LEDObject other) {
+        if (numOfPixels() != other.numOfPixels()) {
+            System.out.println("ERROR: can't copy led object with " + other.numOfPixels()+  " pixels to a led object with " + numOfPixels() + " pixels");
+            return;
+        }
+
+        for (int i = 0; i < numOfPixels(); i++) {
+            setColor(i, other.getColor(i));
+        }
+    }
+
+    // merge 2 other pixels array and copy it the this object
+    public void mergeAndcopy(LEDObject other1, LEDObject other2, double fadePercent) {
+        if (numOfPixels() != other1.numOfPixels() || numOfPixels() != other2.numOfPixels()) {
+            System.out.println("ERROR: can't copy led objects with " + other1.numOfPixels()+ " and " + other2.numOfPixels() + " pixels to a led object with " + numOfPixels() + " pixels");
+            return;
+        }
+
+        for (int i = 0; i < numOfPixels(); i++) {
+            setColor(i, HSBColor.mixColors(other1.getColor(i), fadePercent, other2.getColor(i), 1-fadePercent));
+        }
+    }
 }

@@ -3,32 +3,35 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
 
-public class MakeEverythingOK {
-
-    private static final double CYCLE_TIME = 2000; //millisecond
-    private static double currentTime = 0; //millisecond
+public class UFOMO {
 
     public static void run(final boolean runSimulator) {
 
+        // network
         final Network network = new Network();
         network.configure();
-        final Simulator s = new Simulator();
 
+        // the main UFOMO object
         UFOMOObject ufomoObject = new UFOMOObject();
-        UFOMOSimulated ufomoSimulated = new UFOMOSimulated(ufomoObject);
 
-        //EffectToObjectMapper mapper = new EffectToObjectMapper(getEffect(largeCircle.GetPixelsNumber()), largeCircle.GetAllPixels(), range(0,largeCircle.GetPixelsNumber()-1));
+        // simulator
+        final Simulator s = runSimulator ? new Simulator() : null;
+        UFOMOSimulated ufomoSimulated = runSimulator ? new UFOMOSimulated(ufomoObject) : null;
+
+        FreeStyleAnimations freeStyleAnimations = new FreeStyleAnimations();
+
 
         try {
             while (true) {
-                Thread.sleep(30);
-                //mapper.apply(currentTime / CYCLE_TIME );
+                // apply animations
+                freeStyleAnimations.apply(ufomoObject);
 
-                s.draw(ufomoSimulated, 0, 10);
-                currentTime += 20;
-                if (currentTime >= CYCLE_TIME) {
-                    currentTime -= CYCLE_TIME;
+                // show in simulator
+                if (runSimulator) {
+                    s.draw(ufomoSimulated, 0, 10);
                 }
+
+                Thread.sleep(30);
 
                 new Thread(new Runnable() {
                     @Override
@@ -138,28 +141,6 @@ public class MakeEverythingOK {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-
-
-    private static DiscreteEffect getEffect(int numOfPixels) {
-        // ----------------------------------------- //
-        // Change this section to test other effects //
-        // ----------------------------------------- //
-        ContinuousWhiteEffect effect = new ContinuousWhiteEffect();
-        ContinuousRainbowEffect effect1 = new ContinuousRainbowEffect(effect);
-        ContinuousCyclicMoveEffect effect2 = new ContinuousCyclicMoveEffect(effect1);
-        ContinuousToDiscrete discrete = new ContinuousToDiscrete(numOfPixels, effect2);
-        return discrete;
-        // ----------------------------------------- //
-    }
-
-    private static int[] range(int firstIndex, int lastIndex) {
-        int allIndexes[] = new int[lastIndex - firstIndex + 1];
-        for(int i=firstIndex; i <= lastIndex; i++) {
-            allIndexes[i-firstIndex] = i;
-        }
-        return allIndexes;
     }
 }
 

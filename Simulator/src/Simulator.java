@@ -20,16 +20,9 @@ public class Simulator {
         System.out.println("screen started");
     }
 
-    public void draw(ISimulatedLEDObject ledObject, int startX, int startY) {
-        draw(new ISimulatedLEDObject[]{ledObject}, startX, startY);
-    }
-
-    public void draw(ISimulatedLEDObject[] ledObjects, int startX, int startY) {
-        BufferedImage bi = new BufferedImage(ledObjects[0].getWidth(), ledObjects[0].getHeight(), BufferedImage.TYPE_INT_RGB);
-
-        for (int i=0; i<ledObjects.length; i++) {
-            ledObjects[i].draw(bi);
-        }
-        graphics.drawImage(bi, startX, startY, ledObjects[0].getWidth(), ledObjects[0].getHeight(), null);
+    public void draw(ISimulatedLEDObject simulatedLEDObject, int startX, int startY) {
+        BufferedImage bi = new BufferedImage(simulatedLEDObject.getWidth(), simulatedLEDObject.getHeight(), BufferedImage.TYPE_INT_RGB);
+        simulatedLEDObject.draw(bi);
+        graphics.drawImage(bi, startX, startY, simulatedLEDObject.getWidth(), simulatedLEDObject.getHeight(), null);
     }
 }

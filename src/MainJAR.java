@@ -4,6 +4,6 @@ public class MainJAR {
         String soundsPath = Config.SOUNDS_FOLDER_PATH_JAR;
         boolean runSimulator = false;
 
-//        MakeEverythingOK.run(soundsPath, runSimulator);
+//        UFOMO.run(soundsPath, runSimulator);
     }
 }

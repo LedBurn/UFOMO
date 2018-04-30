@@ -1,42 +1,25 @@
-import java.util.ArrayList;
 
+// This class takes a led object, colors it and apply addons.
 public class Animation {
 
-    private ArrayList<EffectToObjectMapper> mappers = new ArrayList<>();
+    private LEDObject ledObject;
+    private Coloring coloring;
+    private Addon[] addons;
 
-    private ArrayList<Animation> animations = new ArrayList<>();
-    private ArrayList<Double> fromPercents = new ArrayList<>();
-    private ArrayList<Double> toPercents = new ArrayList<>();
-
-    public void addMapper(EffectToObjectMapper mapper) {
-        mappers.add(mapper);
+    public Animation(LEDObject ledObject, Coloring coloring, Addon[] addons) {
+        this.ledObject = ledObject;
+        this.coloring = coloring;
+        this.addons = addons;
     }
 
-    public void addAnimation(Animation animation) {
-        addAnimation(animation, 0.0, 1.0);
-    }
+    public void apply(double level) {
 
-    public void addAnimation(Animation animation, double fromPercent, double toPercent) {
-        animations.add(animation);
-        fromPercents.add(fromPercent);
-        toPercents.add(toPercent);
-    }
+        // basic coloring
+        coloring.color(ledObject);
 
-    public void apply(double timePercent) {
-        for (EffectToObjectMapper mapper : mappers) {
-            mapper.apply(timePercent);
-        }
-
-        for (int i=0; i<animations.size(); i++) {
-            Animation animation = animations.get(i);
-            double fromPercent = fromPercents.get(i);
-            double toPercent = toPercents.get(i);
-            if (timePercent < fromPercent || timePercent > toPercent) {
-                continue;
-            }
-
-            double subPercent = (timePercent - fromPercent) / (toPercent - fromPercent);
-            animation.apply(subPercent);
+        // add ons
+        for (Addon addon : addons) {
+            addon.change(ledObject, level);
         }
     }
 }
