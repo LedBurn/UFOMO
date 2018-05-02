@@ -1,6 +1,7 @@
 public class MainLocal {
 
     public static void main(String[] args) {
-        UFOMO.run(true);
+        UFOMO ufomo = new UFOMO(true);
+        ufomo.run();
     }
 }

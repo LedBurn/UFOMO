@@ -1,15 +1,14 @@
 public class FreeStyleAnimations {
 
 
-    private static final double CYCLE_TIME = 5000; //milliseconds
-    private static final int NUM_OF_CYCLES = 3;
+    private static final double CYCLE_TIME = 8000; //milliseconds
+    private static final int NUM_OF_CYCLES = 2;
 
     private long currentAnimationStartTime = 0; // milliseconds
     private long nextAnimationStartTime = 0;
 
     private UFOMOAnimation currentAnimation;
     private UFOMOAnimation nextAnimation;
-
 
 
     // all is random
@@ -29,7 +28,7 @@ public class FreeStyleAnimations {
         long currentTime = System.currentTimeMillis();
         int currentCycleNum = getCycleNum(currentTime, currentAnimationStartTime);
         int nextCycleNum = getCycleNum(currentTime, nextAnimationStartTime);
-        System.out.println("current cycle - " + currentCycleNum + "             next cycle - " + nextCycleNum);
+//        System.out.println("current cycle - " + currentCycleNum + "             next cycle - " + nextCycleNum);
 
 
         if (currentAnimation == null) { // fresh start
@@ -68,7 +67,7 @@ public class FreeStyleAnimations {
             currentAnimation.apply(((currentTime - currentAnimationStartTime) % CYCLE_TIME) / CYCLE_TIME);
             nextAnimation.apply(((currentTime - nextAnimationStartTime) % CYCLE_TIME) / CYCLE_TIME);
             double fadePercent = 1 - ((currentTime - currentAnimationStartTime) % CYCLE_TIME) / CYCLE_TIME;
-            System.out.println("fadePercent-"+fadePercent);
+            //System.out.println("fadePercent-"+fadePercent);
             ufomoObject.mergeAndCopy(currentAnimation.ufomoObject, nextAnimation.ufomoObject, fadePercent);
         }
     }

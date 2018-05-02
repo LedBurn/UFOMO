@@ -10,7 +10,7 @@ public class UFOMOObject {
 
     public UFOMOObject() {
         // TODO verify final number of pixels
-        bigCircle = new LEDObject(2000);
+        bigCircle = new LEDObject(1920);
         mediumCircle = new LEDObject(1260);
         smallCircle = new LEDObject(840);
         for (int i = 0; i < 8; i++) {
