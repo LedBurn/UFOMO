@@ -22,7 +22,7 @@ public class LEDObject {
     // get color of a specific pixel
     public HSBColor getColor(int pixelNum) {
         if (pixelNum < 0 || pixelNum >= pixels.length) {
-            System.out.println("ERROR: pixel is out of range. pixel " + pixelNum + "isn't in 0-" + pixels.length + " range");
+            System.out.println("ERROR: pixel is out of range. pixel " + pixelNum + " isn't in 0-" + pixels.length + " range");
             return HSBColor.BLACK;
         }
         return this.pixels[pixelNum];
@@ -41,7 +41,7 @@ public class LEDObject {
     // set color of a specific pixel
     public void setColor(int pixelNum, HSBColor color) {
         if (pixelNum < 0 || pixelNum >= pixels.length) {
-            System.out.println("ERROR: pixel is out of range. pixel " + pixelNum + "isn't in 0-" + pixels.length + " range");
+            System.out.println("ERROR: pixel is out of range. pixel " + pixelNum + " isn't in 0-" + pixels.length + " range");
             return;
         }
         this.pixels[pixelNum] = color;

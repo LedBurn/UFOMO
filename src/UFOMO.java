@@ -14,16 +14,19 @@ public class UFOMO {
     private final Simulator simulator;
     private final UFOMOSimulated ufomoSimulated;
 
+    private final TestLeds tester;
     private final FreeStyleAnimations freeStyleAnimations;
 
     private boolean onBeat = false;
-    private int userCode = 0;
+    private int userCode = 91;
+    private boolean isTesting = true;
 
     public UFOMO(boolean runSimulator) {
         network = new UFOMONetwork();
         ufomoObject = new UFOMOObject();
         simulator = runSimulator ? new Simulator() : null;
         ufomoSimulated = runSimulator ? new UFOMOSimulated(ufomoObject) : null;
+        tester = new TestLeds();
         freeStyleAnimations = new FreeStyleAnimations();
         startListening();
     }
@@ -31,8 +34,16 @@ public class UFOMO {
     public void run() {
         try {
             while (true) {
+
+                // user code
+                handleUserCode();
+
                 // apply animations
-                freeStyleAnimations.apply(ufomoObject);
+                if (isTesting) {
+                    tester.apply(ufomoObject);
+                } else {
+                    freeStyleAnimations.apply(ufomoObject);
+                }
 
                 // show in simulator
                 if (simulator != null) simulator.draw(ufomoSimulated, 0, 10);
@@ -47,6 +58,22 @@ public class UFOMO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void handleUserCode() {
+        if (userCode < 0) {
+            return;
+        }
+
+        switch (userCode) {
+            case 91:
+                tester.startWithCode(91);
+                isTesting = true;
+                break;
+            case 9:
+                isTesting = false;
+        }
+        userCode = -1;
     }
 
     private void startListening() {

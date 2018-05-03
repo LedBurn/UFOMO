@@ -55,6 +55,7 @@ public class HSBColor {
         return new HSBColor(hue, saturation, brightness);
     }
 
+    public static final HSBColor WHITE = new HSBColor(0,0,1.0);
     public static final HSBColor BLACK = new HSBColor(0,0,0);
     public static final HSBColor RED = new HSBColor(0.0/3.0,1.0,1.0);
     public static final HSBColor GREEN = new HSBColor(1.0/3.0,1.0,1.0);

@@ -14,13 +14,28 @@ public class UFOMOObject {
         mediumCircle = new LEDObject(1260);
         smallCircle = new LEDObject(840);
         for (int i = 0; i < 8; i++) {
-            octagon[i] = new LEDObject(33);
+            octagon[i] = new LEDObject(52);
         }
         for (int i = 0; i < 16; i++) {
             lines[i] = new LEDObject(240);
         }
         for (int i = 0; i < 8; i++) {
-            beam[i] = new LEDObject(400);
+            beam[i] = new LEDObject(204);
+        }
+    }
+
+    public void clear() {
+        bigCircle.clear();
+        mediumCircle.clear();
+        smallCircle.clear();
+        for (int i = 0; i < 8; i++) {
+            octagon[i].clear();
+        }
+        for (int i = 0; i < 16; i++) {
+            lines[i].clear();
+        }
+        for (int i = 0; i < 8; i++) {
+            beam[i].clear();
         }
     }
 

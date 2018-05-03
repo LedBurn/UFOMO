@@ -46,7 +46,7 @@ public class UFOMOSimulated implements ISimulatedLEDObject {
         int[] xVertices = new int[8];
         int[] yVertices = new int[8];
         for (int i=0; i<8; i++) {
-            double angleInDegree = i * 360.0 / 8;
+            double angleInDegree = 360 - 22.5 - 90 - i * 360.0 / 8;
             double angleInRadian = Math.toRadians(angleInDegree);
 
             double cos = Math.cos(angleInRadian);
@@ -62,9 +62,9 @@ public class UFOMOSimulated implements ISimulatedLEDObject {
         // Octagon pixels
         for (int i=0; i<8; i++) {
             if (i < 7) {
-                octagonPixels[i] = getPixelsForLine(ufomoObject.octagon[i].numOfPixels(), xVertices[i], yVertices[i], xVertices[i+1], yVertices[i+1]);
+                octagonPixels[i] = getPixelsForLine(ufomoObject.octagon[i].numOfPixels(), xVertices[i+1], yVertices[i+1], xVertices[i], yVertices[i]);
             } else {
-                octagonPixels[i] = getPixelsForLine(ufomoObject.octagon[i].numOfPixels(), xVertices[i], yVertices[i], xVertices[0], yVertices[0]);
+                octagonPixels[i] = getPixelsForLine(ufomoObject.octagon[i].numOfPixels(), xVertices[0], yVertices[0], xVertices[i], yVertices[i]);
             }
         }
 
@@ -82,8 +82,8 @@ public class UFOMOSimulated implements ISimulatedLEDObject {
             int lineStart2Y = (int) Math.round(octagonEnd.y + 0.1 * (octagonStart.y - octagonEnd.y));
 
             // line end
-            double angle1 =  (1 + i * 2) * 360 / 16;
-            double angle2 = angle1 + 0.2 * 45;
+            double angle2 =  360 - 27 - 90 - (1 + i * 2) * 360 / 16;
+            double angle1 = angle2 + 0.2 * 45;
 
             double angle1InRadian = Math.toRadians(angle1);
             double angle2InRadian = Math.toRadians(angle2);
@@ -100,8 +100,8 @@ public class UFOMOSimulated implements ISimulatedLEDObject {
             int lineEnd2Y = (int) Math.round(SIZE/2 + sin2 * (SIZE/2-PADDING));
 
             // line
-            linePixels[i*2] = getPixelsForLine(ufomoObject.lines[i*2].numOfPixels(), lineStart1X, lineStart1Y, lineEnd1X, lineEnd1Y);
-            linePixels[i*2+1] = getPixelsForLine(ufomoObject.lines[i*2+1].numOfPixels(), lineStart2X, lineStart2Y, lineEnd2X, lineEnd2Y);
+            linePixels[i*2] = getPixelsForLine(ufomoObject.lines[i*2].numOfPixels(), lineEnd1X, lineEnd1Y, lineStart1X, lineStart1Y);
+            linePixels[i*2+1] = getPixelsForLine(ufomoObject.lines[i*2+1].numOfPixels(), lineEnd2X, lineEnd2Y, lineStart2X, lineStart2Y);
         }
     }
     private Pixel[] getCirclePixelPositions(int numOfPixels, int radius) {
@@ -111,7 +111,7 @@ public class UFOMOSimulated implements ISimulatedLEDObject {
         Pixel[] pixels = new Pixel[numOfPixels];
 
         for (int i=0; i<numOfPixels; i++) {
-            double angleInDegree = i * 360.0 / numOfPixels;
+            double angleInDegree = 266 - (i * 360.0 / numOfPixels);
             double angleInRadian = Math.toRadians(angleInDegree);
 
             double cos = Math.cos(angleInRadian);
