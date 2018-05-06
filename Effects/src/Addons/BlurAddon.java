@@ -4,7 +4,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class BlurAddon extends Addon {
 
     @Override
-    public void change(LEDObject ledObject, double level) {
+    public void change(LEDObject ledObject, double level, boolean newBeat) {
 
         for (int i=0; i<ledObject.numOfPixels(); i++) {
             double satChange = ThreadLocalRandom.current().nextDouble(-0.1, 0.1);

@@ -4,13 +4,14 @@ import java.awt.image.BufferedImage;
 // This class sets the position of each pixel from the UFOMO on the screen, and colors it accordingly
 public class UFOMOSimulated implements ISimulatedLEDObject {
 
-    private static final int SIZE = 1000; // in pixels
+    private static final int SIZE = 800; // in pixels
     private static final int PADDING = 20; // in pixels
 
     private static final double LARGE_CIRCLE_DIAMETER = 10.1; // in meters
     private static final double MEDIUM_CIRCLE_DIAMETER = 6.695; // in meters
     private static final double SMALL_CIRCLE_DIAMETER = 4.45; // in meters
     private static final double OCTAGON_DIAMETER = 2.5; // in meters
+    private static final double BEAM_LENGTH = 3.4; // in meters
 
     private Pixel[] bigCirclePixels;
     private Pixel[] mediumCirclePixels;
@@ -42,9 +43,11 @@ public class UFOMOSimulated implements ISimulatedLEDObject {
         setOctagonAndLinesPixelPositions();
     }
     private void setOctagonAndLinesPixelPositions() {
-        // Octagon vertices
+        // Octagon vertices and beam
         int[] xVertices = new int[8];
         int[] yVertices = new int[8];
+        int[] xBeamEnd = new int[8];
+        int[] yBeamEnd = new int[8];
         for (int i=0; i<8; i++) {
             double angleInDegree = 360 - 22.5 - 90 - i * 360.0 / 8;
             double angleInRadian = Math.toRadians(angleInDegree);
@@ -52,11 +55,11 @@ public class UFOMOSimulated implements ISimulatedLEDObject {
             double cos = Math.cos(angleInRadian);
             double sin = Math.sin(angleInRadian);
 
-            int xPos = (int) Math.round(SIZE/2 + cos * (SIZE/2-PADDING) * OCTAGON_DIAMETER / LARGE_CIRCLE_DIAMETER);
-            int yPos = (int) Math.round(SIZE/2 + sin * (SIZE/2-PADDING) * OCTAGON_DIAMETER / LARGE_CIRCLE_DIAMETER);
+            xVertices[i] = (int) Math.round(SIZE/2 + cos * (SIZE/2-PADDING) * OCTAGON_DIAMETER / LARGE_CIRCLE_DIAMETER);
+            yVertices[i] = (int) Math.round(SIZE/2 + sin * (SIZE/2-PADDING) * OCTAGON_DIAMETER / LARGE_CIRCLE_DIAMETER);
 
-            xVertices[i] = xPos;
-            yVertices[i] = yPos;
+            xBeamEnd[i] = (int) Math.round(SIZE/2 + cos * (SIZE/2-PADDING) * (OCTAGON_DIAMETER + BEAM_LENGTH * 2) / LARGE_CIRCLE_DIAMETER);
+            yBeamEnd[i] = (int) Math.round(SIZE/2 + sin * (SIZE/2-PADDING) * (OCTAGON_DIAMETER + BEAM_LENGTH * 2) / LARGE_CIRCLE_DIAMETER);
         }
 
         // Octagon pixels
@@ -66,6 +69,11 @@ public class UFOMOSimulated implements ISimulatedLEDObject {
             } else {
                 octagonPixels[i] = getPixelsForLine(ufomoObject.octagon[i].numOfPixels(), xVertices[0], yVertices[0], xVertices[i], yVertices[i]);
             }
+        }
+
+        // beam pixels
+        for (int i=0; i<8; i++) {
+            beamPixels[i] = getPixelsForLine(ufomoObject.beam[i].numOfPixels(), xBeamEnd[i], yBeamEnd[i], xVertices[i], yVertices[i]);
         }
 
         // Lines
@@ -155,6 +163,7 @@ public class UFOMOSimulated implements ISimulatedLEDObject {
         drawElement(bi, ufomoObject.mediumCircle, mediumCirclePixels);
         drawElement(bi, ufomoObject.smallCircle, smallCirclePixels);
         drawElements(bi, ufomoObject.octagon, octagonPixels);
+        drawElements(bi, ufomoObject.beam, beamPixels);
         drawElements(bi, ufomoObject.lines, linePixels);
     }
 

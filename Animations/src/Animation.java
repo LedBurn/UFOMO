@@ -2,9 +2,9 @@
 // This class takes a led object, colors it and apply addons.
 public class Animation {
 
-    private LEDObject ledObject;
+    protected LEDObject ledObject;
     private Coloring coloring;
-    private Addon[] addons;
+    protected Addon[] addons;
 
     public Animation(LEDObject ledObject, Coloring coloring, Addon[] addons) {
         this.ledObject = ledObject;
@@ -12,14 +12,16 @@ public class Animation {
         this.addons = addons;
     }
 
-    public void apply(double level) {
+    public void apply(double level, boolean newBeat) {
 
         // basic coloring
-        coloring.color(ledObject);
+        if (coloring != null) {
+            coloring.color(ledObject);
+        }
 
         // add ons
         for (Addon addon : addons) {
-            addon.change(ledObject, level);
+            addon.change(ledObject, level, newBeat);
         }
     }
 }

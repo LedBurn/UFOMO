@@ -11,6 +11,10 @@ public class ConstColoring extends Coloring {
         this.color = color;
     }
 
+    public void changeColor(HSBColor color) {
+        this.color = color;
+    }
+
     @Override
     public void color(LEDObject ledObject) {
         for (int i = 0; i < ledObject.numOfPixels(); i++) {

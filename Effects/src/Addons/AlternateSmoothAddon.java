@@ -1,14 +1,23 @@
-public class AddonAlternateSmooth extends AddonEffect {
+public class AlternateSmoothAddon extends Addon {
 
-    public AddonAlternateSmooth(double hue1, double hue2, int pixelsPerSegment) {
+
+    private double hue1, hue2;
+    private int pixelsPerSegment;
+
+    public AlternateSmoothAddon(double hue1, double hue2, int pixelsPerSegment) {
         this.hue1 = hue1;
         this.hue2 = hue2;
         this.pixelsPerSegment = pixelsPerSegment;
     }
 
-    @Override
-    public void apply(HSBColor[] array, double timePercent) {
+    // use this method to change the hue while the animation is running
+    public void changeHue(double hue1, double hue2){
+        this.hue1 = hue1;
+        this.hue2 = hue2;
+    }
 
+    @Override
+    public void change(LEDObject ledObject, double level, boolean newBeat) {
         /*
         hue 1 is centered at pixelsPerSegment * 0, pixelsPerSegment * 2, pixelsPerSegment * 4, ...
         hue 2 is centered at pixelsPerSegment * 1, pixelsPerSegment * 3, pixelsPerSegment * 5, ...
@@ -21,7 +30,7 @@ public class AddonAlternateSmooth extends AddonEffect {
 
          */
 
-        for(int i=0; i<array.length; i++) {
+        for(int i=0; i<ledObject.numOfPixels(); i++) {
 
             int fullSegmentLocation = i % (2 * this.pixelsPerSegment);
 
@@ -36,12 +45,7 @@ public class AddonAlternateSmooth extends AddonEffect {
             }
 
             double currHue = HSBColor.combineHues(this.hue1, this.pixelsPerSegment - distToHue1, this.hue2, this.pixelsPerSegment - distToHue2);
-            array[i].hue = currHue;
-            array[i].brightness = 1.0;
-            array[i].saturation = 1.0;
+            ledObject.setColor(i, new HSBColor(currHue, 1, 1));
         }
     }
-
-    double hue1, hue2;
-    int pixelsPerSegment;
 }

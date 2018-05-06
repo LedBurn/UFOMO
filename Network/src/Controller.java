@@ -50,8 +50,8 @@ public class Controller {
 
             int msgIndex=24;
             for(RGBColor color : segmentData.getData()) {
-                msgContent[msgIndex++] = color.r;
                 msgContent[msgIndex++] = color.g;
+                msgContent[msgIndex++] = color.r;
                 msgContent[msgIndex++] = color.b;
             }
 

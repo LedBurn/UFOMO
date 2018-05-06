@@ -18,6 +18,10 @@ public class UFOMO {
     private final FreeStyleAnimations freeStyleAnimations;
 
     private boolean onBeat = false;
+    private boolean newBeat = false;
+    private long lastBeatTime = 0;
+    private long nextBeatTime = 100;
+
     private int userCode = 91;
     private boolean isTesting = true;
 
@@ -39,11 +43,21 @@ public class UFOMO {
                 handleUserCode();
 
                 // apply animations
+                isTesting = false;
                 if (isTesting) {
                     tester.apply(ufomoObject);
+
                 } else {
-                    freeStyleAnimations.apply(ufomoObject);
+                    long currentTime = System.currentTimeMillis();
+                    if (currentTime - lastBeatTime > 1000) { // if there's no beat for a long time - fake one
+                        lastBeatTime = currentTime;
+                        nextBeatTime = currentTime + 1000;
+                        newBeat = true;
+                    }
+                    double percentToNextBeat = ((double)(currentTime - lastBeatTime)) / (nextBeatTime - lastBeatTime);
+                    freeStyleAnimations.apply(ufomoObject, newBeat, percentToNextBeat);
                 }
+                newBeat = false;
 
                 // show in simulator
                 if (simulator != null) simulator.draw(ufomoSimulated, 0, 10);
@@ -51,7 +65,7 @@ public class UFOMO {
                 // send network
                 network.send(ufomoObject);
 
-                Thread.sleep(30);
+                Thread.sleep(20);
 
 
             }
@@ -65,13 +79,11 @@ public class UFOMO {
             return;
         }
 
-        switch (userCode) {
-            case 91:
-                tester.startWithCode(91);
-                isTesting = true;
-                break;
-            case 9:
-                isTesting = false;
+        if (userCode >= 90 && userCode <= 99) {
+            tester.startWithCode(userCode);
+            isTesting = true;
+        } else {
+            isTesting = false;
         }
         userCode = -1;
     }
@@ -94,7 +106,7 @@ public class UFOMO {
                         System.out.println("Received type=" + type + " value=" + value);
 
                         if (type == 1) { // beat
-                            onBeat = value>0;
+                            handleBeatInput(value>0);
                         } else if (type == 2) { // code
                             userCode = value;
                         }
@@ -106,5 +118,17 @@ public class UFOMO {
                 }
             }
         }).start();
+    }
+
+    private void handleBeatInput(boolean newOnBeat) {
+        long currentTime = System.currentTimeMillis();
+        if (!onBeat && newOnBeat && currentTime - lastBeatTime > 250) { // new beat
+            long nextBeat = currentTime + currentTime - lastBeatTime;
+            lastBeatTime = currentTime;
+            nextBeatTime = nextBeat;
+            newBeat = true;
+            System.out.println("New Beat " + Math.random());
+        }
+        onBeat = newOnBeat;
     }
 }

@@ -10,17 +10,17 @@ public class UFOMOObject {
 
     public UFOMOObject() {
         // TODO verify final number of pixels
-        bigCircle = new LEDObject(1920);
-        mediumCircle = new LEDObject(1260);
-        smallCircle = new LEDObject(840);
+        bigCircle = new LEDObject(1920/3);
+        mediumCircle = new LEDObject(1260/3);
+        smallCircle = new LEDObject(840/3);
         for (int i = 0; i < 8; i++) {
-            octagon[i] = new LEDObject(52);
+            octagon[i] = new LEDObject(51/3);
         }
         for (int i = 0; i < 16; i++) {
-            lines[i] = new LEDObject(240);
+            lines[i] = new LEDObject(240/3);
         }
         for (int i = 0; i < 8; i++) {
-            beam[i] = new LEDObject(204);
+            beam[i] = new LEDObject(204/3);
         }
     }
 

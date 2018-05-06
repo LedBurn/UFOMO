@@ -12,56 +12,34 @@ public class UFOMONetwork {
     private Controller t4;
 
     // T3
-    private Segment d1_1 = new Segment("D1_1", 0, 0, 208);
-    private Segment d1_2 = new Segment("D1_2", 0, 208, 208);
-    private Segment d2_1 = new Segment("D2_1", 1, 0, 240);
-    private Segment d2_2 = new Segment("D2_2", 1, 240, 240);
-    private Segment d3_1 = new Segment("D3_1", 2, 0, 204);
-    private Segment d3_2 = new Segment("D3_2", 2, 204, 204);
-    private Segment d4_1 = new Segment("D4_1", 3, 0, 240);
-    private Segment d4_2 = new Segment("D4_2", 3, 240, 240);
-    private Segment d5_1 = new Segment("D5_1", 4, 0, 240);
-    private Segment d5_2 = new Segment("D5_2", 4, 240, 240);
-    private Segment d6_1 = new Segment("D6_1", 5, 0, 204);
-    private Segment d6_2 = new Segment("D6_2", 5, 204, 204);
-    private Segment d7_1 = new Segment("D7_1", 6, 0, 240);
-    private Segment d7_2 = new Segment("D7_2", 6, 240, 240);
+    private Segment d1 = new Segment("D1", 0, 0, 408/3);
+    private Segment d2 = new Segment("D2", 1, 0, 480/3);
+    private Segment d3 = new Segment("D3", 2, 0, 408/3);
+    private Segment d4 = new Segment("D4", 3, 0, 480/3);
+    private Segment d5 = new Segment("D5", 4, 0, 480/3);
+    private Segment d6 = new Segment("D6", 5, 0, 408/3);
+    private Segment d7 = new Segment("D7", 6, 0, 480/3);
 
     // T4
-    private Segment d8_1 = new Segment("D8_1", 0, 0, 240);
-    private Segment d8_2 = new Segment("D8_2", 0, 240, 240);
-    private Segment d9_1 = new Segment("D9_1", 1, 0, 204);
-    private Segment d9_2 = new Segment("D9_2", 1, 204, 204);
-    private Segment d10_1 = new Segment("D10_1", 2, 0, 240);
-    private Segment d10_2 = new Segment("D10_2", 2, 240, 240);
-    private Segment d11_1 = new Segment("D11_1", 3, 0, 240);
-    private Segment d11_2 = new Segment("D11_2", 3, 240, 240);
-    private Segment d12_1 = new Segment("D12_1", 4, 0, 204);
-    private Segment d12_2 = new Segment("D12_2", 4, 204, 204);
-    private Segment d13_1 = new Segment("D13_1", 5, 0, 240);
-    private Segment d13_2 = new Segment("D13_2", 5, 240, 240);
+    private Segment d8 = new Segment("D8", 0, 0, 480/3);
+    private Segment d9 = new Segment("D9", 1, 0, 408/3);
+    private Segment d10 = new Segment("D10", 2, 0, 480/3);
+    private Segment d11 = new Segment("D11", 3, 0, 480/3);
+    private Segment d12 = new Segment("D12", 4, 0, 408/3);
+    private Segment d13 = new Segment("D13", 5, 0, 480/3);
 
     // T1
-    private Segment d14_1 = new Segment("D14_1", 0, 0, 240);
-    private Segment d14_2 = new Segment("D14_2", 0, 240, 240);
-    private Segment d15_1 = new Segment("D15_1", 1, 0, 240);
-    private Segment d15_2 = new Segment("D15_2", 1, 240, 240);
-    private Segment d16_1 = new Segment("D16_1", 2, 0, 210);
-    private Segment d16_2 = new Segment("D16_2", 2, 210, 210);
-    private Segment d17_1 = new Segment("D17_1", 3, 0, 210);
-    private Segment d17_2 = new Segment("D17_2", 3, 210, 210);
+    private Segment d14 = new Segment("D14", 0, 0, 480/3); // L1
+    private Segment d15 = new Segment("D15", 1, 0, 480/3); // L2
+    private Segment d16 = new Segment("D16", 2, 0, 420/3); // L5
+    private Segment d17 = new Segment("D17", 3, 0, 420/3); // L6
 
     // T2
-    private Segment d18_1 = new Segment("D18_1", 4, 0, 210);
-    private Segment d18_2 = new Segment("D18_2", 4, 210, 210);
-    private Segment d19_1 = new Segment("D19_1", 3, 0, 210);
-    private Segment d19_2 = new Segment("D19_2", 3, 210, 210);
-    private Segment d20_1 = new Segment("D20_1", 2, 0, 210);
-    private Segment d20_2 = new Segment("D20_2", 2, 210, 210);
-    private Segment d21_1 = new Segment("D21_1", 0, 0, 240);
-    private Segment d21_2 = new Segment("D21_2", 0, 240, 240);
-    private Segment d22_1 = new Segment("D22_1", 1, 0, 240);
-    private Segment d22_2 = new Segment("D22_2", 1, 240, 240);
+    private Segment d18 = new Segment("D18", 4, 0, 420/3); // L8
+    private Segment d19 = new Segment("D19", 3, 0, 420/3); // L9
+    private Segment d20 = new Segment("D20", 2, 0, 420/3); // L7
+    private Segment d21 = new Segment("D21", 0, 0, 480/3); // L3
+    private Segment d22 = new Segment("D22", 1, 0, 480/3); // L4
 
     public UFOMONetwork() {
 
@@ -85,289 +63,178 @@ public class UFOMONetwork {
         // | 4:            5:            6:            7:     |
         // ----------------------------------------------------
         network.addController(t1);
-        t1.addSegments(new Segment[]{ d14_1, d14_2, d15_1, d15_2, d16_1, d16_2, d17_1, d17_2});
+        t1.addSegments(new Segment[]{ d14, d15, d16, d17});
 
         // ------------------------ T2 ------------------------
         // | 0: D21        1: D22        2: D20        3: D19 |
         // | 4: D18        5:            6:            7:     |
         // ----------------------------------------------------
         network.addController(t2);
-        t2.addSegments(new Segment[]{ d21_1, d21_2, d22_1, d22_2, d20_1, d20_2, d19_1, d19_2, d18_1, d18_2});
+        t2.addSegments(new Segment[]{ d21, d22, d20, d19, d18});
 
         // ------------------------ T3 ------------------------
         // | 0: D1         1: D2         2: D3         3: D4  |
         // | 4: D5         5: D6         6: D7         7:     |
         // ----------------------------------------------------
         network.addController(t3);
-        t3.addSegments(new Segment[]{ d1_1, d1_2, d2_1, d2_2, d3_1, d3_2, d4_1, d4_2, d5_1, d5_2, d6_1, d6_2, d7_1, d7_2});
+        t3.addSegments(new Segment[]{ d1, d2, d3, d4, d5, d6, d7 });
 
         // ------------------------ T4 ------------------------
         // | 0: D8         1: D9         2: D11        3: D11 |
         // | 4: D12        5: D13        6:            7:     |
         // ----------------------------------------------------
         network.addController(t4);
-        t4.addSegments(new Segment[]{ d8_1, d8_2, d9_1, d9_2, d10_1, d10_2, d11_1, d11_2, d12_1, d12_2, d13_1, d13_2});
+        t4.addSegments(new Segment[]{ d8, d9, d10, d11, d12, d13});
     }
 
 
+    private long lastSend = 0;
     public void send(UFOMOObject ufomoObject) {
-        d1_1.setData(getDataPoint(ufomoObject,"D1", 1));
-        d1_2.setData(getDataPoint(ufomoObject,"D1", 2));
-        d2_1.setData(getDataPoint(ufomoObject,"D2", 1));
-        d2_2.setData(getDataPoint(ufomoObject,"D2", 2));
-        d3_1.setData(getDataPoint(ufomoObject,"D3", 1));
-        d3_2.setData(getDataPoint(ufomoObject,"D3", 2));
-        d4_1.setData(getDataPoint(ufomoObject,"D4", 1));
-        d4_2.setData(getDataPoint(ufomoObject,"D4", 2));
-        d5_1.setData(getDataPoint(ufomoObject,"D5", 1));
-        d5_2.setData(getDataPoint(ufomoObject,"D5", 2));
-        d6_1.setData(getDataPoint(ufomoObject,"D6", 1));
-        d6_2.setData(getDataPoint(ufomoObject,"D6", 2));
-        d7_1.setData(getDataPoint(ufomoObject,"D7", 1));
-        d7_2.setData(getDataPoint(ufomoObject,"D7", 2));
-        d8_1.setData(getDataPoint(ufomoObject,"D8", 1));
-        d8_2.setData(getDataPoint(ufomoObject,"D8", 2));
-        d9_1.setData(getDataPoint(ufomoObject,"D9", 1));
-        d9_2.setData(getDataPoint(ufomoObject,"D9", 2));
-        d10_1.setData(getDataPoint(ufomoObject,"D10", 1));
-        d10_2.setData(getDataPoint(ufomoObject,"D10", 2));
-        d11_1.setData(getDataPoint(ufomoObject,"D11", 1));
-        d11_2.setData(getDataPoint(ufomoObject,"D11", 2));
-        d12_1.setData(getDataPoint(ufomoObject,"D12", 1));
-        d12_2.setData(getDataPoint(ufomoObject,"D12", 2));
-        d13_1.setData(getDataPoint(ufomoObject,"D13", 1));
-        d13_2.setData(getDataPoint(ufomoObject,"D13", 2));
-        d14_1.setData(getDataPoint(ufomoObject,"D14", 1));
-        d14_2.setData(getDataPoint(ufomoObject,"D14", 2));
-        d15_1.setData(getDataPoint(ufomoObject,"D15", 1));
-        d15_2.setData(getDataPoint(ufomoObject,"D15", 2));
-        d16_1.setData(getDataPoint(ufomoObject,"D16", 1));
-        d16_2.setData(getDataPoint(ufomoObject,"D16", 2));
-        d17_1.setData(getDataPoint(ufomoObject,"D17", 1));
-        d17_2.setData(getDataPoint(ufomoObject,"D17", 2));
-        d18_1.setData(getDataPoint(ufomoObject,"D18", 1));
-        d18_2.setData(getDataPoint(ufomoObject,"D18", 2));
-        d19_1.setData(getDataPoint(ufomoObject,"D19", 1));
-        d19_2.setData(getDataPoint(ufomoObject,"D19", 2));
-        d20_1.setData(getDataPoint(ufomoObject,"D20", 1));
-        d20_2.setData(getDataPoint(ufomoObject,"D20", 2));
-        d21_1.setData(getDataPoint(ufomoObject,"D21", 1));
-        d21_2.setData(getDataPoint(ufomoObject,"D21", 2));
-        d22_1.setData(getDataPoint(ufomoObject,"D22", 1));
-        d22_2.setData(getDataPoint(ufomoObject,"D22", 2));
+        //System.out.println("sending - " + (System.currentTimeMillis() - lastSend));
+        lastSend = System.currentTimeMillis();
+        d1.setData(getDataPoint(ufomoObject,"D1"));
+        d2.setData(getDataPoint(ufomoObject,"D2"));
+        d3.setData(getDataPoint(ufomoObject,"D3"));
+        d4.setData(getDataPoint(ufomoObject,"D4"));
+        d5.setData(getDataPoint(ufomoObject,"D5"));
+        d6.setData(getDataPoint(ufomoObject,"D6"));
+        d7.setData(getDataPoint(ufomoObject,"D7"));
+        d8.setData(getDataPoint(ufomoObject,"D8"));
+        d9.setData(getDataPoint(ufomoObject,"D9"));
+        d10.setData(getDataPoint(ufomoObject,"D10"));
+        d11.setData(getDataPoint(ufomoObject,"D11"));
+        d12.setData(getDataPoint(ufomoObject,"D12"));
+        d13.setData(getDataPoint(ufomoObject,"D13"));
+        d14.setData(getDataPoint(ufomoObject,"D14"));
+        d15.setData(getDataPoint(ufomoObject,"D15"));
+        d16.setData(getDataPoint(ufomoObject,"D16"));
+        d17.setData(getDataPoint(ufomoObject,"D17"));
+        d18.setData(getDataPoint(ufomoObject,"D18"));
+        d19.setData(getDataPoint(ufomoObject,"D19"));
+        d20.setData(getDataPoint(ufomoObject,"D20"));
+        d21.setData(getDataPoint(ufomoObject,"D21"));
+        d22.setData(getDataPoint(ufomoObject,"D22"));
 
         network.send();
     }
 
 
 
-    private RGBColor[] getDataPoint(UFOMOObject ufomoObject, String name, int index) {
+    private RGBColor[] getDataPoint(UFOMOObject ufomoObject, String name) {
         switch (name) {
             case "D1":
-                switch (index) {
-                    case 1:
-                        return joinArray(getRGB(ufomoObject.octagon[0], 0, 51),
-                                getRGB(ufomoObject.octagon[1], 0, 51),
-                                getRGB(ufomoObject.octagon[2], 0, 51),
-                                getRGB(ufomoObject.octagon[3], 0, 51));
-                    case 2:
-                        return joinArray(getRGB(ufomoObject.octagon[4], 0, 51),
-                                getRGB(ufomoObject.octagon[5], 0, 51),
-                                getRGB(ufomoObject.octagon[6], 0, 51),
-                                getRGB(ufomoObject.octagon[7], 0, 51));
-                }
-                break;
+                return joinArray(
+                        getRGB(ufomoObject.octagon[0], 0, ufomoObject.octagon[0].numOfPixels()-1),
+                        getRGB(ufomoObject.octagon[1], 0, ufomoObject.octagon[1].numOfPixels()-1),
+                        getRGB(ufomoObject.octagon[2], 0, ufomoObject.octagon[2].numOfPixels()-1),
+                        getRGB(ufomoObject.octagon[3], 0, ufomoObject.octagon[3].numOfPixels()-1),
+                        getRGB(ufomoObject.octagon[4], 0, ufomoObject.octagon[4].numOfPixels()-1),
+                        getRGB(ufomoObject.octagon[5], 0, ufomoObject.octagon[5].numOfPixels()-1),
+                        getRGB(ufomoObject.octagon[6], 0, ufomoObject.octagon[6].numOfPixels()-1),
+                        getRGB(ufomoObject.octagon[7], 0, ufomoObject.octagon[7].numOfPixels()-1)
+                );
 
             case "D2":
-                switch (index) {
-                    case 1:
-                        return getRGB(ufomoObject.lines[0], 0, 240 - 1);
-                    case 2:
-                        return getRGB(ufomoObject.lines[1], 240 - 1, 0);
-                }
-                break;
+                return joinArray(
+                        getRGB(ufomoObject.lines[0], 0, ufomoObject.lines[0].numOfPixels()-1),
+                        getRGB(ufomoObject.lines[1], ufomoObject.lines[1].numOfPixels()-1, 0)
+                );
 
             case "D3":
-                switch (index) {
-                    case 1:
-                        return getRGB(ufomoObject.beam[0], 0, 204 - 1);
-                    case 2:
-                        return getRGB(ufomoObject.beam[1], 204 - 1, 0);
-                }
-                break;
+                return joinArray(
+                        getRGB(ufomoObject.beam[0], 0, ufomoObject.beam[0].numOfPixels()-1),
+                        getRGB(ufomoObject.beam[1], ufomoObject.beam[1].numOfPixels()-1, 0)
+                );
 
             case "D4":
-                switch (index) {
-                    case 1:
-                        return getRGB(ufomoObject.lines[2], 0, 240 - 1);
-                    case 2:
-                        return getRGB(ufomoObject.lines[3], 240 - 1, 0);
-                }
-                break;
+                return joinArray(
+                        getRGB(ufomoObject.lines[2], 0, ufomoObject.lines[2].numOfPixels()-1),
+                        getRGB(ufomoObject.lines[3], ufomoObject.lines[3].numOfPixels()-1, 0)
+                );
 
             case "D5":
-                switch (index) {
-                    case 1:
-                        return getRGB(ufomoObject.lines[4], 0, 240 - 1);
-                    case 2:
-                        return getRGB(ufomoObject.lines[5], 240 - 1, 0);
-                }
-                break;
+                return joinArray(
+                        getRGB(ufomoObject.lines[4], 0, ufomoObject.lines[4].numOfPixels()-1),
+                        getRGB(ufomoObject.lines[5], ufomoObject.lines[5].numOfPixels()-1, 0)
+                );
 
             case "D6":
-                switch (index) {
-                    case 1:
-                        return getRGB(ufomoObject.beam[2], 0, 204 - 1);
-                    case 2:
-                        return getRGB(ufomoObject.beam[3], 204 - 1, 0);
-                }
-                break;
+                return joinArray(
+                        getRGB(ufomoObject.beam[2], 0, ufomoObject.beam[2].numOfPixels()-1),
+                        getRGB(ufomoObject.beam[3], ufomoObject.beam[3].numOfPixels()-1, 0)
+                );
 
             case "D7":
-                switch (index) {
-                    case 1:
-                        return getRGB(ufomoObject.lines[6], 0, 240 - 1);
-                    case 2:
-                        return getRGB(ufomoObject.lines[7], 240 - 1, 0);
-                }
-                break;
+                return joinArray(
+                        getRGB(ufomoObject.lines[6], 0, ufomoObject.lines[6].numOfPixels()-1),
+                        getRGB(ufomoObject.lines[7], ufomoObject.lines[7].numOfPixels()-1, 0)
+                );
 
             case "D8":
-                switch (index) {
-                    case 1:
-                        return getRGB(ufomoObject.lines[8], 0, 240 - 1);
-                    case 2:
-                        return getRGB(ufomoObject.lines[9], 240 - 1, 0);
-                }
-                break;
+                return joinArray(
+                        getRGB(ufomoObject.lines[8], 0, ufomoObject.lines[0].numOfPixels()-1),
+                        getRGB(ufomoObject.lines[9], ufomoObject.lines[1].numOfPixels()-1, 0)
+                );
 
             case "D9":
-                switch (index) {
-                    case 1:
-                        return getRGB(ufomoObject.beam[4], 0, 204 - 1);
-                    case 2:
-                        return getRGB(ufomoObject.beam[5], 204 - 1, 0);
-                }
-                break;
+                return joinArray(
+                        getRGB(ufomoObject.beam[4], 0, ufomoObject.beam[4].numOfPixels()-1),
+                        getRGB(ufomoObject.beam[5], ufomoObject.beam[5].numOfPixels()-1, 0)
+                );
 
             case "D10":
-                switch (index) {
-                    case 1:
-                        return getRGB(ufomoObject.lines[10], 0, 240 - 1);
-                    case 2:
-                        return getRGB(ufomoObject.lines[11], 240 - 1, 0);
-                }
-                break;
+                return joinArray(
+                        getRGB(ufomoObject.lines[10], 0, ufomoObject.lines[10].numOfPixels()-1),
+                        getRGB(ufomoObject.lines[11], ufomoObject.lines[11].numOfPixels()-1, 0)
+                );
 
             case "D11":
-                switch (index) {
-                    case 1:
-                        return getRGB(ufomoObject.lines[12], 0, 240 - 1);
-                    case 2:
-                        return getRGB(ufomoObject.lines[13], 240 - 1, 0);
-                }
-                break;
+                return joinArray(
+                        getRGB(ufomoObject.lines[12], 0, ufomoObject.lines[12].numOfPixels()-1),
+                        getRGB(ufomoObject.lines[13], ufomoObject.lines[13].numOfPixels()-1, 0)
+                );
 
             case "D12":
-                switch (index) {
-                    case 1:
-                        return getRGB(ufomoObject.beam[6], 0, 204 - 1);
-                    case 2:
-                        return getRGB(ufomoObject.beam[7], 204 - 1, 0);
-                }
-                break;
+                return joinArray(
+                        getRGB(ufomoObject.beam[6], 0, ufomoObject.beam[6].numOfPixels()-1),
+                        getRGB(ufomoObject.beam[7], ufomoObject.beam[7].numOfPixels()-1, 0)
+                );
 
             case "D13":
-                switch (index) {
-                    case 1:
-                        return getRGB(ufomoObject.lines[14], 0, 240 - 1);
-                    case 2:
-                        return getRGB(ufomoObject.lines[15], 240 - 1, 0);
-                }
-                break;
+                return joinArray(
+                        getRGB(ufomoObject.lines[14], 0, ufomoObject.lines[0].numOfPixels()-1),
+                        getRGB(ufomoObject.lines[15], ufomoObject.lines[15].numOfPixels()-1, 0)
+                );
 
             case "D14":
-                switch (index) {
-                    case 1:
-                        return getRGB(ufomoObject.bigCircle, 0, 240 - 1);
-                    case 2:
-                        return getRGB(ufomoObject.bigCircle, 240, 240 * 2 -1);
-                }
-                break;
+                return getRGB(ufomoObject.bigCircle, 0, ufomoObject.bigCircle.numOfPixels()/4-1);
 
             case "D15":
-                switch (index) {
-                    case 1:
-                        return getRGB(ufomoObject.bigCircle, 240 * 8 - 1, 240 * 7);
-                    case 2:
-                        return getRGB(ufomoObject.bigCircle, 240 * 7 - 1, 240 * 6);
-                }
-                break;
+                return getRGB(ufomoObject.bigCircle, ufomoObject.bigCircle.numOfPixels()-1, (ufomoObject.bigCircle.numOfPixels()*3)/4);
 
             case "D16":
-                switch (index) {
-                    case 1:
-                        RGBColor[] colors1 = getRGB(ufomoObject.mediumCircle, 105 * 11, 105 * 12 - 1);
-                        RGBColor[] colors2 = getRGB(ufomoObject.mediumCircle, 0, 105 -1);
-                        return connect(colors1, colors2);
-                    case 2:
-                        return getRGB(ufomoObject.mediumCircle, 105, 105 * 3 - 1);
-                }
-                break;
+                RGBColor[] colors1 = getRGB(ufomoObject.mediumCircle, (ufomoObject.mediumCircle.numOfPixels()*11)/12, ufomoObject.mediumCircle.numOfPixels()-1);
+                RGBColor[] colors2 = getRGB(ufomoObject.mediumCircle, 0, (ufomoObject.mediumCircle.numOfPixels()*3)/12-1);
+                return connect(colors1, colors2);
 
             case "D17":
-                switch (index) {
-                    case 1:
-                        return getRGB(ufomoObject.mediumCircle, 105 * 10 - 1, 105 * 8);
-                    case 2:
-                        return getRGB(ufomoObject.mediumCircle, 105 * 8 - 1, 105 * 6);
-                }
-                break;
+                return getRGB(ufomoObject.mediumCircle, (ufomoObject.mediumCircle.numOfPixels()*11)/12-1, (ufomoObject.mediumCircle.numOfPixels()*7)/12);
 
             case "D18":
-                switch (index) {
-                    case 1:
-                        return getRGB(ufomoObject.smallCircle, 210 - 1, 0);
-                    case 2:
-                        return getRGB(ufomoObject.smallCircle, 210 * 2 - 1, 210);
-                }
-                break;
+                return getRGB(ufomoObject.smallCircle, ufomoObject.smallCircle.numOfPixels()/2-1, 0);
 
             case "D19":
-                switch (index) {
-                    case 1:
-                        return getRGB(ufomoObject.smallCircle, 210 * 2, 210 * 3 - 1);
-                    case 2:
-                        return getRGB(ufomoObject.smallCircle, 210 * 3, 210 * 4 - 1);
-                }
-                break;
+                return getRGB(ufomoObject.smallCircle, ufomoObject.smallCircle.numOfPixels()-1, ufomoObject.smallCircle.numOfPixels()/2);
 
             case "D20":
-                switch (index) {
-                    case 1:
-                        return getRGB(ufomoObject.mediumCircle, 105 * 6 - 1, 105 * 4);
-                    case 2:
-                        return getRGB(ufomoObject.mediumCircle, 105 * 4 - 1, 105 * 2);
-                }
-                break;
+                return getRGB(ufomoObject.mediumCircle, (ufomoObject.mediumCircle.numOfPixels()*7)/12-1, (ufomoObject.mediumCircle.numOfPixels()*3)/12);
+
 
             case "D21":
-                switch (index) {
-                    case 1:
-                        return getRGB(ufomoObject.bigCircle, 240 * 4 - 1, 240 * 3);
-                    case 2:
-                        return getRGB(ufomoObject.bigCircle, 240 * 3 - 1, 240 * 2);
-                }
-                break;
+                return getRGB(ufomoObject.bigCircle, (ufomoObject.bigCircle.numOfPixels()*2)/4-1, ufomoObject.bigCircle.numOfPixels()/4);
 
             case "D22":
-                switch (index) {
-                    case 1:
-                        return getRGB(ufomoObject.bigCircle, 240 * 4, 240 * 5 -1);
-                    case 2:
-                        return getRGB(ufomoObject.bigCircle, 240 * 5, 240 * 6 - 1);
-                }
-                break;
+                return getRGB(ufomoObject.bigCircle, (ufomoObject.bigCircle.numOfPixels()*2)/4, (ufomoObject.bigCircle.numOfPixels()*3)/4-1);
 
         }
         return new RGBColor[0];
