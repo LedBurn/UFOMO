@@ -68,9 +68,10 @@ OctoWS2811 leds(LEDS_PER_STRIP, displayMemory, drawingMemory, config);
 // Enter a MAC address and IP address for your controller below.
 // The IP address will be dependent on your local network:
 byte mac[] = {
-  0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xCA //last byte should be the hex of the last byte of the ip address
+  0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xCB //last byte should be the hex of the last byte of the ip address
 };
-IPAddress ip( 10, 0, 0, 202 );
+IPAddress ip( 10, 0, 0, 203 );
+//201=C9 202=CA 203=CB 204=CC 205=CD
 unsigned int localPort = 2000;      // local port to listen on
 // An EthernetUDP instance to let us send and receive packets over UDP
 EthernetUDP Udp;
@@ -278,6 +279,8 @@ void loop() {
   digitalWrite(bluePin, LOW);
 
   if (packetSize > 0) {
+     Serial.println(packetSize);
+    
     if (packetSize > MAX_PACKET_SIZE)
     {
       digitalWrite(redPin, HIGH);
@@ -303,7 +306,7 @@ void loop() {
     AfterPaintLeds(phd);
     previousShow = millis();
 
-  } else if (millis() - previousShow > 50) {
+  } else if (millis() - previousShow > 1000) {
     PaintAllLeds(leds.color(0, 0, 0), bluePin);
     leds.show();
     previousShow = millis();
