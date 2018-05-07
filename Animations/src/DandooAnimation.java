@@ -23,7 +23,7 @@ public class DandooAnimation extends Animation {
     }
 
     @Override
-    public void apply(double level, boolean newBeat) {
+    public void apply(double level, boolean newBeat, boolean isOn, int[] eq) {
         for (int i = 0; i < ledObject.numOfPixels(); i++) {
             ledObject.setColor(i, HSBColor.BLACK);
         }
@@ -65,7 +65,7 @@ public class DandooAnimation extends Animation {
         }
 
         for (Addon addon : addons) {
-            addon.change(ledObject, level, newBeat);
+            addon.change(ledObject, level, newBeat, isOn, eq);
         }
     }
 

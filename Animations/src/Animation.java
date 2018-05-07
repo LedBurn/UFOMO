@@ -12,7 +12,7 @@ public class Animation {
         this.addons = addons;
     }
 
-    public void apply(double level, boolean newBeat) {
+    public void apply(double level, boolean newBeat, boolean isOn, int[] eq) {
 
         // basic coloring
         if (coloring != null) {
@@ -21,7 +21,7 @@ public class Animation {
 
         // add ons
         for (Addon addon : addons) {
-            addon.change(ledObject, level, newBeat);
+            addon.change(ledObject, level, newBeat, isOn, eq);
         }
     }
 }

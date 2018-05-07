@@ -190,7 +190,7 @@ void loop() {
         leds[i+3] = color;
       }
     }
-
+    sendFFT();
     LEDS.show();
   }
 }
@@ -357,8 +357,9 @@ void showAndSendBpm() {
     return;
   }
 
-  uint8_t data = isOn ? 1 : 0;
-  sendToRemote(BPM_PACKET_TYPE, data);
+  uint8_t data[1];
+  data[0] = isOn ? 1 : 0;
+  sendToRemote(BPM_PACKET_TYPE, data, 1);
   lastIsOn = isOn;
 }
 
@@ -496,8 +497,9 @@ void sendCode(uint8_t code) {
     startNosie();
     return;
   }
-
-  sendToRemote(CODES_PACKET_TYPE, code);
+  uint8_t data[1];
+  data[0] = code;
+  sendToRemote(CODES_PACKET_TYPE, data, 1);
 }
 
 void startNosie() {
@@ -555,7 +557,7 @@ void showCodesLed() {
 long networkErrorStartTime = 0;
 long networkSuccessStartTime = 0;
 
-void sendToRemote(uint8_t type, uint8_t value) {
+void sendToRemote(uint8_t type, uint8_t value[], uint8_t valueSize) {
   int success = Udp.beginPacket(REMOTE_IP, REMOTE_PORT);
   if (!success) {
     Serial.println("network error1");
@@ -563,7 +565,7 @@ void sendToRemote(uint8_t type, uint8_t value) {
     return;
   }
   Udp.write(type);
-  Udp.write(value);
+  Udp.write(value, valueSize);
   success = Udp.endPacket();
   if (!success) {
     Serial.println("network error2");
@@ -588,6 +590,7 @@ void showNetworkLed() {
 //////////////////////////////////////////////////////////
 //-------------- FFT -----------------------------------//
 //////////////////////////////////////////////////////////
+#define FFT_PACKET_TYPE 3
 
 void doFFT() {
   // multiply bin number by 43.06640625 to get frequency
@@ -613,4 +616,13 @@ void doFFT() {
   //  }
   //  rawLevel[7] /= 7;
 }
+
+void sendFFT() {
+  uint8_t data[8];
+  for (int i=0; i<8; i++) {
+    data[i] = min(floor(level[i] * 128), 127);
+  }
+  sendToRemote(FFT_PACKET_TYPE, data, 8);
+}
+
 

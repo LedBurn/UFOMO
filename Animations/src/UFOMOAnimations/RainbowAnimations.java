@@ -54,7 +54,11 @@ public class RainbowAnimations {
             animations.add(new Animation(ufomoObject.smallCircle, Coloring.RAINBOW_COLORING, addons1));
 
             for (int i = 0; i < ufomoObject.lines.length; i++) {
-                animations.add(new Animation(ufomoObject.lines[i], Coloring.RAINBOW_COLORING, addons1));
+                Addon[] addons= {
+                        new ConstCyclicMoveAddon(false),
+                        new EqAddon()
+                };
+                animations.add(new Animation(ufomoObject.lines[i], Coloring.RAINBOW_COLORING, addons));
             }
 
             for (int i = 0; i < ufomoObject.beam.length; i++) {

@@ -29,8 +29,8 @@ public class LEDObject {
     }
 
     // get color of a specific pixel as RGB integer (best for sending on network)
-    public RGBColor getColorRGB(int pixelNum) {
-        return getColor(pixelNum).toRGBColor();
+    public RGBColor getColorRGB(int pixelNum, double brightnessLevel) {
+        return getColor(pixelNum).toRGBColor(brightnessLevel);
     }
 
     // get color of a specific pixel as RGB integer (best for simulator)

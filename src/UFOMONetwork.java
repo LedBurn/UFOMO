@@ -89,169 +89,168 @@ public class UFOMONetwork {
 
 
     private long lastSend = 0;
-    public void send(UFOMOObject ufomoObject) {
+    public void send(UFOMOObject ufomoObject, double brightnessLevel) {
+//        System.out.println("brightness - " + brightnessLevel);
         //System.out.println("sending - " + (System.currentTimeMillis() - lastSend));
         lastSend = System.currentTimeMillis();
-        d1.setData(getDataPoint(ufomoObject,"D1"));
-        d2.setData(getDataPoint(ufomoObject,"D2"));
-        d3.setData(getDataPoint(ufomoObject,"D3"));
-        d4.setData(getDataPoint(ufomoObject,"D4"));
-        d5.setData(getDataPoint(ufomoObject,"D5"));
-        d6.setData(getDataPoint(ufomoObject,"D6"));
-        d7.setData(getDataPoint(ufomoObject,"D7"));
-        d8.setData(getDataPoint(ufomoObject,"D8"));
-        d9.setData(getDataPoint(ufomoObject,"D9"));
-        d10.setData(getDataPoint(ufomoObject,"D10"));
-        d11.setData(getDataPoint(ufomoObject,"D11"));
-        d12.setData(getDataPoint(ufomoObject,"D12"));
-        d13.setData(getDataPoint(ufomoObject,"D13"));
-        d14.setData(getDataPoint(ufomoObject,"D14"));
-        d15.setData(getDataPoint(ufomoObject,"D15"));
-        d16.setData(getDataPoint(ufomoObject,"D16"));
-        d17.setData(getDataPoint(ufomoObject,"D17"));
-        d18.setData(getDataPoint(ufomoObject,"D18"));
-        d19.setData(getDataPoint(ufomoObject,"D19"));
-        d20.setData(getDataPoint(ufomoObject,"D20"));
-        d21.setData(getDataPoint(ufomoObject,"D21"));
-        d22.setData(getDataPoint(ufomoObject,"D22"));
+        d1.setData(getDataPoint(ufomoObject,"D1", brightnessLevel));
+        d2.setData(getDataPoint(ufomoObject,"D2", brightnessLevel));
+        d3.setData(getDataPoint(ufomoObject,"D3", brightnessLevel));
+        d4.setData(getDataPoint(ufomoObject,"D4", brightnessLevel));
+        d5.setData(getDataPoint(ufomoObject,"D5", brightnessLevel));
+        d6.setData(getDataPoint(ufomoObject,"D6", brightnessLevel));
+        d7.setData(getDataPoint(ufomoObject,"D7", brightnessLevel));
+        d8.setData(getDataPoint(ufomoObject,"D8", brightnessLevel));
+        d9.setData(getDataPoint(ufomoObject,"D9", brightnessLevel));
+        d10.setData(getDataPoint(ufomoObject,"D10", brightnessLevel));
+        d11.setData(getDataPoint(ufomoObject,"D11", brightnessLevel));
+        d12.setData(getDataPoint(ufomoObject,"D12", brightnessLevel));
+        d13.setData(getDataPoint(ufomoObject,"D13", brightnessLevel));
+        d14.setData(getDataPoint(ufomoObject,"D14", brightnessLevel));
+        d15.setData(getDataPoint(ufomoObject,"D15", brightnessLevel));
+        d16.setData(getDataPoint(ufomoObject,"D16", brightnessLevel));
+        d17.setData(getDataPoint(ufomoObject,"D17", brightnessLevel));
+        d18.setData(getDataPoint(ufomoObject,"D18", brightnessLevel));
+        d19.setData(getDataPoint(ufomoObject,"D19", brightnessLevel));
+        d20.setData(getDataPoint(ufomoObject,"D20", brightnessLevel));
+        d21.setData(getDataPoint(ufomoObject,"D21", brightnessLevel));
+        d22.setData(getDataPoint(ufomoObject,"D22", brightnessLevel));
 
         network.send();
     }
 
-
-
-    private RGBColor[] getDataPoint(UFOMOObject ufomoObject, String name) {
+    private RGBColor[] getDataPoint(UFOMOObject ufomoObject, String name, double brightnessLevel) {
         switch (name) {
             case "D1":
                 return joinArray(
-                        getRGB(ufomoObject.octagon[0], 0, ufomoObject.octagon[0].numOfPixels()-1),
-                        getRGB(ufomoObject.octagon[1], 0, ufomoObject.octagon[1].numOfPixels()-1),
-                        getRGB(ufomoObject.octagon[2], 0, ufomoObject.octagon[2].numOfPixels()-1),
-                        getRGB(ufomoObject.octagon[3], 0, ufomoObject.octagon[3].numOfPixels()-1),
-                        getRGB(ufomoObject.octagon[4], 0, ufomoObject.octagon[4].numOfPixels()-1),
-                        getRGB(ufomoObject.octagon[5], 0, ufomoObject.octagon[5].numOfPixels()-1),
-                        getRGB(ufomoObject.octagon[6], 0, ufomoObject.octagon[6].numOfPixels()-1),
-                        getRGB(ufomoObject.octagon[7], 0, ufomoObject.octagon[7].numOfPixels()-1)
+                        getRGB(ufomoObject.octagon[0], 0, ufomoObject.octagon[0].numOfPixels()-1, brightnessLevel),
+                        getRGB(ufomoObject.octagon[1], 0, ufomoObject.octagon[1].numOfPixels()-1, brightnessLevel),
+                        getRGB(ufomoObject.octagon[2], 0, ufomoObject.octagon[2].numOfPixels()-1, brightnessLevel),
+                        getRGB(ufomoObject.octagon[3], 0, ufomoObject.octagon[3].numOfPixels()-1, brightnessLevel),
+                        getRGB(ufomoObject.octagon[4], 0, ufomoObject.octagon[4].numOfPixels()-1, brightnessLevel),
+                        getRGB(ufomoObject.octagon[5], 0, ufomoObject.octagon[5].numOfPixels()-1, brightnessLevel),
+                        getRGB(ufomoObject.octagon[6], 0, ufomoObject.octagon[6].numOfPixels()-1, brightnessLevel),
+                        getRGB(ufomoObject.octagon[7], 0, ufomoObject.octagon[7].numOfPixels()-1, brightnessLevel)
                 );
 
             case "D2":
                 return joinArray(
-                        getRGB(ufomoObject.lines[0], 0, ufomoObject.lines[0].numOfPixels()-1),
-                        getRGB(ufomoObject.lines[1], ufomoObject.lines[1].numOfPixels()-1, 0)
+                        getRGB(ufomoObject.lines[15], 0, ufomoObject.lines[15].numOfPixels()-1, brightnessLevel),
+                        getRGB(ufomoObject.lines[14], ufomoObject.lines[14].numOfPixels()-1, 0, brightnessLevel)
                 );
 
             case "D3":
                 return joinArray(
-                        getRGB(ufomoObject.beam[0], 0, ufomoObject.beam[0].numOfPixels()-1),
-                        getRGB(ufomoObject.beam[1], ufomoObject.beam[1].numOfPixels()-1, 0)
+                        getRGB(ufomoObject.beam[7], 0, ufomoObject.beam[7].numOfPixels()-1, brightnessLevel),
+                        getRGB(ufomoObject.beam[6], ufomoObject.beam[6].numOfPixels()-1, 0, brightnessLevel)
                 );
 
             case "D4":
                 return joinArray(
-                        getRGB(ufomoObject.lines[2], 0, ufomoObject.lines[2].numOfPixels()-1),
-                        getRGB(ufomoObject.lines[3], ufomoObject.lines[3].numOfPixels()-1, 0)
+                        getRGB(ufomoObject.lines[13], 0, ufomoObject.lines[13].numOfPixels()-1, brightnessLevel),
+                        getRGB(ufomoObject.lines[12], ufomoObject.lines[12].numOfPixels()-1, 0, brightnessLevel)
                 );
 
             case "D5":
                 return joinArray(
-                        getRGB(ufomoObject.lines[4], 0, ufomoObject.lines[4].numOfPixels()-1),
-                        getRGB(ufomoObject.lines[5], ufomoObject.lines[5].numOfPixels()-1, 0)
+                        getRGB(ufomoObject.lines[11], 0, ufomoObject.lines[11].numOfPixels()-1, brightnessLevel),
+                        getRGB(ufomoObject.lines[10], ufomoObject.lines[10].numOfPixels()-1, 0, brightnessLevel)
                 );
 
             case "D6":
                 return joinArray(
-                        getRGB(ufomoObject.beam[2], 0, ufomoObject.beam[2].numOfPixels()-1),
-                        getRGB(ufomoObject.beam[3], ufomoObject.beam[3].numOfPixels()-1, 0)
+                        getRGB(ufomoObject.beam[5], 0, ufomoObject.beam[5].numOfPixels()-1, brightnessLevel),
+                        getRGB(ufomoObject.beam[4], ufomoObject.beam[4].numOfPixels()-1, 0, brightnessLevel)
                 );
 
             case "D7":
                 return joinArray(
-                        getRGB(ufomoObject.lines[6], 0, ufomoObject.lines[6].numOfPixels()-1),
-                        getRGB(ufomoObject.lines[7], ufomoObject.lines[7].numOfPixels()-1, 0)
+                        getRGB(ufomoObject.lines[9], 0, ufomoObject.lines[9].numOfPixels()-1, brightnessLevel),
+                        getRGB(ufomoObject.lines[8], ufomoObject.lines[8].numOfPixels()-1, 0, brightnessLevel)
                 );
 
             case "D8":
                 return joinArray(
-                        getRGB(ufomoObject.lines[8], 0, ufomoObject.lines[0].numOfPixels()-1),
-                        getRGB(ufomoObject.lines[9], ufomoObject.lines[1].numOfPixels()-1, 0)
+                        getRGB(ufomoObject.lines[7], 0, ufomoObject.lines[7].numOfPixels()-1, brightnessLevel),
+                        getRGB(ufomoObject.lines[6], ufomoObject.lines[6].numOfPixels()-1, 0, brightnessLevel)
                 );
 
             case "D9":
                 return joinArray(
-                        getRGB(ufomoObject.beam[4], 0, ufomoObject.beam[4].numOfPixels()-1),
-                        getRGB(ufomoObject.beam[5], ufomoObject.beam[5].numOfPixels()-1, 0)
+                        getRGB(ufomoObject.beam[3], 0, ufomoObject.beam[3].numOfPixels()-1, brightnessLevel),
+                        getRGB(ufomoObject.beam[2], ufomoObject.beam[2].numOfPixels()-1, 0, brightnessLevel)
                 );
 
             case "D10":
                 return joinArray(
-                        getRGB(ufomoObject.lines[10], 0, ufomoObject.lines[10].numOfPixels()-1),
-                        getRGB(ufomoObject.lines[11], ufomoObject.lines[11].numOfPixels()-1, 0)
+                        getRGB(ufomoObject.lines[5], 0, ufomoObject.lines[5].numOfPixels()-1, brightnessLevel),
+                        getRGB(ufomoObject.lines[4], ufomoObject.lines[4].numOfPixels()-1, 0, brightnessLevel)
                 );
 
             case "D11":
                 return joinArray(
-                        getRGB(ufomoObject.lines[12], 0, ufomoObject.lines[12].numOfPixels()-1),
-                        getRGB(ufomoObject.lines[13], ufomoObject.lines[13].numOfPixels()-1, 0)
+                        getRGB(ufomoObject.lines[3], 0, ufomoObject.lines[3].numOfPixels()-1, brightnessLevel),
+                        getRGB(ufomoObject.lines[2], ufomoObject.lines[2].numOfPixels()-1, 0, brightnessLevel)
                 );
 
             case "D12":
                 return joinArray(
-                        getRGB(ufomoObject.beam[6], 0, ufomoObject.beam[6].numOfPixels()-1),
-                        getRGB(ufomoObject.beam[7], ufomoObject.beam[7].numOfPixels()-1, 0)
+                        getRGB(ufomoObject.beam[1], 0, ufomoObject.beam[1].numOfPixels()-1, brightnessLevel),
+                        getRGB(ufomoObject.beam[0], ufomoObject.beam[0].numOfPixels()-1, 0, brightnessLevel)
                 );
 
             case "D13":
                 return joinArray(
-                        getRGB(ufomoObject.lines[14], 0, ufomoObject.lines[0].numOfPixels()-1),
-                        getRGB(ufomoObject.lines[15], ufomoObject.lines[15].numOfPixels()-1, 0)
+                        getRGB(ufomoObject.lines[1], 0, ufomoObject.lines[1].numOfPixels()-1, brightnessLevel),
+                        getRGB(ufomoObject.lines[0], ufomoObject.lines[0].numOfPixels()-1, 0, brightnessLevel)
                 );
 
             case "D14":
-                return getRGB(ufomoObject.bigCircle, 0, ufomoObject.bigCircle.numOfPixels()/4-1);
+                return getRGB(ufomoObject.bigCircle, 0, ufomoObject.bigCircle.numOfPixels()/4-1, brightnessLevel);
 
             case "D15":
-                return getRGB(ufomoObject.bigCircle, ufomoObject.bigCircle.numOfPixels()-1, (ufomoObject.bigCircle.numOfPixels()*3)/4);
+                return getRGB(ufomoObject.bigCircle, ufomoObject.bigCircle.numOfPixels()-1, (ufomoObject.bigCircle.numOfPixels()*3)/4, brightnessLevel);
 
             case "D16":
-                RGBColor[] colors1 = getRGB(ufomoObject.mediumCircle, (ufomoObject.mediumCircle.numOfPixels()*11)/12, ufomoObject.mediumCircle.numOfPixels()-1);
-                RGBColor[] colors2 = getRGB(ufomoObject.mediumCircle, 0, (ufomoObject.mediumCircle.numOfPixels()*3)/12-1);
+                RGBColor[] colors1 = getRGB(ufomoObject.mediumCircle, (ufomoObject.mediumCircle.numOfPixels()*11)/12, ufomoObject.mediumCircle.numOfPixels()-1, brightnessLevel);
+                RGBColor[] colors2 = getRGB(ufomoObject.mediumCircle, 0, (ufomoObject.mediumCircle.numOfPixels()*3)/12-1, brightnessLevel);
                 return connect(colors1, colors2);
 
             case "D17":
-                return getRGB(ufomoObject.mediumCircle, (ufomoObject.mediumCircle.numOfPixels()*11)/12-1, (ufomoObject.mediumCircle.numOfPixels()*7)/12);
+                return getRGB(ufomoObject.mediumCircle, (ufomoObject.mediumCircle.numOfPixels()*11)/12-1, (ufomoObject.mediumCircle.numOfPixels()*7)/12, brightnessLevel);
 
             case "D18":
-                return getRGB(ufomoObject.smallCircle, ufomoObject.smallCircle.numOfPixels()/2-1, 0);
+                return getRGB(ufomoObject.smallCircle, ufomoObject.smallCircle.numOfPixels()/2-1, 0, brightnessLevel);
 
             case "D19":
-                return getRGB(ufomoObject.smallCircle, ufomoObject.smallCircle.numOfPixels()-1, ufomoObject.smallCircle.numOfPixels()/2);
+                return getRGB(ufomoObject.smallCircle, ufomoObject.smallCircle.numOfPixels()/2, ufomoObject.smallCircle.numOfPixels()-1, brightnessLevel);
 
             case "D20":
-                return getRGB(ufomoObject.mediumCircle, (ufomoObject.mediumCircle.numOfPixels()*7)/12-1, (ufomoObject.mediumCircle.numOfPixels()*3)/12);
+                return getRGB(ufomoObject.mediumCircle, (ufomoObject.mediumCircle.numOfPixels()*7)/12-1, (ufomoObject.mediumCircle.numOfPixels()*3)/12, brightnessLevel);
 
 
             case "D21":
-                return getRGB(ufomoObject.bigCircle, (ufomoObject.bigCircle.numOfPixels()*2)/4-1, ufomoObject.bigCircle.numOfPixels()/4);
+                return getRGB(ufomoObject.bigCircle, (ufomoObject.bigCircle.numOfPixels()*2)/4-1, ufomoObject.bigCircle.numOfPixels()/4, brightnessLevel);
 
             case "D22":
-                return getRGB(ufomoObject.bigCircle, (ufomoObject.bigCircle.numOfPixels()*2)/4, (ufomoObject.bigCircle.numOfPixels()*3)/4-1);
+                return getRGB(ufomoObject.bigCircle, (ufomoObject.bigCircle.numOfPixels()*2)/4, (ufomoObject.bigCircle.numOfPixels()*3)/4-1, brightnessLevel);
 
         }
         return new RGBColor[0];
     }
 
     // returns rgb colors from the object. toIndex can be smaller than fromIndex so it will be a reversed array.
-    private RGBColor[] getRGB(LEDObject object, int fromIndex, int toIndex) {
+    private RGBColor[] getRGB(LEDObject object, int fromIndex, int toIndex, double brightnessLevel) {
         if (fromIndex < toIndex) {
             RGBColor[] colors = new RGBColor[toIndex-fromIndex+1];
             for (int i = 0; i < colors.length; i++) {
-                colors[i] = object.getColorRGB(fromIndex + i);
+                colors[i] = object.getColorRGB(fromIndex + i, brightnessLevel);
             }
             return colors;
         } else {
             RGBColor[] colors = new RGBColor[fromIndex-toIndex+1];
             for (int i = 0; i < colors.length; i++) {
-                colors[i] = object.getColorRGB(toIndex + i);
+                colors[i] = object.getColorRGB(fromIndex - i, brightnessLevel);
             }
             return colors;
         }

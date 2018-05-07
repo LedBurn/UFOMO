@@ -36,13 +36,11 @@ public class FreeStyleAnimations {
     }
 
 
-    public void apply(UFOMOObject ufomoObject, boolean newBeat, double percentToNextBeat) {
+    public void apply(UFOMOObject ufomoObject, boolean newBeat, boolean isOn, double percentToNextBeat, int[] eq) {
 
         long currentTime = System.currentTimeMillis();
         int currentCycleNum = getCycleNum(currentTime, currentAnimationStartTime);
         int nextCycleNum = getCycleNum(currentTime, nextAnimationStartTime);
-        System.out.println("current cycle - " + currentCycleNum + "             next cycle - " + nextCycleNum);
-
 
         if (currentAnimation == null) { // fresh start
             System.out.println("New Animation - fresh start");
@@ -75,13 +73,13 @@ public class FreeStyleAnimations {
 
         if (nextAnimation == null) { // apply current only
             if (newBeat) currentAnimation.newBeat();
-            currentAnimation.apply(((currentTime - currentAnimationStartTime) % CYCLE_TIME) / CYCLE_TIME, newBeat);
+            currentAnimation.apply(((currentTime - currentAnimationStartTime) % CYCLE_TIME) / CYCLE_TIME, newBeat, isOn, eq);
             ufomoObject.copy(currentAnimation.ufomoObject);
         } else { // apply both animations
             if (newBeat) currentAnimation.newBeat();
             if (newBeat) nextAnimation.newBeat();
-            currentAnimation.apply(((currentTime - currentAnimationStartTime) % CYCLE_TIME) / CYCLE_TIME, newBeat);
-            nextAnimation.apply(((currentTime - nextAnimationStartTime) % CYCLE_TIME) / CYCLE_TIME, newBeat);
+            currentAnimation.apply(((currentTime - currentAnimationStartTime) % CYCLE_TIME) / CYCLE_TIME, newBeat, isOn, eq);
+            nextAnimation.apply(((currentTime - nextAnimationStartTime) % CYCLE_TIME) / CYCLE_TIME, newBeat, isOn, eq);
             double fadePercent = 1 - ((currentTime - currentAnimationStartTime) % CYCLE_TIME) / CYCLE_TIME;
             //System.out.println("fadePercent-"+fadePercent);
             ufomoObject.mergeAndCopy(currentAnimation.ufomoObject, nextAnimation.ufomoObject, fadePercent);

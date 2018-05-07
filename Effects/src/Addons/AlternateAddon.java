@@ -19,7 +19,7 @@ public class AlternateAddon extends Addon {
     }
 
     @Override
-    public void change(LEDObject ledObject, double level, boolean newBeat) {
+    public void change(LEDObject ledObject, double level, boolean newBeat, boolean isOn,int[] eq) {
 
         if (newBeat) {
             double temp = hue1;

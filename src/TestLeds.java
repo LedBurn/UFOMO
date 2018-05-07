@@ -59,8 +59,8 @@ public class TestLeds {
         }
 
         for (int i = 0; i < 8; i++) {
-            int startPoint1 = 10 + i * ufomoObject.octagon[i].numOfPixels();
-            int startPoint2 = (i + 1) * ufomoObject.octagon[i].numOfPixels() - 10;
+            int startPoint1 = 2 + i * ufomoObject.octagon[i].numOfPixels();
+            int startPoint2 = (i + 1) * ufomoObject.octagon[i].numOfPixels() - 2;
             if (frameNum / speed >= startPoint1 && frameNum / speed - startPoint1 < ufomoObject.lines[i*2].numOfPixels()) {
                 ufomoObject.lines[i*2].setColor(frameNum / speed - startPoint1, color);
             }

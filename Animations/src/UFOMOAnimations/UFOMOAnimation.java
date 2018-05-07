@@ -16,10 +16,10 @@ public abstract class UFOMOAnimation {
     protected abstract void configAnimations();
     protected abstract void newBeat();
 
-    public void apply(double timePercent, boolean newBeat) {
+    public void apply(double timePercent, boolean newBeat, boolean isOn, int[] eq) {
 
         for (Animation animation : animations){
-            animation.apply(timePercent,newBeat);
+            animation.apply(timePercent,newBeat, isOn, eq);
         }
     }
 }

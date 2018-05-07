@@ -17,7 +17,11 @@ public class HSBColor {
     }
 
     public RGBColor toRGBColor() {
-        int rgbAsInt = toRGBInt();
+        return toRGBColor(1.0);
+    }
+
+    public RGBColor toRGBColor(double brightnessLevel) {
+        int rgbAsInt = toRGBInt(brightnessLevel);
         RGBColor rgb = new RGBColor();
         rgb.r = (byte)((rgbAsInt>>16)&0xFF);
         rgb.g = (byte)((rgbAsInt>>8)&0xFF);
@@ -26,7 +30,11 @@ public class HSBColor {
     }
 
     public int toRGBInt() {
-       return Color.HSBtoRGB((float)hue, (float)saturation, (float)(brightness * brightness));
+        return toRGBInt(1.0);
+    }
+
+    public int toRGBInt(double brightnessLevel) {
+        return Color.HSBtoRGB((float)hue, (float)saturation, (float)(brightness * brightness * brightnessLevel));
     }
 
     // TODO: does java supports it in some way?
