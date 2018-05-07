@@ -50,9 +50,9 @@ public class Controller {
 
             int msgIndex=24;
             for(RGBColor color : segmentData.getData()) {
-                msgContent[msgIndex++] = color.g;
                 msgContent[msgIndex++] = color.r;
                 msgContent[msgIndex++] = color.b;
+                msgContent[msgIndex++] = color.g;
             }
 
             DatagramPacket sendPacket = new DatagramPacket(msgContent, msgContent.length, ipAddress, 2000);

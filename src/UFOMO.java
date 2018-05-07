@@ -1,8 +1,9 @@
+import com.pi4j.io.gpio.*;
+
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
-import java.net.UnknownHostException;
 
 public class UFOMO {
 
@@ -29,7 +30,7 @@ public class UFOMO {
 
     private int brightnessLevel = 100; // 0 - 100
 
-    public UFOMO(boolean runSimulator) {
+    public UFOMO(boolean runSimulator, boolean runGPIO) {
         network = new UFOMONetwork();
         ufomoObject = new UFOMOObject();
         simulator = runSimulator ? new Simulator() : null;
@@ -37,6 +38,7 @@ public class UFOMO {
         tester = new TestLeds();
         freeStyleAnimations = new FreeStyleAnimations();
         startListening();
+        if (runGPIO) gpio();
     }
 
     public void run() {
@@ -162,5 +164,44 @@ public class UFOMO {
             int value = buf[i+1];
             eq[i] = value;
         }
+    }
+
+    private void gpio() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // create gpio controller
+                System.out.println("--> create gpio controller");
+                final GpioController gpio = GpioFactory.getInstance();
+
+                // provision gpio pin #01 as an output pin and turn on
+                System.out.println("--> provision gpio pin #07 as an output pin and turn on");
+                final GpioPinDigitalOutput pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_23, "MyLED", PinState.HIGH);
+
+                // set shutdown state for this pin
+//                pin.setShutdownOptions(true, PinState.LOW);
+
+                while (true) {
+                    pin.high();
+                    System.out.println("--> GPIO state should be: OFF");
+
+                    try {
+                        Thread.sleep(2500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    // turn off gpio pin #01
+                    pin.low();
+                    System.out.println("--> GPIO state should be: ON");
+
+                    try {
+                        Thread.sleep(2500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
     }
 }

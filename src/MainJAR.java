@@ -1,7 +1,7 @@
 public class MainJAR {
 
     public static void main(String[] args) {
-        UFOMO ufomo = new UFOMO(false);
+        UFOMO ufomo = new UFOMO(false, true);
         ufomo.run();
     }
 }

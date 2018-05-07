@@ -1,1 +1,0 @@
-java -Xmx200m -jar C:\Users\Bigi\Documents\GitHub\UFOMO\out\artifacts\MakeEverythingOK_jar\UFOMO.jar

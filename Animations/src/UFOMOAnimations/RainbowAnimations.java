@@ -22,7 +22,10 @@ public class RainbowAnimations {
 
             for (int i = 0; i < ufomoObject.lines.length; i++) {
                 animations.add(new Animation(ufomoObject.lines[i], Coloring.RAINBOW_REVERESED_COLORING,
-                        new Addon[] {new ConstCyclicMoveAddon(true)}));
+                        new Addon[] {
+                                new ConstCyclicMoveAddon(true),
+                                new EqAddon(i/2)
+                        }));
             }
 
             for (int i = 0; i < ufomoObject.beam.length; i++) {

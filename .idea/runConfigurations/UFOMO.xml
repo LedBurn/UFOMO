@@ -14,7 +14,7 @@
     <envs />
     <method>
       <option name="BuildArtifacts" enabled="true">
-        <artifact name="MakeEverythingOK:jar" />
+        <artifact name="UFOMO:jar" />
       </option>
     </method>
   </configuration>

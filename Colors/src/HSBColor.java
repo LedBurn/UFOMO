@@ -37,6 +37,10 @@ public class HSBColor {
         return Color.HSBtoRGB((float)hue, (float)saturation, (float)(brightness * brightness * brightnessLevel));
     }
 
+    public static HSBColor copy(HSBColor color) {
+        return new HSBColor(color.hue, color.saturation, color.brightness);
+    }
+
     // TODO: does java supports it in some way?
     public void copyFromOther(HSBColor other) {
         hue = other.hue;

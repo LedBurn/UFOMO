@@ -1,3 +1,5 @@
 Manifest-Version: 1.0
 Main-Class: MainJAR
+Class-Path: /opt/pi4j/lib/pi4j-core.jar /opt/pi4j/lib/pi4j-device.jar /opt/pi4j/lib/pi4j-gpio-extension.jar
+
 
