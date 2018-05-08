@@ -64,8 +64,11 @@ public class RainbowAnimations {
                 animations.add(new Animation(ufomoObject.lines[i], Coloring.RAINBOW_COLORING, addons));
             }
 
+            HSBColor color = new HSBColor(Math.random(), 0.0, 0.4);
             for (int i = 0; i < ufomoObject.beam.length; i++) {
-                animations.add(new Animation(ufomoObject.beam[i], Coloring.RAINBOW_COLORING, addons1));
+                animations.add(new Animation(ufomoObject.beam[i],
+                        new BlurColoring(color, ufomoObject.beam[i].numOfPixels()),
+                        new Addon[] {new ConstCyclicMoveAddon(false)},3));
             }
 
             Coloring octagonColoring = new ConstColoring(new HSBColor(0,1.0,1.0));
@@ -133,9 +136,11 @@ public class RainbowAnimations {
                         new Addon[] {new ConstCyclicMoveAddon(true)}));
             }
 
+            HSBColor color = new HSBColor(Math.random(), 0.0, 0.4);
             for (int i = 0; i < ufomoObject.beam.length; i++) {
-                animations.add(new Animation(ufomoObject.beam[i], Coloring.RAINBOW_COLORING,
-                        new Addon[] {new ConstCyclicMoveAddon(false)}));
+                animations.add(new Animation(ufomoObject.beam[i],
+                        new BlurColoring(color, ufomoObject.beam[i].numOfPixels()),
+                        new Addon[] {new ConstCyclicMoveAddon(false)},3));
             }
 
             Coloring constColoring = new ConstColoring(new HSBColor(0,1.0,1.0));

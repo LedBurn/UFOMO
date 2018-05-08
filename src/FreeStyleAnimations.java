@@ -44,6 +44,8 @@ public class FreeStyleAnimations {
             animation = getAnimation(highAnimations[(int)Math.floor(Math.random() * highAnimations.length)]);
         } else if (type != null && type.equals("Low")) {
             animation = getAnimation(lowAnimations[(int)Math.floor(Math.random() * lowAnimations.length)]);
+        } else if (type != null) {
+            animation = getAnimation(type) != null ? getAnimation(type) : animation;
         }
 
         currentAnimation = animation;

@@ -30,6 +30,13 @@ public class UFOMO {
 
     private int brightnessLevel = 100; // 0 - 100
 
+    private String gpioState = "off"; // off, on, on1, on2, on3, normal
+    private long gpioLastSent = 0;
+    private boolean projector1 = false;
+    private boolean projector2 = false;
+    private boolean projector3 = false;
+
+
     public UFOMO(boolean runSimulator, boolean runGPIO) {
         network = new UFOMONetwork();
         ufomoObject = new UFOMOObject();
@@ -63,6 +70,12 @@ public class UFOMO {
                     double percentToNextBeat = ((double)(currentTime - lastBeatTime)) / (nextBeatTime - lastBeatTime);
                     freeStyleAnimations.apply(ufomoObject, newBeat, onBeat, percentToNextBeat, eq);
                 }
+                if (newBeat) {
+                    projector1 = Math.random() > 0.5;
+                    projector2 = Math.random() > 0.5;
+                    projector3 = Math.random() > 0.5;
+                }
+
                 newBeat = false;
 
                 // show in simulator
@@ -91,15 +104,39 @@ public class UFOMO {
             return;
         }
 
-        // testing
-        if (userCode >= 90 && userCode <= 99) {
-            tester.startWithCode(userCode);
-            isTesting = true;
-        }
+        System.out.println("Handle Code: "+ userCode);
 
         // animations
         if (userCode == 1) {
             isTesting = false;
+            gpioState = "normal";
+        }
+
+        // gpio
+        if (userCode == 40) {
+            gpioState = "off";
+        }
+        if (userCode == 41) {
+            gpioState = "normal";
+        }
+        if (userCode == 45) {
+            gpioState = "on1";
+        }
+        if (userCode == 46) {
+            gpioState = "on2";
+        }
+        if (userCode == 47) {
+            gpioState = "on3";
+        }
+        if (userCode == 48) {
+            gpioState = "on";
+        }
+
+        // testing
+        if (userCode >= 90 && userCode <= 99) {
+            tester.startWithCode(userCode);
+            isTesting = true;
+            gpioState = "off";
         }
 
         // brightness
@@ -116,6 +153,7 @@ public class UFOMO {
             brightnessLevel = Math.min(brightnessLevel + 10, 100);
         }
 
+        // random animation
         if (userCode == 30) {
             freeStyleAnimations.newAnimation("Low");
         }
@@ -125,6 +163,59 @@ public class UFOMO {
         if (userCode == 32) {
             freeStyleAnimations.newAnimation("High");
         }
+
+
+        // animations
+        if (userCode == 101) {
+            freeStyleAnimations.newAnimation("Alternate1");
+        }
+        if (userCode == 102) {
+            freeStyleAnimations.newAnimation("Alternate2");
+        }
+
+        if (userCode == 103) {
+            freeStyleAnimations.newAnimation("Dandoo1");
+        }
+        if (userCode == 104) {
+            freeStyleAnimations.newAnimation("Dandoo2");
+        }
+        if (userCode == 105) {
+            freeStyleAnimations.newAnimation("Dandoo3");
+        }
+
+        if (userCode == 106) {
+            freeStyleAnimations.newAnimation("Confetti1");
+        }
+        if (userCode == 107) {
+            freeStyleAnimations.newAnimation("Confetti2");
+        }
+
+        if (userCode == 108) {
+            freeStyleAnimations.newAnimation("EQ1");
+        }
+        if (userCode == 109) {
+            freeStyleAnimations.newAnimation("EQ2");
+        }
+        if (userCode == 120) {
+            freeStyleAnimations.newAnimation("EQ3");
+        }
+        if (userCode == 121) {
+            freeStyleAnimations.newAnimation("EQ4");
+        }
+
+        if (userCode == 123) {
+            freeStyleAnimations.newAnimation("Rainbow1");
+        }
+        if (userCode == 124) {
+            freeStyleAnimations.newAnimation("Rainbow2");
+        }
+        if (userCode == 125) {
+            freeStyleAnimations.newAnimation("Rainbow3");
+        }
+        if (userCode == 126) {
+            freeStyleAnimations.newAnimation("Rainbow4");
+        }
+
 
         userCode = -1;
     }
@@ -195,29 +286,101 @@ public class UFOMO {
 
                 // provision gpio pin #01 as an output pin and turn on
                 System.out.println("--> provision gpio pin #07 as an output pin and turn on");
-                final GpioPinDigitalOutput pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_23, "MyLED", PinState.HIGH);
+                final GpioPinDigitalOutput pin7 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_07, "7", PinState.HIGH);
+                final GpioPinDigitalOutput pin23 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_23, "23", PinState.HIGH);
+                final GpioPinDigitalOutput pin26 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_26, "26", PinState.HIGH);
 
-                // set shutdown state for this pin
-//                pin.setShutdownOptions(true, PinState.LOW);
+                pin7.high();
+                pin23.high();
+                pin26.high();
+
+                boolean state7 = false;
+                boolean state23 = false;
+                boolean state26 = false;
 
                 while (true) {
-                    pin.high();
-                    System.out.println("--> GPIO state should be: OFF");
+                    if (System.currentTimeMillis() - gpioLastSent < 250) continue;
 
-                    try {
-                        Thread.sleep(2500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    if (gpioState.equals("off")) {
+                        if (state7) {
+                            pin7.high();
+                            state7 = false;
+                        }
+                        if (state23) {
+                            pin23.high();
+                            state23 = false;
+                        }
+                        if (state26) {
+                            pin26.high();
+                            state26 = false;
+                        }
+                    } else if (gpioState.equals("on")) {
+                        if (!state7) {
+                            pin7.low();
+                            state7 = true;
+                        }
+                        if (!state23) {
+                            pin23.low();
+                            state23 = true;
+                        }
+                        if (!state26) {
+                            pin26.low();
+                            state26 = true;
+                        }
+                    } else if (gpioState.equals("on1")) {
+                        if (!state7) {
+                            pin7.low();
+                            state7 = true;
+                        }
+                        if (state23) {
+                            pin23.high();
+                            state23 = false;
+                        }
+                        if (state26) {
+                            pin26.high();
+                            state26 = false;
+                        }
+                    } else if (gpioState.equals("on2")) {
+                        if (state7) {
+                            pin7.high();
+                            state7 = false;
+                        }
+                        if (!state23) {
+                            pin23.low();
+                            state23 = true;
+                        }
+                        if (state26) {
+                            pin26.high();
+                            state26 = false;
+                        }
+                    } else if (gpioState.equals("on3")) {
+                        if (state7) {
+                            pin7.high();
+                            state7 = false;
+                        }
+                        if (state23) {
+                            pin23.high();
+                            state23 = false;
+                        }
+                        if (!state26) {
+                            pin26.low();
+                            state26 = true;
+                        }
+                    } else if (gpioState.equals("normal")) {
+                        if (state7 != projector1) {
+                            pin7.toggle();
+                            state7 = projector1;
+                        }
 
-                    // turn off gpio pin #01
-                    pin.low();
-                    System.out.println("--> GPIO state should be: ON");
+                        if (state23 != projector2) {
+                            pin23.toggle();
+                            state23 = projector2;
+                        }
 
-                    try {
-                        Thread.sleep(2500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        if (state26 != projector3) {
+                            pin26.toggle();
+                            state26 = projector3;
+                        }
                     }
                 }
             }

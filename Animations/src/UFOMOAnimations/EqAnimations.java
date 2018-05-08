@@ -42,7 +42,7 @@ public class EqAnimations {
             for (int i = 0; i < ufomoObject.beam.length; i++) {
                 animations.add(new Animation(ufomoObject.beam[i],
                         new BlurColoring(color, ufomoObject.beam[i].numOfPixels()),
-                        new Addon[] {new ConstCyclicMoveAddon(false)}));
+                        new Addon[] {new ConstCyclicMoveAddon(false)},3));
             }
         }
     }
@@ -86,7 +86,7 @@ public class EqAnimations {
             for (int i = 0; i < ufomoObject.beam.length; i++) {
                 animations.add(new Animation(ufomoObject.beam[i],
                         new BlurColoring(color, ufomoObject.beam[i].numOfPixels()),
-                        new Addon[] {new ConstCyclicMoveAddon(false)}));
+                        new Addon[] {new ConstCyclicMoveAddon(false)},3));
             }
         }
     }
