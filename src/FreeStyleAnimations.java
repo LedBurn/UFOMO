@@ -37,6 +37,23 @@ public class FreeStyleAnimations {
         return getAnimation(animationName);
     }
 
+    public void newAnimation(String type) {
+        System.out.println("New Animation - code");
+        UFOMOAnimation animation = randomNewAnimation();
+        if (type != null && type.equals("High")) {
+            animation = getAnimation(highAnimations[(int)Math.floor(Math.random() * highAnimations.length)]);
+        } else if (type != null && type.equals("Low")) {
+            animation = getAnimation(lowAnimations[(int)Math.floor(Math.random() * lowAnimations.length)]);
+        }
+
+        currentAnimation = animation;
+        currentAnimationStartTime = System.currentTimeMillis();
+        nextAnimation = null;
+        nextAnimationStartTime = 0;
+
+
+    }
+
     private UFOMOAnimation getAnimation(String name) {
         switch (name) {
             case "Rainbow1": return new RainbowAnimations.RainbowAnimation1(); // eq separate

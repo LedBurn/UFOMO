@@ -26,7 +26,11 @@ public class DandooAnimation extends Animation {
     @Override
     public void apply(double level, boolean newBeat, boolean isOn, int[] eq) {
 //        if (newBeat) reversed = !reversed;
-            if (eq[7] / 128.0 > 0.8)  reversed = !reversed;
+        if (eq[7] / 128.0 > 0.8) {
+//            System.out.println("new spike");
+            reversed = !reversed;
+        }
+
         for (int i = 0; i < ledObject.numOfPixels(); i++) {
             ledObject.setColor(i, HSBColor.BLACK);
         }

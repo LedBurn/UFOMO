@@ -81,6 +81,12 @@ public class UFOMO {
     }
 
     private void handleUserCode() {
+        if (System.currentTimeMillis() - lastEqStatus > 2000) {
+            for (int i = 0; i < 8; i++) {
+                eq[i] = 1;
+            }
+        }
+
         if (userCode < 0) {
             return;
         }
@@ -110,9 +116,20 @@ public class UFOMO {
             brightnessLevel = Math.min(brightnessLevel + 10, 100);
         }
 
+        if (userCode == 30) {
+            freeStyleAnimations.newAnimation("Low");
+        }
+        if (userCode == 31) {
+            freeStyleAnimations.newAnimation(null);
+        }
+        if (userCode == 32) {
+            freeStyleAnimations.newAnimation("High");
+        }
 
         userCode = -1;
     }
+
+    private long lastEqStatus = 0;
 
     private void startListening() {
         new Thread(new Runnable() {
@@ -164,6 +181,7 @@ public class UFOMO {
             int value = buf[i+1];
             eq[i] = value;
         }
+        lastEqStatus = System.currentTimeMillis();
 //        System.out.println("eq="+eq[7]);
     }
 
