@@ -27,7 +27,7 @@ public class DandooAnimations {
             }
 
             for (int i = 0; i < ufomoObject.octagon.length; i++) {
-                animations.add(new DandooAnimation(ufomoObject.octagon[i],2, false));
+                animations.add(new DandooAnimation(ufomoObject.octagon[i],1, false));
             }
         }
     }

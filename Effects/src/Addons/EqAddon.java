@@ -1,4 +1,4 @@
-// show only the first leds accrdoing to the eq
+// show only the first leds according to the eq
 public class EqAddon extends Addon {
 
     private int keepMax = 0;

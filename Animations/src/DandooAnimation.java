@@ -2,9 +2,10 @@
 public class DandooAnimation extends Animation {
 
     private int numOfPoints = 16 * 2;
-    private int tailLength = 30;
+    private int tailLength = 1;
     private boolean addBackground = true;
-    private final int[] points;
+    private final double[] points;
+    private boolean reversed = false;
 
     public DandooAnimation(LEDObject ledObject, int numOfPoints, boolean addBackground) {
         this(ledObject, numOfPoints, addBackground, new Addon[]{});
@@ -14,9 +15,9 @@ public class DandooAnimation extends Animation {
         super(ledObject,null, addons);
         this.numOfPoints = numOfPoints;
         this.addBackground = addBackground;
-        tailLength = addBackground ? 3 : 7;
+        tailLength = addBackground ? 1 : 2;
 
-        points = new int[numOfPoints];
+        points = new double[numOfPoints];
         for (int i = 0; i < numOfPoints; i++) {
             points[i] = i * ledObject.numOfPixels() / numOfPoints;
         }
@@ -24,35 +25,47 @@ public class DandooAnimation extends Animation {
 
     @Override
     public void apply(double level, boolean newBeat, boolean isOn, int[] eq) {
+//        if (newBeat) reversed = !reversed;
+            if (eq[7] / 128.0 > 0.8)  reversed = !reversed;
         for (int i = 0; i < ledObject.numOfPixels(); i++) {
             ledObject.setColor(i, HSBColor.BLACK);
         }
 
+
         for (int i = 0; i < numOfPoints; i++) {
-            int point = points[i];
-            if (i % 2 == 0) {
-                point += level * 2 * ledObject.numOfPixels() / numOfPoints;
+            // update point
+            double point = points[i];
+            if (reversed) {
+                if (i % 2 == 0) {
+                    point -=  0.75;
+                } else {
+                    point +=  0.75;
+                }
             } else {
-                point -= level * 2 * ledObject.numOfPixels() / numOfPoints;
+                if (i % 2 == 0) {
+                    point +=  0.75;
+                } else {
+                    point -=  0.75;
+                }
             }
+            points[i] = point;
 
             // tail
             for (int j = 0; j < tailLength; j++) {
-                int tail = point;
-                if (i % 2 == 0) {
-                    tail -= j + 1;
-                } else {
-                    tail += j + 1;
-                }
+                int tailIndex1 = (int)Math.floor(point) + j + 1;
+                int tailIndex2 = (int)Math.floor(point) - j - 1;
                 double tailLevel = 1 - j * 1.0/tailLength;
 
-                if (ledObject.getColor(fixPoint(tail)).brightness < tailLevel) {
-                    ledObject.setColor(fixPoint(tail), new HSBColor(level, 1, tailLevel));
+                if (ledObject.getColor(fixPoint(tailIndex1)).brightness < tailLevel) {
+                    ledObject.setColor(fixPoint(tailIndex1), new HSBColor(level, 1, tailLevel));
+                }
+                if (ledObject.getColor(fixPoint(tailIndex2)).brightness < tailLevel) {
+                    ledObject.setColor(fixPoint(tailIndex2), new HSBColor(level, 1, tailLevel));
                 }
             }
 
             // point
-            ledObject.setColor(fixPoint(point), new HSBColor(level,1,1));
+            ledObject.setColor(fixPoint((int)Math.floor(point)), new HSBColor(level,1,1));
         }
 
 

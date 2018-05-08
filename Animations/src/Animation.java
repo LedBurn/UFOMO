@@ -5,6 +5,10 @@ public class Animation {
     protected LEDObject ledObject;
     private Coloring coloring;
     protected Addon[] addons;
+    private int speed = 1;
+
+    private int cycleNum = 0;
+    private double lastLevel = 0;
 
     public Animation(LEDObject ledObject, Coloring coloring, Addon[] addons) {
         this.ledObject = ledObject;
@@ -12,7 +16,17 @@ public class Animation {
         this.addons = addons;
     }
 
+    public Animation(LEDObject ledObject, Coloring coloring, Addon[] addons, int speed) {
+        this.ledObject = ledObject;
+        this.coloring = coloring;
+        this.addons = addons;
+        this.speed = speed;
+    }
+
     public void apply(double level, boolean newBeat, boolean isOn, int[] eq) {
+        if (level < lastLevel) cycleNum++;
+        if (cycleNum == speed) cycleNum = 0;
+        double newLevel = (level + cycleNum) / speed;
 
         // basic coloring
         if (coloring != null) {
@@ -21,7 +35,9 @@ public class Animation {
 
         // add ons
         for (Addon addon : addons) {
-            addon.change(ledObject, level, newBeat, isOn, eq);
+            addon.change(ledObject, newLevel, newBeat, isOn, eq);
         }
+
+        lastLevel = level;
     }
 }

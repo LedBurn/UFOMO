@@ -49,7 +49,7 @@ public class UFOMO {
                 handleUserCode();
 
                 // apply animations
-                isTesting = false;
+//                isTesting = false;
                 if (isTesting) {
                     tester.apply(ufomoObject);
 
@@ -129,7 +129,7 @@ public class UFOMO {
 
                         int type = buf[0];
                         int value = buf[1];
-                        //System.out.println("Received type=" + type + " value=" + value);
+//                        System.out.println("Received type=" + type + " value=" + value);
 
                         if (type == 1) { // beat
                             handleBeatInput(value>0);
@@ -164,6 +164,7 @@ public class UFOMO {
             int value = buf[i+1];
             eq[i] = value;
         }
+//        System.out.println("eq="+eq[7]);
     }
 
     private void gpio() {

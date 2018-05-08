@@ -10,29 +10,52 @@ public class FreeStyleAnimations {
     private UFOMOAnimation currentAnimation;
     private UFOMOAnimation nextAnimation;
 
-    private UFOMOAnimation[] highAnimations = {
-            RainbowAnimations.RAINBOW_ANIMATION1,
-            RainbowAnimations.RAINBOW_ANIMATION2,
-            RainbowAnimations.RAINBOW_ANIMATION3,
-            RainbowAnimations.RAINBOW_ANIMATION4,
-            DandooAnimations.DANDOO_ANIMATION2,
-            AlternateAnimations.ALTERNATE_ANIMATION2
+    private String[] highAnimations = {
+            "Rainbow1", "Rainbow2","Rainbow3","Rainbow4",
+            "Dandoo2",
+            "Alternate1","Alternate2",
+            "EQ1", "EQ2", "EQ3", "EQ4"
     };
-    private UFOMOAnimation[] lowAnimations = {
-            DandooAnimations.DANDOO_ANIMATION1,
-            DandooAnimations.DANDOO_ANIMATION3
+    private String[] lowAnimations = {
+            "Dandoo1", "Dandoo3",
+            "Confetti1", "Confetti2"
     };
 
 
     // all is random
     private UFOMOAnimation randomNewAnimation() {
-        return RoundRobinAnimations.ROUND_ROBIN_ANIMATION1;
+        String animationName;
+        int num = (int)Math.floor(Math.random() * (highAnimations.length + lowAnimations.length));
+        if (num < highAnimations.length) {
+            animationName = highAnimations[num];
+        } else {
+            animationName = lowAnimations[num - highAnimations.length];
+        }
+//        animationName = "Dandoo3";
 
-//        int num = (int)Math.floor(Math.random() * highAnimations.length + lowAnimations.length);
-//        if (num < highAnimations.length) {
-//            return highAnimations[num];
-//        }
-//        return lowAnimations[num - highAnimations.length];
+        System.out.println("New Animation - " + animationName);
+        return getAnimation(animationName);
+    }
+
+    private UFOMOAnimation getAnimation(String name) {
+        switch (name) {
+            case "Rainbow1": return new RainbowAnimations.RainbowAnimation1(); // eq separate
+            case "Rainbow2": return new RainbowAnimations.RainbowAnimation2(); // eq
+            case "Rainbow3": return new RainbowAnimations.RainbowAnimation3();
+            case "Rainbow4": return new RainbowAnimations.RainbowAnimation4();
+            case "Dandoo1": return new DandooAnimations.DandooUFOMOAnimation1();
+            case "Dandoo2": return new DandooAnimations.DandooUFOMOAnimation2();
+            case "Dandoo3": return new DandooAnimations.DandooUFOMOAnimation3();
+            case "Alternate1": return new AlternateAnimations.AlternateAnimation1(); // beat
+            case "Alternate2": return new AlternateAnimations.AlternateAnimation2(); // beat
+            case "Confetti1" : return new ConfettiAnimations.ConfettiAnimation1();
+            case "Confetti2" : return new ConfettiAnimations.ConfettiAnimation2(); // beat
+            case "EQ1": return new EqAnimations.EqAnimation1(); // eq separate
+            case "EQ2": return new EqAnimations.EqAnimation2(); // eq
+            case "EQ3": return new EqAnimations.EqAnimation3(); // eq separate
+            case "EQ4": return new EqAnimations.EqAnimation4(); // eq separate
+        }
+        return null;
     }
 
 

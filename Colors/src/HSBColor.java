@@ -14,6 +14,11 @@ public class HSBColor {
         this.hue = hue;
         this.saturation = saturation;
         this.brightness = brightness;
+
+        while (this.hue < 0) this.hue += 1;
+        while (this.hue >=1) this.hue -= 1;
+        this.saturation = Math.max(0.0, Math.min(1.0, this.saturation));
+        this.brightness = Math.max(0.0, Math.min(1.0, this.brightness));
     }
 
     public RGBColor toRGBColor() {
