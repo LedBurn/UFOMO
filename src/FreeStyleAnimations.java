@@ -14,11 +14,14 @@ public class FreeStyleAnimations {
             "Rainbow1", "Rainbow2","Rainbow3","Rainbow4",
             "Dandoo2",
             "Alternate1","Alternate2",
-            "EQ1", "EQ2", "EQ3", "EQ4"
+            "EQ1", "EQ2", "EQ3", "EQ4",
+            "EQHue1", "EQHue2",
+            "Spikes3"
     };
     private String[] lowAnimations = {
             "Dandoo1", "Dandoo3",
-            "Confetti1", "Confetti2"
+            "Confetti1", "Confetti2",
+            "Spikes1", "Spikes2", "Spikes4"
     };
 
 
@@ -31,7 +34,7 @@ public class FreeStyleAnimations {
         } else {
             animationName = lowAnimations[num - highAnimations.length];
         }
-//        animationName = "Dandoo3";
+//        animationName = "Spikes4";
 
         System.out.println("New Animation - " + animationName);
         return getAnimation(animationName);
@@ -62,9 +65,9 @@ public class FreeStyleAnimations {
             case "Rainbow2": return new RainbowAnimations.RainbowAnimation2(); // eq
             case "Rainbow3": return new RainbowAnimations.RainbowAnimation3();
             case "Rainbow4": return new RainbowAnimations.RainbowAnimation4();
-            case "Dandoo1": return new DandooAnimations.DandooUFOMOAnimation1();
-            case "Dandoo2": return new DandooAnimations.DandooUFOMOAnimation2();
-            case "Dandoo3": return new DandooAnimations.DandooUFOMOAnimation3();
+            case "Dandoo1": return new DandooAnimations.DandooUFOMOAnimation1(); // eq
+            case "Dandoo2": return new DandooAnimations.DandooUFOMOAnimation2(); // eq
+            case "Dandoo3": return new DandooAnimations.DandooUFOMOAnimation3(); // eq
             case "Alternate1": return new AlternateAnimations.AlternateAnimation1(); // beat
             case "Alternate2": return new AlternateAnimations.AlternateAnimation2(); // beat
             case "Confetti1" : return new ConfettiAnimations.ConfettiAnimation1();
@@ -73,6 +76,12 @@ public class FreeStyleAnimations {
             case "EQ2": return new EqAnimations.EqAnimation2(); // eq
             case "EQ3": return new EqAnimations.EqAnimation3(); // eq separate
             case "EQ4": return new EqAnimations.EqAnimation4(); // eq separate
+            case "EQHue1": return new EQHueAnimations.EqHueAnimation1(); // eq;
+            case "EQHue2": return new EQHueAnimations.EqHueAnimation2(); // eq;
+            case "Spikes1": return new SpikesAnimations.SpikeAnimation1(); // beat;
+            case "Spikes2": return new SpikesAnimations.SpikeAnimation2(); // beat;
+            case "Spikes3": return new SpikesAnimations.SpikeAnimation3(); // beat;
+            case "Spikes4": return new SpikesAnimations.SpikeAnimation4(); // eq separate;
         }
         return null;
     }

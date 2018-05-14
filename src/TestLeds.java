@@ -19,15 +19,15 @@ public class TestLeds {
         ufomoObject.clear();
 
         switch (code) {
-            case 91: {
+            case 2: {
                 test(ufomoObject,1);
                 break;
             }
-            case 93: {
+            case 3: {
                 test(ufomoObject,3);
                 break;
             }
-            case 98: {
+            case 4: {
                 test(ufomoObject,8);
                 break;
             }

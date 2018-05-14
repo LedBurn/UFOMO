@@ -25,7 +25,7 @@ public class UFOMO {
 
     private int[] eq = new int[8];
 
-    private int userCode = 98;
+    private int userCode = 4;
     private boolean isTesting = true;
 
     private int brightnessLevel = 100; // 0 - 100
@@ -133,7 +133,7 @@ public class UFOMO {
         }
 
         // testing
-        if (userCode >= 90 && userCode <= 99) {
+        if (userCode >= 2 && userCode <= 4) {
             tester.startWithCode(userCode);
             isTesting = true;
             gpioState = "off";
@@ -164,8 +164,31 @@ public class UFOMO {
             freeStyleAnimations.newAnimation("High");
         }
 
-
         // animations
+        if (userCode == 93) {
+            freeStyleAnimations.newAnimation("Spikes1");
+        }
+
+        if (userCode == 94) {
+            freeStyleAnimations.newAnimation("Spikes2");
+        }
+
+        if (userCode == 95) {
+            freeStyleAnimations.newAnimation("Spikes3");
+        }
+
+        if (userCode == 96) {
+            freeStyleAnimations.newAnimation("Spikes4");
+        }
+
+        if (userCode == 97) {
+            freeStyleAnimations.newAnimation("EQHue1");
+        }
+
+        if (userCode == 98) {
+            freeStyleAnimations.newAnimation("EQHue2");
+        }
+
         if (userCode == 101) {
             freeStyleAnimations.newAnimation("Alternate1");
         }
