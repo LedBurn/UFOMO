@@ -25,7 +25,7 @@ public class UFOMO {
 
     private int[] eq = new int[8];
 
-    private int userCode = 4;
+    private int userCode = 1;
     private boolean isTesting = true;
 
     private int brightnessLevel = 100; // 0 - 100
@@ -67,6 +67,11 @@ public class UFOMO {
                         nextBeatTime = currentTime + 1000;
                         newBeat = true;
                     }
+
+
+//                    for (int i = 0; i < eq.length; i++) {
+//                        eq[i] = (int)Math.floor(Math.random() * 50) + 50;
+//                    }
                     double percentToNextBeat = ((double)(currentTime - lastBeatTime)) / (nextBeatTime - lastBeatTime);
                     freeStyleAnimations.apply(ufomoObject, newBeat, onBeat, percentToNextBeat, eq);
                 }

@@ -75,4 +75,40 @@ public class ConfettiAnimations {
             }
         }
     }
+
+    public static class ConfettiAnimation3 extends UFOMOAnimation {
+        @Override
+        protected void newBeat() {
+
+        }
+
+        @Override
+        protected void configAnimations() {
+            HSBColor color1 = new HSBColor(Math.random(),1.0, 1.0);
+            HSBColor color2 = new HSBColor(color1.hue + 0.1,1.0, 1.0);
+            HSBColor color3 = new HSBColor(color1.hue + 0.2,1.0, 1.0);
+
+            animations.add(new Animation(ufomoObject.bigCircle, new ConstColoring(color1),
+                    new Addon[] {new ConfettiAddon(ufomoObject.bigCircle.numOfPixels())}));
+            animations.add(new Animation(ufomoObject.mediumCircle, new ConstColoring(color1),
+                    new Addon[] {new ConfettiAddon(ufomoObject.mediumCircle.numOfPixels())}));
+            animations.add(new Animation(ufomoObject.smallCircle, new ConstColoring(color1),
+                    new Addon[] {new ConfettiAddon(ufomoObject.smallCircle.numOfPixels())}));
+
+            for (int i = 0; i < ufomoObject.lines.length; i++) {
+                animations.add(new Animation(ufomoObject.lines[i], new ConstColoring(color2),
+                        new Addon[] {new ConfettiAddon(ufomoObject.lines[i].numOfPixels())}));
+            }
+
+            for (int i = 0; i < ufomoObject.octagon.length; i++) {
+                animations.add(new Animation(ufomoObject.octagon[i], new ConstColoring(color3),
+                        new Addon[] {new ConfettiAddon(ufomoObject.octagon[i].numOfPixels())}));
+            }
+
+            for (int i = 0; i < ufomoObject.beam.length; i++) {
+                animations.add(new Animation(ufomoObject.beam[i], new ConstColoring(color3),
+                        new Addon[] {new ConfettiAddon(ufomoObject.beam[i].numOfPixels())}));
+            }
+        }
+    }
 }

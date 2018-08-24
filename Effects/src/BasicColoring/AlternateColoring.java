@@ -16,6 +16,12 @@ public class AlternateColoring extends Coloring {
         this.numOfPixels = 5;
     }
 
+    public AlternateColoring(HSBColor color1, int numOfPixels) {
+        this.color1 = color1;
+        this.color2 = new HSBColor(color1.hue + 0.5,1.0, 1.0);
+        this.numOfPixels = numOfPixels;
+    }
+
     public AlternateColoring(HSBColor color1, HSBColor color2, int numOfPixels) {
         this.color1 = color1;
         this.color2 = color2;
@@ -25,11 +31,15 @@ public class AlternateColoring extends Coloring {
     @Override
     public void color(LEDObject ledObject) {
         for (int i = 0; i < ledObject.numOfPixels(); i++) {
-            if ((i % numOfPixels) % 2 == 0) {
-                ledObject.setColor(i, color1);
-            } else {
-                ledObject.setColor(i, color2);
+            int locationInSegment = i % (2 * this.numOfPixels);
+            HSBColor color;
+            if(locationInSegment < this.numOfPixels) {
+                color = color1;
             }
+            else {
+                color = color2;
+            }
+            ledObject.setColor(i, color);
         }
     }
 }

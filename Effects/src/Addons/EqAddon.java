@@ -3,12 +3,22 @@ public class EqAddon extends Addon {
 
     private int keepMax = 0;
     private int eqIndex = 7;
+    private boolean reversed = false;
 
     public EqAddon() {
     }
 
     public EqAddon(int eqIndex) {
         this.eqIndex = eqIndex;
+    }
+
+    public EqAddon(boolean reversed) {
+        this.reversed = reversed;
+    }
+
+    public EqAddon(int eqIndex, boolean reversed) {
+        this.eqIndex = eqIndex;
+        this.reversed = reversed;
     }
 
     @Override
@@ -21,10 +31,10 @@ public class EqAddon extends Addon {
         }
         index = Math.max(index, keepMax);
         for (int i = 0; i < ledObject.numOfPixels(); i++) {
-            if (i>=index) {
+            if ((reversed && ledObject.numOfPixels()-i >= index) ||
+                    !reversed && i>=index) {
                 HSBColor color = ledObject.getColor(i);
-                // TODO - lower it;
-                color.brightness *= 0.3;
+                color.brightness *= 0.15;
             }
         }
     }

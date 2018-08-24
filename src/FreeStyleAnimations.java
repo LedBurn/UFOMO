@@ -14,14 +14,15 @@ public class FreeStyleAnimations {
             "Rainbow1", "Rainbow2","Rainbow3","Rainbow4",
             "Dandoo2",
             "Alternate1","Alternate2",
-            "EQ1", "EQ2", "EQ3", "EQ4",
+            "EQ1", "EQ2", "EQ3", "EQ4", "EQ5",
             "EQHue1", "EQHue2",
-            "Spikes3"
+            "Spikes3",
+            "Random1"
     };
     private String[] lowAnimations = {
             "Dandoo1", "Dandoo3",
-            "Confetti1", "Confetti2",
-            "Spikes1", "Spikes2", "Spikes4"
+            "Confetti1", "Confetti2", "Confetti3",
+            "Spikes1", "Spikes2", "Spikes4", "Spikes5"
     };
 
 
@@ -34,7 +35,7 @@ public class FreeStyleAnimations {
         } else {
             animationName = lowAnimations[num - highAnimations.length];
         }
-//        animationName = "Spikes4";
+//        animationName = "Random1";
 
         System.out.println("New Animation - " + animationName);
         return getAnimation(animationName);
@@ -72,16 +73,20 @@ public class FreeStyleAnimations {
             case "Alternate2": return new AlternateAnimations.AlternateAnimation2(); // beat
             case "Confetti1" : return new ConfettiAnimations.ConfettiAnimation1();
             case "Confetti2" : return new ConfettiAnimations.ConfettiAnimation2(); // beat
+            case "Confetti3" : return new ConfettiAnimations.ConfettiAnimation3(); // beat
             case "EQ1": return new EqAnimations.EqAnimation1(); // eq separate
             case "EQ2": return new EqAnimations.EqAnimation2(); // eq
             case "EQ3": return new EqAnimations.EqAnimation3(); // eq separate
             case "EQ4": return new EqAnimations.EqAnimation4(); // eq separate
+            case "EQ5": return new EqAnimations.EqAnimation5(); // eq separate
             case "EQHue1": return new EQHueAnimations.EqHueAnimation1(); // eq;
             case "EQHue2": return new EQHueAnimations.EqHueAnimation2(); // eq;
             case "Spikes1": return new SpikesAnimations.SpikeAnimation1(); // beat;
             case "Spikes2": return new SpikesAnimations.SpikeAnimation2(); // beat;
             case "Spikes3": return new SpikesAnimations.SpikeAnimation3(); // beat;
             case "Spikes4": return new SpikesAnimations.SpikeAnimation4(); // eq separate;
+            case "Spikes5": return new SpikesAnimations.SpikeAnimation5(); // eq;
+            case "Random1": return new RandomAnimations.RandomAnimation1();
         }
         return null;
     }

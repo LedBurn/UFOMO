@@ -15,7 +15,7 @@ public class AlternateAnimations {
 
             double hue1 = Math.random();
             double hue2 = hue1 + 0.4;
-            Addon alternateAddon = new AlternateAddon(hue1, hue2, 3);
+            Addon alternateAddon = new AlternateAddon(hue1, hue2, 10);
 
             animations.add(new Animation(ufomoObject.bigCircle, null, new Addon[]{alternateAddon}));
             animations.add(new Animation(ufomoObject.mediumCircle, null, new Addon[]{alternateAddon}));
@@ -50,7 +50,7 @@ public class AlternateAnimations {
 
             double hue1 = Math.random();
             double hue2 = hue1 + 0.4;
-            Addon alternateAddon = new AlternateAddon(hue1, hue2, 3);
+            Addon alternateAddon = new AlternateAddon(hue1, hue2, 10);
 
             animations.add(new Animation(ufomoObject.bigCircle, null, new Addon[]{alternateAddon}));
             animations.add(new Animation(ufomoObject.mediumCircle, null, new Addon[]{alternateAddon}));

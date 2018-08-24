@@ -18,7 +18,7 @@ public class EqConstAddon extends Addon {
         if (brightness >= keepMax) {
             keepMax = brightness;
         } else {
-            keepMax = Math.max(0.2, keepMax - 0.01);
+            keepMax = Math.max(0.1, keepMax - 0.02);
         }
         brightness = Math.max(brightness, keepMax);
         for (int i = 0; i < ledObject.numOfPixels(); i++) {
