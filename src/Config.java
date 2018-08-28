@@ -1,4 +1,4 @@
 public class Config {
 
-    final public static IProject<UFOMOObject> PROJECT = new UFOMO();
+    final public static IProject<LinesObject> PROJECT = new Lines();
 }
