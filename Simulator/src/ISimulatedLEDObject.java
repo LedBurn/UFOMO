@@ -1,10 +1,10 @@
 import java.awt.image.BufferedImage;
 
-public interface ISimulatedLEDObject {
+public interface ISimulatedLEDObject<T extends ILEDObject> {
 
-    public int getWidth();
-    public int getHeight();
+    int getWidth();
+    int getHeight();
 
     /* Draw the current state inside the buffered image */
-    public void draw(BufferedImage bi);
+    void draw(T t, BufferedImage bi);
 }

@@ -1,29 +1,28 @@
-
 // This class holds the pixels of all the UFOMO leds.
-public class UFOMOObject {
-    public LEDObject bigCircle;
-    public LEDObject mediumCircle;
-    public LEDObject smallCircle;
-    public LEDObject[] octagon = new LEDObject[8];
-    public LEDObject[] lines = new LEDObject[16];
-    public LEDObject[] beam = new LEDObject[8];
+public class UFOMOObject implements ILEDObject<UFOMOObject>{
+    public IPixelsArray bigCircle;
+    public IPixelsArray mediumCircle;
+    public IPixelsArray smallCircle;
+    public IPixelsArray[] octagon = new PixelsArrayImp[8];
+    public IPixelsArray[] lines = new PixelsArrayImp[16];
+    public IPixelsArray[] beam = new PixelsArrayImp[8];
 
     public UFOMOObject() {
-        // TODO verify final number of pixels
-        bigCircle = new LEDObject(1920/3);
-        mediumCircle = new LEDObject(1260/3);
-        smallCircle = new LEDObject(840/3);
+        bigCircle = new PixelsArrayImp(1920/3);
+        mediumCircle = new PixelsArrayImp(1260/3);
+        smallCircle = new PixelsArrayImp(840/3);
         for (int i = 0; i < 8; i++) {
-            octagon[i] = new LEDObject(51/3);
+            octagon[i] = new PixelsArrayImp(51/3);
         }
         for (int i = 0; i < 16; i++) {
-            lines[i] = new LEDObject(240/3);
+            lines[i] = new PixelsArrayImp(240/3);
         }
         for (int i = 0; i < 8; i++) {
-            beam[i] = new LEDObject(204/3);
+            beam[i] = new PixelsArrayImp(204/3);
         }
     }
 
+    @Override
     public void clear() {
         bigCircle.clear();
         mediumCircle.clear();
@@ -39,7 +38,7 @@ public class UFOMOObject {
         }
     }
 
-    // copy all the pixels form another object
+    @Override
     public void copy(UFOMOObject other) {
         bigCircle.copy(other.bigCircle);
         mediumCircle.copy(other.mediumCircle);
@@ -55,19 +54,19 @@ public class UFOMOObject {
         }
     }
 
-    // merge 2 other objects (pixel by pixel merge) and copy it the this object
+    @Override
     public void mergeAndCopy(UFOMOObject other1, UFOMOObject other2, double percent) {
-        bigCircle.mergeAndcopy(other1.bigCircle, other2.bigCircle, percent);
-        mediumCircle.mergeAndcopy(other1.mediumCircle, other2.mediumCircle, percent);
-        smallCircle.mergeAndcopy(other1.smallCircle, other2.smallCircle, percent);
+        bigCircle.mergeAndCopy(other1.bigCircle, other2.bigCircle, percent);
+        mediumCircle.mergeAndCopy(other1.mediumCircle, other2.mediumCircle, percent);
+        smallCircle.mergeAndCopy(other1.smallCircle, other2.smallCircle, percent);
         for (int i = 0; i < 8; i++) {
-            octagon[i].mergeAndcopy(other1.octagon[i], other2.octagon[i], percent);
+            octagon[i].mergeAndCopy(other1.octagon[i], other2.octagon[i], percent);
         }
         for (int i = 0; i < 16; i++) {
-            lines[i].mergeAndcopy(other1.lines[i], other2.lines[i], percent);
+            lines[i].mergeAndCopy(other1.lines[i], other2.lines[i], percent);
         }
         for (int i = 0; i < 8; i++) {
-            beam[i].mergeAndcopy(other1.beam[i], other2.beam[i], percent);
+            beam[i].mergeAndCopy(other1.beam[i], other2.beam[i], percent);
         }
     }
 }

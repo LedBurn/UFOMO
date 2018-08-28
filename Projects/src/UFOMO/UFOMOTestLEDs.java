@@ -1,4 +1,4 @@
-public class TestLeds {
+public class UFOMOTestLEDs {
 
     private int frameNum = 0;
     private int code = 1;

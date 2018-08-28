@@ -1,25 +1,27 @@
 
-// Abstract class that holds the pixels of a led object
-public class LEDObject {
+// The simplest LED object. contains one array of pixels.
+public class PixelsArrayImp implements IPixelsArray {
 
     private HSBColor[] pixels;
 
-    public LEDObject(int numOfPixels) {
+    public PixelsArrayImp(int numOfPixels) {
         this.pixels = new HSBColor[numOfPixels];
         this.clear();
     }
 
+    @Override
     public void clear() {
         for(int i=0; i<pixels.length; i++) {
             pixels[i] = HSBColor.BLACK;
         }
     }
 
+    @Override
     public int numOfPixels() {
         return this.pixels.length;
     }
 
-    // get color of a specific pixel
+    @Override
     public HSBColor getColor(int pixelNum) {
         if (pixelNum < 0 || pixelNum >= pixels.length) {
             System.out.println("ERROR: pixel is out of range. pixel " + pixelNum + " isn't in 0-" + pixels.length + " range");
@@ -28,17 +30,17 @@ public class LEDObject {
         return this.pixels[pixelNum];
     }
 
-    // get color of a specific pixel as RGB integer (best for sending on network)
+    @Override
     public RGBColor getColorRGB(int pixelNum, double brightnessLevel) {
         return getColor(pixelNum).toRGBColor(brightnessLevel);
     }
 
-    // get color of a specific pixel as RGB integer (best for simulator)
+    @Override
     public int getColorRGBInt(int pixelNum) {
         return getColor(pixelNum).toRGBInt();
     }
 
-    // set color of a specific pixel
+    @Override
     public void setColor(int pixelNum, HSBColor color) {
         if (pixelNum < 0 || pixelNum >= pixels.length) {
             System.out.println("ERROR: pixel is out of range. pixel " + pixelNum + " isn't in 0-" + pixels.length + " range");
@@ -47,8 +49,8 @@ public class LEDObject {
         this.pixels[pixelNum] = color;
     }
 
-    // copy pixels array from another led object
-    public void copy(LEDObject other) {
+    @Override
+    public void copy(IPixelsArray other) {
         if (numOfPixels() != other.numOfPixels()) {
             System.out.println("ERROR: can't copy led object with " + other.numOfPixels()+  " pixels to a led object with " + numOfPixels() + " pixels");
             return;
@@ -59,8 +61,8 @@ public class LEDObject {
         }
     }
 
-    // merge 2 other pixels array and copy it the this object
-    public void mergeAndcopy(LEDObject other1, LEDObject other2, double fadePercent) {
+    @Override
+    public void mergeAndCopy(IPixelsArray other1, IPixelsArray other2, double fadePercent) {
         if (numOfPixels() != other1.numOfPixels() || numOfPixels() != other2.numOfPixels()) {
             System.out.println("ERROR: can't copy led objects with " + other1.numOfPixels()+ " and " + other2.numOfPixels() + " pixels to a led object with " + numOfPixels() + " pixels");
             return;

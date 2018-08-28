@@ -7,7 +7,7 @@ public class ConfettiAddon extends Addon {
     }
 
     @Override
-    public void change(LEDObject ledObject, double level, boolean newBeat, boolean isOn, int[] eq) {
+    public void change(IPixelsArray ledObject, double level, boolean newBeat, boolean isOn, int[] eq) {
         double chance = ledObject.numOfPixels() / 30.0;
         while (chance >= 1) {
             int shineIndex = (int) Math.floor(Math.random() * ledObject.numOfPixels());

@@ -11,7 +11,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="Network" />
     <orderEntry type="module" module-name="LEDObject" />
-    <orderEntry type="module" module-name="Audio" />
+    <orderEntry type="module" module-name="Projects" />
     <orderEntry type="module" module-name="Colors" />
     <orderEntry type="module" module-name="Effects" />
     <orderEntry type="module" module-name="Simulator" />
@@ -43,5 +43,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="module" module-name="Audio" />
+    <orderEntry type="module" module-name="Keypad" />
   </component>
 </module>

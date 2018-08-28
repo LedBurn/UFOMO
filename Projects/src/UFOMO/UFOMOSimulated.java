@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 // This class sets the position of each pixel from the UFOMO on the screen, and colors it accordingly
-public class UFOMOSimulated implements ISimulatedLEDObject {
+public class UFOMOSimulated implements ISimulatedLEDObject<UFOMOObject> {
 
     private static final int SIZE = 800; // in pixels
     private static final int PADDING = 20; // in pixels
@@ -20,29 +20,29 @@ public class UFOMOSimulated implements ISimulatedLEDObject {
     private Pixel[][] linePixels = new Pixel[16][]; // 16 arrays of pixels
     private Pixel[][] beamPixels = new Pixel[8][]; // 8 arrays of pixels
 
-    private UFOMOObject ufomoObject;
-
-    public UFOMOSimulated(UFOMOObject ufomoObject) {
-        this.ufomoObject = ufomoObject;
+    public UFOMOSimulated() {
         calculatePixelsPositions();
     }
 
     // calculate all the UFOMO pixels positions on the screen. and saves the data
     private void calculatePixelsPositions() {
 
+        UFOMOObject ufomoObject = new UFOMOObject();
+
         // Circles positions
         int maxRadius = SIZE / 2 - PADDING;
         int bigCircleRadius = maxRadius; // in pixels
         int mediumPixelRadius = (int) Math.round(bigCircleRadius * MEDIUM_CIRCLE_DIAMETER / LARGE_CIRCLE_DIAMETER); // in pixels
         int smallPixelRadius = (int) Math.round(bigCircleRadius * SMALL_CIRCLE_DIAMETER / LARGE_CIRCLE_DIAMETER); // in pixels
-        bigCirclePixels = getCirclePixelPositions(ufomoObject.bigCircle.numOfPixels(), bigCircleRadius);
-        mediumCirclePixels = getCirclePixelPositions(ufomoObject.mediumCircle.numOfPixels(), mediumPixelRadius);
-        smallCirclePixels = getCirclePixelPositions(ufomoObject.smallCircle.numOfPixels(), smallPixelRadius);
+        bigCirclePixels = SimulatorUtils.getCirclePixelPositions(ufomoObject.bigCircle.numOfPixels(), bigCircleRadius, SIZE/2, SIZE/2);
+        mediumCirclePixels = SimulatorUtils.getCirclePixelPositions(ufomoObject.mediumCircle.numOfPixels(), mediumPixelRadius, SIZE/2, SIZE/2);
+        smallCirclePixels = SimulatorUtils.getCirclePixelPositions(ufomoObject.smallCircle.numOfPixels(), smallPixelRadius, SIZE/2, SIZE/2);
 
         // Octagon and Lines positions
         setOctagonAndLinesPixelPositions();
     }
     private void setOctagonAndLinesPixelPositions() {
+        UFOMOObject ufomoObject = new UFOMOObject();
         // Octagon vertices and beam
         int[] xVertices = new int[8];
         int[] yVertices = new int[8];
@@ -65,15 +65,15 @@ public class UFOMOSimulated implements ISimulatedLEDObject {
         // Octagon pixels
         for (int i=0; i<8; i++) {
             if (i < 7) {
-                octagonPixels[i] = getPixelsForLine(ufomoObject.octagon[i].numOfPixels(), xVertices[i+1], yVertices[i+1], xVertices[i], yVertices[i]);
+                octagonPixels[i] = SimulatorUtils.getPixelsForLine(ufomoObject.octagon[i].numOfPixels(), xVertices[i+1], yVertices[i+1], xVertices[i], yVertices[i]);
             } else {
-                octagonPixels[i] = getPixelsForLine(ufomoObject.octagon[i].numOfPixels(), xVertices[0], yVertices[0], xVertices[i], yVertices[i]);
+                octagonPixels[i] = SimulatorUtils.getPixelsForLine(ufomoObject.octagon[i].numOfPixels(), xVertices[0], yVertices[0], xVertices[i], yVertices[i]);
             }
         }
 
         // beam pixels
         for (int i=0; i<8; i++) {
-            beamPixels[i] = getPixelsForLine(ufomoObject.beam[i].numOfPixels(), xBeamEnd[i], yBeamEnd[i], xVertices[i], yVertices[i]);
+            beamPixels[i] = SimulatorUtils.getPixelsForLine(ufomoObject.beam[i].numOfPixels(), xBeamEnd[i], yBeamEnd[i], xVertices[i], yVertices[i]);
         }
 
         // Lines
@@ -108,43 +108,9 @@ public class UFOMOSimulated implements ISimulatedLEDObject {
             int lineEnd2Y = (int) Math.round(SIZE/2 + sin2 * (SIZE/2-PADDING));
 
             // line
-            linePixels[i*2] = getPixelsForLine(ufomoObject.lines[i*2].numOfPixels(), lineEnd1X, lineEnd1Y, lineStart1X, lineStart1Y);
-            linePixels[i*2+1] = getPixelsForLine(ufomoObject.lines[i*2+1].numOfPixels(), lineEnd2X, lineEnd2Y, lineStart2X, lineStart2Y);
+            linePixels[i*2] = SimulatorUtils.getPixelsForLine(ufomoObject.lines[i*2].numOfPixels(), lineEnd1X, lineEnd1Y, lineStart1X, lineStart1Y);
+            linePixels[i*2+1] = SimulatorUtils.getPixelsForLine(ufomoObject.lines[i*2+1].numOfPixels(), lineEnd2X, lineEnd2Y, lineStart2X, lineStart2Y);
         }
-    }
-    private Pixel[] getCirclePixelPositions(int numOfPixels, int radius) {
-        int xCenter = SIZE / 2;
-        int yCenter = SIZE / 2;
-
-        Pixel[] pixels = new Pixel[numOfPixels];
-
-        for (int i=0; i<numOfPixels; i++) {
-            double angleInDegree = 266 - (i * 360.0 / numOfPixels);
-            double angleInRadian = Math.toRadians(angleInDegree);
-
-            double cos = Math.cos(angleInRadian);
-            double sin = Math.sin(angleInRadian);
-
-            int xPos = (int) Math.round(xCenter + cos * radius);
-            int yPos = (int) Math.round(yCenter + sin * radius);
-
-            pixels[i] = new Pixel(xPos, yPos);
-        }
-
-        return  pixels;
-    }
-    private Pixel[] getPixelsForLine(int numOfLEDs, int startX, int startY, int endX, int endY) {
-        Pixel[] pixels = new Pixel[numOfLEDs];
-
-        for (int i=0; i<numOfLEDs; i++) {
-            double percent = 1 - i / (float)numOfLEDs;
-            int xPos = (int) Math.round(startX + percent * (endX - startX));
-            int yPos = (int) Math.round(startY + percent * (endY - startY));
-
-            pixels[i] = new Pixel(xPos, yPos);
-        }
-
-        return pixels;
     }
 
     @Override
@@ -158,38 +124,12 @@ public class UFOMOSimulated implements ISimulatedLEDObject {
     }
 
     @Override
-    public void draw(BufferedImage bi) {
-        drawElement(bi, ufomoObject.bigCircle, bigCirclePixels);
-        drawElement(bi, ufomoObject.mediumCircle, mediumCirclePixels);
-        drawElement(bi, ufomoObject.smallCircle, smallCirclePixels);
-        drawElements(bi, ufomoObject.octagon, octagonPixels);
-        drawElements(bi, ufomoObject.beam, beamPixels);
-        drawElements(bi, ufomoObject.lines, linePixels);
-    }
-
-    private void drawElement(BufferedImage bi, LEDObject element, Pixel[] pixels) {
-        for (int i=0; i<element.numOfPixels(); i++) {
-            drawPixel(bi, pixels[i].x, pixels[i].y, element.getColorRGBInt(i));
-        }
-    }
-
-    private void drawElements(BufferedImage bi, LEDObject[] elements, Pixel[][] pixels) {
-        for (int i=0; i<pixels.length; i++) {
-            for (int j=0; j<pixels[i].length; j++) {
-                drawPixel(bi, pixels[i][j].x, pixels[i][j].y, elements[i].getColorRGBInt(j));
-            }
-        }
-    }
-
-    private void drawPixel(BufferedImage bi, int x, int y, int color) {
-        // TODO delete this if
-        if (color == Color.black.getRGB()) { // in case of black - show something just to know the pixel is there
-            color = new Color(75, 75, 75).getRGB();
-        }
-        bi.setRGB(x, y, color);
-        bi.setRGB(x+1, y, color);
-        bi.setRGB(x-1, y, color);
-        bi.setRGB(x, y+1, color);
-        bi.setRGB(x, y-1, color);
+    public void draw(UFOMOObject ufomoObject, BufferedImage bi) {
+        SimulatorUtils.drawElement(bi, ufomoObject.bigCircle, bigCirclePixels);
+        SimulatorUtils.drawElement(bi, ufomoObject.mediumCircle, mediumCirclePixels);
+        SimulatorUtils.drawElement(bi, ufomoObject.smallCircle, smallCirclePixels);
+        SimulatorUtils.drawElements(bi, ufomoObject.octagon, octagonPixels);
+        SimulatorUtils.drawElements(bi, ufomoObject.beam, beamPixels);
+        SimulatorUtils.drawElements(bi, ufomoObject.lines, linePixels);
     }
 }

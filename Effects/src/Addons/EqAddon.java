@@ -22,7 +22,7 @@ public class EqAddon extends Addon {
     }
 
     @Override
-    public void change(LEDObject ledObject, double level, boolean newBeat, boolean isOn, int[] eq) {
+    public void change(IPixelsArray ledObject, double level, boolean newBeat, boolean isOn, int[] eq) {
         int index = (int)Math.floor(ledObject.numOfPixels() * eq[eqIndex] / 128.0);
         if (index >= keepMax) {
             keepMax = index;

@@ -6,8 +6,10 @@
       <module fileurl="file://$PROJECT_DIR$/Audio/Audio.iml" filepath="$PROJECT_DIR$/Audio/Audio.iml" />
       <module fileurl="file://$PROJECT_DIR$/Colors/Colors.iml" filepath="$PROJECT_DIR$/Colors/Colors.iml" />
       <module fileurl="file://$PROJECT_DIR$/Effects/Effects.iml" filepath="$PROJECT_DIR$/Effects/Effects.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Keypad/Keypad.iml" filepath="$PROJECT_DIR$/Keypad/Keypad.iml" />
       <module fileurl="file://$PROJECT_DIR$/LEDObject/LEDObject.iml" filepath="$PROJECT_DIR$/LEDObject/LEDObject.iml" />
       <module fileurl="file://$PROJECT_DIR$/Network/Network.iml" filepath="$PROJECT_DIR$/Network/Network.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Projects/Projects.iml" filepath="$PROJECT_DIR$/Projects/Projects.iml" />
       <module fileurl="file://$PROJECT_DIR$/Simulator/Simulator.iml" filepath="$PROJECT_DIR$/Simulator/Simulator.iml" />
       <module fileurl="file://$PROJECT_DIR$/UFOMO.iml" filepath="$PROJECT_DIR$/UFOMO.iml" />
     </modules>

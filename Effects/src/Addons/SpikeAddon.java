@@ -21,7 +21,7 @@ public class SpikeAddon extends Addon {
     }
 
     @Override
-    public void change(LEDObject ledObject, double level, boolean newBeat, boolean isOn, int[] eq) {
+    public void change(IPixelsArray ledObject, double level, boolean newBeat, boolean isOn, int[] eq) {
         if (onBeat && newBeat) {
             positions.add(0.0);
         } else if (eq[spikeIndex]/128.0 > 0.75) {

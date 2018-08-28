@@ -17,7 +17,7 @@ public class AlternateSmoothAddon extends Addon {
     }
 
     @Override
-    public void change(LEDObject ledObject, double level, boolean newBeat, boolean isOn, int[] eq) {
+    public void change(IPixelsArray ledObject, double level, boolean newBeat, boolean isOn, int[] eq) {
         /*
         hue 1 is centered at pixelsPerSegment * 0, pixelsPerSegment * 2, pixelsPerSegment * 4, ...
         hue 2 is centered at pixelsPerSegment * 1, pixelsPerSegment * 3, pixelsPerSegment * 5, ...

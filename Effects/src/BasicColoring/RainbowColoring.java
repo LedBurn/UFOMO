@@ -9,7 +9,7 @@ public class RainbowColoring extends Coloring {
     }
 
     @Override
-    public void color(LEDObject ledObject) {
+    public void color(IPixelsArray ledObject) {
         for (int i = 0; i < ledObject.numOfPixels(); i++) {
 
             double hue = (double)i / ledObject.numOfPixels();

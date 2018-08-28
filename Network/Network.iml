@@ -8,5 +8,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="Colors" />
+    <orderEntry type="module" module-name="LEDObject" />
   </component>
 </module>

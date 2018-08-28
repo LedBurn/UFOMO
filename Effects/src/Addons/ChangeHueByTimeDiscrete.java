@@ -14,7 +14,7 @@ public class ChangeHueByTimeDiscrete extends Addon {
     }
 
     @Override
-    public void change(LEDObject ledObject, double level, boolean newBeat, boolean isOn, int[] eq) {
+    public void change(IPixelsArray ledObject, double level, boolean newBeat, boolean isOn, int[] eq) {
         int jump = (int)Math.floor(level * numOfJumps);
         double hue = startingHue + jump / (double) numOfJumps;
         HSBColor color = new HSBColor(hue, 1, 1);

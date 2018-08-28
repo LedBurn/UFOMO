@@ -1,43 +1,29 @@
+import java.util.ArrayList;
 
-// This class takes a led object, colors it and apply addons.
-public class Animation {
+// This is the base class of all the animations of T (can be any led object)
+// each subclass should:
+// 1. pass the led object instance in the constructor
+// 2. implement configAnimation & newBeat and add pixelsArrayAnimations to the animations array list.
+public abstract class Animation<T extends ILEDObject> {
 
-    protected LEDObject ledObject;
-    private Coloring coloring;
-    protected Addon[] addons;
-    private int speed = 1;
+    // holds the led object the animation will run on.
+    public T ledObject;
 
-    private int cycleNum = 0;
-    private double lastLevel = 0;
-
-    public Animation(LEDObject ledObject, Coloring coloring, Addon[] addons) {
-        this.ledObject = ledObject;
-        this.coloring = coloring;
-        this.addons = addons;
+    // in the constructor you must pass the led object
+    public Animation(T t) {
+        ledObject = t;
+        configAnimations();
+        newBeat();
     }
 
-    public Animation(LEDObject ledObject, Coloring coloring, Addon[] addons, int speed) {
-        this.ledObject = ledObject;
-        this.coloring = coloring;
-        this.addons = addons;
-        this.speed = speed;
-    }
+    protected ArrayList<PixelsArrayAnimation> animations = new ArrayList<>();
 
-    public void apply(double level, boolean newBeat, boolean isOn, int[] eq) {
-        if (level < lastLevel) cycleNum++;
-        if (cycleNum == speed) cycleNum = 0;
-        double newLevel = (level + cycleNum) / speed;
+    protected abstract void configAnimations();
+    protected abstract void newBeat();
 
-        // basic coloring
-        if (coloring != null) {
-            coloring.color(ledObject);
+    public void apply(double timePercent, boolean newBeat, boolean isOn, int[] eq) {
+        for (PixelsArrayAnimation animation : animations){
+            animation.apply(timePercent,newBeat, isOn, eq);
         }
-
-        // add ons
-        for (Addon addon : addons) {
-            addon.change(ledObject, newLevel, newBeat, isOn, eq);
-        }
-
-        lastLevel = level;
     }
 }

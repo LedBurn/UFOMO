@@ -29,7 +29,7 @@ public class AlternateColoring extends Coloring {
     }
 
     @Override
-    public void color(LEDObject ledObject) {
+    public void color(IPixelsArray ledObject) {
         for (int i = 0; i < ledObject.numOfPixels(); i++) {
             int locationInSegment = i % (2 * this.numOfPixels);
             HSBColor color;

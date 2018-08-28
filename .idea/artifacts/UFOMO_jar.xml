@@ -10,6 +10,8 @@
       <element id="module-output" name="Audio" />
       <element id="module-output" name="Effects" />
       <element id="module-output" name="Animations" />
+      <element id="module-output" name="Keypad" />
+      <element id="module-output" name="Projects" />
     </root>
   </artifact>
 </component>

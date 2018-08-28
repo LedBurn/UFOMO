@@ -5,6 +5,6 @@ public abstract class Coloring {
     public static final Coloring RAINBOW_COLORING = new RainbowColoring(false);
     public static final Coloring RAINBOW_REVERESED_COLORING = new RainbowColoring(true);
 
-    // colors the led object
-    public abstract void color(LEDObject ledObject);
+    // colors the array
+    public abstract void color(IPixelsArray ledObject);
 }

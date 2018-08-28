@@ -13,7 +13,7 @@ public class ChangeHueByTimeAddon extends Addon {
     }
 
     @Override
-    public void change(LEDObject ledObject, double level, boolean isOn, boolean newBeat, int[] eq) {
+    public void change(IPixelsArray ledObject, double level, boolean isOn, boolean newBeat, int[] eq) {
         for (int i = 0; i < ledObject.numOfPixels(); i++) {
             double currHue = ledObject.getColor(i).hue;
             double newHue = reversed ? currHue - level : currHue + level;

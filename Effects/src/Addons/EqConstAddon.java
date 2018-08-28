@@ -13,7 +13,7 @@ public class EqConstAddon extends Addon {
     }
 
     @Override
-    public void change(LEDObject ledObject, double level, boolean newBeat, boolean isOn, int[] eq) {
+    public void change(IPixelsArray ledObject, double level, boolean newBeat, boolean isOn, int[] eq) {
         double brightness =  eq[eqIndex] / 128.0;
         if (brightness >= keepMax) {
             keepMax = brightness;

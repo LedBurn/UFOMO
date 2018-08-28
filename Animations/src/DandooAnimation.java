@@ -1,5 +1,5 @@
 
-public class DandooAnimation extends Animation {
+public class DandooAnimation extends PixelsArrayAnimation {
 
     private int numOfPoints = 16 * 2;
     private int tailLength = 1;
@@ -7,11 +7,11 @@ public class DandooAnimation extends Animation {
     private final double[] points;
     private boolean reversed = false;
 
-    public DandooAnimation(LEDObject ledObject, int numOfPoints, boolean addBackground) {
+    public DandooAnimation(IPixelsArray ledObject, int numOfPoints, boolean addBackground) {
         this(ledObject, numOfPoints, addBackground, new Addon[]{});
     }
 
-    public DandooAnimation(LEDObject ledObject, int numOfPoints, boolean addBackground, Addon[] addons) {
+    public DandooAnimation(IPixelsArray ledObject, int numOfPoints, boolean addBackground, Addon[] addons) {
         super(ledObject,null, addons);
         this.numOfPoints = numOfPoints;
         this.addBackground = addBackground;

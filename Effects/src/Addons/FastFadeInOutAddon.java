@@ -6,7 +6,7 @@ public class FastFadeInOutAddon extends Addon {
     private boolean isIn = true;
 
     @Override
-    public void change(LEDObject ledObject, double level, boolean newBeat, boolean isOn, int[] eq) {
+    public void change(IPixelsArray ledObject, double level, boolean newBeat, boolean isOn, int[] eq) {
         if (isIn){
             currentLevel = Math.min(currentLevel + 0.02, 1);
         } else {
