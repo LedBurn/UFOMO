@@ -18,7 +18,8 @@ public class ChangeHueByTimeAddon extends Addon {
             double currHue = ledObject.getColor(i).hue;
             double newHue = reversed ? currHue - level : currHue + level;
             if (newHue + level >= 1) newHue -=1;
-            ledObject.getColor(i).hue = level;
+            if (newHue - level < 0) newHue +=1;
+            ledObject.getColor(i).hue = newHue;
         }
     }
 }

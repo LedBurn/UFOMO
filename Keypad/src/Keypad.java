@@ -7,7 +7,7 @@ public class Keypad {
 
     private static final int INCOMING_PORT = 8181;
 
-    public int userCode = 4;
+    public int userCode = 0;
 
     public boolean onBeat = false;
     public boolean newBeat = false;

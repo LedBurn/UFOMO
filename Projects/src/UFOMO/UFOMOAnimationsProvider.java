@@ -88,6 +88,11 @@ public class UFOMOAnimationsProvider implements IAnimationsProvider {
         return getAnimationByName(animationName);
     }
 
+    @Override
+    public void handleUserCode(int code) {
+
+    }
+
 //    public void newAnimation(String type) {
 //        System.out.println("New PixelsArrayAnimation - code");
 //        UFOMOAnimation animation = randomNewAnimation();

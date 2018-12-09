@@ -1,8 +1,14 @@
 public class LinesAnimationsProvider implements IAnimationsProvider {
 
+    boolean fireMode = false;
+
     @Override
     public Animation randomNewAnimation() {
-        int num = (int)Math.floor(Math.random() * 16);
+        if (fireMode) {
+            return new LinesAnimations.FireAnimation(new LinesObject());
+        }
+
+        int num = (int)Math.floor(Math.random() * 18);
         switch (num) {
             case 0:
                 return new LinesAnimations.RainbowAnimation1(new LinesObject());
@@ -35,8 +41,23 @@ public class LinesAnimationsProvider implements IAnimationsProvider {
             case 14:
                 return new LinesAnimations.SpikesAnimation1(new LinesObject());
             case 15:
-                return new LinesAnimations.SpikesAnimation1(new LinesObject());
+                return new LinesAnimations.SpikesAnimation2(new LinesObject());
+            case 16:
+                return new LinesAnimations.SpikesAnimation3(new LinesObject());
+            case 17:
+                return new LinesAnimations.FireAnimation(new LinesObject());
         }
         return null;
+    }
+
+    @Override
+    public void handleUserCode(int code) {
+        if (code == 1) {
+            fireMode = false;
+        }
+
+        if (code == 2) {
+            fireMode = true;
+        }
     }
 }

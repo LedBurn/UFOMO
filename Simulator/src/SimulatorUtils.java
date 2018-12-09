@@ -2,9 +2,26 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class SimulatorUtils {
+    public static Pixel[] getPixelsForCircle(int numOfPixels, int centerX, int centerY, int radius, int fromAngle, int toAngle) {
+        Pixel[] pixels = new Pixel[numOfPixels];
+
+        for (int i=0; i<numOfPixels; i++) {
+            double angleInDegree = fromAngle + (toAngle - fromAngle) * i / (double) numOfPixels;
+            double angleInRadian = Math.toRadians(angleInDegree);
+
+            double cos = Math.cos(angleInRadian);
+            double sin = Math.sin(angleInRadian);
+
+            int xPos = (int) Math.round(centerX + cos * radius);
+            int yPos = (int) Math.round(centerY - sin * radius);
+
+            pixels[i] = new Pixel(xPos, yPos);
+        }
+
+        return  pixels;
+    }
 
     public static Pixel[] getCirclePixelPositions(int numOfPixels, int radius, int xCenter, int yCenter) {
-
         Pixel[] pixels = new Pixel[numOfPixels];
 
         for (int i=0; i<numOfPixels; i++) {

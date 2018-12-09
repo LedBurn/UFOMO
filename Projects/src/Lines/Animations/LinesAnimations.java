@@ -306,7 +306,7 @@ public class LinesAnimations {
             ConstColoring coloring = new ConstColoring(color);
             for (int i = 0; i < ledObject.lines.length; i++) {
                 animations.add(new PixelsArrayAnimation(ledObject.lines[i], coloring,
-                        new Addon[]{new SpikeAddon(true, false), new ChangeHueByTimeAddon(true)},5));
+                        new Addon[]{new SpikeAddon(false, false), new ChangeHueByTimeAddon(true)},5));
             }
         }
 
@@ -323,6 +323,27 @@ public class LinesAnimations {
 
         @Override
         protected void configAnimations() {
+            HSBColor color = new HSBColor(Math.random(), 1, 0.3);
+            ConstColoring coloring = new ConstColoring(color);
+            for (int i = 0; i < ledObject.lines.length; i++) {
+                animations.add(new PixelsArrayAnimation(ledObject.lines[i], coloring,
+                        new Addon[]{new SpikeAddon(true, false), new ChangeHueByTimeAddon(true)},5));
+            }
+        }
+
+        @Override
+        protected void newBeat() {
+
+        }
+    }
+
+    public static class SpikesAnimation3 extends Animation<LinesObject> {
+        public SpikesAnimation3(LinesObject linesObject) {
+            super(linesObject);
+        }
+
+        @Override
+        protected void configAnimations() {
             HSBColor color1 = new HSBColor(Math.random(),1, 0.3);
             HSBColor color2 = new HSBColor(color1.hue + 0.3,1, 0.3);
             HSBColor color3 = new HSBColor(color1.hue + 0.6,1, 0.3);
@@ -333,7 +354,26 @@ public class LinesAnimations {
 
             for (int i = 0; i < ledObject.lines.length; i++) {
                 animations.add(new PixelsArrayAnimation(ledObject.lines[i], colorings[(int)Math.floor(Math.random()*3)],
-                        new Addon[]{new SpikeAddon(true, false), new ChangeHueByTimeAddon(true)},5));
+                        new Addon[]{new SpikeAddon(Math.random() > 0.5, false), new ChangeHueByTimeAddon(true)},5));
+            }
+        }
+
+        @Override
+        protected void newBeat() {
+
+        }
+    }
+
+    public static class FireAnimation extends Animation<LinesObject> {
+        public FireAnimation(LinesObject linesObject) {
+            super(linesObject);
+        }
+
+        @Override
+        protected void configAnimations() {
+            for (int i = 0; i < ledObject.lines.length; i++) {
+                animations.add(new PixelsArrayAnimation(ledObject.lines[i], null,
+                        new Addon[]{new FireAddon()}, 4));
             }
         }
 

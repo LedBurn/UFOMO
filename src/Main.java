@@ -1,16 +1,19 @@
+import java.util.ArrayList;
 
 public class Main<T extends ILEDObject> {
 
-    private final INetworkDataSource<T> networkDataSource;
-    private final Network<T> network;
+    private final boolean runSimulator;
 
-    private final T ledObject;
+    private final ArrayList<INetworkDataSource<T>> networkDataSources;
+    private final ArrayList<Network<T>> networks;
 
-    private final Simulator simulator;
-    private final ISimulatedLEDObject simulatedObject;
+    private final ArrayList<T> ledObjects;
 
-    private final AnimationsRunner animationsRunner;
-    private final IAnimationsProvider animationsProvider;
+    private final ArrayList<Simulator> simulators;
+    private final ArrayList<ISimulatedLEDObject> simulatedObjects;
+
+    private final ArrayList<AnimationsRunner> animationsRunners;
+    private final ArrayList<IAnimationsProvider> animationsProviders;
 
     private final Keypad keypad;
 
@@ -19,35 +22,58 @@ public class Main<T extends ILEDObject> {
     // - brightness level
     // - gpio
     // - user codes
+    public Main(boolean runSimulator) {
 
-    public Main(IProject<T> project, boolean runSimulator, boolean runGPIO) {
+        this.runSimulator = runSimulator;
+
         // main LED object
-        ledObject = project.createLEDObject();
+        ledObjects = new ArrayList<>();
 
         // network
-        networkDataSource =  project.CreateNetworkDataSource();
-        network = new Network<T>(networkDataSource);
+        networkDataSources =  new ArrayList<>();
+        networks = new ArrayList<>();
 
         // simulator
-        simulatedObject = runSimulator ? project.createSimulatedLEDObject() : null;
-        simulator = runSimulator ? new Simulator(simulatedObject) : null;
+        simulatedObjects = new ArrayList<>();
+        simulators = new ArrayList<>();
 
         // animations
-        animationsProvider = project.createAnimationsProvider();
-        animationsRunner = new AnimationsRunner(animationsProvider);
+        animationsProviders = new ArrayList<>();
+        animationsRunners = new ArrayList<>();
 
         // keypad
         keypad = new Keypad();
         keypad.startListening();
     }
 
+    public void addProject(IProject<T> project) {
+
+        // main LED object
+        ledObjects.add(project.createLEDObject());
+
+        // network
+        INetworkDataSource<T> networkDataSource = project.CreateNetworkDataSource();
+        networkDataSources.add(networkDataSource);
+        networks.add(new Network<T>(networkDataSource));
+
+        // simulator
+        ISimulatedLEDObject simulatedObject = runSimulator ? project.createSimulatedLEDObject() : null;
+        if (simulatedObject != null) simulatedObjects.add(simulatedObject);
+        if (simulatedObject != null) simulators.add(new Simulator(simulatedObject));
+
+        // animations
+        IAnimationsProvider animationsProvider = project.createAnimationsProvider();
+        animationsProviders.add(animationsProvider);
+        animationsRunners.add(new AnimationsRunner(animationsProvider));
+    }
+
     public void run() {
         try {
             while (true) {
-
-                // user code
-//                handleUserCode(keypad.userCode);
-
+                for (IAnimationsProvider animationsProvider : animationsProviders) {
+                    animationsProvider.handleUserCode(keypad.userCode);
+                }
+                keypad.userCode = 0;
 
                 long currentTime = System.currentTimeMillis();
                 if (currentTime - keypad.lastBeatTime > 1000) { // if there's no beat for a long time - fake one
@@ -61,15 +87,19 @@ public class Main<T extends ILEDObject> {
                     }
                 }
 
-                animationsRunner.apply(ledObject, keypad.newBeat, keypad.onBeat, keypad.eq);
+                for (int i = 0; i < ledObjects.size(); i++) {
+                    animationsRunners.get(i).apply(ledObjects.get(i), keypad.newBeat, keypad.onBeat, keypad.eq);
+                }
 
                 keypad.newBeat = false;
 
-                // show in simulator
-                if (simulator != null) simulator.draw(ledObject, simulatedObject, 0, 10);
+                for (int i = 0; i < ledObjects.size(); i++) {
+                    // show in simulator
+                    if (runSimulator) simulators.get(i).draw(ledObjects.get(i), simulatedObjects.get(i), 0, 10);
 
-                // send network
-                network.send(ledObject);
+                    // send network
+                    networks.get(i).send(ledObjects.get(i));
+                }
 
                 Thread.sleep(20);
             }
