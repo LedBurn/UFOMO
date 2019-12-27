@@ -1,6 +1,6 @@
 
 
-public class UFOMOAnimationsProvider implements IAnimationsProvider {
+public class UFOMOAnimationsProvider implements ISimpleRunnerAnimationsProvider {
 
     private String[] highAnimations = {
             "Rainbow1", "Rainbow2","Rainbow3","Rainbow4",

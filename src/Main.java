@@ -1,4 +1,7 @@
+import SimonBox.SimonBox;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Main<T extends ILEDObject> {
 
@@ -12,10 +15,11 @@ public class Main<T extends ILEDObject> {
     private final ArrayList<Simulator> simulators;
     private final ArrayList<ISimulatedLEDObject> simulatedObjects;
 
-    private final ArrayList<AnimationsRunner> animationsRunners;
-    private final ArrayList<IAnimationsProvider> animationsProviders;
+    private final ArrayList<IAnimationsRunner> animationsRunners;
 
     private final Keypad keypad;
+
+//    private final SimonBox simonBox;
 
     // What's missing:
     // - testing mode
@@ -38,12 +42,14 @@ public class Main<T extends ILEDObject> {
         simulators = new ArrayList<>();
 
         // animations
-        animationsProviders = new ArrayList<>();
         animationsRunners = new ArrayList<>();
 
         // keypad
         keypad = new Keypad();
         keypad.startListening();
+
+//        simonBox = new SimonBox();
+//        simonBox.startListening();
     }
 
     public void addProject(IProject<T> project) {
@@ -52,9 +58,9 @@ public class Main<T extends ILEDObject> {
         ledObjects.add(project.createLEDObject());
 
         // network
-        INetworkDataSource<T> networkDataSource = project.CreateNetworkDataSource();
-        networkDataSources.add(networkDataSource);
-        networks.add(new Network<T>(networkDataSource));
+//        INetworkDataSource<T> networkDataSource = project.CreateNetworkDataSource();
+//        networkDataSources.add(networkDataSource);
+//        networks.add(new Network<T>(networkDataSource));
 
         // simulator
         ISimulatedLEDObject simulatedObject = runSimulator ? project.createSimulatedLEDObject() : null;
@@ -62,18 +68,19 @@ public class Main<T extends ILEDObject> {
         if (simulatedObject != null) simulators.add(new Simulator(simulatedObject));
 
         // animations
-        IAnimationsProvider animationsProvider = project.createAnimationsProvider();
-        animationsProviders.add(animationsProvider);
-        animationsRunners.add(new AnimationsRunner(animationsProvider));
+        animationsRunners.add(project.createAnimationsRunner());
     }
 
     public void run() {
         try {
             while (true) {
-                for (IAnimationsProvider animationsProvider : animationsProviders) {
-                    animationsProvider.handleUserCode(keypad.userCode);
-                }
+//                for (ISimpleRunnerAnimationsProvider animationsProvider : animationsProviders) {
+//                    animationsProvider.handleUserCode(keypad.userCode);
+//                }
                 keypad.userCode = 0;
+//                System.out.println(Arrays.toString(simonBox.compareButtonStates()));
+//                System.out.println(Arrays.toString(simonBox.compareButtonStates(simonState, simonBox.getButtonStates())));
+//                simonBox.updatePreviousState();
 
                 long currentTime = System.currentTimeMillis();
                 if (currentTime - keypad.lastBeatTime > 1000) { // if there's no beat for a long time - fake one
@@ -98,7 +105,7 @@ public class Main<T extends ILEDObject> {
                     if (runSimulator) simulators.get(i).draw(ledObjects.get(i), simulatedObjects.get(i), 0, 10);
 
                     // send network
-                    networks.get(i).send(ledObjects.get(i));
+//                    networks.get(i).send(ledObjects.get(i));
                 }
 
                 Thread.sleep(20);

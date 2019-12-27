@@ -1,4 +1,4 @@
-public class LinesAnimationsProvider implements IAnimationsProvider {
+public class LinesAnimationsProvider implements ISimpleRunnerAnimationsProvider {
 
     boolean fireMode = false;
 

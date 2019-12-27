@@ -11,8 +11,8 @@ public class UFOMO implements IProject<UFOMOObject> {
     }
 
     @Override
-    public IAnimationsProvider createAnimationsProvider() {
-        return new UFOMOAnimationsProvider();
+    public IAnimationsRunner createAnimationsRunner() {
+        return new SimpleAnimationsRunner(new UFOMOAnimationsProvider());
     }
 
     @Override

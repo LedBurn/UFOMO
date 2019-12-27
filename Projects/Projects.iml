@@ -10,6 +10,8 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Babushka" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Babushka/Animations" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Simon" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Simon/Animations" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -19,5 +21,6 @@
     <orderEntry type="module" module-name="Effects" />
     <orderEntry type="module" module-name="Simulator" />
     <orderEntry type="module" module-name="Network" />
+    <orderEntry type="module" module-name="Keypad" />
   </component>
 </module>

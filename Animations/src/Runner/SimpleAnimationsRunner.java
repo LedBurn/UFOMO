@@ -2,10 +2,10 @@
 
 // Runs random animations.
 // You must:
-// 1. pass an IAnimationsProvider in the constructor, and provide animation.
+// 1. pass an ISimpleRunnerAnimationsProvider in the constructor, and provide animation.
 // 2. call apply in the main loop.
 // You can call setNewAnimation anytime to force a new animation.
-public class AnimationsRunner {
+public class SimpleAnimationsRunner implements IAnimationsRunner {
 
     private static final double CYCLE_TIME = 3000.0; //milliseconds
     private static final int NUM_OF_CYCLES = 5;
@@ -16,24 +16,14 @@ public class AnimationsRunner {
     private Animation currentAnimation;
     private Animation nextAnimation;
 
-    private IAnimationsProvider provider;
+    private ISimpleRunnerAnimationsProvider provider;
 
-    public AnimationsRunner(IAnimationsProvider provider) {
+    public SimpleAnimationsRunner(ISimpleRunnerAnimationsProvider provider) {
         this.provider = provider;
     }
 
-    // force a new animation to start now
-    public void setNewAnimation(Animation animation) {
-        currentAnimation = animation;
-        currentAnimationStartTime = System.currentTimeMillis();
-        nextAnimation = null;
-        nextAnimationStartTime = 0;
-    }
-
-
-    // the main apply method
+    @Override
     public void apply(ILEDObject ledObject, boolean newBeat, boolean isOn, int[] eq) {
-
         long currentTime = System.currentTimeMillis();
         int currentCycleNum = getCycleNum(currentTime, currentAnimationStartTime);
         int nextCycleNum = getCycleNum(currentTime, nextAnimationStartTime);
@@ -74,6 +64,14 @@ public class AnimationsRunner {
             double fadePercent = 1 - ((currentTime - currentAnimationStartTime) % CYCLE_TIME) / CYCLE_TIME;
             ledObject.mergeAndCopy(currentAnimation.ledObject, nextAnimation.ledObject, fadePercent);
         }
+    }
+
+    // force a new animation to start now
+    private void setNewAnimation(Animation animation) {
+        currentAnimation = animation;
+        currentAnimationStartTime = System.currentTimeMillis();
+        nextAnimation = null;
+        nextAnimationStartTime = 0;
     }
 
     private int getCycleNum(long currentTime, long animationStartTime) {

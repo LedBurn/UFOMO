@@ -1,4 +1,4 @@
-public class BabushkaAnimationsProvider implements  IAnimationsProvider {
+public class BabushkaAnimationsProvider implements ISimpleRunnerAnimationsProvider {
 
     @Override
     public Animation randomNewAnimation() {

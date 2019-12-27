@@ -11,7 +11,7 @@ public class BlurAddon extends Addon {
             double brightnessChange = ThreadLocalRandom.current().nextDouble(-0.05, 0.05);
             double hueChange = ThreadLocalRandom.current().nextDouble(-0.02, 0.02);
 
-            HSBColor c = new HSBColor();
+            HSBColor c = ledObject.getColor(i);
             c.hue += hueChange;
             c.brightness = Math.min(Math.max(c.brightness + brightnessChange, 0.0), 1.0);
             c.saturation = Math.min(Math.max(c.saturation + satChange, 0.0), 1.0);

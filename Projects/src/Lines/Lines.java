@@ -11,8 +11,8 @@ public class Lines implements IProject<LinesObject> {
     }
 
     @Override
-    public IAnimationsProvider createAnimationsProvider() {
-        return new LinesAnimationsProvider();
+    public IAnimationsRunner createAnimationsRunner() {
+        return new SimpleAnimationsRunner(new LinesAnimationsProvider());
     }
 
     @Override
