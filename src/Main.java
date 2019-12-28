@@ -18,11 +18,13 @@ public class Main<T extends ILEDObject> {
 
     private final Keypad keypad;
 
+    private final String statsFile;
+
     // What's missing:
     // - testing mode
     // - brightness level
     // - user codes
-    public Main(boolean runSimulator, boolean runGPIO) {
+    public Main(boolean runSimulator, boolean runGPIO, String statsFile) {
 
         this.runSimulator = runSimulator;
         this.runGPIO = runGPIO;
@@ -45,8 +47,8 @@ public class Main<T extends ILEDObject> {
         keypad = new Keypad();
         keypad.startListening();
 
-//        simonBox = new SimonBox();
-//        simonBox.startListening();
+        // statistics
+        this.statsFile = statsFile;
     }
 
     public void addProject(IProject<T> project) {
@@ -65,7 +67,7 @@ public class Main<T extends ILEDObject> {
         if (simulatedObject != null) simulators.add(new Simulator(simulatedObject));
 
         // animations
-        animationsRunners.add(project.createAnimationsRunner(runGPIO));
+        animationsRunners.add(project.createAnimationsRunner(runGPIO, statsFile));
     }
 
     public void run() {

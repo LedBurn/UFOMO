@@ -13,8 +13,8 @@ public class Simon implements IProject<SignLEDObject> {
     }
 
     @Override
-    public IAnimationsRunner createAnimationsRunner(boolean runGPIO) {
-        return new SimonAnimationsRunner(runGPIO);
+    public IAnimationsRunner createAnimationsRunner(boolean runGPIO, String statsFile) {
+        return new SimonAnimationsRunner(runGPIO, statsFile);
     }
 
     @Override

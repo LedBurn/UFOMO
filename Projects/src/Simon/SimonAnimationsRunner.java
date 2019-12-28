@@ -1,3 +1,11 @@
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class SimonAnimationsRunner implements IAnimationsRunner {
@@ -13,11 +21,14 @@ public class SimonAnimationsRunner implements IAnimationsRunner {
     private ISimpleRunnerAnimationsProvider simpleRunnerProvider = new SignSimpleAnimationsProvider();
     private SimpleAnimationsRunner runner = new SimpleAnimationsRunner(simpleRunnerProvider);
 
-    public SimonAnimationsRunner(boolean runGPIO) {
+    private String statsFile;
+
+    public SimonAnimationsRunner(boolean runGPIO, String statsFile) {
         box = new SimonBox(true, runGPIO);
         game = new SimonGame(new int[]{SimonBox.RED_BIG, SimonBox.GREEN_BIG, SimonBox.BLUE_BIG, SimonBox.YELLOW_BIG});
         game.newGame();
         animations.add(new SimonSequenceAnimation(game.getGameSequence()));
+        this.statsFile = statsFile;
     }
 
     @Override
@@ -52,6 +63,7 @@ public class SimonAnimationsRunner implements IAnimationsRunner {
                 pressedAnimation.apply((SignLEDObject) ledObject, box.getButtonStates());
 
             } else if (box.hasMoreThanOnePressed()) { // invalid change
+                printStats(game.getGameSequence().size());
                 game.newGame();
                 animations.add(new SimonFailedAnimation());
                 animations.add(new SimonSequenceAnimation(game.getGameSequence()));
@@ -65,6 +77,7 @@ public class SimonAnimationsRunner implements IAnimationsRunner {
                         animations.add(new SimonSuccessAnimation());
                         animations.add(new SimonSequenceAnimation(game.getGameSequence()));
                     } else if (game.isGameOver()) {
+                        printStats(game.getGameSequence().size());
                         game.newGame();
                         animations.add(new SimonFailedAnimation());
                         animations.add(new SimonSequenceAnimation(game.getGameSequence()));
@@ -74,5 +87,22 @@ public class SimonAnimationsRunner implements IAnimationsRunner {
         }
 
         box.updatePreviousState();
+    }
+
+
+    private void printStats(int size) {
+        if (size < 2) return;
+        
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+
+        Path p = Paths.get(statsFile);
+        String s = System.lineSeparator() + size + ", " + dtf.format(now);
+
+        try (BufferedWriter writer = Files.newBufferedWriter(p, StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
+            writer.write(s);
+        } catch (IOException ioe) {
+            System.err.format("IOException: %s%n", ioe);
+        }
     }
 }
