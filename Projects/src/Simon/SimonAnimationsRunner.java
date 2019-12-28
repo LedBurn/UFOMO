@@ -40,7 +40,7 @@ public class SimonAnimationsRunner implements IAnimationsRunner {
                 lastUserInteractionTime = currentTime;
             }
 
-        } else if (currentTime - lastUserInteractionTime > 10 * 1000) { // wait for a player
+        } else if (currentTime - lastUserInteractionTime > 30 * 1000) { // wait for a player
             if (box.hasGameInteraction()) {
                 game.newGame();
                 animations.add(new SimonSequenceAnimation(game.getGameSequence()));

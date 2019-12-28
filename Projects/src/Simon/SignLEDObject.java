@@ -97,7 +97,7 @@ public class SignLEDObject implements ILEDObject<SignLEDObject> {
         burn_n = new PixelsArrayImp(SIZE_N);
 
         gameFingers = new IPixelsArray[]{ finger1, finger2, finger3, finger4 };
-        fingers = new IPixelsArray[]{ finger1, finger2, finger3, finger4, finger5 };
+        fingers = new IPixelsArray[]{ finger5, finger4, finger3, finger2, finger1 };
         palm = new IPixelsArray[]{ palm6, palm7, palm8, palm9, palm10, palm11 };
         hand = new IPixelsArray[]{ finger1, finger2, finger3, finger4, finger5, palm6, palm7, palm8, palm9, palm10, palm11 };
         camp = new IPixelsArray[]{ camp_c, camp_a, camp_m, camp_p };

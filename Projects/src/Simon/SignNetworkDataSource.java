@@ -22,7 +22,7 @@ public class SignNetworkDataSource implements INetworkDataSource<SignLEDObject> 
         }
 
         int size_fingers_1_2_3 = SignLEDObject.SIZE_FINGER1 + SignLEDObject.SIZE_FINGER2 + SignLEDObject.SIZE_FINGER3;
-        fingers_1_2_3 = new Segment("fingers_1_2_3", 5, 0, size_fingers_1_2_3);
+        fingers_1_2_3 = new Segment("fingers_1_2_3", 7, 0, size_fingers_1_2_3);
 
         int size_fingers_4_5 = SignLEDObject.SIZE_FINGER4 + SignLEDObject.SIZE_FINGER5;
         fingers_4_5 = new Segment("fingers_4_5", 3, 0, size_fingers_4_5);

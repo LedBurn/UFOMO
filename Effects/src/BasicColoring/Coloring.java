@@ -5,6 +5,10 @@ public abstract class Coloring {
     public static final Coloring RAINBOW_COLORING = new RainbowColoring(false);
     public static final Coloring RAINBOW_REVERESED_COLORING = new RainbowColoring(true);
 
+    public static final Coloring BLACK_COLORING = new ConstColoring(HSBColor.BLACK);
+    public static final Coloring GRAY_COLORING = new ConstColoring(HSBColor.GRAY);
+
+
     // colors the array
     public abstract void color(IPixelsArray ledObject);
 }
