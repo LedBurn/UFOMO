@@ -46,9 +46,6 @@ public class SimonBoxGPIO {
             @Override
             public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {
 
-//                System.out.println(" --> GPIO PIN STATE CHANGE: " + event.getPin() + " = "
-//                        + event.getState());
-
                 // button id
                 int buttonId = Arrays.asList(SimonBox.BUTTONS_NAMES).indexOf(event.getPin().getName());
                 if (buttonId == -1) return;

@@ -19,6 +19,6 @@ public class Simon implements IProject<SignLEDObject> {
 
     @Override
     public INetworkDataSource<SignLEDObject> CreateNetworkDataSource() {
-        return null;
+        return new SignNetworkDataSource();
     }
 }

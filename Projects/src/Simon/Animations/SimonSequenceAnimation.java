@@ -5,7 +5,12 @@ public class SimonSequenceAnimation extends SimonAnimation {
     ArrayList<Integer> sequence;
 
     ConstColoring red = new ConstColoring(HSBColor.RED);
-    ConstColoring black = new ConstColoring(HSBColor.WHITE);
+    ConstColoring blue = new ConstColoring(HSBColor.BLUE);
+    ConstColoring green = new ConstColoring(HSBColor.GREEN);
+    ConstColoring yellow = new ConstColoring(HSBColor.YELLOW);
+    ConstColoring[] colorings = new ConstColoring[]{ red, blue, green, yellow };
+
+    ConstColoring black = new ConstColoring(HSBColor.BLACK);
 
     public SimonSequenceAnimation(ArrayList<Integer> sequence) {
         super(totalTimeForSequenceSize(sequence.size()));
@@ -21,15 +26,16 @@ public class SimonSequenceAnimation extends SimonAnimation {
     @Override
     public void apply(SignLEDObject sign, double timePercent) {
         int index = (int)Math.floor(timePercent * sequence.size());
-        int buttonId = sequence.get(index);
+        int colorId = sequence.get(index);
+        Coloring coloring = colorings[colorId];
 
         double level = timePercent * sequence.size() - index;
 
-        for (int i = 0; i < sign.gameFingers.length; i++) {
-            if (i == buttonId && level > 0.2 && level < 0.9) {
-                red.color(sign.gameFingers[i]);
+        for (int i = 0; i < sign.all.length; i++) {
+            if (level > 0.2 && level < 0.9) {
+                coloring.color(sign.all[i]);
             } else {
-                black.color(sign.gameFingers[i]);
+                black.color(sign.all[i]);
             }
         }
     }

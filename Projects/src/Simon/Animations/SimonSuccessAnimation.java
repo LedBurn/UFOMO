@@ -11,7 +11,7 @@ public class SimonSuccessAnimation extends SimonAnimation {
 
     @Override
     public void apply(SignLEDObject sign, double timePercent) {
-        for (IPixelsArray finger: sign.gameFingers) {
+        for (IPixelsArray finger: sign.all) {
             coloring.color(finger);
             addon.change(finger, timePercent);
         }

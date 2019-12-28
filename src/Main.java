@@ -55,9 +55,9 @@ public class Main<T extends ILEDObject> {
         ledObjects.add(project.createLEDObject());
 
         // network
-//        INetworkDataSource<T> networkDataSource = project.CreateNetworkDataSource();
-//        networkDataSources.add(networkDataSource);
-//        networks.add(new Network<T>(networkDataSource));
+        INetworkDataSource<T> networkDataSource = project.CreateNetworkDataSource();
+        networkDataSources.add(networkDataSource);
+        networks.add(new Network<T>(networkDataSource));
 
         // simulator
         ISimulatedLEDObject simulatedObject = runSimulator ? project.createSimulatedLEDObject() : null;
@@ -102,7 +102,7 @@ public class Main<T extends ILEDObject> {
                     if (runSimulator) simulators.get(i).draw(ledObjects.get(i), simulatedObjects.get(i), 0, 10);
 
                     // send network
-//                    networks.get(i).send(ledObjects.get(i));
+                    networks.get(i).send(ledObjects.get(i));
                 }
 
                 Thread.sleep(20);

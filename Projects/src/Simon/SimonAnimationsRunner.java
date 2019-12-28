@@ -10,7 +10,8 @@ public class SimonAnimationsRunner implements IAnimationsRunner {
 
     private long lastUserInteractionTime;
 
-    private SimpleAnimationsRunner runner = new SimpleAnimationsRunner(new SignSimpleAnimationsProvider());
+    private ISimpleRunnerAnimationsProvider simpleRunnerProvider = new SignSimpleAnimationsProvider();
+    private SimpleAnimationsRunner runner = new SimpleAnimationsRunner(simpleRunnerProvider);
 
     public SimonAnimationsRunner(boolean runGPIO) {
         box = new SimonBox(true, runGPIO);
@@ -23,7 +24,12 @@ public class SimonAnimationsRunner implements IAnimationsRunner {
     public void apply(ILEDObject ledObject, boolean newBeat, boolean isOn, int[] eq) {
         long currentTime = System.currentTimeMillis();
 
-        if (animations.size() > 0) { // we have animations to run
+        if (box.newlyReleasedId() == SimonBox.RED_SMALL || box.newlyReleasedId() == SimonBox.GREEN_SMALL) { // force animation - stop game
+            lastUserInteractionTime = 0;
+            animations.clear();
+            runner.forceNewAnimation();
+
+        } else if (animations.size() > 0) { // we have animations to run
             SimonAnimation animation = animations.get(0);
             if (animation.startTime == 0) animation.startTime = currentTime;
             if (currentTime - animation.startTime >= animation.totalTime) { // animation is done
@@ -35,7 +41,7 @@ public class SimonAnimationsRunner implements IAnimationsRunner {
             }
 
         } else if (currentTime - lastUserInteractionTime > 10 * 1000) { // wait for a player
-            if (box.hasInteraction()) {
+            if (box.hasGameInteraction()) {
                 game.newGame();
                 animations.add(new SimonSequenceAnimation(game.getGameSequence()));
             }

@@ -1,15 +1,26 @@
 public class SimonPressedAnimation {
 
-    ConstColoring pressed = new ConstColoring(HSBColor.YELLOW);
-    ConstColoring black = new ConstColoring(HSBColor.WHITE);
+    ConstColoring red = new ConstColoring(HSBColor.RED);
+    ConstColoring blue = new ConstColoring(HSBColor.BLUE);
+    ConstColoring green = new ConstColoring(HSBColor.GREEN);
+    ConstColoring yellow = new ConstColoring(HSBColor.YELLOW);
+    ConstColoring black = new ConstColoring(HSBColor.BLACK);
+    ConstColoring[] colorings = new ConstColoring[]{ red, blue, green, yellow };
 
     public void apply(SignLEDObject sign, boolean[] pressStates) {
-        for (int i = 0; i < sign.gameFingers.length; i++) {
+        int colorId = -1;
+        for (int i = 0; i < pressStates.length; i++) {
             if (pressStates[i]) {
-                pressed.color(sign.gameFingers[i]);
-            } else {
-                black.color(sign.gameFingers[i]);
+                colorId = i;
             }
+        }
+
+        Coloring coloring = black;
+        if (colorId != -1 && colorId < colorings.length) {
+            coloring = colorings[colorId];
+        }
+        for (IPixelsArray obj : sign.all) {
+            coloring.color(obj);
         }
     }
 }

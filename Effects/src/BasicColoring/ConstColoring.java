@@ -4,7 +4,7 @@ public class ConstColoring extends Coloring {
     private HSBColor color;
 
     public ConstColoring() {
-        this.color = new HSBColor(0,0, 1.0);
+        this.color = new HSBColor(Math.random(),1.0, 1.0);
     }
 
     public ConstColoring(HSBColor color) {

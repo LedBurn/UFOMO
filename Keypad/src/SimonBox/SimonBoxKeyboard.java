@@ -23,6 +23,12 @@ public class SimonBoxKeyboard {
                     case KeyEvent.VK_4:
                         buttonId = SimonBox.YELLOW_BIG;
                         break;
+                    case KeyEvent.VK_5:
+                        buttonId = SimonBox.RED_SMALL;
+                        break;
+                    case KeyEvent.VK_6:
+                        buttonId = SimonBox.GREEN_SMALL;
+                        break;
                 }
                 if (buttonId == -1) return false;
 

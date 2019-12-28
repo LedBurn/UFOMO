@@ -66,6 +66,10 @@ public class SimpleAnimationsRunner implements IAnimationsRunner {
         }
     }
 
+    public void forceNewAnimation() {
+        setNewAnimation(provider.randomNewAnimation());
+    }
+
     // force a new animation to start now
     private void setNewAnimation(Animation animation) {
         currentAnimation = animation;

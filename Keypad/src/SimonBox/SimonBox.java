@@ -82,6 +82,17 @@ public class SimonBox implements ISimonBoxListener {
         return false;
     }
 
+    // return true if there is any change in the states or if any button is pressed
+    public boolean hasGameInteraction() {
+        for (int i = 0; i < 4; i++) {
+            if (previousButtonStates[i] != buttonStates[i])
+                return true;
+            if (buttonStates[i])
+                return true;
+        }
+        return false;
+    }
+
     // returns the numbers of currently pressed buttons
     public int numberOfPressed() {
         int numberOfPressed = 0;
@@ -91,5 +102,10 @@ public class SimonBox implements ISimonBoxListener {
             }
         }
         return numberOfPressed;
+    }
+
+    // returns true is the button is pressed
+    public boolean isPressed(int buttonId) {
+        return buttonStates[buttonId];
     }
 }
