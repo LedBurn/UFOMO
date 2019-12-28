@@ -1,11 +1,10 @@
-import SimonBox.SimonBox;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Main<T extends ILEDObject> {
 
     private final boolean runSimulator;
+    private final boolean runGPIO;
 
     private final ArrayList<INetworkDataSource<T>> networkDataSources;
     private final ArrayList<Network<T>> networks;
@@ -19,16 +18,14 @@ public class Main<T extends ILEDObject> {
 
     private final Keypad keypad;
 
-//    private final SimonBox simonBox;
-
     // What's missing:
     // - testing mode
     // - brightness level
-    // - gpio
     // - user codes
-    public Main(boolean runSimulator) {
+    public Main(boolean runSimulator, boolean runGPIO) {
 
         this.runSimulator = runSimulator;
+        this.runGPIO = runGPIO;
 
         // main LED object
         ledObjects = new ArrayList<>();
@@ -68,7 +65,7 @@ public class Main<T extends ILEDObject> {
         if (simulatedObject != null) simulators.add(new Simulator(simulatedObject));
 
         // animations
-        animationsRunners.add(project.createAnimationsRunner());
+        animationsRunners.add(project.createAnimationsRunner(runGPIO));
     }
 
     public void run() {

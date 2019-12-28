@@ -1,5 +1,3 @@
-import SimonBox.SimonBox;
-
 import java.util.ArrayList;
 
 public class SimonAnimationsRunner implements IAnimationsRunner {
@@ -14,9 +12,8 @@ public class SimonAnimationsRunner implements IAnimationsRunner {
 
     private SimpleAnimationsRunner runner = new SimpleAnimationsRunner(new SignSimpleAnimationsProvider());
 
-    public SimonAnimationsRunner() {
-        box = new SimonBox();
-        box.startListening();
+    public SimonAnimationsRunner(boolean runGPIO) {
+        box = new SimonBox(true, runGPIO);
         game = new SimonGame(new int[]{SimonBox.RED_BIG, SimonBox.GREEN_BIG, SimonBox.BLUE_BIG, SimonBox.YELLOW_BIG});
         game.newGame();
         animations.add(new SimonSequenceAnimation(game.getGameSequence()));

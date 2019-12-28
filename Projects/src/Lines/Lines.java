@@ -11,7 +11,7 @@ public class Lines implements IProject<LinesObject> {
     }
 
     @Override
-    public IAnimationsRunner createAnimationsRunner() {
+    public IAnimationsRunner createAnimationsRunner(boolean runGPIO) {
         return new SimpleAnimationsRunner(new LinesAnimationsProvider());
     }
 

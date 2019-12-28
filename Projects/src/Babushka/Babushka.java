@@ -11,7 +11,7 @@ public class Babushka implements IProject<BabushkaObject>{
     }
 
     @Override
-    public IAnimationsRunner createAnimationsRunner() {
+    public IAnimationsRunner createAnimationsRunner(boolean runGPIO) {
         return new SimpleAnimationsRunner(new BabushkaAnimationsProvider());
     }
 

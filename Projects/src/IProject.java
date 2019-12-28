@@ -7,7 +7,7 @@ public interface IProject<T extends ILEDObject> {
     ISimulatedLEDObject createSimulatedLEDObject();
 
     // Create a new animations runner
-    IAnimationsRunner createAnimationsRunner();
+    IAnimationsRunner createAnimationsRunner(boolean runGPIO);
 
     // Create a new network data source
     INetworkDataSource<T> CreateNetworkDataSource();

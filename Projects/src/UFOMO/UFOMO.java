@@ -11,7 +11,7 @@ public class UFOMO implements IProject<UFOMOObject> {
     }
 
     @Override
-    public IAnimationsRunner createAnimationsRunner() {
+    public IAnimationsRunner createAnimationsRunner(boolean runGPIO) {
         return new SimpleAnimationsRunner(new UFOMOAnimationsProvider());
     }
 
