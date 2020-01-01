@@ -8,7 +8,7 @@
 public class SimpleAnimationsRunner implements IAnimationsRunner {
 
     private static final double CYCLE_TIME = 3000.0; //milliseconds
-    private static final int NUM_OF_CYCLES = 5;
+    private static final int NUM_OF_CYCLES = 3;
 
     private long currentAnimationStartTime = 0; // milliseconds
     private long nextAnimationStartTime = 0;

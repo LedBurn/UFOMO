@@ -57,8 +57,13 @@ public class SimonAnimationsRunner implements IAnimationsRunner {
                 animations.add(new SimonSequenceAnimation(game.getGameSequence()));
             }
             runner.apply(ledObject, newBeat, isOn, eq);
-
         } else { // play game
+
+            int pressedButtonId = box.newlyPressedId();
+            if (pressedButtonId != -1 && pressedButtonId < 4) {
+                Sound.bips[pressedButtonId].play();
+            }
+
             if (!box.hasChanges()) { // no change
                 pressedAnimation.apply((SignLEDObject) ledObject, box.getButtonStates());
 
@@ -67,20 +72,23 @@ public class SimonAnimationsRunner implements IAnimationsRunner {
                 game.newGame();
                 animations.add(new SimonFailedAnimation());
                 animations.add(new SimonSequenceAnimation(game.getGameSequence()));
+                Sound.failed.play();
 
             } else {
-                int buttonId = box.newlyReleasedId();
-                if (buttonId != -1) { // button pressed
-                    game.userPressed(buttonId);
+                int releasedButtonId = box.newlyReleasedId();
+                if (releasedButtonId != -1) { // button pressed
+                    game.userPressed(releasedButtonId);
                     if (game.isLevelDone()) {
                         game.nextLevel();
                         animations.add(new SimonSuccessAnimation());
                         animations.add(new SimonSequenceAnimation(game.getGameSequence()));
+                        Sound.success.play();
                     } else if (game.isGameOver()) {
                         printStats(game.getGameSequence().size());
                         game.newGame();
                         animations.add(new SimonFailedAnimation());
                         animations.add(new SimonSequenceAnimation(game.getGameSequence()));
+                        Sound.failed.play();
                     }
                 }
             }

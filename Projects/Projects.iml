@@ -22,5 +22,6 @@
     <orderEntry type="module" module-name="Simulator" />
     <orderEntry type="module" module-name="Network" />
     <orderEntry type="module" module-name="Keypad" />
+    <orderEntry type="module" module-name="Audio" />
   </component>
 </module>

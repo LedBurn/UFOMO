@@ -7,7 +7,7 @@ public class SignLEDObject implements ILEDObject<SignLEDObject> {
     public static int SIZE_FINGER5 = 18;
     public static int SIZE_PALM6 = 28;
     public static int SIZE_PALM7 = 23;
-    public static int SIZE_PALM8 = 32;
+    public static int SIZE_PALM8 = 33;
     public static int SIZE_PALM9 = 39;
     public static int SIZE_PALM10 = 29;
     public static int SIZE_PALM11 = 13;

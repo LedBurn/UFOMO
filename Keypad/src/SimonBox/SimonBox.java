@@ -61,6 +61,16 @@ public class SimonBox implements ISimonBoxListener {
         return numberOfPressed > 1;
     }
 
+    // return the first newly pressed id, or -1 if none.
+    public int newlyPressedId() {
+        for (int i = 0; i < NUM_OF_BUTTONS; i++) {
+            if (!previousButtonStates[i] && buttonStates[i]) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     // return the first newly released id, or -1 if none.
     public int newlyReleasedId() {
         for (int i = 0; i < NUM_OF_BUTTONS; i++) {

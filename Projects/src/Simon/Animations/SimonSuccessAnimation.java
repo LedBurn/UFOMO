@@ -4,7 +4,7 @@ public class SimonSuccessAnimation extends SimonAnimation {
     Addon addon;
 
     public SimonSuccessAnimation() {
-        super(1000);
+        super(2500);
         coloring = Coloring.RAINBOW_COLORING;
         addon = new ChangeHueByTimeAddon();
     }
@@ -12,6 +12,10 @@ public class SimonSuccessAnimation extends SimonAnimation {
     @Override
     public void apply(SignLEDObject sign, double timePercent) {
         for (IPixelsArray obj : sign.all) {
+            Coloring.RAINBOW_COLORING.color(obj);
+        }
+
+        for (IPixelsArray obj : sign.hand) {
             Coloring.GRAY_COLORING.color(obj);
         }
 
@@ -24,5 +28,13 @@ public class SimonSuccessAnimation extends SimonAnimation {
 
         coloring.color(sign.finger4);
         addon.change(sign.finger4, timePercent);
+
+        coloring.color(sign.finger5);
+        addon.change(sign.finger5, timePercent);
+
+        for (IPixelsArray obj : sign.campledburn) {
+            coloring.color(obj);
+            addon.change(obj, timePercent);
+        }
     }
 }
