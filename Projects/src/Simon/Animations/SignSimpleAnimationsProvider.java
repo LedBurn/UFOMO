@@ -1,8 +1,8 @@
 public class SignSimpleAnimationsProvider implements ISimpleRunnerAnimationsProvider {
     @Override
     public Animation randomNewAnimation() {
-        int num = (int)Math.floor(Math.random() * 7);
-//        num = 6;
+        int num = (int)Math.floor(Math.random() * 11);
+//        num = 5;
         switch (num) {
             case 0:
                 return new ConstAnimation1(new SignLEDObject());
@@ -18,6 +18,14 @@ public class SignSimpleAnimationsProvider implements ISimpleRunnerAnimationsProv
                 return new AlternateAnimation1(new SignLEDObject());
             case 6:
                 return new AlternateAnimation2(new SignLEDObject());
+            case 7:
+                return new CrazyDotAnimation1(new SignLEDObject());
+            case 8:
+                return new CrazyDotAnimation2(new SignLEDObject());
+            case 9:
+                return new TrailAnimation1(new SignLEDObject());
+            case 10:
+                return new TrailAnimation2(new SignLEDObject());
         }
         return null;
     }
@@ -167,7 +175,7 @@ public class SignSimpleAnimationsProvider implements ISimpleRunnerAnimationsProv
         @Override
         protected void configAnimations() {
             double hue1 = Math.random();
-            double hue2 = Math.random();
+            double hue2 = hue1 + 0.2 + Math.random() * 0.6;
 
             for (int i = 0; i < ledObject.all.length; i++) {
                 animations.add(new PixelsArrayAnimation(ledObject.all[i],
@@ -196,6 +204,87 @@ public class SignSimpleAnimationsProvider implements ISimpleRunnerAnimationsProv
                 animations.add(new PixelsArrayAnimation(ledObject.all[i],
                         new ConstColoring(),
                         new Addon[]{new AlternateSmoothAddon(hue1, hue2, 3), new ConstCyclicMoveAddon(Math.random() > 0.5)}));
+            }
+        }
+
+        @Override
+        protected void newBeat() {
+
+        }
+    }
+
+    public static class CrazyDotAnimation1 extends Animation<SignLEDObject> {
+        public CrazyDotAnimation1(SignLEDObject sign) {
+            super(sign);
+        }
+
+        @Override
+        protected void configAnimations() {
+            for (int i = 0; i < ledObject.all.length; i++) {
+                animations.add(new PixelsArrayAnimation(ledObject.all[i],
+                        new ConstColoring(),
+                        new Addon[]{new CrazyDotsAddon()}));
+            }
+        }
+
+        @Override
+        protected void newBeat() {
+
+        }
+    }
+
+    public static class CrazyDotAnimation2 extends Animation<SignLEDObject> {
+        public CrazyDotAnimation2(SignLEDObject sign) {
+            super(sign);
+        }
+
+        @Override
+        protected void configAnimations() {
+            for (int i = 0; i < ledObject.all.length; i++) {
+                animations.add(new PixelsArrayAnimation(ledObject.all[i],
+                        Coloring.RAINBOW_COLORING,
+                        new Addon[]{new CrazyDotsAddon()}));
+            }
+        }
+
+        @Override
+        protected void newBeat() {
+
+        }
+    }
+
+    public static class TrailAnimation1 extends Animation<SignLEDObject> {
+        public TrailAnimation1(SignLEDObject sign) {
+            super(sign);
+        }
+
+        @Override
+        protected void configAnimations() {
+            for (int i = 0; i < ledObject.all.length; i++) {
+                animations.add(new PixelsArrayAnimation(ledObject.all[i],
+                        Coloring.RAINBOW_COLORING,
+                        new Addon[]{new TrailAddon()}));
+            }
+        }
+
+        @Override
+        protected void newBeat() {
+
+        }
+    }
+
+    public static class TrailAnimation2 extends Animation<SignLEDObject> {
+        public TrailAnimation2(SignLEDObject sign) {
+            super(sign);
+        }
+
+        @Override
+        protected void configAnimations() {
+            Coloring coloring = new ConstColoring(new HSBColor(Math.random(), 1, 1));
+            for (int i = 0; i < ledObject.all.length; i++) {
+                animations.add(new PixelsArrayAnimation(ledObject.all[i],
+                        coloring,
+                        new Addon[]{new TrailAddon(), new ChangeHueByTimeAddon()}));
             }
         }
 
