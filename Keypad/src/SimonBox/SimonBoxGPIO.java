@@ -7,6 +7,8 @@ import java.util.Arrays;
 
 public class SimonBoxGPIO {
 
+    private static int debounce = 150;
+
     public SimonBoxGPIO(ISimonBoxListener listener) {
         GpioController gpio = GpioFactory.getInstance();
 
@@ -14,31 +16,37 @@ public class SimonBoxGPIO {
         // RED BIG - grey line
         GpioPinDigitalInput redBigPin = gpio.provisionDigitalInputPin(RaspiPin.GPIO_01,
                 SimonBox.BUTTONS_NAMES[SimonBox.RED_BIG], PinPullResistance.PULL_DOWN);
+        redBigPin.setDebounce(debounce);
 
 
         // GREEN BIG - orange line
         GpioPinDigitalInput greenBigPin = gpio.provisionDigitalInputPin(RaspiPin.GPIO_05,
                 SimonBox.BUTTONS_NAMES[SimonBox.GREEN_BIG], PinPullResistance.PULL_DOWN);
+        greenBigPin.setDebounce(debounce);
 
 
         // BLUE BIG - purple line
         GpioPinDigitalInput blueBigPin = gpio.provisionDigitalInputPin(RaspiPin.GPIO_00,
                 SimonBox.BUTTONS_NAMES[SimonBox.BLUE_BIG], PinPullResistance.PULL_DOWN);
+        blueBigPin.setDebounce(debounce);
 
 
         // YELLOW BIG - brown line
         GpioPinDigitalInput yellowBigPin = gpio.provisionDigitalInputPin(RaspiPin.GPIO_04,
                 SimonBox.BUTTONS_NAMES[SimonBox.YELLOW_BIG], PinPullResistance.PULL_DOWN);
+        yellowBigPin.setDebounce(debounce);
 
 
         // RED SMALL - green line
         GpioPinDigitalInput redSmallPin = gpio.provisionDigitalInputPin(RaspiPin.GPIO_03,
                 SimonBox.BUTTONS_NAMES[SimonBox.RED_SMALL], PinPullResistance.PULL_DOWN);
+        redSmallPin.setDebounce(debounce);
 
 
         // GREEN SMALL - yellow line
         GpioPinDigitalInput greenSmallPin = gpio.provisionDigitalInputPin(RaspiPin.GPIO_02,
                 SimonBox.BUTTONS_NAMES[SimonBox.GREEN_SMALL], PinPullResistance.PULL_DOWN);
+        greenSmallPin.setDebounce(debounce);
 
 
         // listen to changes
