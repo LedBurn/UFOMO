@@ -58,10 +58,13 @@ public class Controller {
             DatagramPacket sendPacket = new DatagramPacket(msgContent, msgContent.length, ipAddress, 2000);
             try {
                 socket.send(sendPacket);
+                Thread.sleep(2);
             }
-            catch (IOException e) {
+            catch (Exception e) {
                 // TODO: log?
             }
+
+
 
         }
     }

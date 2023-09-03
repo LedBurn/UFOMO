@@ -20,6 +20,8 @@ public class Main<T extends ILEDObject> {
 
     private final String statsFile;
 
+    private long lastFrameTime = 0;
+
     // What's missing:
     // - testing mode
     // - brightness level
@@ -104,10 +106,15 @@ public class Main<T extends ILEDObject> {
                     if (runSimulator) simulators.get(i).draw(ledObjects.get(i), simulatedObjects.get(i), 0, 10);
 
                     // send network
+                    lastFrameTime = System.currentTimeMillis();
                     networks.get(i).send(ledObjects.get(i));
                 }
 
-                Thread.sleep(20);
+                // wait
+                long waitTime = 30 - (System.currentTimeMillis() - lastFrameTime);
+                if (waitTime > 0) {
+                    Thread.sleep(waitTime);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
