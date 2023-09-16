@@ -1,14 +1,9 @@
 public class ConfettiAnimations {
 
-    public static class ConfettiAnimation1 extends Animation<UFOMOObject> {
+    public static class ConfettiAnimation1 extends LedObjectAnimation<UFOMOObject> {
 
         public ConfettiAnimation1(UFOMOObject ufomoObject) {
             super(ufomoObject);
-        }
-
-        @Override
-        protected void newBeat() {
-
         }
 
         @Override
@@ -39,17 +34,11 @@ public class ConfettiAnimations {
         }
     }
 
-    public static class ConfettiAnimation2 extends Animation<UFOMOObject>  {
+    public static class ConfettiAnimation2 extends LedObjectAnimation<UFOMOObject> {
         ConstColoring constColoring;
 
         public ConfettiAnimation2(UFOMOObject ufomoObject) {
             super(ufomoObject);
-        }
-
-        @Override
-        protected void newBeat() {
-            HSBColor color = new HSBColor(Math.random(),1.0, 1.0);
-            constColoring.changeColor(color);
         }
 
         @Override
@@ -82,14 +71,9 @@ public class ConfettiAnimations {
         }
     }
 
-    public static class ConfettiAnimation3 extends Animation<UFOMOObject>  {
+    public static class ConfettiAnimation3 extends LedObjectAnimation<UFOMOObject> {
         public ConfettiAnimation3(UFOMOObject ufomoObject) {
             super(ufomoObject);
-        }
-
-        @Override
-        protected void newBeat() {
-
         }
 
         @Override

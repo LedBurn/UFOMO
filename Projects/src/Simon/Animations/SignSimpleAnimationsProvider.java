@@ -1,6 +1,6 @@
 public class SignSimpleAnimationsProvider implements ISimpleRunnerAnimationsProvider {
     @Override
-    public Animation randomNewAnimation() {
+    public LedObjectAnimation randomNewAnimation() {
         int num = (int)Math.floor(Math.random() * 11);
 //        num = 5;
         switch (num) {
@@ -35,7 +35,7 @@ public class SignSimpleAnimationsProvider implements ISimpleRunnerAnimationsProv
 
     }
 
-    public static class RainbowAnimation1 extends Animation<SignLEDObject> {
+    public static class RainbowAnimation1 extends LedObjectAnimation<SignLEDObject> {
 
         public RainbowAnimation1(SignLEDObject sign) {
             super(sign);
@@ -50,15 +50,10 @@ public class SignSimpleAnimationsProvider implements ISimpleRunnerAnimationsProv
                         new Addon[] {new ConstCyclicMoveAddon(true)}));
             }
         }
-
-        @Override
-        protected void newBeat() {
-
-        }
     }
 
 
-    public static class ConstAnimation1 extends Animation<SignLEDObject> {
+    public static class ConstAnimation1 extends LedObjectAnimation<SignLEDObject> {
 
         public ConstAnimation1(SignLEDObject sign) {
             super(sign);
@@ -73,13 +68,9 @@ public class SignSimpleAnimationsProvider implements ISimpleRunnerAnimationsProv
                         new Addon[]{new ChangeHueByTimeDiscrete(Math.random(), 3, Math.random() > 0.5)}));
             }
         }
-
-        @Override
-        protected void newBeat() {
-        }
     }
 
-    public static class ConfettiAnimation1 extends Animation<SignLEDObject> {
+    public static class ConfettiAnimation1 extends LedObjectAnimation<SignLEDObject> {
         public ConfettiAnimation1(SignLEDObject sign) {
             super(sign);
         }
@@ -94,14 +85,9 @@ public class SignSimpleAnimationsProvider implements ISimpleRunnerAnimationsProv
                         new Addon[] {new ConfettiAddon(ledObject.all[i].numOfPixels())}));
             }
         }
-
-        @Override
-        protected void newBeat() {
-
-        }
     }
 
-    public static class ConfettiAnimation2 extends Animation<SignLEDObject> {
+    public static class ConfettiAnimation2 extends LedObjectAnimation<SignLEDObject> {
         public ConfettiAnimation2(SignLEDObject sign) {
             super(sign);
         }
@@ -114,14 +100,9 @@ public class SignSimpleAnimationsProvider implements ISimpleRunnerAnimationsProv
                         new Addon[] {new ConfettiAddon(ledObject.all[i].numOfPixels())}));
             }
         }
-
-        @Override
-        protected void newBeat() {
-
-        }
     }
 
-    public static class CountingAnimation1 extends Animation<SignLEDObject> {
+    public static class CountingAnimation1 extends LedObjectAnimation<SignLEDObject> {
         Coloring[] colorings;
 
 
@@ -134,7 +115,7 @@ public class SignSimpleAnimationsProvider implements ISimpleRunnerAnimationsProv
         }
 
         @Override
-        public void apply(double timePercent, boolean newBeat, boolean isOn, int[] eq) {
+        public void apply(double timePercent) {
             for (IPixelsArray obj : ledObject.all) {
                 Coloring.GRAY_COLORING.color(obj);
             }
@@ -161,13 +142,10 @@ public class SignSimpleAnimationsProvider implements ISimpleRunnerAnimationsProv
 
         @Override
         protected void configAnimations() {}
-
-        @Override
-        protected void newBeat() {}
     }
 
 
-    public static class AlternateAnimation1 extends Animation<SignLEDObject> {
+    public static class AlternateAnimation1 extends LedObjectAnimation<SignLEDObject> {
         public AlternateAnimation1(SignLEDObject sign) {
             super(sign);
         }
@@ -183,14 +161,9 @@ public class SignSimpleAnimationsProvider implements ISimpleRunnerAnimationsProv
                         new Addon[]{new AlternateSmoothAddon(hue1, hue2, 6), new ConstCyclicMoveAddon(Math.random() > 0.5)}));
             }
         }
-
-        @Override
-        protected void newBeat() {
-
-        }
     }
 
-    public static class AlternateAnimation2 extends Animation<SignLEDObject> {
+    public static class AlternateAnimation2 extends LedObjectAnimation<SignLEDObject> {
         public AlternateAnimation2(SignLEDObject sign) {
             super(sign);
         }
@@ -206,14 +179,9 @@ public class SignSimpleAnimationsProvider implements ISimpleRunnerAnimationsProv
                         new Addon[]{new AlternateSmoothAddon(hue1, hue2, 3), new ConstCyclicMoveAddon(Math.random() > 0.5)}));
             }
         }
-
-        @Override
-        protected void newBeat() {
-
-        }
     }
 
-    public static class CrazyDotAnimation1 extends Animation<SignLEDObject> {
+    public static class CrazyDotAnimation1 extends LedObjectAnimation<SignLEDObject> {
         public CrazyDotAnimation1(SignLEDObject sign) {
             super(sign);
         }
@@ -226,14 +194,9 @@ public class SignSimpleAnimationsProvider implements ISimpleRunnerAnimationsProv
                         new Addon[]{new CrazyDotsAddon()}));
             }
         }
-
-        @Override
-        protected void newBeat() {
-
-        }
     }
 
-    public static class CrazyDotAnimation2 extends Animation<SignLEDObject> {
+    public static class CrazyDotAnimation2 extends LedObjectAnimation<SignLEDObject> {
         public CrazyDotAnimation2(SignLEDObject sign) {
             super(sign);
         }
@@ -246,14 +209,9 @@ public class SignSimpleAnimationsProvider implements ISimpleRunnerAnimationsProv
                         new Addon[]{new CrazyDotsAddon()}));
             }
         }
-
-        @Override
-        protected void newBeat() {
-
-        }
     }
 
-    public static class TrailAnimation1 extends Animation<SignLEDObject> {
+    public static class TrailAnimation1 extends LedObjectAnimation<SignLEDObject> {
         public TrailAnimation1(SignLEDObject sign) {
             super(sign);
         }
@@ -266,14 +224,9 @@ public class SignSimpleAnimationsProvider implements ISimpleRunnerAnimationsProv
                         new Addon[]{new TrailAddon()}));
             }
         }
-
-        @Override
-        protected void newBeat() {
-
-        }
     }
 
-    public static class TrailAnimation2 extends Animation<SignLEDObject> {
+    public static class TrailAnimation2 extends LedObjectAnimation<SignLEDObject> {
         public TrailAnimation2(SignLEDObject sign) {
             super(sign);
         }
@@ -286,11 +239,6 @@ public class SignSimpleAnimationsProvider implements ISimpleRunnerAnimationsProv
                         coloring,
                         new Addon[]{new TrailAddon(), new ChangeHueByTimeAddon()}));
             }
-        }
-
-        @Override
-        protected void newBeat() {
-
         }
     }
 }

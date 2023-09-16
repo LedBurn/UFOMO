@@ -1,6 +1,6 @@
 public class BabushkaRainbowAnimations {
 
-    public static class RainbowAnimationAll extends Animation<BabushkaObject>{
+    public static class RainbowAnimationAll extends LedObjectAnimation<BabushkaObject> {
 
         public RainbowAnimationAll(BabushkaObject babushkaObject) {
             super(babushkaObject);
@@ -15,12 +15,9 @@ public class BabushkaRainbowAnimations {
                         new Addon[] {new ConstCyclicMoveAddon(oppositeDirection)}));
             }
         }
-
-        @Override
-        protected void newBeat() {}
     }
 
-    public static class RainbowAnimationEqualDiff extends Animation<BabushkaObject> {
+    public static class RainbowAnimationEqualDiff extends LedObjectAnimation<BabushkaObject> {
 
         public RainbowAnimationEqualDiff(BabushkaObject babushkaObject) {
             super(babushkaObject);
@@ -34,12 +31,9 @@ public class BabushkaRainbowAnimations {
                         new Addon[] {new ConstCyclicMoveAddon(oppositeDirection, i / (double)BabushkaObject.SIZES.length)}));
             }
         }
-
-        @Override
-        protected void newBeat() {}
     }
 
-    public static class RainbowAnimationSmallDiff extends Animation<BabushkaObject> {
+    public static class RainbowAnimationSmallDiff extends LedObjectAnimation<BabushkaObject> {
 
         public RainbowAnimationSmallDiff(BabushkaObject babushkaObject) {
             super(babushkaObject);
@@ -54,8 +48,5 @@ public class BabushkaRainbowAnimations {
                         new Addon[] {new ConstCyclicMoveAddon(oppositeDirection, i * positionDiff)}));
             }
         }
-
-        @Override
-        protected void newBeat() {}
     }
 }

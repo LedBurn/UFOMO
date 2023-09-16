@@ -13,7 +13,7 @@ public class ConstChangeHueAddon extends Addon {
     }
 
     @Override
-    public void change(IPixelsArray ledObject, double level, boolean newBeat, boolean isOn, int[] eq) {
+    public void change(IPixelsArray ledObject, double level) {
         for (int i = 0; i < ledObject.numOfPixels(); i++) {
             double currHue = ledObject.getColor(i).hue;
             double newHue = currHue + diff;

@@ -24,12 +24,12 @@ public class DandooAnimation extends PixelsArrayAnimation {
     }
 
     @Override
-    public void apply(double level, boolean newBeat, boolean isOn, int[] eq) {
+    public void apply(double level) {
 //        if (newBeat) reversed = !reversed;
-        if (eq[7] / 128.0 > 0.8) {
-//            System.out.println("new spike");
-            reversed = !reversed;
-        }
+//        if (eq[7] / 128.0 > 0.8) {
+////            System.out.println("new spike");
+//            reversed = !reversed;
+//        }
 
         for (int i = 0; i < ledObject.numOfPixels(); i++) {
             ledObject.setColor(i, HSBColor.BLACK);
@@ -82,7 +82,7 @@ public class DandooAnimation extends PixelsArrayAnimation {
         }
 
         for (Addon addon : addons) {
-            addon.change(ledObject, level, newBeat, isOn, eq);
+            addon.change(ledObject, level);
         }
     }
 

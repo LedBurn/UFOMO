@@ -17,7 +17,7 @@ public class FireAddon extends Addon {
     int fireLevel = -1;
 
     @Override
-    public void change(IPixelsArray ledObject, double level, boolean newBeat, boolean isOn, int[] eq) {
+    public void change(IPixelsArray ledObject, double level) {
         if (fireLevel == -1) {
             random(ledObject);
         }

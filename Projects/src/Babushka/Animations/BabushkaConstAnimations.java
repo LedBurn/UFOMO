@@ -1,8 +1,6 @@
-import java.util.ArrayList;
-
 public class BabushkaConstAnimations {
 
-    public static class ConstAnimation extends Animation<BabushkaObject>{
+    public static class ConstAnimation extends LedObjectAnimation<BabushkaObject> {
 
         public ConstAnimation(BabushkaObject babushkaObject) {
             super(babushkaObject);
@@ -18,12 +16,9 @@ public class BabushkaConstAnimations {
                         new Addon[] {new ChangeHueByTimeAddon(reversed)}));
             }
         }
-
-        @Override
-        protected void newBeat() {}
     }
 
-    public static class ConstAnimation2 extends Animation<BabushkaObject>{
+    public static class ConstAnimation2 extends LedObjectAnimation<BabushkaObject> {
 
         public ConstAnimation2(BabushkaObject babushkaObject) {
             super(babushkaObject);
@@ -40,7 +35,5 @@ public class BabushkaConstAnimations {
             }
         }
 
-        @Override
-        protected void newBeat() {}
     }
 }

@@ -1,13 +1,8 @@
 public class RandomAnimations {
 
-    public static class RandomAnimation1 extends Animation<UFOMOObject> {
+    public static class RandomAnimation1 extends LedObjectAnimation<UFOMOObject> {
         public RandomAnimation1(UFOMOObject ufomoObject) {
             super(ufomoObject);
-        }
-
-        @Override
-        protected void newBeat() {
-
         }
 
         @Override

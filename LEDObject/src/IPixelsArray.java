@@ -18,6 +18,9 @@ public interface IPixelsArray {
     // set color of a specific pixel
     void setColor(int pixelNum, HSBColor color);
 
+    // blends a new color into existing color
+    void blendColor(int pixelNum, HSBColor color, HSBColor.BLEND_TYPE blendType);
+
 
     // clears the array - set all to black
     void clear();
@@ -28,4 +31,7 @@ public interface IPixelsArray {
 
     // merge 2 other pixels array and copy it the this object
     void mergeAndCopy(IPixelsArray other1, IPixelsArray other2, double fadePercent);
+
+    // reduce the brightness level of all the pixels
+    void reduceBrightness(double brightnessLevel);
 }

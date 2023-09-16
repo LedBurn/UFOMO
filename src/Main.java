@@ -14,7 +14,7 @@ public class Main<T extends ILEDObject> {
     private final ArrayList<Simulator> simulators;
     private final ArrayList<ISimulatedLEDObject> simulatedObjects;
 
-    private final ArrayList<IAnimationsRunner> animationsRunners;
+    private final ArrayList<IAnimationsRunner<T>> animationsRunners;
 
     private final Keypad keypad;
 
@@ -96,9 +96,8 @@ public class Main<T extends ILEDObject> {
                 }
 
                 for (int i = 0; i < ledObjects.size(); i++) {
-                    animationsRunners.get(i).apply(ledObjects.get(i), keypad.newBeat, keypad.onBeat, keypad.eq);
+                    animationsRunners.get(i).apply(ledObjects.get(i));
                 }
-
                 keypad.newBeat = false;
 
                 for (int i = 0; i < ledObjects.size(); i++) {

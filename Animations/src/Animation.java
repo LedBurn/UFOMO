@@ -1,29 +1,15 @@
-import java.util.ArrayList;
+public abstract class Animation {
 
-// This is the base class of all the animations of T (can be any led object)
-// each subclass should:
-// 1. pass the led object instance in the constructor
-// 2. implement configAnimation & newBeat and add pixelsArrayAnimations to the animations array list.
-public abstract class Animation<T extends ILEDObject> {
+    protected IPixelsArray ledObject;
+//    protected long startingTime = 0; // in millis
+//    protected long startingTime = 0; // in millis
 
-    // holds the led object the animation will run on.
-    public T ledObject;
-
-    // in the constructor you must pass the led object
-    public Animation(T t) {
-        ledObject = t;
-        configAnimations();
-        newBeat();
+    public Animation(IPixelsArray ledObject) {
+        this.ledObject = ledObject;
     }
-
-    protected ArrayList<PixelsArrayAnimation> animations = new ArrayList<>();
-
-    protected abstract void configAnimations();
-    protected abstract void newBeat();
-
-    public void apply(double timePercent, boolean newBeat, boolean isOn, int[] eq) {
-        for (PixelsArrayAnimation animation : animations){
-            animation.apply(timePercent,newBeat, isOn, eq);
-        }
-    }
+    public abstract void animate(long cycleNum, double cycleTimePercent);
+//        if (startingTime == 0) {
+//            startingTime = System.currentTimeMillis();
+//        }
+//    }
 }

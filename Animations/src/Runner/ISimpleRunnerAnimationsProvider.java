@@ -1,4 +1,4 @@
 public interface ISimpleRunnerAnimationsProvider {
-    Animation randomNewAnimation();
+    LedObjectAnimation randomNewAnimation();
     void handleUserCode(int code);
 }

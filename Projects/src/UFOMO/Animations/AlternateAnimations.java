@@ -1,13 +1,9 @@
 public class AlternateAnimations {
 
-    public static class AlternateAnimation1 extends Animation<UFOMOObject> {
+    public static class AlternateAnimation1 extends LedObjectAnimation<UFOMOObject> {
 
         public AlternateAnimation1(UFOMOObject ufomoObject) {
             super(ufomoObject);
-        }
-
-        @Override
-        protected void newBeat() {
         }
 
         @Override
@@ -39,14 +35,10 @@ public class AlternateAnimations {
         }
     }
 
-    public static class AlternateAnimation2 extends Animation<UFOMOObject> {
+    public static class AlternateAnimation2 extends LedObjectAnimation<UFOMOObject> {
 
         public AlternateAnimation2(UFOMOObject ufomoObject) {
             super(ufomoObject);
-        }
-
-        @Override
-        protected void newBeat() {
         }
 
         @Override

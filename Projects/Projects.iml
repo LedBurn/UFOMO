@@ -12,6 +12,8 @@
       <sourceFolder url="file://$MODULE_DIR$/src/Babushka/Animations" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Simon" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Simon/Animations" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Home" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Home/Animations" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -23,5 +25,15 @@
     <orderEntry type="module" module-name="Network" />
     <orderEntry type="module" module-name="Keypad" />
     <orderEntry type="module" module-name="Audio" />
+    <orderEntry type="module" module-name="Server" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../libs/json-simple-1.1.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

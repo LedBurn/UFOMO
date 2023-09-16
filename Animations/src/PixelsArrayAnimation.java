@@ -23,7 +23,7 @@ public class PixelsArrayAnimation {
         this.speed = speed;
     }
 
-    public void apply(double level, boolean newBeat, boolean isOn, int[] eq) {
+    public void apply(double level) {
         if (level < lastLevel) cycleNum++;
         if (cycleNum == speed) cycleNum = 0;
         double newLevel = (level + cycleNum) / speed;
@@ -34,8 +34,10 @@ public class PixelsArrayAnimation {
         }
 
         // add ons
-        for (Addon addon : addons) {
-            addon.change(ledObject, newLevel, newBeat, isOn, eq);
+        if (addons != null) {
+            for (Addon addon : addons) {
+                addon.change(ledObject, level);
+            }
         }
 
         lastLevel = level;

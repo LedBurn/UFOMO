@@ -17,16 +17,16 @@ public class UFOMOAnimationsProvider implements ISimpleRunnerAnimationsProvider 
             "Spikes1", "Spikes2", "Spikes4", "Spikes5"
     };
 
-    private Animation<UFOMOObject> getAnimationByName(String name) {
+    private LedObjectAnimation<UFOMOObject> getAnimationByName(String name) {
         switch (name) {
-            case "Rainbow1":
-                return new RainbowAnimations.RainbowAnimation1(new UFOMOObject()); // eq separate
-            case "Rainbow2":
-                return new RainbowAnimations.RainbowAnimation2(new UFOMOObject()); // eq
-            case "Rainbow3":
-                return new RainbowAnimations.RainbowAnimation3(new UFOMOObject());
-            case "Rainbow4":
-                return new RainbowAnimations.RainbowAnimation4(new UFOMOObject());
+//            case "Rainbow1":
+//                return new RainbowAnimations.RainbowAnimation1(new UFOMOObject()); // eq separate
+//            case "Rainbow2":
+//                return new RainbowAnimations.RainbowAnimation2(new UFOMOObject()); // eq
+//            case "Rainbow3":
+//                return new RainbowAnimations.RainbowAnimation3(new UFOMOObject());
+//            case "Rainbow4":
+//                return new RainbowAnimations.RainbowAnimation4(new UFOMOObject());
             case "Dandoo1":
                 return new DandooAnimations.DandooUFOMOAnimation1(new UFOMOObject()); // eq
             case "Dandoo2":
@@ -43,30 +43,30 @@ public class UFOMOAnimationsProvider implements ISimpleRunnerAnimationsProvider 
                 return new ConfettiAnimations.ConfettiAnimation2(new UFOMOObject()); // beat
             case "Confetti3":
                 return new ConfettiAnimations.ConfettiAnimation3(new UFOMOObject()); // beat
-            case "EQ1":
-                return new EqAnimations.EqAnimation1(new UFOMOObject()); // eq separate
-            case "EQ2":
-                return new EqAnimations.EqAnimation2(new UFOMOObject()); // eq
-            case "EQ3":
-                return new EqAnimations.EqAnimation3(new UFOMOObject()); // eq separate
-            case "EQ4":
-                return new EqAnimations.EqAnimation4(new UFOMOObject()); // eq separate
-            case "EQ5":
-                return new EqAnimations.EqAnimation5(new UFOMOObject()); // eq separate
-            case "EQHue1":
-                return new EQHueAnimations.EqHueAnimation1(new UFOMOObject()); // eq;
-            case "EQHue2":
-                return new EQHueAnimations.EqHueAnimation2(new UFOMOObject()); // eq;
-            case "Spikes1":
-                return new SpikesAnimations.SpikeAnimation1(new UFOMOObject()); // beat;
-            case "Spikes2":
-                return new SpikesAnimations.SpikeAnimation2(new UFOMOObject()); // beat;
-            case "Spikes3":
-                return new SpikesAnimations.SpikeAnimation3(new UFOMOObject()); // beat;
-            case "Spikes4":
-                return new SpikesAnimations.SpikeAnimation4(new UFOMOObject()); // eq separate;
-            case "Spikes5":
-                return new SpikesAnimations.SpikeAnimation5(new UFOMOObject()); // eq;
+//            case "EQ1":
+//                return new EqAnimations.EqAnimation1(new UFOMOObject()); // eq separate
+//            case "EQ2":
+//                return new EqAnimations.EqAnimation2(new UFOMOObject()); // eq
+//            case "EQ3":
+//                return new EqAnimations.EqAnimation3(new UFOMOObject()); // eq separate
+//            case "EQ4":
+//                return new EqAnimations.EqAnimation4(new UFOMOObject()); // eq separate
+//            case "EQ5":
+//                return new EqAnimations.EqAnimation5(new UFOMOObject()); // eq separate
+//            case "EQHue1":
+//                return new EQHueAnimations.EqHueAnimation1(new UFOMOObject()); // eq;
+//            case "EQHue2":
+//                return new EQHueAnimations.EqHueAnimation2(new UFOMOObject()); // eq;
+//            case "Spikes1":
+//                return new SpikesAnimations.SpikeAnimation1(new UFOMOObject()); // beat;
+//            case "Spikes2":
+//                return new SpikesAnimations.SpikeAnimation2(new UFOMOObject()); // beat;
+//            case "Spikes3":
+//                return new SpikesAnimations.SpikeAnimation3(new UFOMOObject()); // beat;
+//            case "Spikes4":
+//                return new SpikesAnimations.SpikeAnimation4(new UFOMOObject()); // eq separate;
+//            case "Spikes5":
+//                return new SpikesAnimations.SpikeAnimation5(new UFOMOObject()); // eq;
             case "Random1":
                 return new RandomAnimations.RandomAnimation1(new UFOMOObject());
         }
@@ -75,7 +75,7 @@ public class UFOMOAnimationsProvider implements ISimpleRunnerAnimationsProvider 
 
 
     @Override
-    public Animation randomNewAnimation() {
+    public LedObjectAnimation randomNewAnimation() {
         String animationName;
         int num = (int)Math.floor(Math.random() * (highAnimations.length + lowAnimations.length));
         if (num < highAnimations.length) {

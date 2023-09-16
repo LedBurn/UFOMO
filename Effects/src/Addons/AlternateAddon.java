@@ -19,13 +19,13 @@ public class AlternateAddon extends Addon {
     }
 
     @Override
-    public void change(IPixelsArray ledObject, double level, boolean newBeat, boolean isOn,int[] eq) {
-
-        if (newBeat) {
-            double temp = hue1;
-            hue1 = hue2;
-            hue2 = temp;
-        }
+    public void change(IPixelsArray ledObject, double level) {
+//
+//        if (newBeat) {
+//            double temp = hue1;
+//            hue1 = hue2;
+//            hue2 = temp;
+//        }
 
         HSBColor color1 = new HSBColor(hue1, 1, 1);
         HSBColor color2 = new HSBColor(hue2, 1, 1);

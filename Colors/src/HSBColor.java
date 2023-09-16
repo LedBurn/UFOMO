@@ -21,6 +21,20 @@ public class HSBColor {
         this.brightness = Math.max(0.0, Math.min(1.0, this.brightness));
     }
 
+    public static HSBColor hsbColorFromHex(String hex) {
+        if (!hex.startsWith("#")) {
+            hex = "#" + hex;
+        }
+        Color colorObj = Color.decode(hex);
+        float[] hsbvals = new float[3];
+        Color.RGBtoHSB(colorObj.getRed(), colorObj.getGreen(), colorObj.getBlue(), hsbvals);
+        return new HSBColor(hsbvals[0], hsbvals[1], hsbvals[2]);
+    }
+
+    public static HSBColor randomHue() {
+        return new HSBColor(Math.random(), 1.0, 1.0);
+    }
+
     public RGBColor toRGBColor() {
         return toRGBColor(1.0);
     }
@@ -39,7 +53,7 @@ public class HSBColor {
     }
 
     public int toRGBInt(double brightnessLevel) {
-        return Color.HSBtoRGB((float)hue, (float)saturation, (float)(brightness * brightness * brightnessLevel));
+        return Color.HSBtoRGB((float)hue, (float)saturation, (float)(brightness * brightnessLevel));
     }
 
     public static HSBColor copy(HSBColor color) {
@@ -70,6 +84,60 @@ public class HSBColor {
         double brightness = (c1.brightness * amount1 + c2.brightness * amount2) / (amount1 + amount2);
         double saturation = (c1.saturation * amount1 + c2.saturation * amount2) / (amount1 + amount2);
         return new HSBColor(hue, saturation, brightness);
+    }
+
+    public enum BLEND_TYPE {
+        ADDITIVE,
+        SUBTRACTIVE
+    }
+    public static HSBColor blendColors(HSBColor c1, HSBColor c2, BLEND_TYPE type) {
+        if (type == BLEND_TYPE.SUBTRACTIVE) {
+            RGBColor rgb1 = c1.toRGBColor();
+            RGBColor rgb2 = c2.toRGBColor();
+
+            int r = Math.min(255, Math.max(0, rgb1.r & 0xFF) + (rgb2.r & 0xFF) / 2);
+            int g = Math.min(255, Math.max(0, rgb1.g & 0xFF) + (rgb2.g & 0xFF) / 2);
+            int b = Math.min(255, Math.max(0, rgb1.b & 0xFF) + (rgb2.b & 0xFF) / 2);
+
+            float[] hsbvals = new float[3];
+            Color.RGBtoHSB(r, g, b, hsbvals);
+
+            return new HSBColor(hsbvals[0], hsbvals[1], hsbvals[2]);
+
+        } else {
+            RGBColor rgb1 = c1.toRGBColor();
+            RGBColor rgb2 = c2.toRGBColor();
+
+            int r = Math.min(255, (rgb1.r & 0xFF) + (rgb2.r & 0xFF));
+            int g = Math.min(255, (rgb1.g & 0xFF) + (rgb2.g & 0xFF));
+            int b = Math.min(255, (rgb1.b & 0xFF) + (rgb2.b & 0xFF));
+
+            float[] hsbvals = new float[3];
+            Color.RGBtoHSB(r, g, b, hsbvals);
+
+            return new HSBColor(hsbvals[0], hsbvals[1], hsbvals[2]);
+        }
+    }
+
+    /**
+     * linear averaged of two colors
+     * @param c1 color1
+     * @param c2 color2
+     * @param ratio 0-1 ratio between c1 & c2. ratio=0 means c1, ratio=1 means c2
+     * @return the new averaged color
+     */
+    public static HSBColor averageColors(HSBColor c1, HSBColor c2, double ratio) {
+        RGBColor rgb1 = c1.toRGBColor();
+        RGBColor rgb2 = c2.toRGBColor();
+
+        int r = (int) Math.min(255, Math.max(0, Math.round(rgb1.r & 0xFF) * (1 - ratio) + (rgb2.r & 0xFF) * ratio));
+        int g = (int) Math.min(255, Math.max(0, Math.round(rgb1.g & 0xFF) * (1 - ratio) + (rgb2.g & 0xFF) * ratio));
+        int b = (int) Math.min(255, Math.max(0, Math.round(rgb1.b & 0xFF) * (1 - ratio) + (rgb2.b & 0xFF) * ratio));
+
+        float[] hsbvals = new float[3];
+        Color.RGBtoHSB(r, g, b, hsbvals);
+
+        return new HSBColor(hsbvals[0], hsbvals[1], hsbvals[2]);
     }
 
     public static double mixHue(double h1, double h2, double level) {

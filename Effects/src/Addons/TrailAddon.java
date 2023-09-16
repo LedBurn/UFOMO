@@ -5,7 +5,7 @@ public class TrailAddon extends Addon {
 
 
     @Override
-    public void change(IPixelsArray ledObject, double level, boolean newBeat, boolean isOn, int[] eq) {
+    public void change(IPixelsArray ledObject, double level) {
         if (crazyDotPosition == -1) {
             crazyDotPosition = (int)Math.floor(Math.random() * ledObject.numOfPixels());
         }

@@ -1,3 +1,5 @@
-public interface IAnimationsRunner {
-    void apply(ILEDObject ledObject, boolean newBeat, boolean isOn, int[] eq);
+import java.util.Map;
+
+public interface IAnimationsRunner<T> {
+    void apply(ILEDObject<T> ledObject);
 }

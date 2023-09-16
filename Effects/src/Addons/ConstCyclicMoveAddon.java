@@ -15,7 +15,7 @@ public class ConstCyclicMoveAddon extends Addon {
     }
 
     @Override
-    public void change(IPixelsArray ledObject, double level, boolean newBeat, boolean isOn, int[] eq) {
+    public void change(IPixelsArray ledObject, double level) {
 
         int indexDiff = (int)((level + this.startingPosition) * ledObject.numOfPixels());
         if (oppositeDirection) {

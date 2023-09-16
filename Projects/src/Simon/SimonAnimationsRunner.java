@@ -7,6 +7,7 @@ import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class SimonAnimationsRunner implements IAnimationsRunner {
 
@@ -33,7 +34,7 @@ public class SimonAnimationsRunner implements IAnimationsRunner {
     }
 
     @Override
-    public void apply(ILEDObject ledObject, boolean newBeat, boolean isOn, int[] eq) {
+    public void apply(ILEDObject ledObject) {
         long currentTime = System.currentTimeMillis();
 
         if (box.newlyReleasedId() == SimonBox.RED_SMALL || box.newlyReleasedId() == SimonBox.GREEN_SMALL) { // force animation - stop game
@@ -57,7 +58,7 @@ public class SimonAnimationsRunner implements IAnimationsRunner {
                 game.newGame();
                 animations.add(new SimonSequenceAnimation(game.getGameSequence()));
             }
-            runner.apply(ledObject, newBeat, isOn, eq);
+            runner.apply(ledObject);
         } else { // play game
 
             int pressedButtonId = box.newlyPressedId();

@@ -1,11 +1,11 @@
-
+import java.util.Map;
 
 // Runs random animations.
 // You must:
 // 1. pass an ISimpleRunnerAnimationsProvider in the constructor, and provide animation.
 // 2. call apply in the main loop.
 // You can call setNewAnimation anytime to force a new animation.
-public class SimpleAnimationsRunner implements IAnimationsRunner {
+public class SimpleAnimationsRunner implements IAnimationsRunner<ILEDObject> {
 
     private static final double CYCLE_TIME = 3000.0; //milliseconds
     private static final int NUM_OF_CYCLES = 3;
@@ -13,8 +13,8 @@ public class SimpleAnimationsRunner implements IAnimationsRunner {
     private long currentAnimationStartTime = 0; // milliseconds
     private long nextAnimationStartTime = 0;
 
-    private Animation currentAnimation;
-    private Animation nextAnimation;
+    private LedObjectAnimation currentAnimation;
+    private LedObjectAnimation nextAnimation;
 
     private ISimpleRunnerAnimationsProvider provider;
 
@@ -23,7 +23,7 @@ public class SimpleAnimationsRunner implements IAnimationsRunner {
     }
 
     @Override
-    public void apply(ILEDObject ledObject, boolean newBeat, boolean isOn, int[] eq) {
+    public void apply(ILEDObject<ILEDObject> ledObject) {
         long currentTime = System.currentTimeMillis();
         int currentCycleNum = getCycleNum(currentTime, currentAnimationStartTime);
         int nextCycleNum = getCycleNum(currentTime, nextAnimationStartTime);
@@ -52,15 +52,15 @@ public class SimpleAnimationsRunner implements IAnimationsRunner {
         }
 
         if (nextAnimation == null) { // apply current only
-            if (newBeat) currentAnimation.newBeat();
-            currentAnimation.apply(((currentTime - currentAnimationStartTime) % CYCLE_TIME) / CYCLE_TIME, newBeat, isOn, eq);
+//            if (newBeat) currentAnimation.newBeat();
+            currentAnimation.apply(((currentTime - currentAnimationStartTime) % CYCLE_TIME) / CYCLE_TIME);
             ledObject.copy(currentAnimation.ledObject);
 
         } else { // apply both animations
-            if (newBeat) currentAnimation.newBeat();
-            if (newBeat) nextAnimation.newBeat();
-            currentAnimation.apply(((currentTime - currentAnimationStartTime) % CYCLE_TIME) / CYCLE_TIME, newBeat, isOn, eq);
-            nextAnimation.apply(((currentTime - nextAnimationStartTime) % CYCLE_TIME) / CYCLE_TIME, newBeat, isOn, eq);
+//            if (newBeat) currentAnimation.newBeat();
+//            if (newBeat) nextAnimation.newBeat();
+            currentAnimation.apply(((currentTime - currentAnimationStartTime) % CYCLE_TIME) / CYCLE_TIME);
+            nextAnimation.apply(((currentTime - nextAnimationStartTime) % CYCLE_TIME) / CYCLE_TIME);
             double fadePercent = 1 - ((currentTime - currentAnimationStartTime) % CYCLE_TIME) / CYCLE_TIME;
             ledObject.mergeAndCopy(currentAnimation.ledObject, nextAnimation.ledObject, fadePercent);
         }
@@ -71,7 +71,7 @@ public class SimpleAnimationsRunner implements IAnimationsRunner {
     }
 
     // force a new animation to start now
-    private void setNewAnimation(Animation animation) {
+    private void setNewAnimation(LedObjectAnimation animation) {
         currentAnimation = animation;
         currentAnimationStartTime = System.currentTimeMillis();
         nextAnimation = null;

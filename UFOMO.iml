@@ -45,5 +45,6 @@
     </orderEntry>
     <orderEntry type="module" module-name="Audio" />
     <orderEntry type="module" module-name="Keypad" />
+    <orderEntry type="module" module-name="Server" />
   </component>
 </module>

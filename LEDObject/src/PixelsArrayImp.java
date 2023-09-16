@@ -50,6 +50,12 @@ public class PixelsArrayImp implements IPixelsArray {
     }
 
     @Override
+    public void blendColor(int pixelNum, HSBColor color, HSBColor.BLEND_TYPE blendType) {
+        HSBColor blendColor = HSBColor.blendColors(this.getColor(pixelNum), color, blendType);
+        this.setColor(pixelNum, blendColor);
+    }
+
+    @Override
     public void copy(IPixelsArray other) {
         if (numOfPixels() != other.numOfPixels()) {
             System.out.println("ERROR: can't copy led object with " + other.numOfPixels()+  " pixels to a led object with " + numOfPixels() + " pixels");
@@ -70,6 +76,14 @@ public class PixelsArrayImp implements IPixelsArray {
 
         for (int i = 0; i < numOfPixels(); i++) {
             setColor(i, HSBColor.mixColors(other1.getColor(i), fadePercent, other2.getColor(i), 1-fadePercent));
+        }
+    }
+
+    @Override
+    public void reduceBrightness(double brightnessLevel) {
+        for (int i = 0; i < numOfPixels(); i++) {
+            HSBColor color = getColor(i);
+            setColor(i, new HSBColor(color.hue, color.saturation, color.brightness * brightnessLevel));
         }
     }
 }

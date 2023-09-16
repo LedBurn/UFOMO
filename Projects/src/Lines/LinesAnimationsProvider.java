@@ -3,7 +3,7 @@ public class LinesAnimationsProvider implements ISimpleRunnerAnimationsProvider 
     boolean fireMode = false;
 
     @Override
-    public Animation randomNewAnimation() {
+    public LedObjectAnimation randomNewAnimation() {
         if (fireMode) {
             return new LinesAnimations.FireAnimation(new LinesObject());
         }
@@ -26,24 +26,24 @@ public class LinesAnimationsProvider implements ISimpleRunnerAnimationsProvider 
                 return new LinesAnimations.DandooAnimation2(new LinesObject());
             case 7:
                 return new LinesAnimations.RandomAnimation1(new LinesObject());
-            case 8:
-                return new LinesAnimations.EQAnimation1(new LinesObject());
-            case 9:
-                return new LinesAnimations.EQAnimation2(new LinesObject());
-            case 10:
-                return new LinesAnimations.EQAnimation3(new LinesObject());
-            case 11:
-                return new LinesAnimations.EQAnimation4(new LinesObject());
-            case 12:
-                return new LinesAnimations.EQHueAnimation1(new LinesObject());
-            case 13:
-                return new LinesAnimations.EQHueAnimation2(new LinesObject());
-            case 14:
-                return new LinesAnimations.SpikesAnimation1(new LinesObject());
-            case 15:
-                return new LinesAnimations.SpikesAnimation2(new LinesObject());
-            case 16:
-                return new LinesAnimations.SpikesAnimation3(new LinesObject());
+//            case 8:
+//                return new LinesAnimations.EQAnimation1(new LinesObject());
+//            case 9:
+//                return new LinesAnimations.EQAnimation2(new LinesObject());
+//            case 10:
+//                return new LinesAnimations.EQAnimation3(new LinesObject());
+//            case 11:
+//                return new LinesAnimations.EQAnimation4(new LinesObject());
+//            case 12:
+//                return new LinesAnimations.EQHueAnimation1(new LinesObject());
+//            case 13:
+//                return new LinesAnimations.EQHueAnimation2(new LinesObject());
+//            case 14:
+//                return new LinesAnimations.SpikesAnimation1(new LinesObject());
+//            case 15:
+//                return new LinesAnimations.SpikesAnimation2(new LinesObject());
+//            case 16:
+//                return new LinesAnimations.SpikesAnimation3(new LinesObject());
             case 17:
                 return new LinesAnimations.FireAnimation(new LinesObject());
         }

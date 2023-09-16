@@ -1,6 +1,6 @@
 public class BabushkaConfettiAnimations {
 
-    public static class ConfettiAnimation1 extends Animation<BabushkaObject> {
+    public static class ConfettiAnimation1 extends LedObjectAnimation<BabushkaObject> {
         public ConfettiAnimation1(BabushkaObject babushkaObject) {
             super(babushkaObject);
         }
@@ -15,14 +15,9 @@ public class BabushkaConfettiAnimations {
                         new Addon[] {new ConfettiAddon(ledObject.babushkas[i].numOfPixels())}));
             }
         }
-
-        @Override
-        protected void newBeat() {
-
-        }
     }
 
-    public static class ConfettiAnimation2 extends Animation<BabushkaObject> {
+    public static class ConfettiAnimation2 extends LedObjectAnimation<BabushkaObject> {
         public ConfettiAnimation2(BabushkaObject babushkaObject) {
             super(babushkaObject);
         }
@@ -36,11 +31,6 @@ public class BabushkaConfettiAnimations {
                         new ConstColoring(new HSBColor(hue + 0.2*i, 1.0 , 1.0)),
                         new Addon[] {new ConfettiAddon(ledObject.babushkas[i].numOfPixels())}));
             }
-        }
-
-        @Override
-        protected void newBeat() {
-
         }
     }
 }

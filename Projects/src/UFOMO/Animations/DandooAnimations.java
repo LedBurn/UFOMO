@@ -1,15 +1,10 @@
 
 public class DandooAnimations {
 
-    public static class DandooUFOMOAnimation1 extends Animation<UFOMOObject> {
+    public static class DandooUFOMOAnimation1 extends LedObjectAnimation<UFOMOObject> {
 
         public DandooUFOMOAnimation1(UFOMOObject ufomoObject) {
             super(ufomoObject);
-        }
-
-        @Override
-        protected void newBeat() {
-
         }
 
         @Override
@@ -32,15 +27,10 @@ public class DandooAnimations {
         }
     }
 
-    public static class DandooUFOMOAnimation2 extends Animation<UFOMOObject> {
+    public static class DandooUFOMOAnimation2 extends LedObjectAnimation<UFOMOObject> {
 
         public DandooUFOMOAnimation2(UFOMOObject ufomoObject) {
             super(ufomoObject);
-        }
-
-        @Override
-        protected void newBeat() {
-
         }
 
         @Override
@@ -63,15 +53,10 @@ public class DandooAnimations {
         }
     }
 
-    public static class DandooUFOMOAnimation3 extends Animation<UFOMOObject> {
+    public static class DandooUFOMOAnimation3 extends LedObjectAnimation<UFOMOObject> {
 
         public DandooUFOMOAnimation3(UFOMOObject ufomoObject) {
             super(ufomoObject);
-        }
-
-        @Override
-        protected void newBeat() {
-
         }
 
         @Override
