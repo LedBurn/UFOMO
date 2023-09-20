@@ -11,9 +11,8 @@ public class HomeMidToCornerAnimation extends HomeAnimation {
         HSBColor color = HSBColor.hsbColorFromHex(colorStr);
         MidToSidesChunkAnimation.FADE_STYLE fadeStyle = MidToSidesChunkAnimation.FADE_STYLE.BEGINNING_AND_END;
 
-        CompoundAnimation animations = new CompoundAnimation();
         for (IPixelsArray pixelsArray : homeObject.all) {
-            animations.addAnimation(new MidToSidesChunkAnimation(pixelsArray,
+            this.compoundAnimation.addAnimation(new MidToSidesChunkAnimation(pixelsArray,
                     chunkSize, chunkSpeed,
                     fadeStyle, fadeSize, color));
         }

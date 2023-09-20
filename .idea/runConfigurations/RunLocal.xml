@@ -1,13 +1,12 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="RunLocal" type="Application" factoryName="Application">
     <option name="ALTERNATIVE_JRE_PATH" value="corretto-1.8" />
-    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <option name="MAIN_CLASS_NAME" value="MainLocal" />
     <module name="UFOMO" />
     <method v="2">
       <option name="Make" enabled="true" />
       <option name="BuildArtifacts" enabled="true">
-        <artifact name="UFOMO:jar" />
+        <artifact name="LEDs:jar" />
       </option>
     </method>
   </configuration>

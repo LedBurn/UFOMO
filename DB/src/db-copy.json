@@ -1,0 +1,12 @@
+{
+  "state": {
+    "cycle-time": "5000",
+    "brightness-level": "1.0",
+    "animation" : {
+      "animation-type": "2-color-pwm",
+      "divider": "16",
+      "color1": "ffd500",
+      "color2": "4193d2"
+    }
+  }
+}

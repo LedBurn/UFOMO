@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/Animations/Animations.iml" filepath="$PROJECT_DIR$/Animations/Animations.iml" />
       <module fileurl="file://$PROJECT_DIR$/Audio/Audio.iml" filepath="$PROJECT_DIR$/Audio/Audio.iml" />
       <module fileurl="file://$PROJECT_DIR$/Colors/Colors.iml" filepath="$PROJECT_DIR$/Colors/Colors.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DB/DB.iml" filepath="$PROJECT_DIR$/DB/DB.iml" />
       <module fileurl="file://$PROJECT_DIR$/Effects/Effects.iml" filepath="$PROJECT_DIR$/Effects/Effects.iml" />
       <module fileurl="file://$PROJECT_DIR$/Keypad/Keypad.iml" filepath="$PROJECT_DIR$/Keypad/Keypad.iml" />
       <module fileurl="file://$PROJECT_DIR$/LEDObject/LEDObject.iml" filepath="$PROJECT_DIR$/LEDObject/LEDObject.iml" />

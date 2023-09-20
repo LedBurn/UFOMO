@@ -78,6 +78,9 @@ public class MidToSidesChunkAnimation extends Animation {
                 double fadeLevel = pixelFadeLevel(i,
                         forwardChunkStartPoint, forwardChunkEndPoint,
                         backwardChunkStartPoint, backwardChunkEndPoint);
+                if (effectedArea <= 0.5) {
+                    fadeLevel = 1.0;
+                }
 
                 if (effectedArea > 0) {
                     effectedLeds++;
@@ -135,14 +138,29 @@ public class MidToSidesChunkAnimation extends Animation {
 
         ArrayList<Double> fadeLevels = new ArrayList<>();
 
+        double pixelScaledStart = pixelScaled;
+        double pixelScaledMid = (pixelNum + 0.5) / (double) this.ledObject.numOfPixels();
+        double pixelScaledEnd = (pixelNum + 1) / (double) this.ledObject.numOfPixels();
+
         for (double[] fade : fades) {
             double fadeStart = fade[0];
             double fadeEnd = fade[1];
-            if (pixelScaled > fadeStart && pixelScaled < fadeEnd) {
-                fadeLevels.add((pixelScaled - fadeStart) / (fadeEnd - fadeStart));
-            }
-            if (pixelScaled < fadeStart && pixelScaled > fadeEnd) {
-                fadeLevels.add((fadeStart - pixelScaled) / (fadeStart - fadeEnd));
+            if (fadeStart < fadeEnd) {
+                if (pixelScaledMid > fadeStart && pixelScaledMid < fadeEnd) {
+                    fadeLevels.add((pixelScaledMid - fadeStart) / (fadeEnd - fadeStart));
+                } else if (pixelScaledMid <= fadeStart && pixelScaledEnd >= fadeStart) {
+                    fadeLevels.add(0.0);
+                } else if (pixelScaledMid >= fadeEnd && pixelScaledStart <= fadeEnd) {
+                    fadeLevels.add(1.0);
+                }
+            } else {
+                if (pixelScaledMid < fadeStart && pixelScaledMid > fadeEnd) {
+                    fadeLevels.add((fadeStart - pixelScaledMid) / (fadeStart - fadeEnd));
+                } else if (pixelScaledMid >= fadeStart && pixelScaledStart <= fadeStart) {
+                    fadeLevels.add(0.0);
+                } else if (pixelScaledMid <= fadeEnd && pixelScaledEnd >= fadeEnd) {
+                    fadeLevels.add(1.0);
+                }
             }
         }
 
@@ -170,7 +188,7 @@ public class MidToSidesChunkAnimation extends Animation {
             return 1.0;
         }
 
-        if (pixelStart > areaEnd || pixelEnd < areaStart) {
+        if (pixelStart >= areaEnd || pixelEnd <= areaStart) {
             return 0;
         }
 

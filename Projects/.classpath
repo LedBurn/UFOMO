@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src/UFOMO"/>
+	<classpathentry kind="src" path="src/Lines"/>
+	<classpathentry kind="src" path="src/UFOMO/Animations"/>
+	<classpathentry kind="src" path="src/Lines/Animations"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="src/Babushka"/>
+	<classpathentry kind="src" path="src/Babushka/Animations"/>
+	<classpathentry kind="src" path="src/Simon"/>
+	<classpathentry kind="src" path="src/Simon/Animations"/>
+	<classpathentry kind="src" path="src/Home"/>
+	<classpathentry kind="src" path="src/Home/Animations"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/LEDObject"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Animations"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Colors"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Effects"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Simulator"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Network"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Keypad"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Audio"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Server"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/SimpleJSON-2.1.1"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/DB"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

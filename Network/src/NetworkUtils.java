@@ -17,6 +17,18 @@ public class NetworkUtils {
         }
     }
 
+    public static RGBColor[] getRGB(IPixelsArray object) {
+        return getRGB(object, false);
+    }
+
+    public static RGBColor[] getRGB(IPixelsArray object, boolean reversed) {
+        if (reversed) {
+            return getRGB(object, object.numOfPixels()-1, 0, 1.0);
+        } else {
+            return getRGB(object, 0, object.numOfPixels()-1, 1.0);
+        }
+    }
+
     // returns rgb colors for the object. will start from the fromIndex for the entire object.
     public static RGBColor[] getRGBCyclic(IPixelsArray object, int fromIndex, boolean reversed, double brightnessLevel) {
         RGBColor[] colors = new RGBColor[object.numOfPixels()];

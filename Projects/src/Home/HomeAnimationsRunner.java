@@ -1,43 +1,46 @@
-import jdk.nashorn.api.scripting.JSObject;
-import org.json.simple.JSONObject;
 
+
+import de.ralleytn.simple.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.Map;
 
-public class HomeAnimationsRunner implements IAnimationsRunner<HomeObject>, ServerListener {
+public class HomeAnimationsRunner implements IAnimationsRunner<HomeObject>, IServerListener {
 
-    private long cycleTime = 5000; //milliseconds
-    private long currentAnimationStartTime = 0; // milliseconds
+    private final TimingHelper timingHelper = new TimingHelper();
 
     private double brightnessLevel = 1.0;
     private Animation currentAnimation;
 
     Server server;
 
+    private DB db;
+
+    private boolean isOn = true;
+    private HomeObject homeObject = new HomeObject();
+
 //    private ISimpleRunnerAnimationsProvider provider;
 
     public HomeAnimationsRunner(ISimpleRunnerAnimationsProvider provider) {
         server = new Server(this);
         server.startListening();
-    }
+        db = new DB();
 
-    private boolean isOn = true;
-    private HomeObject homeObject;
+        this.brightnessLevel = this.db.jsonObject.getObject("state").getDouble("brightness-level");
+        this.timingHelper.setCycleTime(this.db.jsonObject.getObject("state").getLong("cycle-time"));
+    }
 
     @Override
     public void apply(ILEDObject<HomeObject> ledObject) {
         this.homeObject = (HomeObject) ledObject;
-
-        long currentTime = System.currentTimeMillis();
-        long animationCurrentRunningTime = currentTime - currentAnimationStartTime;
-        long cycleNum = animationCurrentRunningTime / this.cycleTime;
-        double cycleProgress = (animationCurrentRunningTime % this.cycleTime) / (double) this.cycleTime;
-
         if (currentAnimation != null) {
-            currentAnimation.animate(cycleNum, cycleProgress);
+            timingHelper.newFrame();
+            currentAnimation.animate(timingHelper.getCycleNum(), timingHelper.getCycleProgress());
         } else {
-//            currentAnimation = new HomeAlternateAnimation(homeObject, userInput);
-//            currentAnimationStartTime = System.currentTimeMillis();
-//            this.isOn = true;
+            // read from state
+            this.currentAnimation = this.getAnimationForMap(this.db.jsonObject.getObject("state").getObject("animation"));
+            this.timingHelper.newAnimation();
+            this.isOn = true;
         }
 
         if (!this.isOn) {
@@ -51,23 +54,10 @@ public class HomeAnimationsRunner implements IAnimationsRunner<HomeObject>, Serv
         }
     }
 
-
-    public void forceNewAnimation() {
-//        setNewAnimation(provider.randomNewAnimation());
-    }
-
-    // force a new animation to start now
-    private void setNewAnimation(Animation animation) {
-//        currentAnimation = animation;
-//        currentAnimationStartTime = System.currentTimeMillis();
-//        nextAnimation = null;
-//        nextAnimationStartTime = 0;
-    }
-
     @Override
     public JSONObject handleRequest(Map<String, String> userInput) {
-
         JSONObject jsonObject = new JSONObject();
+
         // handle input
         if (userInput != null) {
 
@@ -75,31 +65,47 @@ public class HomeAnimationsRunner implements IAnimationsRunner<HomeObject>, Serv
             String brightnessLevel = userInput.get("brightness-level");
             if (brightnessLevel != null) {
                 this.brightnessLevel = new Double(brightnessLevel);
+                this.db.jsonObject.getObject("state").put("brightness-level", brightnessLevel);
+                this.db.saveDB();
+            }
+
+            // speed
+            String cycleTime = userInput.get("cycle-time");
+            if (cycleTime != null) {
+                this.timingHelper.setCycleTime(new Long(cycleTime));
+                this.db.jsonObject.getObject("state").put("cycle-time", cycleTime);
+                this.db.saveDB();
             }
 
             // animations
             String actionType = userInput.get("action-type");
             if (actionType != null && actionType.equals("animation")) {
-                String animationType = userInput.get("animation-type");
-                if (animationType != null && animationType.equals("mid-to-corner")) {
-                    currentAnimation = new HomeMidToCornerAnimation(this.homeObject, userInput);
-                } else if (animationType != null && animationType.equals("kelvin-scale")) {
-                    currentAnimation = new HomeKelvinAnimation(this.homeObject, userInput);
-                } else if (animationType != null && animationType.equals("alternate")) {
-                    currentAnimation = new HomeAlternate2Animation(this.homeObject, userInput);
-                }
-
-                String cycleTime = userInput.get("cycle-time");
-                if (cycleTime != null) {
-                    this.cycleTime = new Long(cycleTime);
-                }
-                currentAnimationStartTime = System.currentTimeMillis();
+                this.currentAnimation = this.getAnimationForMap(userInput);
+                this.timingHelper.newAnimation();
                 this.isOn = true;
+                this.db.jsonObject.getObject("state").put("animation", new JSONObject(userInput));
+                this.db.saveDB();
             } else if (actionType != null && actionType.equals("state")) {
                 jsonObject.put("brightness", this.brightnessLevel);
+                jsonObject.put("cycleTime", this.timingHelper.getCycleTime());
             }
         }
 
         return jsonObject;
+    }
+
+    private HomeAnimation getAnimationForMap(Map map) {
+        String animationType = (String) map.get("animation-type");
+        HomeAnimation animation = null;
+        if (animationType != null && animationType.equals("mid-to-corner")) {
+            animation = new HomeMidToCornerAnimation(this.homeObject, map);
+        } else if (animationType != null && animationType.equals("kelvin-scale")) {
+            animation = new HomeKelvinAnimation(this.homeObject, map);
+        } else if (animationType != null && animationType.equals("alternate")) {
+            animation = new HomeAlternateAnimation(this.homeObject, map);
+        } else if (animationType != null && animationType.equals("2-color-pwm")) {
+            animation = new HomeAlternate2Animation(this.homeObject, map);
+        }
+        return animation;
     }
 }

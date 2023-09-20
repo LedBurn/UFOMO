@@ -1,17 +1,23 @@
 <component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="UFOMO:jar">
+  <artifact type="jar" name="UFOMO:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/UFOMO_jar</output-path>
     <root id="archive" name="UFOMO.jar">
       <element id="module-output" name="UFOMO" />
       <element id="module-output" name="Network" />
       <element id="module-output" name="Colors" />
       <element id="module-output" name="LEDObject" />
-      <element id="module-output" name="Simulator" />
-      <element id="module-output" name="Audio" />
-      <element id="module-output" name="Effects" />
-      <element id="module-output" name="Animations" />
-      <element id="module-output" name="Keypad" />
       <element id="module-output" name="Projects" />
+      <element id="module-output" name="Animations" />
+      <element id="module-output" name="Effects" />
+      <element id="module-output" name="Simulator" />
+      <element id="module-output" name="Keypad" />
+      <element id="module-output" name="Audio" />
+      <element id="module-output" name="Server" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/GPIO_libs/pi4j-device.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/SimpleJSON-2.1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/GPIO_libs/pi4j-gpio-extension.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/pi4j-core.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/GPIO_libs/pi4j-core.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

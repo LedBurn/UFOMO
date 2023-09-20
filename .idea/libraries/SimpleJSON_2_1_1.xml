@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="pi4j-core">
+  <library name="SimpleJSON-2.1.1">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/libs/pi4j-core.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/SimpleJSON-2.1.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
