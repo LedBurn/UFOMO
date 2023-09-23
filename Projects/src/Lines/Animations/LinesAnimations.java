@@ -89,9 +89,9 @@ public class LinesAnimations {
 
         @Override
         protected void configAnimations() {
-            for (int i = 0; i < ledObject.lines.length; i++) {
-                animations.add(new DandooAnimation(ledObject.lines[i], 4, false));
-            }
+//            for (int i = 0; i < ledObject.lines.length; i++) {
+//                animations.add(new DandooAnimation(ledObject.lines[i], 4, false));
+//            }
         }
     }
 
@@ -102,9 +102,9 @@ public class LinesAnimations {
 
         @Override
         protected void configAnimations() {
-            for (int i = 0; i < ledObject.lines.length; i++) {
-                animations.add(new DandooAnimation(ledObject.lines[i],4, true));
-            }
+//            for (int i = 0; i < ledObject.lines.length; i++) {
+//                animations.add(new DandooAnimation(ledObject.lines[i],4, true));
+//            }
         }
     }
 

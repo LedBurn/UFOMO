@@ -1,94 +1,105 @@
+import java.util.ArrayList;
+import java.util.Arrays;
 
-public class DandooAnimation extends PixelsArrayAnimation {
+public class DandooAnimation extends Animation {
+    private final Chunk[] chunks;
 
-    private int numOfPoints = 16 * 2;
-    private int tailLength = 1;
-    private boolean addBackground = true;
-    private final double[] points;
-    private boolean reversed = false;
-
-    public DandooAnimation(IPixelsArray ledObject, int numOfPoints, boolean addBackground) {
-        this(ledObject, numOfPoints, addBackground, new Addon[]{});
-    }
-
-    public DandooAnimation(IPixelsArray ledObject, int numOfPoints, boolean addBackground, Addon[] addons) {
-        super(ledObject,null, addons);
-        this.numOfPoints = numOfPoints;
-        this.addBackground = addBackground;
-        tailLength = addBackground ? 1 : 2;
-
-        points = new double[numOfPoints];
-        for (int i = 0; i < numOfPoints; i++) {
-            points[i] = i * ledObject.numOfPixels() / numOfPoints;
+    public DandooAnimation(IPixelsArray ledObject, int numOfChunks, double chunkSize) {
+        super(ledObject);
+        this.chunks = new Chunk[numOfChunks];
+        double maxChunkSize = this.ledObject.numOfPixels() / ((double) numOfChunks / 2);
+        double chunkSizeScaled = maxChunkSize * chunkSize;
+        for (int i = 0; i < numOfChunks / 2; i++) {
+            double startPoint = i * this.ledObject.numOfPixels() / ((double) numOfChunks / 2);
+            chunks[i * 2] = new Chunk(startPoint + chunkSizeScaled, startPoint, true);
+            chunks[i * 2 + 1] = new Chunk(startPoint - chunkSizeScaled, startPoint, false);
         }
     }
 
     @Override
-    public void apply(double level) {
-//        if (newBeat) reversed = !reversed;
-//        if (eq[7] / 128.0 > 0.8) {
-////            System.out.println("new spike");
-//            reversed = !reversed;
-//        }
+    public void animate(long cycleNum, double cycleTimePercent) {
+        this.fixChunksForTimePercent(cycleTimePercent);
 
-        for (int i = 0; i < ledObject.numOfPixels(); i++) {
-            ledObject.setColor(i, HSBColor.BLACK);
-        }
-
-
-        for (int i = 0; i < numOfPoints; i++) {
-            // update point
-            double point = points[i];
-            if (reversed) {
-                if (i % 2 == 0) {
-                    point -=  0.75;
-                } else {
-                    point +=  0.75;
-                }
-            } else {
-                if (i % 2 == 0) {
-                    point +=  0.75;
-                } else {
-                    point -=  0.75;
-                }
-            }
-            points[i] = point;
-
-            // tail
-            for (int j = 0; j < tailLength; j++) {
-                int tailIndex1 = (int)Math.floor(point) + j + 1;
-                int tailIndex2 = (int)Math.floor(point) - j - 1;
-                double tailLevel = 1 - j * 1.0/tailLength;
-
-                if (ledObject.getColor(fixPoint(tailIndex1)).brightness < tailLevel) {
-                    ledObject.setColor(fixPoint(tailIndex1), new HSBColor(level, 1, tailLevel));
-                }
-                if (ledObject.getColor(fixPoint(tailIndex2)).brightness < tailLevel) {
-                    ledObject.setColor(fixPoint(tailIndex2), new HSBColor(level, 1, tailLevel));
-                }
-            }
-
-            // point
-            ledObject.setColor(fixPoint((int)Math.floor(point)), new HSBColor(level,1,1));
-        }
-
-
-        // bg color
-        if (this.addBackground) {
-            for (int i = 0; i < ledObject.numOfPixels(); i++) {
-                HSBColor newColor = new HSBColor(HSBColor.mixHue(level, level + 0.5, ledObject.getColor(i).brightness), 1, 1);
-                ledObject.setColor(i, newColor);
-            }
-        }
-
-        for (Addon addon : addons) {
-            addon.change(ledObject, level);
+        for (int i = 0; i < this.ledObject.numOfPixels(); i++) {
+            double[] positionInChunks = this.getPointPositionInChunks(i);
+            if (positionInChunks.length == 0) continue;
+            double[] brightnessInChunks = this.getBrightnessForPositions(positionInChunks);
+            double maxBrightness = Arrays.stream(brightnessInChunks).max().getAsDouble();
+            ledObject.setColor(i, new HSBColor(cycleTimePercent, 1, maxBrightness));
         }
     }
 
-    private int fixPoint(int point) {
-        while (point < 0) point += ledObject.numOfPixels();
-        while (point >= ledObject.numOfPixels()) point -= ledObject.numOfPixels();
-        return point;
+    private void fixChunksForTimePercent(double timePercent) {
+        for (Chunk chunk : this.chunks) {
+            double diff = timePercent * this.ledObject.numOfPixels();
+            if (chunk.isForward) {
+                chunk.startPosition = chunk.originalStartPosition + diff;
+                chunk.endPosition = chunk.originalEndPosition + diff;
+            } else {
+                chunk.startPosition = chunk.originalStartPosition - diff;
+                chunk.endPosition = chunk.originalEndPosition - diff;
+            }
+
+            while (chunk.startPosition < 0) chunk.startPosition += this.ledObject.numOfPixels();
+            while (chunk.endPosition < 0) chunk.endPosition += this.ledObject.numOfPixels();
+            while (chunk.startPosition >= this.ledObject.numOfPixels()) chunk.startPosition -= this.ledObject.numOfPixels();
+            while (chunk.endPosition >= this.ledObject.numOfPixels()) chunk.endPosition -= this.ledObject.numOfPixels();
+        }
+    }
+
+    private double[] getPointPositionInChunks(int point) {
+        ArrayList<Double> pointChunks = new ArrayList<>();
+
+        for (Chunk chunk : this.chunks) {
+            double chunkStart = chunk.startPosition;
+            double chunkEnd = chunk.endPosition;
+            if (chunk.isForward) {
+                if (chunkStart < chunkEnd) chunkStart += this.ledObject.numOfPixels();
+                if (point < chunkEnd) point += this.ledObject.numOfPixels();
+
+                if (point < chunkStart && point > chunkEnd) {
+                    pointChunks.add((chunkStart - point) / (chunkStart - chunkEnd));
+                }
+            } else {
+                if (chunkStart > chunkEnd) chunkStart -= this.ledObject.numOfPixels();
+                if (point > chunkEnd) point -= this.ledObject.numOfPixels();
+
+                if (point > chunkStart && point < chunkEnd) {
+                    pointChunks.add((point - chunkStart) / (chunkEnd - chunkStart));
+                }
+            }
+
+        }
+        return pointChunks.stream().mapToDouble(i -> i).toArray();
+    }
+
+    private double[] getBrightnessForPositions(double[] positions) {
+        double[] brightness = new double[positions.length];
+
+        for (int i = 0; i < positions.length; i++) {
+            if (positions[i] < 0.1) { // 10% start chunk fade
+                brightness[i] = positions[i] * 10.0;
+            } else if (positions[i] > 0.1 && positions[i] < 0.2) { // 10% full brightness
+                brightness[i] = 1.0;
+            } else { //80% linear fade
+                brightness[i] = 1 - (positions[i] - 0.2) * (1/0.8);
+            }
+        }
+        return brightness;
+    }
+
+
+    private static class Chunk {
+        private final double originalStartPosition;
+        private final double originalEndPosition;
+        private double startPosition;
+        private double endPosition;
+        private final boolean isForward;
+
+        public Chunk(double startPosition, double endPosition, boolean isForward) {
+            this.originalStartPosition = startPosition;
+            this.originalEndPosition = endPosition;
+            this.isForward = isForward;
+        }
     }
 }

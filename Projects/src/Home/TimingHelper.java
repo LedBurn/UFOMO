@@ -5,6 +5,8 @@
 public class TimingHelper {
 
     private long cycleTime = 5000; //milliseconds
+
+    private double cycleTimeFactor = 1;
     private long lastFrameCycleNum = 0;
     private long lastFrameTimestamp;
     private double lastFrameCycleProgress;
@@ -28,9 +30,13 @@ public class TimingHelper {
         this.cycleTime = cycleTime;
     }
 
+    public void setCycleTimeFactor(double cycleTimeFactor) {
+        this.cycleTimeFactor = cycleTimeFactor;
+    }
+
     public void newFrame() {
         long currentTime = System.currentTimeMillis();
-        double diffBetweenFrames = ( currentTime - this.lastFrameTimestamp) / (double) this.cycleTime;
+        double diffBetweenFrames = ( currentTime - this.lastFrameTimestamp) / ((double) this.cycleTime * this.cycleTimeFactor);
         this.lastFrameCycleProgress += diffBetweenFrames;
         while (this.lastFrameCycleProgress >= 1) {
             this.lastFrameCycleNum++;

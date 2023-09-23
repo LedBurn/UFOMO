@@ -38,9 +38,7 @@ public class HomeAnimationsRunner implements IAnimationsRunner<HomeObject>, ISer
             currentAnimation.animate(timingHelper.getCycleNum(), timingHelper.getCycleProgress());
         } else {
             // read from state
-            this.currentAnimation = this.getAnimationForMap(this.db.jsonObject.getObject("state").getObject("animation"));
-            this.timingHelper.newAnimation();
-            this.isOn = true;
+            this.setAnimationForMap(this.db.jsonObject.getObject("state").getObject("animation"));
         }
 
         if (!this.isOn) {
@@ -80,9 +78,7 @@ public class HomeAnimationsRunner implements IAnimationsRunner<HomeObject>, ISer
             // animations
             String actionType = userInput.get("action-type");
             if (actionType != null && actionType.equals("animation")) {
-                this.currentAnimation = this.getAnimationForMap(userInput);
-                this.timingHelper.newAnimation();
-                this.isOn = true;
+                setAnimationForMap(userInput);
                 this.db.jsonObject.getObject("state").put("animation", new JSONObject(userInput));
                 this.db.saveDB();
             } else if (actionType != null && actionType.equals("state")) {
@@ -94,7 +90,9 @@ public class HomeAnimationsRunner implements IAnimationsRunner<HomeObject>, ISer
         return jsonObject;
     }
 
-    private HomeAnimation getAnimationForMap(Map map) {
+    private void setAnimationForMap(Map map) {
+        this.timingHelper.setCycleTimeFactor(1);
+
         String animationType = (String) map.get("animation-type");
         HomeAnimation animation = null;
         if (animationType != null && animationType.equals("mid-to-corner")) {
@@ -105,7 +103,15 @@ public class HomeAnimationsRunner implements IAnimationsRunner<HomeObject>, ISer
             animation = new HomeAlternateAnimation(this.homeObject, map);
         } else if (animationType != null && animationType.equals("2-color-pwm")) {
             animation = new HomeAlternate2Animation(this.homeObject, map);
+        } else if (animationType != null && animationType.equals("dandoo")) {
+            animation = new HomeDandooAnimation(this.homeObject, map);
+            this.timingHelper.setCycleTimeFactor(25);
         }
-        return animation;
+
+        this.currentAnimation = animation;
+        if (animation != null) {
+            this.timingHelper.newAnimation();
+            this.isOn = true;
+        }
     }
 }

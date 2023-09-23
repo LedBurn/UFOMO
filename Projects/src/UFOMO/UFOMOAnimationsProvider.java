@@ -27,12 +27,12 @@ public class UFOMOAnimationsProvider implements ISimpleRunnerAnimationsProvider 
 //                return new RainbowAnimations.RainbowAnimation3(new UFOMOObject());
 //            case "Rainbow4":
 //                return new RainbowAnimations.RainbowAnimation4(new UFOMOObject());
-            case "Dandoo1":
-                return new DandooAnimations.DandooUFOMOAnimation1(new UFOMOObject()); // eq
-            case "Dandoo2":
-                return new DandooAnimations.DandooUFOMOAnimation2(new UFOMOObject()); // eq
-            case "Dandoo3":
-                return new DandooAnimations.DandooUFOMOAnimation3(new UFOMOObject()); // eq
+//            case "Dandoo1":
+//                return new DandooAnimations.DandooUFOMOAnimation1(new UFOMOObject()); // eq
+//            case "Dandoo2":
+//                return new DandooAnimations.DandooUFOMOAnimation2(new UFOMOObject()); // eq
+//            case "Dandoo3":
+//                return new DandooAnimations.DandooUFOMOAnimation3(new UFOMOObject()); // eq
             case "Alternate1":
                 return new AlternateAnimations.AlternateAnimation1(new UFOMOObject()); // beat
             case "Alternate2":
