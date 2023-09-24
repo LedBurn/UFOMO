@@ -2,7 +2,6 @@
 
 import de.ralleytn.simple.json.JSONObject;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class HomeAnimationsRunner implements IAnimationsRunner<HomeObject>, IServerListener {
@@ -94,7 +93,7 @@ public class HomeAnimationsRunner implements IAnimationsRunner<HomeObject>, ISer
         this.timingHelper.setCycleTimeFactor(1);
 
         String animationType = (String) map.get("animation-type");
-        HomeAnimation animation = null;
+        Animation animation = null;
         if (animationType != null && animationType.equals("mid-to-corner")) {
             animation = new HomeMidToCornerAnimation(this.homeObject, map);
         } else if (animationType != null && animationType.equals("kelvin-scale")) {
@@ -106,6 +105,9 @@ public class HomeAnimationsRunner implements IAnimationsRunner<HomeObject>, ISer
         } else if (animationType != null && animationType.equals("dandoo")) {
             animation = new HomeDandooAnimation(this.homeObject, map);
             this.timingHelper.setCycleTimeFactor(25);
+        } else if (animationType != null && animationType.equals("color-spill")) {
+            animation = new ColorSpillAnimation2D(this.homeObject.pixelArray_2D);
+            this.timingHelper.setCycleTimeFactor(2);
         }
 
         this.currentAnimation = animation;

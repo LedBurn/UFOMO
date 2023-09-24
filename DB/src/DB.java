@@ -10,7 +10,9 @@ public class DB {
     public JSONObject jsonObject;
 
     public DB() {
-        this.dbFile = Paths.get("DB/src/db.json").toFile();
+        String path = System.getProperty("files","DB/src");
+        System.out.println(path);
+        this.dbFile = Paths.get(path + "/db.json").toFile();
         try {
             if (this.dbFile.createNewFile()) {
                 System.out.println("DB File created: " + this.dbFile.getName());

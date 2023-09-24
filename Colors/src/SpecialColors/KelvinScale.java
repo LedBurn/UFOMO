@@ -15,7 +15,8 @@ public class KelvinScale {
     }
 
     private void readGradientFile() {
-        try (Stream<String> stream = Files.lines(Paths.get("Colors/src/SpecialColors/KelvinScaleGradient.txt"))) {
+        String path = System.getProperty("files","Colors/src/SpecialColors");
+        try (Stream<String> stream = Files.lines(Paths.get(path + "/KelvinScaleGradient.txt"))) {
             stream.forEach(line -> {
                 String[] split = line.split(" ");
                 String offsetStr = split[1].substring(8, split[1].length()-1);

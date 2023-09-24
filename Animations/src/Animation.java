@@ -8,8 +8,4 @@ public abstract class Animation {
         this.ledObject = ledObject;
     }
     public abstract void animate(long cycleNum, double cycleTimePercent);
-//        if (startingTime == 0) {
-//            startingTime = System.currentTimeMillis();
-//        }
-//    }
 }

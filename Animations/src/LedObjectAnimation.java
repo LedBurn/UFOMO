@@ -24,4 +24,5 @@ public abstract class LedObjectAnimation<T extends ILEDObject> {
             animation.apply(timePercent);
         }
     }
+
 }

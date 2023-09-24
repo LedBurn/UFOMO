@@ -10,6 +10,10 @@ public class HSBColor {
         this(0, 0, 0);
     }
 
+    public HSBColor(double hue) {
+        this(hue, 1.0, 1.0);
+    }
+
     public HSBColor(double hue, double saturation, double brightness) {
         this.hue = hue;
         this.saturation = saturation;

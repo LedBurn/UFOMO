@@ -8,6 +8,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/LinesAnimations" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Runner" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/SpecialAnimations" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Animations_2D" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

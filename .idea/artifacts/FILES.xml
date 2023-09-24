@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="FILES">
+    <output-path>$PROJECT_DIR$/out/artifacts/</output-path>
+    <root id="root">
+      <element id="file-copy" path="$PROJECT_DIR$/DB/src/db.json" />
+      <element id="file-copy" path="$PROJECT_DIR$/Colors/src/SpecialColors/KelvinScaleGradient.txt" />
+    </root>
+  </artifact>
+</component>
