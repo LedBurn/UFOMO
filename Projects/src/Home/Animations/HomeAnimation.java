@@ -1,6 +1,6 @@
 import java.util.Map;
 
-public class HomeAnimation extends Animation {
+public abstract class HomeAnimation extends Animation {
 
     protected final HomeObject homeObject;
     protected final Map<String,String> userInput;
@@ -12,6 +12,8 @@ public class HomeAnimation extends Animation {
         this.homeObject = homeObject;
         this.userInput = userInput;
     }
+
+    public abstract void userInputUpdated(Map<String,String> userInput);
 
     @Override
     public void animate(long cycleNum, double cycleTimePercent) {

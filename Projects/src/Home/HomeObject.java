@@ -3,8 +3,8 @@ public class HomeObject implements ILEDObject<HomeObject> {
     // see more info here:
     // https://lucid.app/lucidchart/d6bbc7e2-b672-4d99-9288-c79e4797f52e/edit?viewport_loc=2034%2C-1294%2C2582%2C1588%2C0_0&invitationId=inv_8250d507-511d-4838-8ed7-25823d0610e8
 
-    public static final int[] CEILING_NUM_OF_LEDS = { 139, 140, 140, 140 };
-    public static final int[] EXTERNAL_FRONT_NUM_OF_LEDS = { 75, 144, 210, 144, 75 };
+    public static final int[] CEILING_NUM_OF_LEDS = { 140, 140, 139, 140 };
+    public static final int[] EXTERNAL_FRONT_NUM_OF_LEDS = { 69, 145, 205, 145, 68 };
     public static final int EXTERNAL_FRONT_MISSING_PIXELS = EXTERNAL_FRONT_NUM_OF_LEDS[2] - EXTERNAL_FRONT_NUM_OF_LEDS[0] - EXTERNAL_FRONT_NUM_OF_LEDS[4];
     public static final int[] INTERNAL_FRONT_NUM_OF_LEDS = { 59, 96, 58, 96 };
 
@@ -40,10 +40,10 @@ public class HomeObject implements ILEDObject<HomeObject> {
         this.pixelArray_2D.addPixelArray(frontInternal[2], 253, 149, 253, 48);
         this.pixelArray_2D.addPixelArray(frontInternal[3], 253, 48, 90, 48);
 
-        this.pixelArray_2D.addPixelArray(ceiling[0], 290, 345, 290, 581);
-        this.pixelArray_2D.addPixelArray(ceiling[1], 290, 581, 53, 581);
-        this.pixelArray_2D.addPixelArray(ceiling[2], 53, 581, 53, 345);
-        this.pixelArray_2D.addPixelArray(ceiling[3], 53, 345, 290, 345);
+        this.pixelArray_2D.addPixelArray(ceiling[0], 290, 320, 290, 556);
+        this.pixelArray_2D.addPixelArray(ceiling[1], 290, 556, 53, 556);
+        this.pixelArray_2D.addPixelArray(ceiling[2], 53, 556, 53, 320);
+        this.pixelArray_2D.addPixelArray(ceiling[3], 53, 320, 290, 320);
     }
 
     @Override

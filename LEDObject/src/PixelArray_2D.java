@@ -36,4 +36,8 @@ public class PixelArray_2D {
             return endValue + (startValue - endValue) * (1 - pixelPosition);
         }
     }
+
+    public double maxDistance() {
+        return Math.hypot(this.maxX, this.maxY);
+    }
 }

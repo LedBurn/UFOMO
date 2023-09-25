@@ -1,20 +1,33 @@
 import java.util.Map;
 
 public class HomeMidToCornerAnimation extends HomeAnimation {
+
+    private final MidToSidesChunkAnimation[] animations;
+
     public HomeMidToCornerAnimation(HomeObject homeObject, Map<String, String> userInput) {
         super(homeObject, userInput);
 
-        double chunkSize = new Double(userInput.get("chunk-size"));
-        double chunkSpeed = new Double(userInput.get("chunk-speed"));
-        double fadeSize = new Double(userInput.get("fade-size"));
+        this.animations = new MidToSidesChunkAnimation[(homeObject.all.length)];
+        for (int i = 0; i < this.animations.length; i++) {
+            animations[i] = new MidToSidesChunkAnimation(homeObject.all[i],
+                    0, 0,
+                    MidToSidesChunkAnimation.FADE_STYLE.BEGINNING_AND_END, 0, null);
+            this.compoundAnimation.addAnimation(animations[i]);
+        }
+        this.userInputUpdated(userInput);
+    }
+
+    @Override
+    public void userInputUpdated(Map<String, String> userInput) {
+        double chunkSize =  Double.parseDouble(userInput.get("chunk-size"));
+        double chunkSpeed =  Double.parseDouble(userInput.get("chunk-speed"));
+        double fadeSize =  Double.parseDouble(userInput.get("fade-size"));
         String colorStr = userInput.get("color");
         HSBColor color = HSBColor.hsbColorFromHex(colorStr);
         MidToSidesChunkAnimation.FADE_STYLE fadeStyle = MidToSidesChunkAnimation.FADE_STYLE.BEGINNING_AND_END;
 
-        for (IPixelsArray pixelsArray : homeObject.all) {
-            this.compoundAnimation.addAnimation(new MidToSidesChunkAnimation(pixelsArray,
-                    chunkSize, chunkSpeed,
-                    fadeStyle, fadeSize, color));
+        for (MidToSidesChunkAnimation animation : this.animations) {
+            animation.updateParams(chunkSize, chunkSpeed, fadeStyle, fadeSize, color);
         }
     }
 }

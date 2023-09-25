@@ -2,8 +2,8 @@ public class KelvinAnimation extends Animation {
 
     private final KelvinScale kelvinScale = new KelvinScale();
 
-    private final double lowPoint;
-    private final double highPoint;
+    private double lowPoint;
+    private double highPoint;
 
     public KelvinAnimation(IPixelsArray ledObject, double lowPoint, double highPoint) {
         super(ledObject);
@@ -11,11 +11,13 @@ public class KelvinAnimation extends Animation {
         this.highPoint = highPoint;
     }
 
+    public void updateParams(double lowPoint, double highPoint) {
+        this.lowPoint = lowPoint;
+        this.highPoint = highPoint;
+    }
+
     @Override
     public void animate(long cycleNum, double cycleTimePercent) {
-
-
-
         for (int i = 0; i < this.ledObject.numOfPixels(); i++) {
             double pixelScale = i / (double) this.ledObject.numOfPixels();
             pixelScale = this.lowPoint + pixelScale * (this.highPoint - this.lowPoint);

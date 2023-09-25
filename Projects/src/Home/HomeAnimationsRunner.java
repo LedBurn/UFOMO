@@ -9,7 +9,7 @@ public class HomeAnimationsRunner implements IAnimationsRunner<HomeObject>, ISer
     private final TimingHelper timingHelper = new TimingHelper();
 
     private double brightnessLevel = 1.0;
-    private Animation currentAnimation;
+    private HomeAnimation currentAnimation;
 
     Server server;
 
@@ -35,6 +35,17 @@ public class HomeAnimationsRunner implements IAnimationsRunner<HomeObject>, ISer
         if (currentAnimation != null) {
             timingHelper.newFrame();
             currentAnimation.animate(timingHelper.getCycleNum(), timingHelper.getCycleProgress());
+
+//            for (IPixelsArray pixelsArray : this.homeObject.all) {
+//                pixelsArray.clear();
+//            }
+//
+//            for (int j = 0; j < 4; j++) {
+//                for (int i = 0; i < this.homeObject.ceiling[j].numOfPixels(); i++) {
+//                    this.homeObject.ceiling[j].setColor(i, new HSBColor(0.25 * j, 1.0, i / (double) this.homeObject.ceiling[j].numOfPixels()));
+//                }
+//            }
+
         } else {
             // read from state
             this.setAnimationForMap(this.db.jsonObject.getObject("state").getObject("animation"));
@@ -81,8 +92,7 @@ public class HomeAnimationsRunner implements IAnimationsRunner<HomeObject>, ISer
                 this.db.jsonObject.getObject("state").put("animation", new JSONObject(userInput));
                 this.db.saveDB();
             } else if (actionType != null && actionType.equals("state")) {
-                jsonObject.put("brightness", this.brightnessLevel);
-                jsonObject.put("cycleTime", this.timingHelper.getCycleTime());
+                jsonObject = this.db.jsonObject.getObject("state");
             }
         }
 
@@ -90,30 +100,37 @@ public class HomeAnimationsRunner implements IAnimationsRunner<HomeObject>, ISer
     }
 
     private void setAnimationForMap(Map map) {
-        this.timingHelper.setCycleTimeFactor(1);
-
         String animationType = (String) map.get("animation-type");
-        Animation animation = null;
-        if (animationType != null && animationType.equals("mid-to-corner")) {
-            animation = new HomeMidToCornerAnimation(this.homeObject, map);
-        } else if (animationType != null && animationType.equals("kelvin-scale")) {
-            animation = new HomeKelvinAnimation(this.homeObject, map);
-        } else if (animationType != null && animationType.equals("alternate")) {
-            animation = new HomeAlternateAnimation(this.homeObject, map);
-        } else if (animationType != null && animationType.equals("2-color-pwm")) {
-            animation = new HomeAlternate2Animation(this.homeObject, map);
-        } else if (animationType != null && animationType.equals("dandoo")) {
-            animation = new HomeDandooAnimation(this.homeObject, map);
-            this.timingHelper.setCycleTimeFactor(25);
-        } else if (animationType != null && animationType.equals("color-spill")) {
-            animation = new ColorSpillAnimation2D(this.homeObject.pixelArray_2D);
-            this.timingHelper.setCycleTimeFactor(2);
-        }
+        if (animationType != null && this.currentAnimation != null && animationType.equals(this.db.jsonObject.getObject("state").getObject("animation").getString("animation-type"))) {
+            // just update params
+            this.currentAnimation.userInputUpdated(map);
+        } else {
+            HomeAnimation animation = null;
+            this.timingHelper.setCycleTimeFactor(1);
+            if (animationType != null && animationType.equals("mid-to-corner")) {
+                animation = new HomeMidToCornerAnimation(this.homeObject, map);
+            } else if (animationType != null && animationType.equals("kelvin-scale")) {
+                animation = new HomeKelvinAnimation(this.homeObject, map);
+            } else if (animationType != null && animationType.equals("alternate")) {
+                animation = new HomeAlternateAnimation(this.homeObject, map);
+            } else if (animationType != null && animationType.equals("2-color-pwm")) {
+                animation = new HomeAlternate2Animation(this.homeObject, map);
+            } else if (animationType != null && animationType.equals("dandoo")) {
+                animation = new HomeDandooAnimation(this.homeObject, map);
+                this.timingHelper.setCycleTimeFactor(25);
+            } else if (animationType != null && animationType.equals("color-spill")) {
+                animation = new HomeColorSpillAnimation(this.homeObject, map);
+                this.timingHelper.setCycleTimeFactor(2);
+            } else if (animationType != null && animationType.equals("propeller")) {
+                animation = new HomePropellerAnimation(this.homeObject, map);
+                this.timingHelper.setCycleTimeFactor(5);
+            }
 
-        this.currentAnimation = animation;
-        if (animation != null) {
-            this.timingHelper.newAnimation();
-            this.isOn = true;
+            this.currentAnimation = animation;
+            if (animation != null) {
+                this.timingHelper.newAnimation();
+                this.isOn = true;
+            }
         }
     }
 }

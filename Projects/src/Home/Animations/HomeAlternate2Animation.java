@@ -13,4 +13,9 @@ public class HomeAlternate2Animation extends HomeAnimation{
         this.compoundAnimation.addAnimation(new Alternate2Animation(this.homeObject.frontExternalUnite, divider, color1, color2));
 
     }
+
+    @Override
+    public void userInputUpdated(Map<String, String> userInput) {
+
+    }
 }

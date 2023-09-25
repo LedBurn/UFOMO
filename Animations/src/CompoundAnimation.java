@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class CompoundAnimation extends Animation {
 
-    private final ArrayList<Animation> animations = new ArrayList<>();
+    private ArrayList<Animation> animations = new ArrayList<>();
 
     public CompoundAnimation() {
         super(null);
@@ -16,5 +16,9 @@ public class CompoundAnimation extends Animation {
         for (Animation animation : this.animations) {
             animation.animate(cycleNum, cycleTimePercent);
         }
+    }
+
+    public void clear() {
+        this.animations = new ArrayList<>();
     }
 }

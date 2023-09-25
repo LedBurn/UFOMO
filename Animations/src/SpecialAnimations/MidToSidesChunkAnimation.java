@@ -9,14 +9,14 @@ public class MidToSidesChunkAnimation extends Animation {
     private final ArrayList<Chunk> chunks = new ArrayList<>();
     private long currentCycleNum = -1;
 
-    private final double chunkSpeed;
-    private final double chunkSize;
+    private double chunkSpeed;
+    private double chunkSize;
 
-    private final FADE_STYLE fadeStyle;
+    private FADE_STYLE fadeStyle;
 
-    private final double fadeSize;
+    private double fadeSize;
 
-    private final HSBColor color;
+    private HSBColor color;
 
     public enum FADE_STYLE {
         NONE,
@@ -41,6 +41,14 @@ public class MidToSidesChunkAnimation extends Animation {
     public MidToSidesChunkAnimation(IPixelsArray ledObject, double chunkSize, double chunkSpeed,
                                     FADE_STYLE fadeStyle, double fadeSize, HSBColor chunkColor) {
         super(ledObject);
+        this.chunkSpeed = chunkSpeed;
+        this.chunkSize = chunkSize;
+        this.fadeStyle = fadeStyle;
+        this.fadeSize = fadeSize;
+        this.color = chunkColor;
+    }
+
+    public void updateParams(double chunkSize, double chunkSpeed, FADE_STYLE fadeStyle, double fadeSize, HSBColor chunkColor) {
         this.chunkSpeed = chunkSpeed;
         this.chunkSize = chunkSize;
         this.fadeStyle = fadeStyle;

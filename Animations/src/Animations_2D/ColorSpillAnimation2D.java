@@ -37,8 +37,8 @@ public class ColorSpillAnimation2D extends Animation_2D {
         }
 
         for (Pixel_2D pixel : this.ledObject.pixels) {
-                double distance = pixel.getDistanceFromPoint(this.centerX, this.centerY);
-                double distancePercent = distance / this.maxRadius;
+            double distance = pixel.getDistanceFromPoint(this.centerX, this.centerY);
+            double distancePercent = distance / this.maxRadius;
 
                 if (distancePercent > cycleTimePercent) { // previous
                     pixel._1DArray.setColor(pixel._1DIndex, previousColor);
@@ -49,6 +49,10 @@ public class ColorSpillAnimation2D extends Animation_2D {
                     pixel._1DArray.setColor(pixel._1DIndex, color);
                 }
         }
+//        for (int i = 0; i < this.ledObject.pixels.size(); i++) {
+//            Pixel_2D pixel = this.ledObject.pixels.get(i);
+//            pixel._1DArray.setColor(pixel._1DIndex, new HSBColor((pixel.x + pixel.y) / 400.0));
+//        }
     }
 
     private double randomPoint(double start, double end, double buffer) {

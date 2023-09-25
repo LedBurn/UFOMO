@@ -16,4 +16,9 @@ public class HomeAlternateAnimation extends HomeAnimation {
 
 
     }
+
+    @Override
+    public void userInputUpdated(Map<String, String> userInput) {
+
+    }
 }
