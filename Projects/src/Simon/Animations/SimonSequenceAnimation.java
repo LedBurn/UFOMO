@@ -5,7 +5,7 @@ public class SimonSequenceAnimation extends SimonAnimation {
     ArrayList<Integer> sequence;
     boolean[] sounds;
 
-    HSBColor[] colors = new HSBColor[]{ HSBColor.RED, HSBColor.GREEN, HSBColor.BLUE, HSBColor.YELLOW  };
+    LEDColor[] colors = new LEDColor[]{ LEDColor.RED, LEDColor.GREEN, LEDColor.BLUE, LEDColor.YELLOW  };
     ConstColoring coloring = new ConstColoring();
 
     public SimonSequenceAnimation(ArrayList<Integer> sequence) {
@@ -24,7 +24,7 @@ public class SimonSequenceAnimation extends SimonAnimation {
     public void apply(SignLEDObject sign, double timePercent) {
         int index = (int) Math.floor(timePercent * sequence.size());
         int colorId = sequence.get(index);
-        HSBColor color = colors[colorId];
+        LEDColor color = colors[colorId];
         coloring.changeColor(color);
 
         double level = timePercent * sequence.size() - index;

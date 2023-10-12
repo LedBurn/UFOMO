@@ -38,7 +38,7 @@ public class UFOMOTestLEDs {
     }
 
     private void test(UFOMOObject ufomoObject, int speed) {
-        HSBColor color = new HSBColor(Math.random(), 1.0, 1.0);
+        LEDColor color = new LEDColor(Math.random(), 1.0, 1.0);
         if (frameNum / speed == ufomoObject.bigCircle.numOfPixels()) {
             frameNum = 0;
         }

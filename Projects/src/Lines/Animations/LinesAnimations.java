@@ -52,7 +52,7 @@ public class LinesAnimations {
 
         @Override
         protected void configAnimations() {
-            HSBColor color = new HSBColor(Math.random(),1.0, 1.0);
+            LEDColor color = new LEDColor(Math.random(),1.0, 1.0);
 
             for (int i = 0; i < ledObject.lines.length; i++) {
                 animations.add(new PixelsArrayAnimation(ledObject.lines[i],
@@ -69,10 +69,10 @@ public class LinesAnimations {
 
         @Override
         protected void configAnimations() {
-            HSBColor color1 = new HSBColor(Math.random(),1.0, 1.0);
-            HSBColor color2 = new HSBColor(color1.hue + 0.1,1.0, 1.0);
-            HSBColor color3 = new HSBColor(color1.hue + 0.2,1.0, 1.0);
-            HSBColor[] colors = {color1, color2, color3};
+            LEDColor color1 = new LEDColor(Math.random(),1.0, 1.0);
+            LEDColor color2 = new LEDColor(color1.hue + 0.1,1.0, 1.0);
+            LEDColor color3 = new LEDColor(color1.hue + 0.2,1.0, 1.0);
+            LEDColor[] colors = {color1, color2, color3};
 
             for (int i = 0; i < ledObject.lines.length; i++) {
                 animations.add(new PixelsArrayAnimation(ledObject.lines[i],

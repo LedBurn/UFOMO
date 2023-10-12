@@ -25,7 +25,7 @@ public class DandooAnimation extends Animation {
             if (positionInChunks.length == 0) continue;
             double[] brightnessInChunks = this.getBrightnessForPositions(positionInChunks);
             double maxBrightness = Arrays.stream(brightnessInChunks).max().getAsDouble();
-            ledObject.setColor(i, new HSBColor(cycleTimePercent, 1, maxBrightness));
+            ledObject.setColor(i, new LEDColor(cycleTimePercent, 1, maxBrightness));
         }
     }
 

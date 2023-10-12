@@ -1,7 +1,7 @@
-public class PropellerAnimation extends Animation_2D {
+public class PropellerAnimation2D extends Animation_2D {
 
-    private HSBColor color1;
-    private HSBColor color2;
+    private LEDColor color1;
+    private LEDColor color2;
     private double fadeSize;
 
     private final double centerX;
@@ -9,7 +9,7 @@ public class PropellerAnimation extends Animation_2D {
 
 
 
-    public PropellerAnimation(PixelArray_2D ledObject, double centerX, double centerY, HSBColor color1, HSBColor color2, double fadeSize) {
+    public PropellerAnimation2D(PixelArray_2D ledObject, double centerX, double centerY, LEDColor color1, LEDColor color2, double fadeSize) {
         super(ledObject);
         this.centerX = centerX;
         this.centerY = centerY;
@@ -18,7 +18,7 @@ public class PropellerAnimation extends Animation_2D {
         this.fadeSize = fadeSize;
     }
 
-    public void updateParams(HSBColor color1, HSBColor color2, double fadeSize) {
+    public void updateParams(LEDColor color1, LEDColor color2, double fadeSize) {
         this.color1 = color1;
         this.color2 = color2;
         this.fadeSize = fadeSize;
@@ -32,8 +32,8 @@ public class PropellerAnimation extends Animation_2D {
         for(Pixel_2D pixel : this.ledObject.pixels) {
             double yForLine = ratio * (pixel.x - this.centerX) + this.centerY;
 
-            HSBColor color;
-            HSBColor otherColor;
+            LEDColor color;
+            LEDColor otherColor;
             if ((pixel.y > yForLine && cycleTimePercent < 0.5) ||
                     pixel.y < yForLine && cycleTimePercent > 0.5) {
                 color = color1;
@@ -46,7 +46,7 @@ public class PropellerAnimation extends Animation_2D {
             double distanceToLine = Math.abs(Math.cos(angleRadians) * (this.centerY - pixel.y) - Math.sin(angleRadians) * (this.centerX - pixel.x));
             double distancePercent = distanceToLine / this.ledObject.maxDistance();
             if (distancePercent < this.fadeSize / 2.0 ) {
-                pixel._1DArray.setColor(pixel._1DIndex, HSBColor.averageColors(color, otherColor, 0.5 - distancePercent / this.fadeSize));
+                pixel._1DArray.setColor(pixel._1DIndex, LEDColor.averageColors(color, otherColor, 0.5 - distancePercent / this.fadeSize));
             } else {
                 pixel._1DArray.setColor(pixel._1DIndex, color);
             }

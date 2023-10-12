@@ -9,6 +9,7 @@ public class HomeAnimationsRunner implements IAnimationsRunner<HomeObject>, ISer
     private final TimingHelper timingHelper = new TimingHelper();
 
     private double brightnessLevel = 1.0;
+    private ColorCorrectionValues correction = new ColorCorrectionValues();
     private HomeAnimation currentAnimation;
 
     Server server;
@@ -26,6 +27,7 @@ public class HomeAnimationsRunner implements IAnimationsRunner<HomeObject>, ISer
         db = new DB();
 
         this.brightnessLevel = this.db.jsonObject.getObject("state").getDouble("brightness-level");
+        this.correction.loadCorrection(this.db.jsonObject.getObject("state").getObject("color-correction"));
         this.timingHelper.setCycleTime(this.db.jsonObject.getObject("state").getLong("cycle-time"));
     }
 
@@ -55,10 +57,9 @@ public class HomeAnimationsRunner implements IAnimationsRunner<HomeObject>, ISer
             ledObject.clear();
         }
 
-        if (this.brightnessLevel < 1) {
-            for (IPixelsArray pixelsArray : homeObject.all) {
-                pixelsArray.reduceBrightness(this.brightnessLevel);
-            }
+        for (IPixelsArray pixelsArray : homeObject.all) {
+            pixelsArray.reduceBrightness(this.brightnessLevel);
+            pixelsArray.colorCorrection(correction);
         }
     }
 
@@ -74,6 +75,26 @@ public class HomeAnimationsRunner implements IAnimationsRunner<HomeObject>, ISer
             if (brightnessLevel != null) {
                 this.brightnessLevel = new Double(brightnessLevel);
                 this.db.jsonObject.getObject("state").put("brightness-level", brightnessLevel);
+                this.db.saveDB();
+            }
+
+            // color correction
+            String colorCorrectionRed = userInput.get("color-correction-red");
+            if (colorCorrectionRed != null) {
+                this.correction.redMax = new Double(colorCorrectionRed);
+                this.db.jsonObject.getObject("state").getObject("color-correction").put("red", colorCorrectionRed);
+                this.db.saveDB();
+            }
+            String colorCorrectionGreen = userInput.get("color-correction-green");
+            if (colorCorrectionGreen != null) {
+                this.correction.greenMax = new Double(colorCorrectionGreen);
+                this.db.jsonObject.getObject("state").getObject("color-correction").put("green", colorCorrectionGreen);
+                this.db.saveDB();
+            }
+            String colorCorrectionBlue = userInput.get("color-correction-blue");
+            if (colorCorrectionBlue != null) {
+                this.correction.blueMax = new Double(colorCorrectionBlue);
+                this.db.jsonObject.getObject("state").getObject("color-correction").put("blue", colorCorrectionBlue);
                 this.db.saveDB();
             }
 

@@ -1,7 +1,7 @@
 public class AddonBrightnessStain extends AddonEffect {
 
     @Override
-    public void apply(HSBColor[] array, double timePercent) {
+    public void apply(LEDColor[] array, double timePercent) {
         for(int i=0; i<array.length; i++) {
 
             double relLocation = ((double) i) / (array.length - 1);

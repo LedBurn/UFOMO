@@ -1,10 +1,10 @@
 public class EffectToObjectMapper {
 
     private DiscreteEffect effect;
-    private HSBColor destArray[];
+    private LEDColor destArray[];
     private int indexes[];
 
-    public EffectToObjectMapper(DiscreteEffect effect, HSBColor destArray[], int indexes[]) {
+    public EffectToObjectMapper(DiscreteEffect effect, LEDColor destArray[], int indexes[]) {
         this.effect = effect;
         this.destArray = destArray;
         this.indexes = indexes;

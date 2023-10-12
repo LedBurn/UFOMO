@@ -83,7 +83,7 @@ public class FireAddon extends Addon {
             float[] hsbvals = new float[3];
             Color.RGBtoHSB(r,g,b,hsbvals);
 
-            ledObject.setColor(i, new HSBColor(hsbvals[0], hsbvals[1], hsbvals[2]));
+            ledObject.setColor(i, new LEDColor(hsbvals[0], hsbvals[1], hsbvals[2]));
         }
     }
 //

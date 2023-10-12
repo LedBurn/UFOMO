@@ -14,8 +14,8 @@ public class OneTimeCyclicMoveAddon extends Addon {
         int indexDiff = (int)(changePercent * ledObject.numOfPixels());
 
         // create new pixels array after the shift
-        HSBColor[] newPixels;
-        newPixels = new HSBColor[ledObject.numOfPixels()];
+        LEDColor[] newPixels;
+        newPixels = new LEDColor[ledObject.numOfPixels()];
         for (int i = 0; i < ledObject.numOfPixels(); i++) {
             int newPosition = (ledObject.numOfPixels() + i + indexDiff) % ledObject.numOfPixels();
             newPixels[i] = ledObject.getColor(newPosition);

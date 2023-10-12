@@ -22,7 +22,7 @@ public class KelvinScale {
                 String offsetStr = split[1].substring(8, split[1].length()-1);
                 double offset = new Double(offsetStr);
                 String colorStr = split[2].substring(18, split[2].length()-3);
-                HSBColor color = HSBColor.hsbColorFromHex(colorStr);
+                LEDColor color = LEDColor.hsbColorFromHex(colorStr);
                 gradientPoints.add(new GradientPoint(offset, color));
             });
         } catch (IOException exception){
@@ -30,7 +30,7 @@ public class KelvinScale {
         }
     }
 
-    public HSBColor getColorForLocation(double location) {
+    public LEDColor getColorForLocation(double location) {
         // edge cases
         if (gradientPoints.get(0).location == location) {
             return gradientPoints.get(0).color;
@@ -52,14 +52,14 @@ public class KelvinScale {
 
         // calculate the color based on linear gradient between the two point
         double ratio = (location - lowPoint.location) / (highPoint.location - lowPoint.location);
-        return HSBColor.averageColors(lowPoint.color, highPoint.color, ratio);
+        return LEDColor.averageColors(lowPoint.color, highPoint.color, ratio);
     }
 
     private class GradientPoint {
         private final double location;
-        private final HSBColor color;
+        private final LEDColor color;
 
-        public GradientPoint(double location, HSBColor color) {
+        public GradientPoint(double location, LEDColor color) {
             this.location = location;
             this.color = color;
         }

@@ -14,7 +14,7 @@ public class RainbowColoring extends Coloring {
 
             double hue = (double)i / ledObject.numOfPixels();
             if (reversed) hue = 1 - hue;
-            HSBColor color = new HSBColor(hue, 1.0, 1.0);
+            LEDColor color = new LEDColor(hue, 1.0, 1.0);
             ledObject.setColor(i, color);
         }
     }

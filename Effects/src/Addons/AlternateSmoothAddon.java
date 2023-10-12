@@ -44,8 +44,8 @@ public class AlternateSmoothAddon extends Addon {
                 distToHue2 = fullSegmentLocation - pixelsPerSegment;
             }
 
-            double currHue = HSBColor.combineHues(this.hue1, this.pixelsPerSegment - distToHue1, this.hue2, this.pixelsPerSegment - distToHue2);
-            ledObject.setColor(i, new HSBColor(currHue, 1, 1));
+            double currHue = LEDColor.combineHues(this.hue1, this.pixelsPerSegment - distToHue1, this.hue2, this.pixelsPerSegment - distToHue2);
+            ledObject.setColor(i, new LEDColor(currHue, 1, 1));
         }
     }
 }

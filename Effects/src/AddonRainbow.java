@@ -1,7 +1,7 @@
 public class AddonRainbow extends AddonEffect {
 
     @Override
-    public void apply(HSBColor[] array, double timePercent) {
+    public void apply(LEDColor[] array, double timePercent) {
         for(int i=0; i<array.length; i++) {
             double locPercent = ((double) i ) / (array.length - 1);
             array[i].hue = locPercent;

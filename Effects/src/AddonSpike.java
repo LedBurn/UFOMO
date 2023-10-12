@@ -13,7 +13,7 @@ public class AddonSpike extends AddonEffect {
     }
 
     @Override
-    public void apply(HSBColor[] array, double timePercent) {
+    public void apply(LEDColor[] array, double timePercent) {
 
         final double currHeadStart = (this.headStartPos + ( (this.headEndPos - this.headStartPos) * timePercent));
         final double currTailEnd = currHeadStart - this.tailLength;
@@ -22,7 +22,7 @@ public class AddonSpike extends AddonEffect {
 
         for(int i=0; i < array.length; i++) {
 
-            HSBColor currColor = array[i];
+            LEDColor currColor = array[i];
             double relLocation = ((double)i) / array.length;
 
             if(goingDownUp) {

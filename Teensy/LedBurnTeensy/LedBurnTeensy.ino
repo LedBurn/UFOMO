@@ -64,6 +64,7 @@ int drawingMemory[LEDS_PER_STRIP * 6];
 
 const int config = WS2811_GRB | WS2811_800kHz;
 OctoWS2811 leds(LEDS_PER_STRIP, displayMemory, drawingMemory, config);
+leds.setc
 
 // Enter a MAC address and IP address for your controller below.
 // The IP address will be dependent on your local network:

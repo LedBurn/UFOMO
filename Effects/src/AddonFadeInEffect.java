@@ -1,9 +1,9 @@
 public class AddonFadeInEffect extends AddonEffect {
 
     @Override
-    public void apply(HSBColor[] array, double timePercent) {
+    public void apply(LEDColor[] array, double timePercent) {
 
-        for(HSBColor c : array) {
+        for(LEDColor c : array) {
             c.brightness = c.brightness * timePercent;
         }
     }

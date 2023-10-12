@@ -16,7 +16,7 @@ public class ContinuousSpikeEffect extends ContinuousEffect {
         }
     }
 
-    public HSBColor getColor(double timePercent, double location) {
+    public LEDColor getColor(double timePercent, double location) {
         double currHeadStart = (this.headStartPos + ( (this.headEndPos - this.headStartPos) * timePercent));
         double currTailEnd = currHeadStart - this.tailLength;
 
@@ -31,12 +31,12 @@ public class ContinuousSpikeEffect extends ContinuousEffect {
         }
 
         if(location <= lowerPos || location > higherPos) {
-            HSBColor c = new HSBColor();
+            LEDColor c = new LEDColor();
             c.brightness = 0.0;
             return c;
         }
         else {
-            HSBColor c = this.sourceEffect.getColor(timePercent, location);
+            LEDColor c = this.sourceEffect.getColor(timePercent, location);
             c.brightness = 1.0 -  ((currHeadStart - location) / this.tailLength);
             return c;
         }

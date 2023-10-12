@@ -1,7 +1,7 @@
 public class CrazyDotsAddon extends Addon {
 
     int crazyDotPosition = -1;
-    HSBColor color = HSBColor.BLACK;
+    LEDColor color = LEDColor.BLACK;
     boolean reversed = Math.random() > 0.5;
 
 

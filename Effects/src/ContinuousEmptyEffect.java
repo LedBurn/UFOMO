@@ -11,8 +11,8 @@ public class ContinuousEmptyEffect extends ContinuousEffect {
     }
 
     @Override
-    public HSBColor getColor(double timePercent, double location) {
-        HSBColor c = this.sourceEffect.getColor(timePercent, location);
+    public LEDColor getColor(double timePercent, double location) {
+        LEDColor c = this.sourceEffect.getColor(timePercent, location);
 
         double lowerBound, upperBound;
         if(this.locFrom < this.locTo) {

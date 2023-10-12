@@ -77,7 +77,7 @@ public class SignSimpleAnimationsProvider implements ISimpleRunnerAnimationsProv
 
         @Override
         protected void configAnimations() {
-            HSBColor color = new HSBColor(Math.random(),1.0, 1.0);
+            LEDColor color = new LEDColor(Math.random(),1.0, 1.0);
 
             for (int i = 0; i < ledObject.all.length; i++) {
                 animations.add(new PixelsArrayAnimation(ledObject.all[i],
@@ -233,7 +233,7 @@ public class SignSimpleAnimationsProvider implements ISimpleRunnerAnimationsProv
 
         @Override
         protected void configAnimations() {
-            Coloring coloring = new ConstColoring(new HSBColor(Math.random(), 1, 1));
+            Coloring coloring = new ConstColoring(new LEDColor(Math.random(), 1, 1));
             for (int i = 0; i < ledObject.all.length; i++) {
                 animations.add(new PixelsArrayAnimation(ledObject.all[i],
                         coloring,

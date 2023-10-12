@@ -5,7 +5,7 @@ public class AddonOutAndIn extends AddonEffect {
     }
 
     @Override
-    public void apply(HSBColor[] array, double timePercent) {
+    public void apply(LEDColor[] array, double timePercent) {
 
         double factor;
         if(timePercent < 0.5) {
@@ -15,7 +15,7 @@ public class AddonOutAndIn extends AddonEffect {
             factor = (1.0 - ((1.0 - timePercent) * 2.0));
         }
         double brightnessMul = this.minBrightness + factor * (1.0 - this.minBrightness);
-        for(HSBColor c : array) {
+        for(LEDColor c : array) {
             c.brightness = c.brightness * brightnessMul;
         }
     }

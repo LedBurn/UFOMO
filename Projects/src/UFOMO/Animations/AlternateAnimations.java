@@ -25,7 +25,7 @@ public class AlternateAnimations {
                 animations.add(new PixelsArrayAnimation(ledObject.octagon[i], null, new Addon[]{alternateAddon}));
             }
 
-            HSBColor color = new HSBColor(Math.random(), 0.0, 0.4);
+            LEDColor color = new LEDColor(Math.random(), 0.0, 0.4);
             for (int i = 0; i < ledObject.beam.length; i++) {
                 animations.add(new PixelsArrayAnimation(ledObject.beam[i],
                         new BlurColoring(color, ledObject.beam[i].numOfPixels()),

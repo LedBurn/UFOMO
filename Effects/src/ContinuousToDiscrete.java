@@ -5,7 +5,7 @@ public class ContinuousToDiscrete extends DiscreteEffect{
         this.contEffect = contEffect;
     }
 
-    public HSBColor getColor(double timePercent, int index) {
+    public LEDColor getColor(double timePercent, int index) {
         double location = ((double)index) / (numberOfPixels - 1);
         return contEffect.getColor(timePercent, location);
     }

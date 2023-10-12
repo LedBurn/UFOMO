@@ -52,6 +52,8 @@ public class HomeNetworkDataSource implements INetworkDataSource<HomeObject> {
 
     @Override
     public void setData(Network network, HomeObject homeObject) {
+
+
         segments[0].setData(NetworkUtils.connect(NetworkUtils.getRGB(homeObject.frontInternal[3]), NetworkUtils.getRGB(homeObject.frontInternal[0])));
         segments[1].setData(NetworkUtils.connect(NetworkUtils.getRGB(homeObject.frontInternal[2], true), NetworkUtils.getRGB(homeObject.frontInternal[1], true)));
         segments[2].setData(NetworkUtils.connect(NetworkUtils.getRGB(homeObject.ceiling[2], true), NetworkUtils.getRGB(homeObject.ceiling[1], true)));

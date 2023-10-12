@@ -23,8 +23,8 @@ public class ConstCyclicMoveAddon extends Addon {
         }
 
         // create new pixels array after the shift
-        HSBColor[] newPixels;
-        newPixels = new HSBColor[ledObject.numOfPixels()];
+        LEDColor[] newPixels;
+        newPixels = new LEDColor[ledObject.numOfPixels()];
         for (int i = 0; i < ledObject.numOfPixels(); i++) {
             int newPosition = (ledObject.numOfPixels() + i + indexDiff) % ledObject.numOfPixels();
             if (newPosition < 0) newPosition += ledObject.numOfPixels();

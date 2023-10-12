@@ -11,7 +11,7 @@ public class PixelsArrayReversed implements IPixelsArray {
     }
 
     @Override
-    public HSBColor getColor(int pixelNum) {
+    public LEDColor getColor(int pixelNum) {
         return this.originalArray.getColor(this.originalArray.numOfPixels() - 1 - pixelNum);
     }
 
@@ -26,12 +26,12 @@ public class PixelsArrayReversed implements IPixelsArray {
     }
 
     @Override
-    public void setColor(int pixelNum, HSBColor color) {
+    public void setColor(int pixelNum, LEDColor color) {
         this.originalArray.setColor(this.originalArray.numOfPixels() - 1 - pixelNum, color);
     }
     @Override
-    public void blendColor(int pixelNum, HSBColor color, HSBColor.BLEND_TYPE blendType) {
-        HSBColor blendColor = HSBColor.blendColors(this.getColor(pixelNum), color, blendType);
+    public void blendColor(int pixelNum, LEDColor color, LEDColor.BLEND_TYPE blendType) {
+        LEDColor blendColor = LEDColor.blendColors(this.getColor(pixelNum), color, blendType);
         this.setColor(pixelNum, blendColor);
     }
 
@@ -60,12 +60,17 @@ public class PixelsArrayReversed implements IPixelsArray {
         }
 
         for (int i = 0; i < numOfPixels(); i++) {
-            setColor(i, HSBColor.mixColors(other1.getColor(i), fadePercent, other2.getColor(i), 1-fadePercent));
+            setColor(i, LEDColor.mixColors(other1.getColor(i), fadePercent, other2.getColor(i), 1-fadePercent));
         }
     }
 
     @Override
     public void reduceBrightness(double brightnessLevel) {
         this.originalArray.reduceBrightness(brightnessLevel);
+    }
+
+    @Override
+    public void colorCorrection(ColorCorrectionValues correction) {
+        this.originalArray.colorCorrection(correction);
     }
 }

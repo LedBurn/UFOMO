@@ -1,16 +1,16 @@
 public class AddonSetConstColor extends AddonEffect {
 
-    public AddonSetConstColor(HSBColor c) {
+    public AddonSetConstColor(LEDColor c) {
         this.c = c;
     }
 
     @Override
-    public void apply(HSBColor[] array, double timePercent) {
-        for(HSBColor currColor: array) {
+    public void apply(LEDColor[] array, double timePercent) {
+        for(LEDColor currColor: array) {
             currColor.copyFromOther(this.c);
         }
     }
 
-    private HSBColor c;
+    private LEDColor c;
 
 }

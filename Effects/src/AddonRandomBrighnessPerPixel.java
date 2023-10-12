@@ -3,7 +3,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class AddonRandomBrighnessPerPixel extends AddonEffect {
 
     @Override
-    public void apply(HSBColor[] array, double timePercent) {
+    public void apply(LEDColor[] array, double timePercent) {
         for(int i=0; i<array.length; i++) {
             array[i].brightness = this.brightness[i];
         }

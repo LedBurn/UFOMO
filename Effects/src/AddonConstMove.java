@@ -5,7 +5,7 @@ public class AddonConstMove extends AddonEffect {
     }
 
     @Override
-    public void apply(HSBColor[] array, double timePercent) {
+    public void apply(LEDColor[] array, double timePercent) {
         int amountInPixels = (int)(array.length * this.amount);
 
         if(amountInPixels >= 0) {
@@ -13,7 +13,7 @@ public class AddonConstMove extends AddonEffect {
                 array[i].copyFromOther(array[i - amountInPixels]);
             }
             for(int i=amountInPixels - 1; i>=0 ; i--) {
-                array[i].copyFromOther(HSBColor.BLACK);
+                array[i].copyFromOther(LEDColor.BLACK);
             }
         }
         else {
@@ -21,7 +21,7 @@ public class AddonConstMove extends AddonEffect {
                 array[i].copyFromOther(array[i + amountInPixels]);
             }
             for(int i = (array.length - amountInPixels); i<array.length ; i++) {
-                array[i].copyFromOther(HSBColor.BLACK);
+                array[i].copyFromOther(LEDColor.BLACK);
             }
         }
     }

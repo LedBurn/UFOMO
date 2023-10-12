@@ -2,18 +2,18 @@ public class DiscreteConstColorEffect extends DiscreteEffect {
 
     public DiscreteConstColorEffect(int numberOfPixels) {
         super(numberOfPixels);
-        HSBColor black = new HSBColor();
+        LEDColor black = new LEDColor();
         black.brightness = 0.0;
         configure(black);
     }
 
-    public void configure(HSBColor color) {
+    public void configure(LEDColor color) {
         this.color = color;
     }
 
-    public HSBColor getColor(double timePercent, int index) {
+    public LEDColor getColor(double timePercent, int index) {
         return color;
     }
 
-    private HSBColor color;
+    private LEDColor color;
 }

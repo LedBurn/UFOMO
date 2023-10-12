@@ -1,19 +1,19 @@
 public class ContinuousConstColorEffect extends ContinuousEffect {
 
-    public ContinuousConstColorEffect(HSBColor c) {
+    public ContinuousConstColorEffect(LEDColor c) {
         configure(c);
     }
 
-    public void configure(HSBColor c) {
+    public void configure(LEDColor c) {
         this.c = c;
     }
 
-    public HSBColor getColor(double timePercent, double location) {
-        HSBColor colorCopy = new HSBColor();
+    public LEDColor getColor(double timePercent, double location) {
+        LEDColor colorCopy = new LEDColor();
         colorCopy.copyFromOther(this.c);
         return colorCopy;
     }
 
-    HSBColor c;
+    LEDColor c;
 }
 

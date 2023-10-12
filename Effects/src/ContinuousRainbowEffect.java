@@ -15,8 +15,8 @@ public class ContinuousRainbowEffect extends ContinuousEffect {
         this.hueDiff = this.hueEnd - this.hueStart;
     }
 
-    public HSBColor getColor(double timePercent, double location) {
-        HSBColor origColor = sourceEffect.getColor(timePercent, location);
+    public LEDColor getColor(double timePercent, double location) {
+        LEDColor origColor = sourceEffect.getColor(timePercent, location);
         origColor.hue = this.hueStart + this.hueDiff * location;
         return origColor;
     }

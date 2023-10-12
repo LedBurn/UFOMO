@@ -23,7 +23,7 @@ public class HomeMidToCornerAnimation extends HomeAnimation {
         double chunkSpeed =  Double.parseDouble(userInput.get("chunk-speed"));
         double fadeSize =  Double.parseDouble(userInput.get("fade-size"));
         String colorStr = userInput.get("color");
-        HSBColor color = HSBColor.hsbColorFromHex(colorStr);
+        LEDColor color = LEDColor.hsbColorFromHex(colorStr);
         MidToSidesChunkAnimation.FADE_STYLE fadeStyle = MidToSidesChunkAnimation.FADE_STYLE.BEGINNING_AND_END;
 
         for (MidToSidesChunkAnimation animation : this.animations) {

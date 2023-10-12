@@ -1,4 +1,3 @@
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class DiscreteConfettiEffect extends DiscreteEffect
@@ -20,9 +19,9 @@ public class DiscreteConfettiEffect extends DiscreteEffect
     }
 
     @Override
-    public HSBColor getColor(double timePercent, int index) {
+    public LEDColor getColor(double timePercent, int index) {
         shine(timePercent);
-        HSBColor c = e.getColor(timePercent, index);
+        LEDColor c = e.getColor(timePercent, index);
         double timeFromBirth = timePercent - this.birthTime[index];
         double midTimeFactor = -0.693 / this.midLifeTime;
         double brightFactor = Math.exp(midTimeFactor * timeFromBirth);

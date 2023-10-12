@@ -11,8 +11,8 @@ public class ContinuousSegmentEffect extends ContinuousEffect {
         this.locEnd = locEnd;
     }
 
-    public HSBColor getColor(double timePercent, double location) {
-        HSBColor origColor = sourceEffect.getColor(timePercent, location);
+    public LEDColor getColor(double timePercent, double location) {
+        LEDColor origColor = sourceEffect.getColor(timePercent, location);
         if(location < this.locStart || location > this.locEnd) {
             origColor.brightness = 0.0;
         }

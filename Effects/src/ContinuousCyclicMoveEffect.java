@@ -14,7 +14,7 @@ public class ContinuousCyclicMoveEffect extends ContinuousEffect {
         }
     }
 
-    public HSBColor getColor(double timePercent, double location) {
+    public LEDColor getColor(double timePercent, double location) {
         double newLocation = (location + timePercent * cyclesPerBeat) % 1.0;
         return this.sourceEffect.getColor(timePercent, newLocation);
     }

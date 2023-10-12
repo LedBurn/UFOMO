@@ -5,7 +5,7 @@ public class SimonFailedAnimation extends SimonAnimation {
 
     public SimonFailedAnimation() {
         super(2500);
-        coloring = new ConstColoring(HSBColor.RED);
+        coloring = new ConstColoring(LEDColor.RED);
         addon = new BlurAddon();
     }
 

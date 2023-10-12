@@ -1,9 +1,9 @@
 public class SimonPressedAnimation {
 
-    ConstColoring red = new ConstColoring(HSBColor.RED);
-    ConstColoring blue = new ConstColoring(HSBColor.BLUE);
-    ConstColoring green = new ConstColoring(HSBColor.GREEN);
-    ConstColoring yellow = new ConstColoring(HSBColor.YELLOW);
+    ConstColoring red = new ConstColoring(LEDColor.RED);
+    ConstColoring blue = new ConstColoring(LEDColor.BLUE);
+    ConstColoring green = new ConstColoring(LEDColor.GREEN);
+    ConstColoring yellow = new ConstColoring(LEDColor.YELLOW);
     ConstColoring[] colorings = new ConstColoring[]{ red, green, blue, yellow };
 
     public void apply(SignLEDObject sign, boolean[] pressStates) {

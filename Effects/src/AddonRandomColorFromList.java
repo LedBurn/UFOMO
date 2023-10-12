@@ -2,12 +2,12 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class AddonRandomColorFromList extends AddonEffect {
 
-    public AddonRandomColorFromList(HSBColor sourceColors[]) {
+    public AddonRandomColorFromList(LEDColor sourceColors[]) {
         this.sourceColors = sourceColors;
     }
 
     @Override
-    public void apply(HSBColor[] array, double timePercent) {
+    public void apply(LEDColor[] array, double timePercent) {
         for(int i=0; i<array.length; i++) {
             array[i].copyFromOther(this.colors[i]);
         }
@@ -15,14 +15,14 @@ public class AddonRandomColorFromList extends AddonEffect {
 
     @Override
     public void setNumberOfPixels(int numberOfPixels) {
-        this.colors = new HSBColor[numberOfPixels];
+        this.colors = new LEDColor[numberOfPixels];
         for(int i=0; i < numberOfPixels; i++) {
-            this.colors[i] = new HSBColor();
+            this.colors[i] = new LEDColor();
             this.colors[i].copyFromOther(this.sourceColors[ThreadLocalRandom.current().nextInt(this.sourceColors.length)]);
         }
     }
 
-    private HSBColor sourceColors[];
+    private LEDColor sourceColors[];
 
-    private HSBColor colors[];
+    private LEDColor colors[];
 }

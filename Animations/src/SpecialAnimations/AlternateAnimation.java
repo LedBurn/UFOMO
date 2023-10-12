@@ -10,7 +10,7 @@ public class AlternateAnimation extends Animation {
      * @param color2 color2
      *
      */
-    public AlternateAnimation (IPixelsArray ledObject, int divider, HSBColor color1, HSBColor color2) {
+    public AlternateAnimation (IPixelsArray ledObject, int divider, LEDColor color1, LEDColor color2) {
         super(ledObject);
         double segmentSize = this.ledObject.numOfPixels() / (double) divider;
         double currSegmentNum = 0;
@@ -50,12 +50,12 @@ public class AlternateAnimation extends Animation {
                 precisedPixelNum += this.ledObject.numOfPixels();
             }
 
-            HSBColor color = getColorForPrecisedPixelNum(precisedPixelNum);
+            LEDColor color = getColorForPrecisedPixelNum(precisedPixelNum);
             ledObject.setColor(i, color);
         }
     }
 
-    private HSBColor getColorForPrecisedPixelNum(double precisedPixelNum) {
+    private LEDColor getColorForPrecisedPixelNum(double precisedPixelNum) {
         Segment lowSegment = null;
         Segment highSegment = null;
         for (Segment segment : segments) {
@@ -73,7 +73,7 @@ public class AlternateAnimation extends Animation {
             }
         }
         if (lowSegment != null && highSegment != null) {
-            return HSBColor.averageColors(lowSegment.color, highSegment.color, 1 - precisedPixelNum % 1);
+            return LEDColor.averageColors(lowSegment.color, highSegment.color, 1 - precisedPixelNum % 1);
         }
         return null;
     }
@@ -81,6 +81,6 @@ public class AlternateAnimation extends Animation {
     private static class Segment {
         private int startIndex;
         private int endIndex;
-        private HSBColor color;
+        private LEDColor color;
     }
 }

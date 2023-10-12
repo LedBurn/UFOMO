@@ -1,12 +1,12 @@
 public class AddonMoveSin extends AddonEffect {
 
     @Override
-    public void apply(HSBColor[] array, double timePercent) {
+    public void apply(LEDColor[] array, double timePercent) {
 
         // create a copy. i'm sure there is a cleaner way to do it :)
-        HSBColor arrayForCopy[] = new HSBColor[array.length];
+        LEDColor arrayForCopy[] = new LEDColor[array.length];
         for(int i=0; i<arrayForCopy.length; i++) {
-            arrayForCopy[i] = new HSBColor();
+            arrayForCopy[i] = new LEDColor();
             arrayForCopy[i].copyFromOther(array[i]);
         }
 

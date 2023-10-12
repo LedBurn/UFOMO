@@ -1,8 +1,8 @@
 public class ColorSpillAnimation2D extends Animation_2D {
 
-    private HSBColor previousColor = HSBColor.BLACK;
+    private LEDColor previousColor = LEDColor.BLACK;
 
-    private HSBColor color = HSBColor.BLACK;
+    private LEDColor color = LEDColor.BLACK;
     private double centerX;
     private double centerY;
 
@@ -11,6 +11,8 @@ public class ColorSpillAnimation2D extends Animation_2D {
     private long lastCycleNum = -1;
 
     private final double fadePercent = 0.2;
+
+    private final double minHueChange = 0.2;
 
 
     public ColorSpillAnimation2D(PixelArray_2D ledObject) {
@@ -29,7 +31,7 @@ public class ColorSpillAnimation2D extends Animation_2D {
 
             // random color
             this.previousColor = this.color;
-            this.color = new HSBColor(this.color.hue + Math.random() * 0.7);
+            this.color = new LEDColor(this.color.hue + this.minHueChange + Math.random() * (1 - 2 * this.minHueChange));
 
             // add diff and random a new center
             this.centerX = randomPoint(0, this.ledObject.maxX, 0.05);
@@ -44,7 +46,7 @@ public class ColorSpillAnimation2D extends Animation_2D {
                     pixel._1DArray.setColor(pixel._1DIndex, previousColor);
                 } else if (distancePercent > cycleTimePercent - 0.1) { // fade
                     double brightness = (cycleTimePercent - distancePercent) * 10;
-                    pixel._1DArray.setColor(pixel._1DIndex, HSBColor.averageColors(this.previousColor, this.color, brightness));
+                    pixel._1DArray.setColor(pixel._1DIndex, LEDColor.averageColors(this.previousColor, this.color, brightness));
                 } else { // new
                     pixel._1DArray.setColor(pixel._1DIndex, color);
                 }

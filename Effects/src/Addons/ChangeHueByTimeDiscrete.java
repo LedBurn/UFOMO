@@ -17,7 +17,7 @@ public class ChangeHueByTimeDiscrete extends Addon {
     public void change(IPixelsArray ledObject, double level) {
         int jump = (int)Math.floor(level * numOfJumps);
         double hue = startingHue + jump / (double) numOfJumps;
-        HSBColor color = new HSBColor(hue, 1, 1);
+        LEDColor color = new LEDColor(hue, 1, 1);
         for (int i = 0; i < ledObject.numOfPixels(); i++) {
             ledObject.setColor(i, color);
         }

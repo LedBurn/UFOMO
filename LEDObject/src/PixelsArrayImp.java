@@ -2,17 +2,17 @@
 // The simplest LED object. contains one array of pixels.
 public class PixelsArrayImp implements IPixelsArray {
 
-    private HSBColor[] pixels;
+    private LEDColor[] pixels;
 
     public PixelsArrayImp(int numOfPixels) {
-        this.pixels = new HSBColor[numOfPixels];
+        this.pixels = new LEDColor[numOfPixels];
         this.clear();
     }
 
     @Override
     public void clear() {
         for(int i=0; i<pixels.length; i++) {
-            pixels[i] = HSBColor.BLACK;
+            pixels[i] = LEDColor.BLACK;
         }
     }
 
@@ -22,10 +22,10 @@ public class PixelsArrayImp implements IPixelsArray {
     }
 
     @Override
-    public HSBColor getColor(int pixelNum) {
+    public LEDColor getColor(int pixelNum) {
         if (pixelNum < 0 || pixelNum >= pixels.length) {
             System.out.println("ERROR: pixel is out of range. pixel " + pixelNum + " isn't in 0-" + pixels.length + " range");
-            return HSBColor.BLACK;
+            return LEDColor.BLACK;
         }
         return this.pixels[pixelNum];
     }
@@ -41,7 +41,7 @@ public class PixelsArrayImp implements IPixelsArray {
     }
 
     @Override
-    public void setColor(int pixelNum, HSBColor color) {
+    public void setColor(int pixelNum, LEDColor color) {
         if (pixelNum < 0 || pixelNum >= pixels.length) {
             System.out.println("ERROR: pixel is out of range. pixel " + pixelNum + " isn't in 0-" + pixels.length + " range");
             return;
@@ -50,8 +50,8 @@ public class PixelsArrayImp implements IPixelsArray {
     }
 
     @Override
-    public void blendColor(int pixelNum, HSBColor color, HSBColor.BLEND_TYPE blendType) {
-        HSBColor blendColor = HSBColor.blendColors(this.getColor(pixelNum), color, blendType);
+    public void blendColor(int pixelNum, LEDColor color, LEDColor.BLEND_TYPE blendType) {
+        LEDColor blendColor = LEDColor.blendColors(this.getColor(pixelNum), color, blendType);
         this.setColor(pixelNum, blendColor);
     }
 
@@ -75,15 +75,23 @@ public class PixelsArrayImp implements IPixelsArray {
         }
 
         for (int i = 0; i < numOfPixels(); i++) {
-            setColor(i, HSBColor.mixColors(other1.getColor(i), fadePercent, other2.getColor(i), 1-fadePercent));
+            setColor(i, LEDColor.mixColors(other1.getColor(i), fadePercent, other2.getColor(i), 1-fadePercent));
         }
     }
 
     @Override
     public void reduceBrightness(double brightnessLevel) {
         for (int i = 0; i < numOfPixels(); i++) {
-            HSBColor color = getColor(i);
-            setColor(i, new HSBColor(color.hue, color.saturation, color.brightness * brightnessLevel));
+            LEDColor color = getColor(i);
+            setColor(i, new LEDColor(color.hue, color.saturation, color.brightness * brightnessLevel));
+        }
+    }
+
+    @Override
+    public void colorCorrection(ColorCorrectionValues correction) {
+        for (int i = 0; i < numOfPixels(); i++) {
+            LEDColor color = getColor(i);
+            setColor(i, LEDColor.colorCorrection(color, correction));
         }
     }
 }

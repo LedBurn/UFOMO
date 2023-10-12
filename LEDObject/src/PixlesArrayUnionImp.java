@@ -18,10 +18,10 @@ public class PixlesArrayUnionImp implements IPixelsArray {
     }
 
     @Override
-    public HSBColor getColor(int pixelNum) {
+    public LEDColor getColor(int pixelNum) {
         if (pixelNum < 0 || pixelNum >= this.numOfPixels()) {
             System.out.println("ERROR: pixel is out of range. pixel " + pixelNum + " isn't in 0-" + this.numOfPixels() + " range");
-            return HSBColor.BLACK;
+            return LEDColor.BLACK;
         }
 
         for (IPixelsArray pixelsArray : this.originalArrays) {
@@ -45,7 +45,7 @@ public class PixlesArrayUnionImp implements IPixelsArray {
     }
 
     @Override
-    public void setColor(int pixelNum, HSBColor color) {
+    public void setColor(int pixelNum, LEDColor color) {
         if (pixelNum < 0 || pixelNum >= this.numOfPixels()) {
             System.out.println("ERROR: pixel is out of range. pixel " + pixelNum + " isn't in 0-" + this.numOfPixels() + " range");
             return;
@@ -61,8 +61,8 @@ public class PixlesArrayUnionImp implements IPixelsArray {
         }
     }
     @Override
-    public void blendColor(int pixelNum, HSBColor color, HSBColor.BLEND_TYPE blendType) {
-        HSBColor blendColor = HSBColor.blendColors(this.getColor(pixelNum), color, blendType);
+    public void blendColor(int pixelNum, LEDColor color, LEDColor.BLEND_TYPE blendType) {
+        LEDColor blendColor = LEDColor.blendColors(this.getColor(pixelNum), color, blendType);
         this.setColor(pixelNum, blendColor);
     }
 
@@ -93,7 +93,7 @@ public class PixlesArrayUnionImp implements IPixelsArray {
         }
 
         for (int i = 0; i < numOfPixels(); i++) {
-            setColor(i, HSBColor.mixColors(other1.getColor(i), fadePercent, other2.getColor(i), 1-fadePercent));
+            setColor(i, LEDColor.mixColors(other1.getColor(i), fadePercent, other2.getColor(i), 1-fadePercent));
         }
     }
 
@@ -101,6 +101,13 @@ public class PixlesArrayUnionImp implements IPixelsArray {
     public void reduceBrightness(double brightnessLevel) {
         for (IPixelsArray pixelsArray : this.originalArrays) {
             pixelsArray.reduceBrightness(brightnessLevel);
+        }
+    }
+
+    @Override
+    public void colorCorrection(ColorCorrectionValues correction) {
+        for (IPixelsArray pixelsArray : this.originalArrays) {
+            pixelsArray.colorCorrection(correction);
         }
     }
 }

@@ -5,8 +5,8 @@ public class HomeAlternate2Animation extends HomeAnimation{
         super(homeObject, userInput);
 
         int divider = new Integer(userInput.get("divider"));
-        HSBColor color1 = HSBColor.hsbColorFromHex(userInput.get("color1"));
-        HSBColor color2 = HSBColor.hsbColorFromHex(userInput.get("color2"));
+        LEDColor color1 = LEDColor.hsbColorFromHex(userInput.get("color1"));
+        LEDColor color2 = LEDColor.hsbColorFromHex(userInput.get("color2"));
 
         this.compoundAnimation.addAnimation(new Alternate2Animation(this.homeObject.ceilingUnite, divider, color1, color2));
         this.compoundAnimation.addAnimation(new Alternate2Animation(this.homeObject.frontInternalUnite, divider, color1, color2));

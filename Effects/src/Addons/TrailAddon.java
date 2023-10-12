@@ -12,7 +12,7 @@ public class TrailAddon extends Addon {
 
         // set all black
         for (int i = 0; i < ledObject.numOfPixels(); i++) {
-            HSBColor color = ledObject.getColor(i);
+            LEDColor color = ledObject.getColor(i);
             color.brightness = 0.0;
 
         }
@@ -24,7 +24,7 @@ public class TrailAddon extends Addon {
             if (index >= ledObject.numOfPixels()) index -= ledObject.numOfPixels();
             double brightness = (8-i)/8.0;
 
-            HSBColor color = ledObject.getColor(index);
+            LEDColor color = ledObject.getColor(index);
             color.brightness = brightness;
         }
 

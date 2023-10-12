@@ -13,7 +13,7 @@ public class DiscreteAlternateEffect extends DiscreteEffect {
         this.pixelsPerSegment = pixelsPerSegment;
     }
 
-    public HSBColor getColor(double timePercent, int index) {
+    public LEDColor getColor(double timePercent, int index) {
         boolean alternateStage = (timePercent % this.changeFrequency) < (0.5 / alternatePerBeat);
         if( ((index / pixelsPerSegment) % 2 == 0 ) == alternateStage) {
             return this.e1.getColor(timePercent, index);

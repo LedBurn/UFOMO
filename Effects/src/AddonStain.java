@@ -7,14 +7,14 @@ public class AddonStain extends AddonEffect {
     }
 
     @Override
-    public void apply(HSBColor[] array, double timePercent) {
+    public void apply(LEDColor[] array, double timePercent) {
         for(int i=0; i<array.length; i++) {
             double relLocation = ((double)i) / (array.length - 1);
             double stainBrightness = this.getBrightness(relLocation);
             double origBrightness = array[i].brightness;
             array[i].brightness = Math.min(origBrightness + stainBrightness, 1.0);
             if(this.stainHue != null) {
-                array[i].hue = HSBColor.combineHues(this.stainHue, stainBrightness * 20, array[i].hue, origBrightness);
+                array[i].hue = LEDColor.combineHues(this.stainHue, stainBrightness * 20, array[i].hue, origBrightness);
             }
             array[i].saturation = this.combineSat(this.stainSaturation, stainBrightness, array[i].saturation, origBrightness);
         }

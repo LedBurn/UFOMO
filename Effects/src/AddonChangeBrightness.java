@@ -5,8 +5,8 @@ public class AddonChangeBrightness extends AddonEffect {
     }
 
     @Override
-    public void apply(HSBColor[] array, double timePercent) {
-        for(HSBColor c : array) {
+    public void apply(LEDColor[] array, double timePercent) {
+        for(LEDColor c : array) {
             c.brightness = this.newBrightness;
         }
     }

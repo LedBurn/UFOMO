@@ -8,7 +8,7 @@ public class ConfettiAnimations {
 
         @Override
         protected void configAnimations() {
-            HSBColor color = new HSBColor(Math.random(),1.0, 1.0);
+            LEDColor color = new LEDColor(Math.random(),1.0, 1.0);
 
             animations.add(new PixelsArrayAnimation(ledObject.bigCircle, new ConstColoring(color),
                     new Addon[] {new ConfettiAddon(ledObject.bigCircle.numOfPixels())}));
@@ -44,7 +44,7 @@ public class ConfettiAnimations {
         @Override
         protected void configAnimations() {
 
-            HSBColor color = new HSBColor(Math.random(),1.0, 1.0);
+            LEDColor color = new LEDColor(Math.random(),1.0, 1.0);
             constColoring = new ConstColoring(color);
 
             animations.add(new PixelsArrayAnimation(ledObject.bigCircle, constColoring,
@@ -78,9 +78,9 @@ public class ConfettiAnimations {
 
         @Override
         protected void configAnimations() {
-            HSBColor color1 = new HSBColor(Math.random(),1.0, 1.0);
-            HSBColor color2 = new HSBColor(color1.hue + 0.1,1.0, 1.0);
-            HSBColor color3 = new HSBColor(color1.hue + 0.2,1.0, 1.0);
+            LEDColor color1 = new LEDColor(Math.random(),1.0, 1.0);
+            LEDColor color2 = new LEDColor(color1.hue + 0.1,1.0, 1.0);
+            LEDColor color3 = new LEDColor(color1.hue + 0.2,1.0, 1.0);
 
             animations.add(new PixelsArrayAnimation(ledObject.bigCircle, new ConstColoring(color1),
                     new Addon[] {new ConfettiAddon(ledObject.bigCircle.numOfPixels())}));

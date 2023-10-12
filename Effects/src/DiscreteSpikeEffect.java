@@ -19,7 +19,7 @@ public class DiscreteSpikeEffect extends DiscreteEffect
     }
 
     @Override
-    public HSBColor getColor(double timePercent, int index) {
+    public LEDColor getColor(double timePercent, int index) {
 
         double relPosition = ((double)index / numberOfPixels);
         double currHeadStart = (this.headStartPos + ( (this.headEndPos - this.headStartPos) * timePercent));
@@ -36,12 +36,12 @@ public class DiscreteSpikeEffect extends DiscreteEffect
         }
 
         if(relPosition <= lowerPos || relPosition > higherPos) {
-            HSBColor c = new HSBColor();
+            LEDColor c = new LEDColor();
             c.brightness = 0.0;
             return c;
         }
         else {
-            HSBColor c = e.getColor(timePercent, index);
+            LEDColor c = e.getColor(timePercent, index);
             c.brightness = 1.0 -  ((currHeadStart - relPosition) / this.tailLength);
             return c;
         }

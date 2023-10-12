@@ -5,18 +5,18 @@ public class AddonAlternateColorsFromArray extends AddonEffect {
     if you choose 0, they will stay in place during the entire time.
     you will probably want to numberOfChanges to be a multiply of colors.length because its pretty, but you don't have to.
      */
-    public AddonAlternateColorsFromArray(HSBColor colors[], int pixelsPerSegment, int numberOfChanges) {
+    public AddonAlternateColorsFromArray(LEDColor colors[], int pixelsPerSegment, int numberOfChanges) {
         this.colors = colors;
         this.pixelsPerSegment = pixelsPerSegment;
         this.numberOfChanges = numberOfChanges;
     }
 
-    private HSBColor colors[];
+    private LEDColor colors[];
     private int pixelsPerSegment;
     private int numberOfChanges;
 
     @Override
-    public void apply(HSBColor[] array, double timePercent) {
+    public void apply(LEDColor[] array, double timePercent) {
 
         int colorsMovementFactor = (int) (timePercent * this.numberOfChanges);
 

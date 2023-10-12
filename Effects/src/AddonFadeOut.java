@@ -5,10 +5,10 @@ public class AddonFadeOut extends AddonEffect {
     }
 
     @Override
-    public void apply(HSBColor[] array, double timePercent) {
+    public void apply(LEDColor[] array, double timePercent) {
 
         double factor = this.destBrightness + (1.0 - timePercent) * (1.0 - this.destBrightness);
-        for(HSBColor c : array) {
+        for(LEDColor c : array) {
             c.brightness = c.brightness * factor;
         }
     }

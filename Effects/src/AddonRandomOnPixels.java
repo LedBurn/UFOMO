@@ -7,7 +7,7 @@ public class AddonRandomOnPixels extends AddonEffect {
     }
 
     @Override
-    public void apply(HSBColor[] array, double timePercent) {
+    public void apply(LEDColor[] array, double timePercent) {
         for(int i=0; i<array.length; i++) {
             if(this.isOn[i] == false) {
                 array[i].brightness = 0.0;

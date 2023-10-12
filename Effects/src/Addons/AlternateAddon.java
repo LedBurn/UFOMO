@@ -27,12 +27,12 @@ public class AlternateAddon extends Addon {
 //            hue2 = temp;
 //        }
 
-        HSBColor color1 = new HSBColor(hue1, 1, 1);
-        HSBColor color2 = new HSBColor(hue2, 1, 1);
+        LEDColor color1 = new LEDColor(hue1, 1, 1);
+        LEDColor color2 = new LEDColor(hue2, 1, 1);
 
         for(int i=0; i<ledObject.numOfPixels(); i++) {
             int locationInSegment = i % (2 * this.pixelsPerSegment);
-            HSBColor color;
+            LEDColor color;
             if(locationInSegment < this.pixelsPerSegment) {
                 color = color1;
             }

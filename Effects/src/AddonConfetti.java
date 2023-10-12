@@ -23,12 +23,12 @@ public class AddonConfetti extends AddonEffect {
     }
 
     @Override
-    public void apply(HSBColor[] array, double timePercent) {
+    public void apply(LEDColor[] array, double timePercent) {
 
         this.shine(timePercent, array.length);
 
         for(int i=0; i<array.length; i++) {
-            HSBColor c = array[i];
+            LEDColor c = array[i];
             double timeFromBirth = timePercent - this.birthTime[i];
             double midTimeFactor = -0.693 / this.midLifeTime;
             double brightFactor = Math.exp(midTimeFactor * timeFromBirth);

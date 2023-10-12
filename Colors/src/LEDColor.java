@@ -1,20 +1,20 @@
 import java.awt.*;
 
-public class HSBColor {
+public class LEDColor {
 
     public double hue;
     public double saturation;
     public double brightness;
 
-    public HSBColor() {
+    public LEDColor() {
         this(0, 0, 0);
     }
 
-    public HSBColor(double hue) {
+    public LEDColor(double hue) {
         this(hue, 1.0, 1.0);
     }
 
-    public HSBColor(double hue, double saturation, double brightness) {
+    public LEDColor(double hue, double saturation, double brightness) {
         this.hue = hue;
         this.saturation = saturation;
         this.brightness = brightness;
@@ -25,18 +25,18 @@ public class HSBColor {
         this.brightness = Math.max(0.0, Math.min(1.0, this.brightness));
     }
 
-    public static HSBColor hsbColorFromHex(String hex) {
+    public static LEDColor hsbColorFromHex(String hex) {
         if (!hex.startsWith("#")) {
             hex = "#" + hex;
         }
         Color colorObj = Color.decode(hex);
         float[] hsbvals = new float[3];
         Color.RGBtoHSB(colorObj.getRed(), colorObj.getGreen(), colorObj.getBlue(), hsbvals);
-        return new HSBColor(hsbvals[0], hsbvals[1], hsbvals[2]);
+        return new LEDColor(hsbvals[0], hsbvals[1], hsbvals[2]);
     }
 
-    public static HSBColor randomHue() {
-        return new HSBColor(Math.random(), 1.0, 1.0);
+    public static LEDColor randomHue() {
+        return new LEDColor(Math.random(), 1.0, 1.0);
     }
 
     public RGBColor toRGBColor() {
@@ -60,12 +60,12 @@ public class HSBColor {
         return Color.HSBtoRGB((float)hue, (float)saturation, (float)(brightness * brightnessLevel));
     }
 
-    public static HSBColor copy(HSBColor color) {
-        return new HSBColor(color.hue, color.saturation, color.brightness);
+    public static LEDColor copy(LEDColor color) {
+        return new LEDColor(color.hue, color.saturation, color.brightness);
     }
 
     // TODO: does java supports it in some way?
-    public void copyFromOther(HSBColor other) {
+    public void copyFromOther(LEDColor other) {
         hue = other.hue;
         saturation = other.saturation;
         brightness = other.brightness;
@@ -83,18 +83,18 @@ public class HSBColor {
         return averagePercent % 1.0;
     }
 
-    public static HSBColor mixColors(HSBColor c1, double amount1, HSBColor c2, double amount2) {
-        double hue = HSBColor.combineHues(c1.hue, amount1, c2.hue, amount2);
+    public static LEDColor mixColors(LEDColor c1, double amount1, LEDColor c2, double amount2) {
+        double hue = LEDColor.combineHues(c1.hue, amount1, c2.hue, amount2);
         double brightness = (c1.brightness * amount1 + c2.brightness * amount2) / (amount1 + amount2);
         double saturation = (c1.saturation * amount1 + c2.saturation * amount2) / (amount1 + amount2);
-        return new HSBColor(hue, saturation, brightness);
+        return new LEDColor(hue, saturation, brightness);
     }
 
     public enum BLEND_TYPE {
         ADDITIVE,
         SUBTRACTIVE
     }
-    public static HSBColor blendColors(HSBColor c1, HSBColor c2, BLEND_TYPE type) {
+    public static LEDColor blendColors(LEDColor c1, LEDColor c2, BLEND_TYPE type) {
         if (type == BLEND_TYPE.SUBTRACTIVE) {
             RGBColor rgb1 = c1.toRGBColor();
             RGBColor rgb2 = c2.toRGBColor();
@@ -106,7 +106,7 @@ public class HSBColor {
             float[] hsbvals = new float[3];
             Color.RGBtoHSB(r, g, b, hsbvals);
 
-            return new HSBColor(hsbvals[0], hsbvals[1], hsbvals[2]);
+            return new LEDColor(hsbvals[0], hsbvals[1], hsbvals[2]);
 
         } else {
             RGBColor rgb1 = c1.toRGBColor();
@@ -119,7 +119,7 @@ public class HSBColor {
             float[] hsbvals = new float[3];
             Color.RGBtoHSB(r, g, b, hsbvals);
 
-            return new HSBColor(hsbvals[0], hsbvals[1], hsbvals[2]);
+            return new LEDColor(hsbvals[0], hsbvals[1], hsbvals[2]);
         }
     }
 
@@ -130,7 +130,7 @@ public class HSBColor {
      * @param ratio 0-1 ratio between c1 & c2. ratio=0 means c1, ratio=1 means c2
      * @return the new averaged color
      */
-    public static HSBColor averageColors(HSBColor c1, HSBColor c2, double ratio) {
+    public static LEDColor averageColors(LEDColor c1, LEDColor c2, double ratio) {
         RGBColor rgb1 = c1.toRGBColor();
         RGBColor rgb2 = c2.toRGBColor();
 
@@ -141,23 +141,36 @@ public class HSBColor {
         float[] hsbvals = new float[3];
         Color.RGBtoHSB(r, g, b, hsbvals);
 
-        return new HSBColor(hsbvals[0], hsbvals[1], hsbvals[2]);
+        return new LEDColor(hsbvals[0], hsbvals[1], hsbvals[2]);
+    }
+
+    public static LEDColor colorCorrection(LEDColor c, ColorCorrectionValues correction) {
+        RGBColor rgb = c.toRGBColor();
+
+        int r = (int) Math.min(255, Math.max(0, Math.round(rgb.r & 0xFF) * correction.redMax));
+        int g = (int) Math.min(255, Math.max(0, Math.round(rgb.g & 0xFF) * correction.greenMax));
+        int b = (int) Math.min(255, Math.max(0, Math.round(rgb.b & 0xFF) * correction.blueMax));
+
+        float[] hsbvals = new float[3];
+        Color.RGBtoHSB(r, g, b, hsbvals);
+
+        return new LEDColor(hsbvals[0], hsbvals[1], hsbvals[2]);
     }
 
     public static double mixHue(double h1, double h2, double level) {
         return h1 * (1 - level) + h2 * level;
     }
 
-    public static final HSBColor WHITE = new HSBColor(0,0,1.0);
-    public static final HSBColor BLACK = new HSBColor(0,0,0);
-    public static final HSBColor RED = new HSBColor(0.0/3.0,1.0,1.0);
-    public static final HSBColor GREEN = new HSBColor(1.0/3.0,1.0,1.0);
-    public static final HSBColor BLUE = new HSBColor(2.0/3.0,1.0,1.0);
-    public static final HSBColor SKYBLUE = new HSBColor(0.6,0.8,0.8);
-    public static final HSBColor YELLOW = new HSBColor(1.0/6.0,1.0,1.0);
-    public static final HSBColor ORANGE = new HSBColor(1.0/12.0,1.0,1.0);
-    public static final HSBColor BROWN = new HSBColor(23.0/255.0,0.9,0.5);
-    public static final HSBColor GRAY = new HSBColor(0.0,0.0,0.2);
-    public static final HSBColor PINK = new HSBColor(0.9,1.0,1.0);
-    public static final HSBColor PURPLE = new HSBColor(0.83,1.0,1.0);
+    public static final LEDColor WHITE = new LEDColor(0,0,1.0);
+    public static final LEDColor BLACK = new LEDColor(0,0,0);
+    public static final LEDColor RED = new LEDColor(0.0/3.0,1.0,1.0);
+    public static final LEDColor GREEN = new LEDColor(1.0/3.0,1.0,1.0);
+    public static final LEDColor BLUE = new LEDColor(2.0/3.0,1.0,1.0);
+    public static final LEDColor SKYBLUE = new LEDColor(0.6,0.8,0.8);
+    public static final LEDColor YELLOW = new LEDColor(1.0/6.0,1.0,1.0);
+    public static final LEDColor ORANGE = new LEDColor(1.0/12.0,1.0,1.0);
+    public static final LEDColor BROWN = new LEDColor(23.0/255.0,0.9,0.5);
+    public static final LEDColor GRAY = new LEDColor(0.0,0.0,0.2);
+    public static final LEDColor PINK = new LEDColor(0.9,1.0,1.0);
+    public static final LEDColor PURPLE = new LEDColor(0.83,1.0,1.0);
 }

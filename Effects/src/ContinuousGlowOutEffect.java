@@ -10,8 +10,8 @@ public class ContinuousGlowOutEffect extends ContinuousEffect {
     }
 
     @Override
-    public HSBColor getColor(double timePercent, double location) {
-        HSBColor c = this.sourceEffect.getColor(timePercent, location);
+    public LEDColor getColor(double timePercent, double location) {
+        LEDColor c = this.sourceEffect.getColor(timePercent, location);
         double distFromMiddle = Math.abs(location - this.middleLocation);
         double middleBrightness = (1.0 - timePercent) * 2.0;
         c.brightness = c.brightness * Math.max(0.0, Math.min(1.0, middleBrightness - distFromMiddle));

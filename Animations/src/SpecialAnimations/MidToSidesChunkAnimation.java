@@ -16,7 +16,7 @@ public class MidToSidesChunkAnimation extends Animation {
 
     private double fadeSize;
 
-    private HSBColor color;
+    private LEDColor color;
 
     public enum FADE_STYLE {
         NONE,
@@ -39,7 +39,7 @@ public class MidToSidesChunkAnimation extends Animation {
      */
 
     public MidToSidesChunkAnimation(IPixelsArray ledObject, double chunkSize, double chunkSpeed,
-                                    FADE_STYLE fadeStyle, double fadeSize, HSBColor chunkColor) {
+                                    FADE_STYLE fadeStyle, double fadeSize, LEDColor chunkColor) {
         super(ledObject);
         this.chunkSpeed = chunkSpeed;
         this.chunkSize = chunkSize;
@@ -48,7 +48,7 @@ public class MidToSidesChunkAnimation extends Animation {
         this.color = chunkColor;
     }
 
-    public void updateParams(double chunkSize, double chunkSpeed, FADE_STYLE fadeStyle, double fadeSize, HSBColor chunkColor) {
+    public void updateParams(double chunkSize, double chunkSpeed, FADE_STYLE fadeStyle, double fadeSize, LEDColor chunkColor) {
         this.chunkSpeed = chunkSpeed;
         this.chunkSize = chunkSize;
         this.fadeStyle = fadeStyle;
@@ -92,12 +92,12 @@ public class MidToSidesChunkAnimation extends Animation {
 
                 if (effectedArea > 0) {
                     effectedLeds++;
-                    HSBColor color = new HSBColor(chunk.chunkColor.hue, chunk.chunkColor.saturation,
+                    LEDColor color = new LEDColor(chunk.chunkColor.hue, chunk.chunkColor.saturation,
                             chunk.chunkColor.brightness * effectedArea * (1 - fadeLevel));
-                    if (this.ledObject.getColor(i).equals(HSBColor.BLACK)) {
+                    if (this.ledObject.getColor(i).equals(LEDColor.BLACK)) {
                         this.ledObject.setColor(i, color);
                     } else {
-                        this.ledObject.blendColor(i, color, HSBColor.BLEND_TYPE.ADDITIVE);
+                        this.ledObject.blendColor(i, color, LEDColor.BLEND_TYPE.ADDITIVE);
                     }
                 }
             }
@@ -208,10 +208,10 @@ public class MidToSidesChunkAnimation extends Animation {
     }
 
     private static class Chunk {
-        private final HSBColor chunkColor;
+        private final LEDColor chunkColor;
         private final long startedCycleNum;
 
-        public Chunk(long startedCycleNum, HSBColor chunkColor) {
+        public Chunk(long startedCycleNum, LEDColor chunkColor) {
             this.startedCycleNum = startedCycleNum;
             this.chunkColor = chunkColor;
         }

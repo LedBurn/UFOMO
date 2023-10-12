@@ -13,15 +13,15 @@ public class DiscreteTwoConstColorsAlternateEffect extends DiscreteEffect {
 
     private void setColors(double hueChange) {
 
-        HSBColor prevColor = this.c1.getColor(0.0, 0);
+        LEDColor prevColor = this.c1.getColor(0.0, 0);
 
         double nextHue = prevColor.hue + hueChange;
-        this.c1.configure(new HSBColor(nextHue, 1.0, 1.0));
-        this.c2.configure(new HSBColor(nextHue + 0.5, 1.0, 1.0));
+        this.c1.configure(new LEDColor(nextHue, 1.0, 1.0));
+        this.c2.configure(new LEDColor(nextHue + 0.5, 1.0, 1.0));
     }
 
     @Override
-    public HSBColor getColor(double timePercent, int index) {
+    public LEDColor getColor(double timePercent, int index) {
         boolean newBeat = beatsCounter.newTimePercent(timePercent);
         if(newBeat) {
             setColors(ThreadLocalRandom.current().nextDouble(0.2, 0.5));
